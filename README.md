@@ -18,8 +18,8 @@ Use the package manager [npm](https://www.npmjs.com/get-npm) to install all depe
 npm install
 ```
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-For full contribution, guidelines visit the [Contributing-Guidlines](https://github.com/Mafia-Hands/Mafia/wiki/Contributing-Guidelines)
+
+For  contribution guidelines visit the [Contributing-Guidlines](https://github.com/Mafia-Hands/Mafia/wiki/Contributing-Guidelines) in the wiki. 
 
 Please make sure to update tests as appropriate.
 
@@ -27,4 +27,4 @@ Please make sure to update tests as appropriate.
 Please ensure all [code of conduct](https://github.com/Mafia-Hands/Mafia/wiki/Code-of-Conduct) is followed.
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+Licensed under the [Apache License 2.0](LICENSE) license
