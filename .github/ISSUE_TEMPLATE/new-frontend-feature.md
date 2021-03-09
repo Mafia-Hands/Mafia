@@ -2,7 +2,7 @@
 name: New Frontend Feature
 about: Suggest a new Frontend Idea
 title: ''
-labels: 'frontend'
+labels: frontend
 assignees: ''
 
 ---
