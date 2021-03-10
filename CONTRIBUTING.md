@@ -10,7 +10,7 @@ Please note we have a [code of conduct](https://github.com/Mafia-Hands/Mafia/wik
 ## Set Up  
 Before running, install any necessary modules using:
 ```bash
-npm i  
+npm install  
 ```  
 To run the program use:
 ```bash
