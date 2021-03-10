@@ -4,13 +4,13 @@ If you would like to contribute code you can do so through GitHub by first forki
 All code or documentation contributions should be associated with an open issue. If an issue does not exist, you should create one first (see guidance below).    
 All  additions or modifications to code should include associated tests (an automated test suite should be created).  
 When submitting code, please make every effort to follow existing conventions and style in order to keep the code as readable as possible.
-Please note we have a [code of conduct](https://github.com/Mafia-Hands/Mafia/blob/main/CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
+Please note we have a [code of conduct](https://github.com/Mafia-Hands/Mafia/wiki/Code-of-Conduct), please follow it in all your interactions with the project.
 
 
 ## Set Up  
 Before running, install any necessary modules using:
 ```bash
-npm i  
+npm install  
 ```  
 To run the program use:
 ```bash
