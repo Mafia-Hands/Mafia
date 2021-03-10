@@ -27,4 +27,4 @@ Please make sure to update tests as appropriate.
 Please ensure all [code of conduct](https://github.com/Mafia-Hands/Mafia/wiki/Code-of-Conduct) is followed.
 
 ## License
-Licensed under the [Apache License 2.0](LICENSE) license
+Licensed under the [Apache License 2.0](LICENSE.md) license
