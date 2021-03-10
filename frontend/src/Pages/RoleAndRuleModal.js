@@ -1,13 +1,27 @@
 import React from 'react';
+import RoleTable from '../Components/RoleTable.js';
+import RuleParagraph from '../Components/RuleParagraph';
+import styles from '../Styles/RoleAndRuleModal.module.css';
+import Header from '../Components/Header';
 
 const RoleAndRuleModal = () => {
 
-
     return (
-        <label> Mafia - Roles and Rules </label>
-        
+        <div className={styles.gradient}>
 
+            <Header />
+           
+            <div>
+                <b> Mafia Roles </b>
+            </div>
+            
+
+            <RoleTable />
+            <RuleParagraph />
+
+        </div>
+    
     )
 }
 
-export default RuleModal;
+export default RoleAndRuleModal;

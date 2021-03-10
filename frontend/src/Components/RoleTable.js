@@ -3,15 +3,17 @@ import styles from '../Styles/RuleTable.module.css';
 
 const RuleTable = () => {
 
-    const tableHeader = ["Role Name", "Description"]
+    const tableHeader = ["Role Name", "Description", "Win Condition"]
 
-    const roles = [ { name: "Mafia", description: "At night, all Mafias can vote to kill one player" },
-                    { name: "Medic", description: "At night, after Mafias killed one player, Medic can decide to save the killed player or not" },
-                    { name: "Civilian", description: "Sleep all night, no power :(" }
+    // later for multi-mode version, fetch the data by the backend
+    // eg: if the user choose to play one-night ultimate mode, this will be tanner, mason, etc 
+    const roles = [ { name: "Mafia", description: "At night, all Mafias can vote to kill one player", winCondition: "number of Civilians <= number of Mafias" },
+                    { name: "Medic", description: "At night, after Mafias killed one player, Medic can decide to save the killed player or not", winCondition: "All Mafias are killed" },
+                    { name: "Civilian", description: "Sleep all night, no power :(", winCondition: "All Mafias are killed" }
                   ]
 
     return (
-        <div>
+        <div className={styles.gradient}>
             <table className={styles.roleTable}>
                 <thead>
                     <tr >
@@ -24,6 +26,7 @@ const RuleTable = () => {
                         <tr key={role.name}>
                             <td> {role.name}  </td>
                             <td> {role.description} </td>
+                            <td> {role.winCondition} </td>
                         </tr>
                     ))}
                     
