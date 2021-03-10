@@ -8,8 +8,14 @@ Please note we have a [code of conduct](https://github.com/Mafia-Hands/Mafia/blo
 
 
 ## Set Up  
+Before running, install any necessary modules using:
+```bash
 npm i  
+```  
+To run the program use:
+```bash
 npm start
+```  
   
 
 ## Pull Request process
