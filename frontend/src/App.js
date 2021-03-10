@@ -4,16 +4,17 @@ import './App.css';
 import RoleTable from './Components/RoleTable';
 import RuleParagraph from './Components/RuleParagraph';
 
-import RuleAndRuleModal from './Pages/RoleAndRuleModal';
+import RuleAndRuleDialog from './Pages/RoleAndRuleDialog';
+import Header from './Components/Header';
 
 function App() {
   return (
 
     <div>
-      {/* <RuleParagraph />
-      <RoleTable /> */}
 
-        <RuleAndRuleModal />
+        <RuleAndRuleDialog />
+
+        {/* <Header /> */}
       
     </div>
   );
