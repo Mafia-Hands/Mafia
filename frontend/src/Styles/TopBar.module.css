@@ -15,12 +15,12 @@
 
 .settingsButton {
   grid-area: Settings;
-  justify-self: center;
+  justify-self: end;
 }
 
 .container {
   display: grid;
-  grid-template-columns: 2fr 4fr 1fr;
+  grid-template-columns: 1fr 4fr 1fr;
   grid-template-rows: auto;
   grid-template-areas:
     'userName Timer Settings'
