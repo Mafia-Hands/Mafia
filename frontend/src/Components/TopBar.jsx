@@ -44,14 +44,20 @@ const TopBar = ({ userName, role }) => {
         // </div>
 
         // <ModalMUI info={openInfo} setInfo={setOpenInfo} setting={openSetting} setSetting={setOpenSetting}>
-        <div>
-            <button onClick={() => setOpen(true)}>
-                {' '}
-                <i className="fa fa-info"></i>{' '}
-            </button>
-            
+        <div className={styles.container}>
+            <p className={styles.userName}>{`Name: ${userName}`}</p>
+            <p className={styles.userRole}>
+                {`Role: ${role}`}
+                <button onClick={() => setOpen(true)}>
+                    <i className="fa fa-info"></i>
+                </button>
+            </p>
+            <div className={styles.timer}>Timer Placeholder</div>
+
+            <button className={styles.settingsButton}>Settings</button>
+
             <ModalMUI open={open} setOpen={setOpen}>
-                <RoleAndRuleDialog />
+                <RoleAndRuleDialog goback={setOpen} />
             </ModalMUI>
         </div>
     );
