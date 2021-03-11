@@ -132,9 +132,6 @@ export default function Table({ playerStates }) {
                             playerName={playerName}
                             childRef={playerRef}
                             style={{ top, left, position: 'absolute' }}
-                            // isDead
-                            isHoverable
-                            // isClicked
                             onClick={(e) => console.log(e)}
                         />
                     );
