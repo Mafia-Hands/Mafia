@@ -1,17 +1,22 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
 .playerListHeader {
-    text-align: center;
+    background: #247dc2;
+    padding: 20px;
+    text-align: left;
+    margin: 0px
 }
 
 .playerList {
     text-align: left;
-}
-
-.container {
-    display: grid;
-    grid-template-rows: auto;
-    background: #247dc2;
+    background: #5f6468;
     padding: 20px;
-  }
+    margin: 0px
+}
 
 ul {
     list-style-type: none;

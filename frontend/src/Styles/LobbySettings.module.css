@@ -1,3 +1,9 @@
+.container {
+    display: flex;
+    flex-direction: column; 
+    padding: 20px;
+  }
+
 .lobbySettingsHeader {
     background: #247dc2;
 }
@@ -32,6 +38,12 @@
     border-bottom: 3px solid red;
 }
 
+.mafiaSelectorContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .mafiaSelectorText {
     text-align: left;
     float: left;
@@ -39,11 +51,4 @@
 
 .mafiaSelectorDropdown {
     float: right;
-    padding: 20px;
 }
-
-.container {
-    display: grid;
-    grid-template-rows: auto;  
-    padding: 20px;
-  }

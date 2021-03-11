@@ -1,19 +1,6 @@
 import { React } from 'react';
 import styles from '../Styles/LobbySettings.module.css';
 
-function MafiaNumSelector(props) {
-    return (
-    <div>
-        <p className={styles.mafiaSelectorText}>Mafia</p>
-        <select className={styles.mafiaSelectorDropdown} name="MafiaNum">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-        </select>
-    </div>
-    )
-}
-
 function LobbySettings(props) {
     const gameCode = props.gameCode
     return (
@@ -26,7 +13,7 @@ function LobbySettings(props) {
                 <a className={styles.rolesButton} onClick={() => alert('Roles explanation screen goes here')}>
                     Roles
                 </a>
-                <div>
+                <div className={styles.mafiaSelectorContainer}>
                     <p className={styles.mafiaSelectorText}>Mafia</p>
                     <select className={styles.mafiaSelectorDropdown} name="MafiaNum">
                         <option value="0">0</option>
