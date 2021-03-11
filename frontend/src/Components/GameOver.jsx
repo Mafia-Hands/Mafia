@@ -1,5 +1,5 @@
 import { React } from 'react';
-import styles from '../Styles/TopBar.module.css';
+import styles from '../Styles/GameOver.module.css';
 
 function GameOver({playerName, groupName, winFlag}){
     return (
@@ -10,7 +10,7 @@ function GameOver({playerName, groupName, winFlag}){
             </div>
             
             <div>
-                <p> Pic </p>
+                <p className={styles.avatar}> Pic </p>
                 <h3> "groupName" placeholder is the winner</h3>   
             </div>
             

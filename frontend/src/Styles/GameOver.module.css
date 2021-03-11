@@ -1,10 +1,14 @@
 .container{
     display: block;
-    width: 100vw; 
+   
 }
 
-.top{
-    display: flex; 
-    text-align: center;
+.avatar{
+
+    height: 40%;
+    border: solid white;
+    border-radius: 80%;
+
+    
 }
 
