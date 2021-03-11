@@ -1,7 +1,7 @@
-import './App.css'
-import TopBar from './Components/TopBar'
-import GameEnv from './Components/GameEnv'
-import BottomBar from './Components/BottomBar'
+import './App.css';
+import TopBar from './Components/TopBar';
+import GameEnv from './Components/GameEnv';
+import BottomBar from './Components/BottomBar';
 
 function App() {
     return (
@@ -15,7 +15,7 @@ function App() {
                 </div>
             </header>
         </div>
-    )
+    );
 }
 
-export default App
+export default App;
