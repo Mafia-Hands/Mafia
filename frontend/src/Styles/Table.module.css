@@ -1,0 +1,27 @@
+.tableWrapper {
+    height: 80vh;
+    width: 100%;
+    background-color: rgb(230, 230, 230);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.table {
+    width: 70%;
+    height: 70%;
+    background-color: #b58343;
+    border: 5px solid rgb(255 208 147);
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.199);
+    border-radius: 50%;
+    position: relative;
+}
+
+/* .overlay {
+    height: calc(100% + 200px);
+    width: 100%;
+    position: absolute;
+    background-color: rgba(29, 29, 29, 0.37);
+} */
