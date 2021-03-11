@@ -3,6 +3,7 @@ import styles from '../Styles/RuleParagraph.module.css';
 import React from 'react';
 
 const RuleParagraph = () => {
+    // TODO: formalize/polish the role and rule description
     return (
         <div className={styles.gradient}>
             <b> Mafia Rules </b>
