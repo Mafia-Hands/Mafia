@@ -8,11 +8,11 @@ const CodeJoinBar = () => {
     }
 
     return (
+        /* supposed to enter Lobby ID to join the lobby */
+        /* button will have onClick to join */
         <div>
-            <input type= "text" onChange = {handleID}></input>
-            /* supposed to enter Lobby ID to join the lobby */
+            <input placeholder="Enter LobbyID" type= "text" onChange = {handleID}></input>
             <button> JOIN </button>
-            /* button will have onClick to join */
         </div>
     );
 };

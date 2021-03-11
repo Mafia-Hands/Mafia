@@ -2,9 +2,9 @@ import  React, {useState} from 'react';
 
 const CreateGame = () => {
     return (
+        /* button will have onClick to create a new Lobby */
         <div>
-            <button> JOIN </button>
-            /* button will have onClick to create a new Lobby */
+            <button> Create Game </button>
         </div>
     );
 };

@@ -8,12 +8,12 @@ const NicknameBar = () => {
     }
 
     return (
-        <div>
-            <input type= "text" onChange = {handleName}></input>
-            /* supposed to save the user nickname to the database */
-            {data.length > 0 && (<button> ENTER </button>)}
-            /* ENTER button appear when is entered, onClick to save the 
+        /* supposed to save the user nickname to the database */
+        /* ENTER button appear when is entered, onClick to save the 
             nickname */
+        <div>
+            <input placeholder="Enter Nickname" type= "text" onChange = {handleName}></input>
+            {data && (<button> ENTER </button>)}
         </div>
     );
 };
