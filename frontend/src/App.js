@@ -5,38 +5,46 @@ import BottomBar from './Components/BottomBar';
 import RuleAndRuleDialog from './Pages/RoleAndRuleDialog';
 import { Switch, Route } from 'react-router-dom';
 import SettingDialog from './Pages/SettingDialog';
+import { useState } from 'react';
 
 function App() {
-
-  return (
     
-      <Switch>
 
-        <Route path="/info">
-            <RuleAndRuleDialog />
-        </Route>
+    return (
+        // <Switch>
 
-        <Route path="/setting">
-            <SettingDialog />
-        </Route>
+        //   <Route path="/info">
+        //       <RuleAndRuleDialog />
+        //   </Route>
 
-        <Route path="/">
-          <div className='App'>
-            <header className='App-header'>
+        //   <Route path="/setting">
+        //       <SettingDialog />
+        //   </Route>
+
+        //   <Route path="/">
+        //     <div className='App'>
+        //       <header className='App-header'>
+        //           <div style={{ width: '80%' }}>
+        //             <TopBar userName='Reeve' role='Civilian' />
+        //             <GameEnv />
+        //             <BottomBar />
+        //           </div>
+        //         </header>
+        //       </div>
+        //   </Route>
+
+        // </Switch>
+
+        <div className="App">
+            <header className="App-header">
                 <div style={{ width: '80%' }}>
-                  <TopBar userName='Reeve' role='Civilian' />                  
-                  <GameEnv />
-                  <BottomBar />
+                    <TopBar userName="Reeve" role="Civilian" />
+                    <GameEnv />
+                    <BottomBar />
                 </div>
-              </header>
-            </div>
-        </Route>
-
-      </Switch>
-    
-  );
-
- 
+            </header>
+        </div>
+    );
 }
 
 export default App;

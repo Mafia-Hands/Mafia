@@ -4,33 +4,23 @@ import Modal from '../Modal/Modal';
 import styles from '../Styles/SettingDialog.module.css';
 import Slider from '../Components/Slider';
 
-
-const SettingDialog = (onCancel) => {
-
-    return(
-        <Modal dismissOnClickOutside={true} onCancel={onCancel}>
-            
+const SettingDialog = (props) => {
+    return (
+        <Modal dismissOnClickOutside={true} onCancel={props.goback}>
             <div className={styles.modal}>
-                <GoBackBtn />
+                <GoBackBtn goback={props.goback} />
 
                 <div>
                     <b> Settings </b>
                 </div>
 
                 <div>
-
                     <b> Sound </b>
-                    <Slider /> 
-
+                    <Slider />
                 </div>
-                
-                
             </div>
-
-
-
         </Modal>
-    )
-} 
+    );
+};
 
 export default SettingDialog;

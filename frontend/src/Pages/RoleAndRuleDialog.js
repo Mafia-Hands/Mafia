@@ -5,25 +5,21 @@ import styles from '../Styles/RoleAndRuleDialog.module.css';
 import Modal from '../Modal/Modal';
 import GoBackBtn from '../Components/GoBackButton.js';
 
-
-const RoleAndRuleDialog = () => {
-
+const RoleAndRuleDialog = (props) => {
     return (
-
-        <Modal dismissOnClickOutside={true} style={styles.gradient}> 
+        <Modal onCancel={props.goback} dismissOnClickOutside={true} style={styles.gradient}>
             <div className={styles.modal}>
-                <GoBackBtn />
-            
+                <GoBackBtn goback={props.goback} />
+
                 <div>
                     <b> Mafia Roles </b>
                 </div>
-                
+
                 <RoleTable />
                 <RuleParagraph />
-
             </div>
         </Modal>
-    )
-}
+    );
+};
 
 export default RoleAndRuleDialog;
