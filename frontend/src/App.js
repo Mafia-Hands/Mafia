@@ -8,7 +8,7 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
-                <div style={{ width: '80%' }}>
+                <div style={{ width: '50%' }}>
                     <TopBar userName="Reeve" role="Civilian" />
                     <LobbySettings gameCode="ABC123"/>
                     <BottomBar />

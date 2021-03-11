@@ -21,10 +21,25 @@
 }
 
 .rolesButton {
-    border: none;
+    text-align: left;
+}
+
+.rolesButton:hover {
+    border-bottom: 3px solid red;
+}
+  
+.rolesButton.active {
+    border-bottom: 3px solid red;
+}
+
+.mafiaSelectorText {
+    text-align: left;
+    float: left;
+}
+
+.mafiaSelectorDropdown {
+    float: right;
     padding: 20px;
-    text-decoration: none;
-    display: inline-block;
 }
 
 .container {
