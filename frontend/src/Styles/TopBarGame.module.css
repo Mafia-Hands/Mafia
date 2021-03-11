@@ -1,0 +1,42 @@
+.userName {
+    grid-area: userName;
+    justify-self: start;
+}
+
+.userRole {
+    grid-area: userRole;
+    justify-self: start;
+}
+
+.info {
+    grid-area: info;
+    justify-self: start;
+}
+
+.timer {
+    grid-area: Timer;
+    justify-self: center;
+}
+
+.settingsButton {
+    grid-area: Settings;
+    justify-self: end;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+        'userName Timer Settings'
+        'userRole Timer Settings';
+    align-items: center;
+    justify-items: start;
+    width: 100%;
+}
+
+.container p,
+span {
+    margin: 0;
+    font-size: calc(10px + 1vmin);
+}
