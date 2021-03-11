@@ -10,11 +10,11 @@ const NicknameBar = () => {
 
     return (
         <div>
-            {setPrint? <h1>{data}</h1> :null}
             <input type= "text" onChange = {handleText}></input>
+            /* supposed to save the user nickname to the database */
             <button onClick ={() => setPrint(true)}> ENTER </button>
         </div>
     );
 };
 
-export default NicknameBar;
+export default NicknameBar; 
