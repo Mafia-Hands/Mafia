@@ -7,7 +7,11 @@ import GoBackBtn from '../Components/GoBackButton.js';
 
 const RoleAndRuleDialog = (props) => {
     return (
-        <Modal onCancel={props.goback} dismissOnClickOutside={true} style={styles.gradient}>
+        <Modal
+            onCancel={props.goback}
+            dismissOnClickOutside={true}
+            style={styles.gradient}
+        >
             <div className={styles.modal}>
                 <GoBackBtn goback={props.goback} />
 

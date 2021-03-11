@@ -1,11 +1,9 @@
 import ReactDOM from 'react-dom';
-import { useHistory } from 'react-router';
 import styles from '../Styles/Modal.module.css';
 
 const modalRoot = document.querySelector('#modal-root');
 
 const Modal = ({ onCancel, dismissOnClickOutside, style, children }) => {
-    //const history = useHistory();
     return ReactDOM.createPortal(
         <div
             className={styles.modalContainer}
