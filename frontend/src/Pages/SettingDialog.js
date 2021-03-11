@@ -2,6 +2,7 @@ import React from 'react';
 import GoBackBtn from '../Components/GoBackButton';
 import Modal from '../Modal/Modal';
 import styles from '../Styles/SettingDialog.module.css';
+import Slider from '../Components/Slider';
 
 
 const SettingDialog = (onCancel) => {
@@ -15,6 +16,14 @@ const SettingDialog = (onCancel) => {
                 <div>
                     <b> Settings </b>
                 </div>
+
+                <div>
+
+                    <b> Sound </b>
+                    <Slider /> 
+
+                </div>
+                
                 
             </div>
 

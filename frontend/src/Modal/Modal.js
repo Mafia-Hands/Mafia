@@ -10,7 +10,6 @@ const Modal = ({ dismissOnClickOutside, style, children }) => {
     return ReactDOM.createPortal(
         <div className={styles.modalContainer} onClick={e => {
             if (dismissOnClickOutside && e.target.parentElement === modalRoot) {
-                //history.replace('/');
                 history.goBack();
             }
         }}>

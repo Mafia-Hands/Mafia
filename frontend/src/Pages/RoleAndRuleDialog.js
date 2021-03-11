@@ -6,12 +6,11 @@ import Modal from '../Modal/Modal';
 import GoBackBtn from '../Components/GoBackButton.js';
 
 
-const RoleAndRuleDialog = (onCancelModal) => {
+const RoleAndRuleDialog = () => {
 
     return (
 
-        <Modal dismissOnClickOutside={true} onCancel={onCancelModal} style={styles.gradient}> 
-            {/* <div className={styles.gradient}> */}
+        <Modal dismissOnClickOutside={true} style={styles.gradient}> 
             <div className={styles.modal}>
                 <GoBackBtn />
             
