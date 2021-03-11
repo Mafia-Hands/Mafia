@@ -8,9 +8,7 @@ function App() {
     <div className='App'>
       <header className='App-header'>
         <div style={{ width: '80%' }}>
-          <TopBar userName='Reeve' role='Civilian' />
-          <GameEnv />
-          <BottomBar />
+          <GameOver />
         </div>
       </header>
     </div>
