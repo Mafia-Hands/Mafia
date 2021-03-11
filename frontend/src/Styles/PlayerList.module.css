@@ -1,0 +1,18 @@
+.playerListHeader {
+    text-align: center;
+}
+
+.playerList {
+    text-align: left;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: auto;
+    background: #247dc2;
+    padding: 20px;
+  }
+
+ul {
+    list-style-type: none;
+  }
