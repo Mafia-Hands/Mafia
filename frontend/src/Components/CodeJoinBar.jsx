@@ -1,7 +1,7 @@
 import  React, {useState} from 'react';
 
 const CodeJoinBar = () => {
-    const [data, setData] = useState(null);
+    const [data,setData] = useState(null);
 
     const handleID = (LobbyID) => {
         setData(LobbyID.target.value)
@@ -11,7 +11,7 @@ const CodeJoinBar = () => {
         /* supposed to enter Lobby ID to join the lobby */
         /* button will have onClick to join */
         <div>
-            <input placeholder="Enter LobbyID" type= "text" onChange = {handleID}></input>
+            <input value={data} placeholder="Enter LobbyID" type= "text" onChange = {handleID}></input>
             <button> JOIN </button>
         </div>
     );
