@@ -4,8 +4,38 @@
     border-radius: 50%;
     background-color: rgb(43, 43, 43);
     color: white;
-    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.isHoverable:hover {
+    background-color: rgb(73, 73, 73);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.479);
+    cursor: pointer;
+    transition: 0.2s ease background-color box-shadow;
+}
+
+.hasVoted:after {
+    content: '';
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    border-radius: 50%;
+    bottom: 0;
+    right: 10%;
+    background-color: red;
+}
+
+.isClicked {
+    background-color: #d85a5a;
+    border: 1px solid #da2323;
+}
+
+.isClicked:hover {
+    background-color: #d85a5a;
+}
+
+.isDead {
+    background-color: rgb(0, 0, 0);
 }

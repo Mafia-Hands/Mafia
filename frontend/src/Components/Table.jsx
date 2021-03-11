@@ -12,7 +12,6 @@ export default function Table({ playerStates }) {
     const tableRef = useRef(null);
     // used to keep reference to player div (to get width)
     const playerRef = useRef(null);
-
     // ref to keep track of if first Render has happend (this was suggested online)
     const firstRender = useRef(true);
 
@@ -132,7 +131,11 @@ export default function Table({ playerStates }) {
                             playerId={playerId}
                             playerName={playerName}
                             childRef={playerRef}
-                            style={{ top, left }}
+                            style={{ top, left, position: 'absolute' }}
+                            // isDead
+                            isHoverable
+                            // isClicked
+                            onClick={(e) => console.log(e)}
                         />
                     );
                 })}
