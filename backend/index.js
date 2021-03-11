@@ -12,6 +12,10 @@ const io = require("socket.io")(server, {
 });
 const port = process.env.PORT || 4001;
 
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
+
 // Listen for a "connection" event for incoming sockets.
 io.on("connection", (socket) => {
     console.log("User has connected");
