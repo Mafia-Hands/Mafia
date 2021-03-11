@@ -2,7 +2,7 @@
 name: New Backend Feature
 about: Suggest a new Backend Idea
 title: ""
-labels: frontend
+labels: backend
 assignees: ""
 ---
 
