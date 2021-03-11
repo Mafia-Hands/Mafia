@@ -16,7 +16,7 @@ function App() {
                 </div>
             </header>
         </div>
-    )
+    );
 }
 
-export default App
+export default App;
