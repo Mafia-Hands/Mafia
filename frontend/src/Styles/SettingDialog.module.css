@@ -2,11 +2,7 @@
     position: relative;
     width: 50vw;
     height: 40vh;
-}
-
-button {
-    position: absolute;
-    left: 0%;
+    text-align: center;
 }
 
 b {

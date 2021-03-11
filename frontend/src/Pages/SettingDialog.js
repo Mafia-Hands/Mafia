@@ -21,6 +21,11 @@ const SettingDialog = (props) => {
                 <b> Brightness </b>
                 <Slider />
             </div>
+
+            {/* TODO: improve CSS and layout */}
+            <div className={styles.leaveBtn}>
+                <button> Leave Game </button>
+            </div>
         </div>
     );
 };
