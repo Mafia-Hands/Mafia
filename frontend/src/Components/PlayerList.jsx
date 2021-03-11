@@ -2,6 +2,7 @@ import { React } from 'react';
 import styles from '../Styles/PlayerList.module.css';
 
 function PlayerList(props) {
+  // TODO: refactor to use list of Player objects
   const playerNames = props.playerNames
   return (
     <div className={styles.container}>
