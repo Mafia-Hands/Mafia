@@ -3,11 +3,6 @@
     background-image: linear-gradient(to top right, #988be7, grey);
 }
 
-/* .modal {
-    display: 'flex';
-    justify-content: center;
-    align-items: center;
-} */
 .modal {
     position: absolute;
     top: 0;
