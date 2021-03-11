@@ -7,22 +7,22 @@ import GoBackBtn from '../Components/GoBackButton.js';
 
 const RoleAndRuleDialog = (props) => {
     return (
-        <Modal
-            onCancel={props.goback}
-            dismissOnClickOutside={true}
-            style={styles.gradient}
-        >
-            <div className={styles.modal}>
-                <GoBackBtn goback={props.goback} />
+        // <Modal
+        //     onCancel={props.goback}
+        //     dismissOnClickOutside={true}
+        //     style={styles.gradient}
+        // >
+        <div className={styles.modal}>
+            <GoBackBtn goback={props.goback} />
 
-                <div>
-                    <b> Mafia Roles </b>
-                </div>
-
-                <RoleTable />
-                <RuleParagraph />
+            <div>
+                <b> Mafia Roles </b>
             </div>
-        </Modal>
+
+            <RoleTable />
+            <RuleParagraph />
+        </div>
+        // </Modal>
     );
 };
 
