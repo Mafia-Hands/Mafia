@@ -8,8 +8,14 @@
 }
 
 button {
-    width: 10%;
     position: absolute;
     left:0%;
 }
 
+b {
+    text-align: center;
+}
+
+.modal {
+    position: relative;
+}

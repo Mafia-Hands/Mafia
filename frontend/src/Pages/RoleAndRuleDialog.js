@@ -3,15 +3,17 @@ import RoleTable from '../Components/RoleTable.js';
 import RuleParagraph from '../Components/RuleParagraph';
 import styles from '../Styles/RoleAndRuleDialog.module.css';
 import Modal from '../Modal/Modal';
+import GoBackBtn from '../Components/GoBackButton.js';
 
-const RoleAndRuleDialog = (onCancel) => {
+
+const RoleAndRuleDialog = (onCancelModal) => {
 
     return (
 
-        <Modal dismissOnClickOutside={true} onCancel={onCancel} style={styles.gradient}> 
+        <Modal dismissOnClickOutside={true} onCancel={onCancelModal} style={styles.gradient}> 
             {/* <div className={styles.gradient}> */}
-            <div>
-                <button > Go back </button>
+            <div className={styles.modal}>
+                <GoBackBtn />
             
                 <div>
                     <b> Mafia Roles </b>

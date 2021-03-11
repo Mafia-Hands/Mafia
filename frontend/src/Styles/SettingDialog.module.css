@@ -1,0 +1,13 @@
+.modal {
+    position: relative;
+}
+
+button {
+    position: absolute;
+    left:0%;
+}
+
+b {
+    text-align: center;
+}
+
