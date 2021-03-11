@@ -1,28 +1,19 @@
 class MafiaGame {
     constructor() {
-        // Acts  as a mapping
-        const dict = {};
-        this.gameCount = 0;
+        // Acts  as a mapping for gameID keys to their gameroom.
+        const gameRoomsDict = {};
     }
 
     newGame() {
-        incrementGameCounter();
         let newRoom = new Room();
         let gameID = newRoom.getRoomName();
-        dict[gameID] = newRoom;
+        gameRoomsDict[gameID] = newRoom;
     }
 
     closeGame(gameID) {
-        decrementGameCounter();
-        delete dict[gameID];
-    }
-
-    incrementGameCounter() {
-        this.gameCount++;
-    }
-
-    decrementGameCounter() {
-        this.gameCount--;
+        delete gameRoomsDict[gameID];
     }
 
 }
+
+module.export = MafiaGame;

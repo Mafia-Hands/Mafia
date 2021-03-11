@@ -28,3 +28,5 @@ class Player {
     }
 
 }
+
+module.export = Player;

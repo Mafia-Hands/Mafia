@@ -1,17 +1,17 @@
 class Room {
     constructor() {
         // function to initialise a roomID
-        this.roomName = this.setRoomName();
+        this.roomID = this.setRoomID();
 
         // default values given.
-        this.gamestate = GameStateEnum["Day Time"];
+        this.gamestate = GameStateEnum.DAYTIME;
         this.maxPlayerCount = 6;
         this.players = new Array(maxPlayerCount);
         this.roundNumber = 0;
     }
 
-    getRoomName() {
-        return this.roomName;
+    getRoomID() {
+        return this.roomID;
     }
 
     getGamestate() {
@@ -40,9 +40,11 @@ class Room {
     incrementRoundNumber() {
         this.roundNumber++;
     }
-
-    setRoomName() {
-        return 0; //some function to initialise a roomID. Must discuss how to do this at a later date.
+    // TODO: some function to initialise a roomID. Must discuss how to do this at a later date.
+    setRoomID() {
+        return 0;
     }
 
 }
+
+module.export = Room;
