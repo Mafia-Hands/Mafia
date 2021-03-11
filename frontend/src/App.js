@@ -1,4 +1,5 @@
 import './App.css';
+import TopBarSettings from './Components/TopBarSettings';
 import TopBarGame from './Components/TopBarGame';
 import GameEnv from './Components/GameEnv';
 import BottomBar from './Components/BottomBar';
@@ -13,6 +14,7 @@ function App() {
                         showTimer={true}
                         showRole={true}
                     />
+                    <TopBarSettings currentScreen="LOBBY" showSettings={true} />
                     <GameEnv />
 
                     <BottomBar />
