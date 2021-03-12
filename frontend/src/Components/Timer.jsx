@@ -1,8 +1,8 @@
 import * as React from "react";
 
 const Timer = (props) => {
-  let userPerferTime = props.userPerferTime;
-  let startTime = parseInt(userPerferTime,10);
+  let userPreferTime = props.userPreferTime;
+  let startTime = parseInt(userPreferTime,10);
   let startMinute = parseInt(startTime / 60,10);
   let startSecond = startTime % 60;
 
