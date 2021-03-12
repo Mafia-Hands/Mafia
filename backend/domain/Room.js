@@ -1,3 +1,4 @@
+const GameStateEnum = require("./Enum/GameState");
 class Room {
     constructor() {
         // function to initialise a roomID
@@ -6,7 +7,7 @@ class Room {
         // default values given.
         this.gamestate = GameStateEnum.DAYTIME;
         this.maxPlayerCount = 6;
-        this.players = new Array(maxPlayerCount);
+        this.players = [];
         this.roundNumber = 0;
     }
 
@@ -40,11 +41,12 @@ class Room {
     incrementRoundNumber() {
         this.roundNumber++;
     }
-    // TODO: some function to initialise a roomID. Must discuss how to do this at a later date.
+    // TODO: Change random generation if needed
     setRoomID() {
-        return 0;
+         return Math.random().toString(36).substring(7);
+        
     }
 
 }
 
-module.export = Room;
+module.exports = Room;

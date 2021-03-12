@@ -1,9 +1,9 @@
 class Player {
-    constructor(socketID, roomID, nickname, role) {
+    constructor(socketID, roomID, nickname) {
         this.socketID = socketID;
         this.roomID = roomID;
         this.nickname = nickname;
-        this.role = role;
+        this.role;
         this.isAlive = true;
     }
 
@@ -18,6 +18,9 @@ class Player {
     getRole() {
         return this.role;
     }
+    setRole(role) {
+        this.role = role;
+    }
 
     getIsAlive() {
         return this.isAlive;
@@ -29,4 +32,4 @@ class Player {
 
 }
 
-module.export = Player;
+module.exports = Player;

@@ -1,13 +1,15 @@
+const Room = require("./Room");
 class MafiaGame {
     constructor() {
         // Acts  as a mapping for gameID keys to their gameroom.
-        const gameRoomsDict = {};
+        this.gameRoomsDict = {};
     }
 
     newGame() {
         let newRoom = new Room();
-        let gameID = newRoom.getRoomName();
-        gameRoomsDict[gameID] = newRoom;
+        let roomID = newRoom.getRoomID();
+        this.gameRoomsDict[roomID] = newRoom;
+        return roomID;
     }
 
     closeGame(gameID) {
@@ -16,4 +18,4 @@ class MafiaGame {
 
 }
 
-module.export = MafiaGame;
+module.exports = MafiaGame;
