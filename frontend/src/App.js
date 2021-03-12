@@ -1,17 +1,17 @@
-import './App.css'
-import CodeJoinBar from './Components/CodeJoinBar'
-import CreateGame from './Components/CreateGame'
-import NicknameBar from './Components/NicknameBar'
+import './App.css';
+import TopBar from './Components/TopBar';
+import GameEnv from './Components/GameEnv';
+import BottomBar from './Components/BottomBar';
 
 function App() {
     return (
         <div className="App">
             <header className="App-header">
-                <div style={{ width: '100%' }}>
-                    <h1>MAFIA</h1>
-                    <CodeJoinBar/>
-                    <NicknameBar />
-                    <CreateGame />
+                <div style={{ width: '80%' }}>
+                    <TopBar userName="Reeve" role="Civilian" />
+                    <GameEnv />
+
+                    <BottomBar />
                 </div>
             </header>
         </div>
