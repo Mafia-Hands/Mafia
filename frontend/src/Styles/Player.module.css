@@ -4,8 +4,8 @@
     border-radius: 50%;
     background-color: rgb(43, 43, 43);
     color: white;
-    position: absolute;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    margin: 10px;
 }

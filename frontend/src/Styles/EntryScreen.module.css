@@ -1,0 +1,17 @@
+.container{
+    height: 100%;
+    width : 100%;
+    padding: 20px;
+}
+
+.player{
+    width: 100%;
+}
+
+.settings{
+    text-align: right;
+}
+
+.button{
+    justify-content: flex-end;
+}
