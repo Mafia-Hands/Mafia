@@ -7,17 +7,19 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
-                <div style={{ width: '80%' }}>
+                {/* This is for testing modals */}
+                {/* Need to import these components  */}
+                {/* <div style={{ width: '80%' }}>
+                    
                     <TopBar userName="Reeve" role="Civilian" />
                     <GameEnv />
-                    <BottomBar />
+                    <BottomBar /> */}
 
-                    {/* This is lobby screen */}
-                    {/* <div style={{ width: '100%' }}>
+                <div style={{ width: '100%' }}>
                     <h1>MAFIA</h1>
                     <CodeJoinBar />
                     <NicknameBar />
-                    <CreateGame /> */}
+                    <CreateGame />
                 </div>
             </header>
         </div>
