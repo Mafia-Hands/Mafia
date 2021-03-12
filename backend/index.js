@@ -1,5 +1,6 @@
 const app = require("express")();
 const server = require("http").createServer(app);
+const config = require('./config.json');
 const io = require("socket.io")(server, {
     // Set up of CORS settings for socket.io server
     // Reason for all site access is for the ease of development, since we might have various local/cloud website setup for testing purposes.
@@ -7,10 +8,10 @@ const io = require("socket.io")(server, {
     // This won't be a problem in our website, as there are no local session/cookies returned to the user. 
     // Please refer to the post: https://stackoverflow.com/questions/12001269/what-are-the-security-risks-of-setting-access-control-allow-origin
     cors: {
-        origin: '*', // Allow all origin to connect to the website
+        origin: config.cors_origin, // Allow all origin to connect to the website
     }
 });
-const port = process.env.PORT || 4001;
+const port = process.env.PORT || config.local_port;
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
