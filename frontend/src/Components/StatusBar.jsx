@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "../Styles/Statusbar.module.css";
+import React from 'react';
+import styles from '../Styles/Statusbar.module.css';
 
 export default function StatusBar({ text }) {
     return (
