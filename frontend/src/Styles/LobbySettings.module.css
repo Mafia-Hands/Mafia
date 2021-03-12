@@ -1,7 +1,7 @@
 .container {
     display: flex;
     flex-direction: column; 
-    padding: 20px;
+    padding-left: 20px;
   }
 
 .lobbySettingsHeader {
@@ -24,18 +24,6 @@
     background: #5f6468;
     text-align: left;
     padding: 20px;
-}
-
-.rolesButton {
-    text-align: left;
-}
-
-.rolesButton:hover {
-    border-bottom: 3px solid red;
-}
-  
-.rolesButton.active {
-    border-bottom: 3px solid red;
 }
 
 .mafiaSelectorContainer {

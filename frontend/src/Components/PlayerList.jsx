@@ -1,9 +1,10 @@
 import { React } from 'react';
 import styles from '../Styles/PlayerList.module.css';
 
-function PlayerList(props) {
-  // TODO: refactor to use list of Player objects
-  const playerNames = props.playerNames
+/**
+ * @param playerNames MANDATORY prop: a list of strings (player names)
+ */
+const PlayerList = ({playerNames}) => {
   return (
     <div className={styles.container}>
       <h3 className={styles.playerListHeader}>Player List</h3>

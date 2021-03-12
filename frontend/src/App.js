@@ -3,9 +3,6 @@ import TopBarSettings from './Components/TopBarSettings';
 import TopBarGame from './Components/TopBarGame';
 import GameEnv from './Components/GameEnv';
 import BottomBar from './Components/BottomBar';
-import PlayerList from './Components/PlayerList';
-import LobbySettings from './Components/LobbySettings';
-
 
 function App() {
     return (

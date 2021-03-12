@@ -1,8 +1,10 @@
 import { React } from 'react';
 import styles from '../Styles/LobbySettings.module.css';
 
-function LobbySettings(props) {
-    const gameCode = props.gameCode
+/**
+ * @param gameCode MANDATORY prop: string of game entry code
+ */
+const LobbySettings = ({gameCode}) => {
     return (
         <div className={styles.container}>
             <div className={styles.lobbySettingsHeader}>
@@ -10,9 +12,9 @@ function LobbySettings(props) {
                 <h3 className={styles.gameCode}>Game Code: {gameCode}</h3>
             </div>
             <div className={styles.lobbySettingsOptions}>
-                <a className={styles.rolesButton} onClick={() => alert('Roles explanation screen goes here')}>
+                <button className={styles.rolesButton} onClick={() => alert('Roles explanation screen goes here')}>
                     Roles
-                </a>
+                </button>
                 <div className={styles.mafiaSelectorContainer}>
                     <p className={styles.mafiaSelectorText}>Mafia</p>
                     <select className={styles.mafiaSelectorDropdown} name="MafiaNum">
