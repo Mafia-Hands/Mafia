@@ -20,7 +20,11 @@ io.on("connection", (socket) => {
 /*********************  Create Lobby and lobby code *******/
 socket.on("create-lobby", (nickname) => {
     // create game and assign first player to the room
-    let mafiaGame = new MafiaGame();
+    // only create new game if no game exists
+    let mafiaGame;
+    if (!mafiaGame) {
+         mafiaGame = new MafiaGame(); 
+    }
     let roomID = mafiaGame.newGame();
     let host = new Player(socket.id,roomID,nickname);
     mafiaGame.gameRoomsDict[roomID].addPlayer(host);
@@ -38,3 +42,4 @@ const port = process.env.PORT|| 4001;
 server.listen(port, () => {
     console.log("Listening on *:" + port);
 });
+
