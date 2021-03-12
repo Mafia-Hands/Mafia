@@ -1,13 +1,10 @@
 import React from 'react';
-import GoBackBtn from '../Components/GoBackButton';
 import styles from '../Styles/SettingDialog.module.css';
 import Slider from '../Components/Slider';
 
-const SettingDialog = (props) => {
+const SettingDialog = () => {
     return (
         <div className={styles.modal}>
-            <GoBackBtn goback={props.goback} />
-
             <div>
                 <h2> Settings </h2>
             </div>

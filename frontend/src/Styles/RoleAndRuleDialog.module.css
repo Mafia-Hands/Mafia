@@ -1,15 +1,6 @@
 .gradient {
     background-color: grey;
-    background-image:
-        linear-gradient(
-        to top right, 
-        #988be7, grey
-        );
-}
-
-button {
-    position: absolute;
-    left:0%;
+    background-image: linear-gradient(to top right, #988be7, grey);
 }
 
 b {
