@@ -1,0 +1,12 @@
+.gradient {
+    background-color: grey;
+    background-image: linear-gradient(to top right, #988be7, grey);
+}
+
+b {
+    text-align: center;
+}
+
+.modal {
+    position: relative;
+}
