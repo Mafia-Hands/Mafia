@@ -1,4 +1,4 @@
 {
     "local_port": 4001,
-    "cors_origin": "*"
+    "cors_origin": ["*"]
 }
