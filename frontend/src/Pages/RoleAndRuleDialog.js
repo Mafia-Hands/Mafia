@@ -6,10 +6,6 @@ import styles from '../Styles/RoleAndRuleDialog.module.css';
 const RoleAndRuleDialog = () => {
     return (
         <div className={styles.modal}>
-            <div>
-                <b> Mafia Roles </b>
-            </div>
-
             <RoleTable />
             <RuleParagraph />
         </div>
