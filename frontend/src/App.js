@@ -1,12 +1,12 @@
 import './App.css';
-import HomeScreen from './Components/HomeScreen';
+import HomeScreenID from './Components/HomeScreenID';
 
 function App() {
     return (
         <div className="App">
             <header className="App-header">
                 <div style={{ width: '80%' }}>
-                    <HomeScreen/>
+                    <HomeScreenID/>
                 </div>
             </header>
         </div>

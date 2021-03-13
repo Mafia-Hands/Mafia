@@ -1,14 +1,12 @@
 import { React, useState } from 'react';
-import CodeJoinBar from '../Components/CodeJoinBar';
 import ModalMUI from '../Modal/ModalMUI';
 import NicknameBar from '../Components/NicknameBar';
-import CreateGame from '../Components/CreateGame';
 import SettingDialog from '../Pages/SettingDialog';
 import TopBarSettings from './TopBarSettings';
 import { Grid, Toolbar } from '@material-ui/core';
 
 
-const HomeScreen = () => {
+const HomeScreenID = () => {
     const [open, setOpen] = useState(false);
     
     return(
@@ -37,11 +35,9 @@ const HomeScreen = () => {
                     </div>
                 </ModalMUI>
             </div>
-            <Grid item><CodeJoinBar/></Grid>
             <Grid item><NicknameBar/></Grid>
-            <Grid item><CreateGame/></Grid>
         </Grid>
     );
 };
 
-export default HomeScreen;
+export default HomeScreenID;
