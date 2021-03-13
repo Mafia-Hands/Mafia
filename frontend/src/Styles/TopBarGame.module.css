@@ -32,9 +32,9 @@
         'userRole Timer Settings';
     align-items: center;
     justify-items: start;
-    width: 100%;
     background-color: slategrey;
     margin-bottom: 1em;
+    padding: 0 2em 0 2em;
 }
 
 .container p,

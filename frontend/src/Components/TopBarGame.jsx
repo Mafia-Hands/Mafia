@@ -22,7 +22,7 @@ const TopBarGame = ({ userDetails, showTimer, showRole }) => {
             <p className={styles.userName}>{`Name: ${userName}`}</p>
             {showRole && (
                 <div className={styles.userRole}>
-                    <span>{`Role: ${role}   `}</span>
+                    <span>{`Role: ${role}`}</span>
                     <IconButton
                         onClick={() => {
                             setOpen(true);
