@@ -1,5 +1,5 @@
-function createLobbyDTO(nickname){
+function CreateLobbyDTO(nickname){
     this.nickname = nickname
 }
 
-module.export = createLobbyDTO;
+module.exports = CreateLobbyDTO;

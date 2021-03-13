@@ -1,3 +1,5 @@
+const Room = require("./Room");
+
 class MafiaGame {
     constructor() {
         // Acts as a mapping for roomID keys to their game room.
@@ -10,8 +12,8 @@ class MafiaGame {
      */
     newGame() {
         // Create a new room and add it to existing rooms
-        var room = createNewRoom();
-        gameRoomsDict[room.roomID] = room;
+        var room = this.createNewRoom();
+        this.gameRoomsDict[room.roomID] = room;
         return room.roomID;
     }
 

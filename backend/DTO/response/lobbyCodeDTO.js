@@ -1,5 +1,5 @@
-function lobbyCodeDTO(code){
+function LobbyCodeDTO(code){
     this.code = code
 }
 
-module.export = lobbyCodeDTO;
+module.exports = LobbyCodeDTO;
