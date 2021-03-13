@@ -15,6 +15,9 @@ const useStyles = makeStyles({
     bad: { backgroundColor: 'lightcoral' },
 });
 
+/**
+ * @param userRole Civilian/Medic/Detective/Mafia - gets user's role to display what their current role is
+ */
 const RolesAndRules = ({ userRole }) => {
     var props = { backgroundColor: null };
     const classes = useStyles(props);
