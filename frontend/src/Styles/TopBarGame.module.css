@@ -33,6 +33,8 @@
     align-items: center;
     justify-items: start;
     width: 100%;
+    background-color: slategrey;
+    margin-bottom: 1em;
 }
 
 .container p,
