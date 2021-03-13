@@ -33,23 +33,20 @@ describe("Create-lobby event test", () => {
         let createLobbyDTO = new CreateLobbyDTO("Anmol");
         
         // Subscribe to lobby-code
-        clientSocket.on("lobby-code", (lobbyCodeDTOString) => {
-            let lobbyCodeDTO = JSON.parse(lobbyCodeDTOString)
+        clientSocket.on("lobby-code", (lobbyCodeDTO) => {
             expect(lobbyCodeDTO.code).toBeDefined();
             done();
         });
 
         // Request to create a new lobby
-        // clientSocket.emit("connection");
-        clientSocket.emit("create-lobby", JSON.stringify(createLobbyDTO));
+        clientSocket.emit("create-lobby", createLobbyDTO);
     });
 
     test("Two hosts with two rooms", (done) => {
         let createLobbyDTO = new CreateLobbyDTO("Anmol");
         
         // Client 1 to subscribe to lobby-code
-        clientSocket.on("lobby-code", (lobbyCodeDTOString) => {
-            let lobbyCodeDTO = JSON.parse(lobbyCodeDTOString)
+        clientSocket.on("lobby-code", (lobbyCodeDTO) => {
             expect(lobbyCodeDTO.code).toBeDefined();
             // Wait for the other client to throw errors, if there are any.
             setTimeout(function() { done(); }, 1000);
@@ -63,6 +60,6 @@ describe("Create-lobby event test", () => {
         });
 
         // Request to create a new lobby
-        clientSocket.emit("create-lobby", JSON.stringify(createLobbyDTO));
+        clientSocket.emit("create-lobby", createLobbyDTO);
     });
 });

@@ -21,7 +21,7 @@ module.exports = function(io, socket, mafiaGame){
         socket.join(roomID);
 
         // Send room ID back to host.
-        io.in(roomID).emit("lobby-code", JSON.stringify(new LobbyCodeDTO(roomID)));
+        io.in(roomID).emit("lobby-code", new LobbyCodeDTO(roomID));
     });
 };
 
