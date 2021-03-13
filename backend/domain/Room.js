@@ -16,9 +16,9 @@ class Room {
      * Params: io: io connection
      * Returns: VoteTimer instance
      */
-    getVoteTimer(io) {
+    getVoteTimer(io, isTrail) {
         if (this.voteTimer == null) {
-            this.voteTimer = new VoteTimer(io, this);
+            this.voteTimer = new VoteTimer(io, this, isTrail);
             return this.voteTimer;
         } else {
             return this.voteTimer;
