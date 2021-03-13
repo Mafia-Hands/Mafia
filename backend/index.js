@@ -1,9 +1,9 @@
 const app = require("express")();
 const server = require("http").createServer(app);
 const config = require('./config.json');
-const MafiaGame = require("./domain/MafiaGame");
-const Player = require("./domain/Player");
-const LobbyCodeDTO = require("./DTO/response/LobbyCodeDTO");
+const MafiaGame = require('./domain/MafiaGame');
+
+const { load_lobby_events } = require("./Events/LobbyEvents");
 const io = require("socket.io")(server, {
     // Set up of CORS settings for socket.io server
     // Reason for all site access is for the ease of development, since we might have various local/cloud website setup for testing purposes.
@@ -24,19 +24,7 @@ app.get('/', (req, res) => {
 
 // Listen for a "connection" event for incoming sockets.
 io.on("connection", (socket) => {
-    socket.on("create-lobby", (createLobbyDTO) => {
-        console.log("New room request received");
-        // Create room and assign host player to the room
-        let roomID = mafiaGame.newGame();
-        let host = new Player(socket.id, roomID, createLobbyDTO.nickname);
-        mafiaGame.gameRoomsDict[roomID].addPlayer(host);
-
-        // Subscribe to the room events
-        socket.join(roomID);
-
-        // Send room ID back to host.
-        io.in(roomID).emit("lobby-code", JSON.stringify(new LobbyCodeDTO(roomID)));
-    });
+    load_lobby_events(io, socket, mafiaGame);
 });
 
 // Start the server on our predetermined port number.

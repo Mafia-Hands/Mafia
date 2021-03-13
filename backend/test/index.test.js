@@ -1,5 +1,5 @@
 const Client = require("socket.io-client");
-const CreateLobbyDTO = require("../DTO/request/CreateLobbyDTO");
+const CreateLobbyDTO = require("../domain/DTO/request/CreateLobbyDTO");
 const server = require("../index")
 
 describe("Create-lobby event test", () => {

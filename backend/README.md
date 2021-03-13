@@ -9,6 +9,8 @@ This folder holds the backend server which is mainly composed of NodeJS, Express
     *  `npm install`
 * To start the server, run the following command in the terminal
     * `npm start`
+* To run all the tests
+    * `npm run test`
 * For the ease of development, instead of manually restart the server everything a change is made, you could use the following command to "watch" for changes and restart the server automatically
     * `npm run live`
 
