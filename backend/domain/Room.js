@@ -27,9 +27,14 @@ class Room {
     }
 
     addPlayer(player) {
-        if (player !== null &&
-            this.players.length <= this.maxPlayerCount) {
-            this.players.push(player);
+        if (player !== null && this.players.length <= this.maxPlayerCount) {
+            if (!this.players.includes(player.nickname)) {
+                this.players.push(player);
+            } else {
+                return { reason: "Cannot join because name already taken" };
+            }
+        } else {
+            return { reason: "Cannot join because room is full" };
         }
     }
 
@@ -44,7 +49,6 @@ class Room {
     setRoomID() {
         return 0;
     }
-
 }
 
 module.export = Room;
