@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../Styles/SettingDialog.module.css';
 import Slider from '../Components/Slider';
+import { Button } from '@material-ui/core';
 
 const SettingDialog = () => {
     return (
@@ -17,7 +18,7 @@ const SettingDialog = () => {
 
             {/* TODO: improve CSS and layout */}
             <div className={styles.leaveBtn}>
-                <button> Leave Game </button>
+                <Button variant="contained"> Leave Game </Button>
             </div>
         </div>
     );

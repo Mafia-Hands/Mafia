@@ -1,9 +1,11 @@
 import { React, useState } from 'react';
 import styles from '../Styles/TopBarGame.module.css';
 import ModalMUI from '../Modal/ModalMUI';
-import RoleAndRuleDialog from '../Pages/RoleAndRuleDialog';
 import SettingDialog from '../Pages/SettingDialog';
 import TopBarSettings from './TopBarSettings';
+import RolesAndRules from './RolesAndRules';
+import HelpIcon from '@material-ui/icons/Help';
+import { Button, IconButton } from '@material-ui/core';
 
 /**
  * @param userDetails [{userName: <string>, role: <string>}]
@@ -21,19 +23,19 @@ const TopBarGame = ({ userDetails, showTimer, showRole }) => {
             {showRole && (
                 <div className={styles.userRole}>
                     <span>{`Role: ${role}   `}</span>
-                    <button
+                    <IconButton
                         onClick={() => {
                             setOpen(true);
                             setOpenInfo(true);
                         }}
                     >
-                        {' '}
-                        <i className="fa fa-info"></i>{' '}
-                    </button>
+                        <HelpIcon />
+                    </IconButton>
                 </div>
             )}
             {showTimer && <div className={styles.timer}>Timer Placeholder</div>}
-            <button
+            <Button
+                variant="contained"
                 className={styles.settingsButton}
                 onClick={() => {
                     setOpen(true);
@@ -41,7 +43,7 @@ const TopBarGame = ({ userDetails, showTimer, showRole }) => {
                 }}
             >
                 Settings
-            </button>
+            </Button>
 
             <div>
                 <ModalMUI open={open} setOpen={setOpen}>
@@ -49,17 +51,17 @@ const TopBarGame = ({ userDetails, showTimer, showRole }) => {
                         <div>
                             <TopBarSettings
                                 showUp={setOpen}
-                                currentScreen="LOBBY"
-                                showSettings={true}
+                                currentScreen="ROLES AND RULES"
+                                showSettings={false}
                                 setOpenInfo={setOpenInfo}
                             />
-                            <RoleAndRuleDialog />
+                            <RolesAndRules userRole="Mafia" />
                         </div>
                     ) : (
                         <div>
                             <TopBarSettings
                                 showUp={setOpen}
-                                currentScreen="LOBBY"
+                                currentScreen="SETTINGS"
                                 showSettings={false}
                             />
                             <SettingDialog />
