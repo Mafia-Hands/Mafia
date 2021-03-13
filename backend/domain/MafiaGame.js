@@ -6,7 +6,7 @@ class MafiaGame {
     }
 
     newGame() {
-        let newRoom = new Room();
+        let newRoom = new Room(this.gameRoomsDict);
         let roomID = newRoom.getRoomID();
         this.gameRoomsDict[roomID] = newRoom;
         return roomID;
