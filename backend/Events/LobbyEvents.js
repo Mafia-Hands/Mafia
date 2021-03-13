@@ -9,7 +9,7 @@ const MafiaGame = require("../domain/MafiaGame");
  * @param {any} socket 
  * @param {MafiaGame} mafiaGame 
  */
-exports.load_lobby_events = function(io, socket, mafiaGame){
+module.exports = function(io, socket, mafiaGame){
     socket.on("create-lobby", (createLobbyDTO) => {
         console.log("New room request received");
         // Create room and assign host player to the room

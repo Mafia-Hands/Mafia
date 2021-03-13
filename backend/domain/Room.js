@@ -6,7 +6,7 @@ class Room {
         this.roomID = this.getRandomID();
 
         // Default game settings.
-        this.gameState = GameStateEnum.DAYTIME;
+        this.gameState = GameStateEnum.NIGHTTIME;
         this.maxPlayerCount = 6;
         this.players = new Array(this.maxPlayerCount);
         this.roundNumber = 0;

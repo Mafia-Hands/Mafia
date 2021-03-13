@@ -1,7 +1,7 @@
 const Client = require("socket.io-client");
 const CreateLobbyDTO = require("../domain/DTO/request/CreateLobbyDTO");
 const config = require('../config.json');
-const Server = require("../index")
+const SocketIOServer = require("../index")
 
 describe("Create-lobby event test", () => {
     let clientSocket;
@@ -9,12 +9,12 @@ describe("Create-lobby event test", () => {
 
     beforeEach((done) => {
         clientSocket = new Client(`http://localhost:` + port);
-        done();
+        clientSocket.on("connect", done);
     });
 
     // Disconnect each socket connected to the server
     afterEach((done) => {
-        var sockets = Server.io.sockets.sockets;
+        var sockets = SocketIOServer.io.sockets.sockets;
 
         // Iterate through each connected client and disconnect them.
         sockets.forEach(function(socket, key) {
@@ -26,7 +26,7 @@ describe("Create-lobby event test", () => {
 
     // Close the server once all tests are done
     afterAll(() => {
-        Server.server.close();
+        SocketIOServer.server.close();
     })
 
     test("Simple create lobby events", (done) => {
