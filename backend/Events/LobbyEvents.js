@@ -20,6 +20,9 @@ module.exports = function(io, socket, mafiaGame){
         // Subscribe to the room events
         socket.join(roomID);
 
+        // Add player information to the host socket
+        socket.player = host;
+
         // Send room ID back to host.
         io.in(roomID).emit("lobby-code", new LobbyCodeDTO(roomID));
     });
