@@ -5,7 +5,7 @@ class Room {
         // Initialize a roomID
         this.roomID = this.getRandomID();
 
-        // Default values given.
+        // Default game settings.
         this.gameState = GameStateEnum.DAYTIME;
         this.maxPlayerCount = 6;
         this.players = new Array(this.maxPlayerCount);

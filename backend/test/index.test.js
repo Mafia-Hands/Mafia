@@ -29,7 +29,6 @@ describe("Create-lobby event test", () => {
     });
 
     test("Two hosts with two rooms", (done) => {
-        // throw new Error('I have failed you, Anakin');
         let createLobbyDTO = new CreateLobbyDTO("Anmol");
         
         // Client 1 to subscribe to lobby-code
@@ -48,6 +47,5 @@ describe("Create-lobby event test", () => {
 
         // Request to create a new lobby
         clientSocket.emit("create-lobby", JSON.stringify(createLobbyDTO));
-        // clientSocket2.emit("create-lobby", JSON.stringify(createLobbyDTO));
     });
 });
