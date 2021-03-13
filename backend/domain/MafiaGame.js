@@ -12,7 +12,7 @@ class MafiaGame {
      */
     newGame() {
         // Create a new room and add it to existing rooms
-        var room = this.createNewRoom();
+        let room = this.createNewRoom();
         this.gameRoomsDict[room.roomID] = room;
         return room.roomID;
     }

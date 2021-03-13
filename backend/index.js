@@ -34,3 +34,4 @@ server.listen(port, () => {
 
 // Export the server for testing
 exports.server = server;
+exports.io = io;

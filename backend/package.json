@@ -6,7 +6,7 @@
     "scripts": {
         "start": "node index.js",
         "live": "nodemon index.js",
-        "test": "jest --forceExit"
+        "test": "jest"
     },
     "dependencies": {
         "express": "^4.17.1",

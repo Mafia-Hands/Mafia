@@ -17,6 +17,7 @@ exports.load_lobby_events = function(io, socket, mafiaGame){
         let host = new Player(socket.id, roomID, createLobbyDTO.nickname);
         mafiaGame.gameRoomsDict[roomID].addPlayer(host);
 
+        console.log("Subscribing client to room id: " + roomID);
         // Subscribe to the room events
         socket.join(roomID);
 
