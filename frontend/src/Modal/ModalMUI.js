@@ -10,7 +10,7 @@ export default function ModalMUI(props) {
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
-                className={styles.modal}
+                className={styles.background}
                 open={props.open}
                 onClose={() => props.setOpen(false)}
                 closeAfterTransition
@@ -19,8 +19,8 @@ export default function ModalMUI(props) {
                     timeout: 500,
                 }}
             >
-                <Fade in={props.open}>
-                    <div className={styles.gradient}>{props.children}</div>
+                <Fade in={props.open} style={{ outline: 'none' }}>
+                    <div className={styles.modal}>{props.children} </div>
                 </Fade>
             </Modal>
         </div>
