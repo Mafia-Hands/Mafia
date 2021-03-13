@@ -1,10 +1,10 @@
 class Room {
     constructor() {
-        // function to initialise a roomID
+        // Initialize a roomID
         this.roomID = this.setRoomID();
 
-        // default values given.
-        this.gamestate = GameStateEnum.DAYTIME;
+        // Default values given.
+        this.gameState = GameStateEnum.DAYTIME;
         this.maxPlayerCount = 6;
         this.players = new Array(maxPlayerCount);
         this.roundNumber = 0;
@@ -40,9 +40,13 @@ class Room {
     incrementRoundNumber() {
         this.roundNumber++;
     }
-    // TODO: some function to initialise a roomID. Must discuss how to do this at a later date.
-    setRoomID() {
-        return 0;
+    
+    /**
+     * Generate a random alphanumeric id
+     * @returns {string} a random alphanumeric id
+     */
+    getRandomID() {
+        return Math.random().toString(36).substring(7);
     }
 
 }
