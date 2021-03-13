@@ -1,5 +1,5 @@
 import './App.css';
-import TopBar from './Components/TopBar';
+import TopBarGame from './Components/TopBarGame';
 import GameEnv from './Components/GameEnv';
 import BottomBar from './Components/BottomBar';
 
@@ -8,9 +8,12 @@ function App() {
         <div className="App">
             <header className="App-header">
                 <div style={{ width: '80%' }}>
-                    <TopBar userName="Reeve" role="Civilian" />
+                    <TopBarGame
+                        userDetails={['Reeve', 'Civilian']}
+                        showTimer={true}
+                        showRole={true}
+                    />
                     <GameEnv />
-
                     <BottomBar />
                 </div>
             </header>

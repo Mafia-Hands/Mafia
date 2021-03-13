@@ -8,6 +8,11 @@
     justify-self: start;
 }
 
+.info {
+    grid-area: info;
+    justify-self: start;
+}
+
 .timer {
     grid-area: Timer;
     justify-self: center;
@@ -26,10 +31,12 @@
         'userName Timer Settings'
         'userRole Timer Settings';
     align-items: center;
+    justify-items: start;
     width: 100%;
 }
 
-.container p {
+.container p,
+span {
     margin: 0;
     font-size: calc(10px + 1vmin);
 }
