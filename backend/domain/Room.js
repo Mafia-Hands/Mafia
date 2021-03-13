@@ -11,6 +11,11 @@ class Room {
         this.voteTimer = null;
     }
 
+    /*
+     * This function creates a VoteTimer instance if one is not created already
+     * Params: io: io connection
+     * Returns: VoteTimer instance
+     */
     getVoteTimer(io) {
         if (this.voteTimer == null) {
             this.voteTimer = new VoteTimer(io, this);

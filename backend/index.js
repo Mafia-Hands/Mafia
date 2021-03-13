@@ -26,14 +26,18 @@ app.get("/", (req, res) => {
 io.on("connection", (socket) => {
     console.log("User has connected");
 
+    //on join lobby message event will called job lobby event handler
     socket.on("join-lobby", (data) => {
         joinLobbyFunction(data, io, socket, mafiaGame);
     });
 
+    //on day vote message event will called day vote event handler
     socket.on("day-vote", (data) => {
         dayVoteFunction(data, io, socket, mafiaGame);
     });
-    socket.on("day-vote", (data) => {
+
+    //on trail vote message event will called trail vote event handler
+    socket.on("trial-vote", (data) => {
         trailVoteFunction(data, io, socket, mafiaGame);
     });
 });
