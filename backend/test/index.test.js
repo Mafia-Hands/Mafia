@@ -12,13 +12,22 @@ describe("Create-lobby event test", () => {
         done();
     });
 
-    afterEach(async (done) => {
-        // var clients = Server.io();
-        // console.log(clients);
-        clientSocket.destroy();
-        Server.server.close();
+    // Disconnect each socket connected to the server
+    afterEach((done) => {
+        var sockets = Server.io.sockets.sockets;
+
+        // Iterate through each connected client and disconnect them.
+        sockets.forEach(function(socket, key) {
+            socket.disconnect(true);
+        })
+
         done();
     });
+
+    // Close the server once all tests are done
+    afterAll(() => {
+        Server.server.close();
+    })
 
     test("Simple create lobby events", (done) => {
         let createLobbyDTO = new CreateLobbyDTO("Anmol");
@@ -35,24 +44,25 @@ describe("Create-lobby event test", () => {
         clientSocket.emit("create-lobby", JSON.stringify(createLobbyDTO));
     });
 
-    // test("Two hosts with two rooms", (done) => {
-    //     let createLobbyDTO = new CreateLobbyDTO("Anmol");
+    test("Two hosts with two rooms", (done) => {
+        let createLobbyDTO = new CreateLobbyDTO("Anmol");
         
-    //     // Client 1 to subscribe to lobby-code
-    //     clientSocket.on("lobby-code", (lobbyCodeDTOString) => {
-    //         let lobbyCodeDTO = JSON.parse(lobbyCodeDTOString)
-    //         expect(lobbyCodeDTO.code).toBeDefined();
-    //         // Wait for the other client to throw errors, if there are any.
-    //         setTimeout(function() { done(); }, 1000);
-    //     });
+        // Client 1 to subscribe to lobby-code
+        clientSocket.on("lobby-code", (lobbyCodeDTOString) => {
+            let lobbyCodeDTO = JSON.parse(lobbyCodeDTOString)
+            expect(lobbyCodeDTO.code).toBeDefined();
+            // Wait for the other client to throw errors, if there are any.
+            setTimeout(function() { done(); }, 1000);
+        });
+        
 
-    //     let clientSocket2 = new Client(`http://localhost:4001`);
-    //     // Client 2 to subscribe to lobby-code
-    //     clientSocket2.on("lobby-code", (lobbyCodeDTOString) => {
-    //         throw new Error("Client 2 shouldn't receive a lobby code");
-    //     });
+        let clientSocket2 = new Client(`http://localhost:4001`);
+        // Client 2 to subscribe to lobby-code
+        clientSocket2.on("lobby-code", (lobbyCodeDTOString) => {
+            throw new Error("Client 2 shouldn't receive a lobby code");
+        });
 
-    //     // Request to create a new lobby
-    //     clientSocket.emit("create-lobby", JSON.stringify(createLobbyDTO));
-    // });
+        // Request to create a new lobby
+        clientSocket.emit("create-lobby", JSON.stringify(createLobbyDTO));
+    });
 });
