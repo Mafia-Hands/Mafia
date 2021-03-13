@@ -8,6 +8,16 @@ class Room {
         this.maxPlayerCount = 6;
         this.players = new Array(maxPlayerCount);
         this.roundNumber = 0;
+        this.voteTimer = null;
+    }
+
+    getVoteTimer(io) {
+        if (this.voteTimer == null) {
+            this.voteTimer = new VoteTimer(io, this);
+            return this.voteTimer;
+        } else {
+            return this.voteTimer;
+        }
     }
 
     getRoomID() {
