@@ -13,7 +13,6 @@ class MafiaGame {
     closeGame(gameID) {
         delete gameRoomsDict[gameID];
     }
-
 }
 
 module.export = MafiaGame;

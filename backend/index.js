@@ -2,6 +2,10 @@ const app = require("express")();
 const server = require("http").createServer(app);
 const config = require("./config.json");
 const joinLobbyFunction = require("./Managers/LobbyManager.js");
+const {
+    dayVoteFunction,
+    trailVoteFunction,
+} = require("./Managers/VoteManager.js");
 const io = require("socket.io")(server, {
     // Set up of CORS settings for socket.io server
     // Reason for all site access is for the ease of development, since we might have various local/cloud website setup for testing purposes.
@@ -24,6 +28,13 @@ io.on("connection", (socket) => {
 
     socket.on("join-lobby", (data) => {
         joinLobbyFunction(data, io, socket, mafiaGame);
+    });
+
+    socket.on("day-vote", (data) => {
+        dayVoteFunction(data, io, socket, mafiaGame);
+    });
+    socket.on("day-vote", (data) => {
+        trailVoteFunction(data, io, socket, mafiaGame);
     });
 });
 
