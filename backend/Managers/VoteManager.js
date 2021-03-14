@@ -10,13 +10,7 @@ const VoteTimer = require("../Utilities/VoteTimer");
  * socket: socket connection to client, mafiaGame: the mafiaGame instance
  * Returns:
  */
-const dayVoteFunction = (votingFor, io, socket, mafiaGame) => {
-    const room = mafiaGame.gameRoomsDict[socket.player.roomID];
-    const player = socket.player;
-    const voteTimer = room.getVoteTimer(io, false);
-    voteTimer.votes[player.nickname] = votingFor;
-    io.in(socket.player.roomID).emit("day-vote-update", voteTimer.votes);
-};
+
 
 /*
  * This function is to handle the trail vote event. It stores the players votes and
@@ -25,13 +19,7 @@ const dayVoteFunction = (votingFor, io, socket, mafiaGame) => {
  * socket: socket connection to client, mafiaGame: the mafiaGame instance
  * Returns:
  */
-const trailVoteFunction = (votingFor, io, socket, mafiaGame) => {
-    const room = mafiaGame.gameRoomsDict[socket.player.roomID];
-    const player = socket.player;
-    const voteTimer = room.getVoteTimer(io, true);
-    voteTimer.votes[player.nickname] = votingFor;
-    io.in(socket.player.roomID).emit("trail-vote-update", voteTimer.votes);
-};
+
 
 module.exports = dayVoteFunction;
 module.exports = trailVoteFunction;

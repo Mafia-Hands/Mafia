@@ -1,11 +1,10 @@
 const app = require("express")();
 const server = require("http").createServer(app);
 const config = require("./config.json");
-const joinLobbyFunction = require("./Managers/LobbyManager.js");
-const {
-    dayVoteFunction,
-    trailVoteFunction,
-} = require("./Managers/VoteManager.js");
+const MafiaGame = require("./domain/MafiaGame");
+const joinLobbyFunction = require("./Events/LobbyManager.js");
+const loadLobbyEvents = require("./Events/LobbyEvents");
+const loadJoinEvents = require("./Events/VoteEvents");
 const io = require("socket.io")(server, {
     // Set up of CORS settings for socket.io server
     // Reason for all site access is for the ease of development, since we might have various local/cloud website setup for testing purposes.
@@ -18,6 +17,8 @@ const io = require("socket.io")(server, {
 });
 const port = process.env.PORT || config.local_port;
 
+const mafiaGame = new MafiaGame();
+
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
@@ -26,23 +27,15 @@ app.get("/", (req, res) => {
 io.on("connection", (socket) => {
     console.log("User has connected");
 
-    //on join lobby message event will called job lobby event handler
-    socket.on("join-lobby", (data) => {
-        joinLobbyFunction(data, io, socket, mafiaGame);
-    });
-
-    //on day vote message event will called day vote event handler
-    socket.on("day-vote", (data) => {
-        dayVoteFunction(data, io, socket, mafiaGame);
-    });
-
-    //on trail vote message event will called trail vote event handler
-    socket.on("trial-vote", (data) => {
-        trailVoteFunction(data, io, socket, mafiaGame);
-    });
+    loadLobbyEvents(io, socket, mafiaGame);
+    LoadVoteEvents(io, socket, mafiaGame);
 });
 
 // Start the server on our predetermined port number.
 server.listen(port, () => {
     console.log("Listening on *:" + port);
 });
+
+// Export the server for testing
+exports.server = server;
+exports.io = io;
