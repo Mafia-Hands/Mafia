@@ -10,14 +10,12 @@ const VoteTimer = require("../Utilities/VoteTimer");
  * socket: socket connection to client, mafiaGame: the mafiaGame instance
  * Returns:
  */
-const dayVoteFunction = ({ votingFor, roomCode }, io, socket, mafiaGame) => {
-    const room = mafiaGame.gameRoomsDict[roomCode];
-    const player = room.players.find((element) => {
-        element.socketID == socket.id;
-    });
+const dayVoteFunction = (votingFor, io, socket, mafiaGame) => {
+    const room = mafiaGame.gameRoomsDict[socket.player.roomID];
+    const player = socket.player;
     const voteTimer = room.getVoteTimer(io, false);
     voteTimer.votes[player.nickname] = votingFor;
-    io.in(room.roomID).emit("day-vote-update", voteTimer.votes);
+    io.in(socket.player.roomID).emit("day-vote-update", voteTimer.votes);
 };
 
 /*
@@ -27,14 +25,12 @@ const dayVoteFunction = ({ votingFor, roomCode }, io, socket, mafiaGame) => {
  * socket: socket connection to client, mafiaGame: the mafiaGame instance
  * Returns:
  */
-const trailVoteFunction = ({ votingFor, roomCode }, io, socket, mafiaGame) => {
-    const room = mafiaGame.gameRoomsDict[roomCode];
-    const player = room.players.find((element) => {
-        element.socketID == socket.id;
-    });
+const trailVoteFunction = (votingFor, io, socket, mafiaGame) => {
+    const room = mafiaGame.gameRoomsDict[socket.player.roomID];
+    const player = socket.player;
     const voteTimer = room.getVoteTimer(io, true);
     voteTimer.votes[player.nickname] = votingFor;
-    io.in(room.roomID).emit("trail-vote-update", voteTimer.votes);
+    io.in(socket.player.roomID).emit("trail-vote-update", voteTimer.votes);
 };
 
 module.exports = dayVoteFunction;

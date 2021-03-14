@@ -11,9 +11,9 @@ const Room = require("../domain/Room");
  * io: io connection, socket: socket connection to player, mafiaGame: mafiaGame instance
  * Returns:
  */
-const joinLobbyFunction = ({ nickname, roomCode }, io, socket, mafiaGame) => {
-    const room = mafiaGame.gameRoomsDict[roomCode];
-    let player = new Player(socket.id, roomCode, nickname, false);
+const joinLobbyFunction = (nickname, io, socket, mafiaGame) => {
+    const room = mafiaGame.gameRoomsDict[socket.player.roomID];
+    let player = new Player(socket.id, socket.player.roomID, nickname, false);
     const reason = room.addPlayer(player);
     if (!reason) {
         socket.join(roomCode);
