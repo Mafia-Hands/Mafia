@@ -1,8 +1,6 @@
 import { React, useState } from 'react';
-import CodeJoinBar from '../Components/CodeJoinBar';
 import ModalMUI from '../Modal/ModalMUI';
 import NicknameBar from '../Components/NicknameBar';
-import CreateGame from '../Components/CreateGame';
 import SettingDialog from '../Pages/SettingDialog';
 import TopBarSettings from './TopBarSettings';
 import SettingsIcon from '@material-ui/icons/Settings';
