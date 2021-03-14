@@ -1,4 +1,4 @@
-name: CI
+name: Backend Tests
 on: pull_request
 jobs:
   build:
@@ -8,6 +8,6 @@ jobs:
     - name: Install modules
       working-directory: ./backend
       run: npm install
-    - name: Run tests
+    - name: Run backend tests
       working-directory: ./backend
       run: npm run test
