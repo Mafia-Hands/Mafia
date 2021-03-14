@@ -1,15 +1,15 @@
-const Client = require("socket.io-client");
-const CreateLobbyDTO = require("../domain/DTO/request/CreateLobbyDTO");
+const Client = require('socket.io-client');
+const CreateLobbyDTO = require('../domain/DTO/request/CreateLobbyDTO');
 const config = require('../config.json');
-const SocketIOServer = require("../index")
+const SocketIOServer = require('../index');
 
-describe("Create-lobby event test", () => {
+describe('Create-lobby event test', () => {
     let clientSocket;
     const port = process.env.PORT || config.local_port;
 
     beforeEach((done) => {
         clientSocket = new Client(`http://localhost:` + port);
-        clientSocket.on("connect", done);
+        clientSocket.on('connect', done);
     });
 
     // Disconnect each socket connected to the server
@@ -17,9 +17,9 @@ describe("Create-lobby event test", () => {
         var sockets = SocketIOServer.io.sockets.sockets;
 
         // Iterate through each connected client and disconnect them.
-        sockets.forEach(function(socket, key) {
+        sockets.forEach(function (socket, key) {
             socket.disconnect(true);
-        })
+        });
 
         done();
     });
@@ -27,39 +27,57 @@ describe("Create-lobby event test", () => {
     // Close the server once all tests are done
     afterAll(() => {
         SocketIOServer.server.close();
-    })
+    });
 
-    test("Simple create lobby events", (done) => {
-        let createLobbyDTO = new CreateLobbyDTO("Anmol");
-        
+    test('Simple create lobby events', (done) => {
+        let createLobbyDTO = new CreateLobbyDTO('Anmol');
+
         // Subscribe to lobby-code
-        clientSocket.on("lobby-code", (lobbyCodeDTO) => {
+        clientSocket.on('lobby-code', (lobbyCodeDTO) => {
             expect(lobbyCodeDTO.code).toBeDefined();
             done();
         });
 
         // Request to create a new lobby
-        clientSocket.emit("create-lobby", createLobbyDTO);
+        clientSocket.emit('create-lobby', createLobbyDTO);
     });
 
-    test("Two hosts with two rooms", (done) => {
-        let createLobbyDTO = new CreateLobbyDTO("Anmol");
-        
+    test('Two hosts with two rooms', (done) => {
+        let createLobbyDTO = new CreateLobbyDTO('Anmol');
+
         // Client 1 to subscribe to lobby-code
-        clientSocket.on("lobby-code", (lobbyCodeDTO) => {
+        clientSocket.on('lobby-code', (lobbyCodeDTO) => {
             expect(lobbyCodeDTO.code).toBeDefined();
             // Wait for the other client to throw errors, if there are any.
-            setTimeout(function() { done(); }, 1000);
+            setTimeout(function () {
+                done();
+            }, 1000);
         });
-        
 
         let clientSocket2 = new Client(`http://localhost:4001`);
         // Client 2 to subscribe to lobby-code
-        clientSocket2.on("lobby-code", (lobbyCodeDTOString) => {
+        clientSocket2.on('lobby-code', (lobbyCodeDTOString) => {
             throw new Error("Client 2 shouldn't receive a lobby code");
         });
 
         // Request to create a new lobby
-        clientSocket.emit("create-lobby", createLobbyDTO);
+        clientSocket.emit('create-lobby', createLobbyDTO);
+    });
+
+    test('Reset lobby', (done) => {
+        let createLobbyDTO = new CreateLobbyDTO('Anmol');
+
+        // Subscribe to lobby-code
+        clientSocket.on('lobby-code', (lobbyCodeDTO) => {
+            expect(lobbyCodeDTO.code).toBeDefined();
+            clientSocket.emit('reset-lobby');
+        });
+
+        clientSocket.on('reset-lobby-update', () => {
+            done();
+        });
+
+        // Request to create a new lobby
+        clientSocket.emit('create-lobby', createLobbyDTO);
     });
 });

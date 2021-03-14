@@ -7,7 +7,7 @@ class Player {
         this.roomID = roomID;
         this.nickname = nickname;
         this.role = role;
-        this.isAlive = true;
+        this.isAlive = INTIAL_IS_ALIVE;
     }
 
     getRoomID() {

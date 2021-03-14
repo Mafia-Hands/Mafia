@@ -10,7 +10,7 @@ const MafiaGame = require('../domain/MafiaGame');
  */
 module.exports = function (io, socket, mafiaGame) {
     socket.on('reset-lobby', () => {
-        mafiaGame.resetGame(socket.roomID);
+        mafiaGame.resetGame(socket.player.roomID);
 
         // Emit "reset-lobby-update" to all players in room
         io.in(socket.player.roomID).emit('reset-lobby-update');

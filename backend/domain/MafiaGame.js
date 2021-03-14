@@ -43,7 +43,7 @@ class MafiaGame {
     }
 
     resetGame(gameId) {
-        gameRoomsDict[roomID].resetRoom();
+        this.gameRoomsDict[gameId].resetGame();
     }
 }
 

@@ -48,8 +48,10 @@ class Room {
     resetGame() {
         this.gameState = INITIAL_GAME_STATE;
         this.roundNumber = INITIAL_ROUND_NUMBER;
-        for (player in this.players) {
-            player.resetPlayer();
+        for (let i = 0; i < this.players.length; i++) {
+            if (this.players[i]) {
+                this.players[i].resetPlayer();
+            }
         }
     }
 
