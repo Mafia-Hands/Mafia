@@ -2,18 +2,32 @@ import  React, {useState} from 'react';
 
 const NicknameBar = () => {
     const [data, setData] = useState(null);
+    const [print, setPrint] = useState(false);
+    
+    /* This is prototype of what the function should do 
+    will have to replace with other functions which connect to the backend
+    of the project
+    */
 
-    const handleName = (Name) => {
-        setData(Name.target.value)
+    const saveNickName = () => { 
+        setPrint(true);
+    }
+
+    const handleName = (userNickname) => {
+        setData(userNickname.target.value)
+        setPrint(false);
     }
 
     return (
-        /* supposed to save the user nickname to the database */
-        /* ENTER button appear when is entered, onClick to save the 
-            nickname */
+
         <div>
+            {
+                print?
+                <h1>{data}</h1>
+                :null
+            }
             <input placeholder="Enter Nickname" type= "text" onChange = {handleName}></input>
-            {data && (<button> ENTER </button>)}
+            {data && (<button onClick={saveNickName}> ENTER </button>)}
         </div>
     );
 };
