@@ -70,9 +70,11 @@ describe('Create-lobby event test', () => {
         // Subscribe to lobby-code
         clientSocket.on('lobby-code', (lobbyCodeDTO) => {
             expect(lobbyCodeDTO.code).toBeDefined();
+            // Only emit reset-lobby once lobby code has been received
             clientSocket.emit('reset-lobby');
         });
 
+        // Finish test once reset-lobby-update has been received
         clientSocket.on('reset-lobby-update', () => {
             done();
         });
