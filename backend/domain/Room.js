@@ -8,7 +8,7 @@ class Room {
         // Default game settings.
         this.gameState = GameStateEnum.NIGHTTIME;
         this.maxPlayerCount = 6;
-        this.players = new Array(this.maxPlayerCount);
+        this.players = new Array();
         this.roundNumber = 0;
     }
 
@@ -30,7 +30,7 @@ class Room {
 
     addPlayer(player) {
         if (player !== null &&
-            this.players.length <= this.maxPlayerCount) {
+            this.players.length < this.maxPlayerCount) {
             this.players.push(player);
         }
     }
