@@ -19,12 +19,12 @@ class Room {
         return this.roomID;
     }
 
-    getGamestate() {
-        return this.gamestate;
+    getGameState() {
+        return this.gameState;
     }
 
-    setGamestate(gamestate) {
-        this.gamestate = gamestate;
+    setGameState(gameState) {
+        this.gameState = gameState;
     }
 
     getPlayers() {
@@ -46,7 +46,7 @@ class Room {
     }
 
     resetGame() {
-        setGamestate(INITIAL_GAME_STATE);
+        this.setGameState(INITIAL_GAME_STATE);
         this.roundNumber = INITIAL_ROUND_NUMBER;
         for (let i = 0; i < this.players.length; i++) {
             if (this.players[i]) {

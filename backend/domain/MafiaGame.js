@@ -42,8 +42,8 @@ class MafiaGame {
         return room;
     }
 
-    resetGame(gameId) {
-        this.gameRoomsDict[gameId].resetGame();
+    resetGame(roomID) {
+        this.gameRoomsDict[roomID].resetGame();
     }
 }
 
