@@ -4,7 +4,6 @@ const config = require('./config.json');
 const MafiaGame = require('./domain/MafiaGame');
 
 const loadLobbyEvents = require('./Events/LobbyEvents');
-const loadResetLobbyEvent = require('./Events/ResetLobbyEvent');
 
 const io = require('socket.io')(server, {
     // Set up of CORS settings for socket.io server
@@ -27,7 +26,6 @@ app.get('/', (req, res) => {
 // Listen for a "connection" event for incoming sockets.
 io.on('connection', (socket) => {
     loadLobbyEvents(io, socket, mafiaGame);
-    loadResetLobbyEvent(io, socket, mafiaGame);
 });
 
 // Start the server on our predetermined port number.
