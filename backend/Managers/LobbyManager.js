@@ -16,8 +16,8 @@ const joinLobbyFunction = (nickname, io, socket, mafiaGame) => {
     let player = new Player(socket.id, socket.player.roomID, nickname, false);
     const reason = room.addPlayer(player);
     if (!reason) {
-        socket.join(roomCode);
-        io.in(roomCode).emit("lobby-join", room.players);
+        socket.join(socket.player.roomID);
+        io.in(socket.player.roomID).emit("lobby-join", room.players);
         if (len(room.players == 6)) {
             const host = room.players.find((element) => {
                 element.isHost == true;
