@@ -3,15 +3,12 @@ import styles from '../Styles/Modal.module.css';
 
 const modalRoot = document.querySelector('#modal-root');
 
-const Modal = ({ onCancel, dismissOnClickOutside, style, children }) => {
-    return ReactDOM.createPortal(
+const Modal = ({ onCancel, dismissOnClickOutside, style, children }) =>
+    ReactDOM.createPortal(
         <div
             className={styles.modalContainer}
             onClick={(e) => {
-                if (
-                    dismissOnClickOutside &&
-                    e.target.parentElement === modalRoot
-                ) {
+                if (dismissOnClickOutside && e.target.parentElement === modalRoot) {
                     onCancel();
                 }
             }}
@@ -20,6 +17,5 @@ const Modal = ({ onCancel, dismissOnClickOutside, style, children }) => {
         </div>,
         modalRoot
     );
-};
 
 export default Modal;

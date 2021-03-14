@@ -8,16 +8,16 @@ describe('Create-lobby event test', () => {
     const port = process.env.PORT || config.local_port;
 
     beforeEach((done) => {
-        clientSocket = new Client(`http://localhost:` + port);
+        clientSocket = new Client(`http://localhost:${port}`);
         clientSocket.on('connect', done);
     });
 
     // Disconnect each socket connected to the server
     afterEach((done) => {
-        var sockets = SocketIOServer.io.sockets.sockets;
+        const { sockets } = SocketIOServer.io.sockets;
 
         // Iterate through each connected client and disconnect them.
-        sockets.forEach(function (socket, key) {
+        sockets.forEach((socket, key) => {
             socket.disconnect(true);
         });
 
@@ -30,7 +30,7 @@ describe('Create-lobby event test', () => {
     });
 
     test('Simple create lobby events', (done) => {
-        let createLobbyDTO = new CreateLobbyDTO('Anmol');
+        const createLobbyDTO = new CreateLobbyDTO('Anmol');
 
         // Subscribe to lobby-code
         clientSocket.on('lobby-code', (lobbyCodeDTO) => {
@@ -43,18 +43,18 @@ describe('Create-lobby event test', () => {
     });
 
     test('Two hosts with two rooms', (done) => {
-        let createLobbyDTO = new CreateLobbyDTO('Anmol');
+        const createLobbyDTO = new CreateLobbyDTO('Anmol');
 
         // Client 1 to subscribe to lobby-code
         clientSocket.on('lobby-code', (lobbyCodeDTO) => {
             expect(lobbyCodeDTO.code).toBeDefined();
             // Wait for the other client to throw errors, if there are any.
-            setTimeout(function () {
+            setTimeout(() => {
                 done();
             }, 1000);
         });
 
-        let clientSocket2 = new Client(`http://localhost:4001`);
+        const clientSocket2 = new Client(`http://localhost:4001`);
         // Client 2 to subscribe to lobby-code
         clientSocket2.on('lobby-code', (lobbyCodeDTOString) => {
             throw new Error("Client 2 shouldn't receive a lobby code");
@@ -65,7 +65,7 @@ describe('Create-lobby event test', () => {
     });
 
     test('Reset lobby', (done) => {
-        let createLobbyDTO = new CreateLobbyDTO('Anmol');
+        const createLobbyDTO = new CreateLobbyDTO('Anmol');
 
         // Subscribe to lobby-code
         clientSocket.on('lobby-code', (lobbyCodeDTO) => {

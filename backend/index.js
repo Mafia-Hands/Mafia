@@ -15,12 +15,13 @@ const io = require('socket.io')(server, {
         origin: config.cors_origin, // Allow all origin to connect to the website
     },
 });
+
 const port = process.env.PORT || config.local_port;
 
 const mafiaGame = new MafiaGame();
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(`${__dirname}/index.html`);
 });
 
 // Listen for a "connection" event for incoming sockets.
@@ -30,7 +31,7 @@ io.on('connection', (socket) => {
 
 // Start the server on our predetermined port number.
 server.listen(port, () => {
-    console.log('Listening on *:' + port);
+    console.log(`Listening on *:${port}`);
 });
 
 // Export the server for testing

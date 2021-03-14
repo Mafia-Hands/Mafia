@@ -8,11 +8,7 @@ function App() {
         <div className="App">
             <header className="App-header">
                 <div style={{ width: '80%' }}>
-                    <TopBarGame
-                        userDetails={['Reeve', 'Civilian']}
-                        showTimer={true}
-                        showRole={true}
-                    />
+                    <TopBarGame userDetails={['Reeve', 'Civilian']} showTimer showRole />
                     <GameEnv />
                     <BottomBar />
                 </div>
