@@ -9,4 +9,5 @@ jobs:
       working-directory: ./backend
       run: npm install
     - name: Run tests
+      working-directory: ./backend
       run: npm run test
