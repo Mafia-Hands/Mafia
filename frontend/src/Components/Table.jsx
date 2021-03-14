@@ -1,13 +1,24 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useContext } from 'react';
 import Player from './Player';
 import styles from '../Styles/Table.module.css';
+import { GeneralContext } from '../App';
 
 /**
  *
  * @param playerState [{playerId: <unique id string>, name: <string>, state: <"alive", "dead", "onTrial">}]
  *
  */
-export default function Table({ playerStates }) {
+export default function Table() {
+    const { state } = useContext(GeneralContext);
+    console.log(state);
+    const playerStates = state.players.map((p) => {
+        return {
+            playerId: p,
+            name: p,
+        };
+    });
+    console.log(playerStates);
+
     // used to keep reference to table dom element (to get width/height of it)
     const tableRef = useRef(null);
     // used to keep reference to player div (to get width)
@@ -132,7 +143,7 @@ export default function Table({ playerStates }) {
                             playerName={playerName}
                             childRef={playerRef}
                             style={{ top, left, position: 'absolute' }}
-                            onClick={(e) => console.log(e)}
+                            // onClick={(e) => console.log(e)}
                         />
                     );
                 })}

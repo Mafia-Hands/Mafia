@@ -1,4 +1,5 @@
 import { React } from 'react';
+<<<<<<< HEAD
 // import styles from '../Styles/GameEnv.module.css';
 
 const GameEnv = () => (
@@ -7,5 +8,19 @@ const GameEnv = () => (
         <p> This is the Game Environment </p>
     </div>
 );
+=======
+import StatusBar from './StatusBar';
+import Table from './Table';
+//import styles from '../Styles/GameEnv.module.css';
+
+const GameEnv = () => {
+    return (
+        <>
+            <StatusBar />
+            <Table />
+        </>
+    );
+};
+>>>>>>> continued working on state
 
 export default GameEnv;
