@@ -1,12 +1,13 @@
-name: CI
-on: push
+name: Backend Tests
+on: pull_request
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Install modules
       working-directory: ./backend
       run: npm install
-    - name: Run tests
+    - name: Run backend tests
+      working-directory: ./backend
       run: npm run test
