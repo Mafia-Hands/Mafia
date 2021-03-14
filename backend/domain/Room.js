@@ -1,4 +1,7 @@
-const GameStateEnum = require("./Enum/GameStateEnum");
+const GameStateEnum = require('./Enum/GameStateEnum');
+
+const INITIAL_GAME_STATE = GameStateEnum.NIGHTTIME;
+const INITIAL_ROUND_NUMBER = 0;
 
 class Room {
     constructor() {
@@ -6,22 +9,22 @@ class Room {
         this.roomID = this.getRandomID();
 
         // Default game settings.
-        this.gameState = GameStateEnum.NIGHTTIME;
+        this.gameState = INITIAL_GAME_STATE;
         this.maxPlayerCount = 6;
         this.players = new Array();
-        this.roundNumber = 0;
+        this.roundNumber = INITIAL_ROUND_NUMBER;
     }
 
     getRoomID() {
         return this.roomID;
     }
 
-    getGamestate() {
-        return this.gamestate;
+    getGameState() {
+        return this.gameState;
     }
 
-    setGamestate(gamestate) {
-        this.gamestate = gamestate;
+    setGameState(gameState) {
+        this.gameState = gameState;
     }
 
     getPlayers() {
@@ -42,7 +45,17 @@ class Room {
     incrementRoundNumber() {
         this.roundNumber++;
     }
-    
+
+    resetGame() {
+        this.setGameState(INITIAL_GAME_STATE);
+        this.roundNumber = INITIAL_ROUND_NUMBER;
+        for (let i = 0; i < this.players.length; i++) {
+            if (this.players[i]) {
+                this.players[i].resetPlayer();
+            }
+        }
+    }
+
     /**
      * Generate a random alphanumeric id
      * @returns {string} a random alphanumeric id
@@ -50,7 +63,6 @@ class Room {
     getRandomID() {
         return Math.random().toString(36).substring(7);
     }
-
 }
 
 module.exports = Room;

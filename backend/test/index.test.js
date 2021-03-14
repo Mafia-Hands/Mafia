@@ -3,7 +3,6 @@ const CreateLobbyDTO = require("../domain/DTO/request/CreateLobbyDTO");
 const config = require("../config.json");
 const SocketIOServer = require("../index");
 
-
 describe("Create-lobby event test", () => {
   let clientSocket;
   const port = process.env.PORT || config.local_port;
@@ -43,7 +42,6 @@ describe("Create-lobby event test", () => {
     clientSocket.emit("create-lobby", createLobbyDTO);
   });
 
-
   test("Two hosts with two rooms", (done) => {
     let createLobbyDTO = new CreateLobbyDTO("Anmol");
 
@@ -66,30 +64,25 @@ describe("Create-lobby event test", () => {
     clientSocket.emit("create-lobby", createLobbyDTO);
   });
 
-
   test("should start game event", (done) => {
-
     let createLobbyDTO = new CreateLobbyDTO("Anmol");
 
     // Request to create a new lobby
     // this will set the socket id to the host to be tested.
     clientSocket.emit("create-lobby", createLobbyDTO);
-    
+
     // Subscribe to game start event
     // server should send this event back once host clicks start.
     // Client to subscribe to "game-start"
     clientSocket.on("game-start", () => {
-        done();
-      });
+      done();
+    });
 
     // Request to server that game is ready to be started.
     clientSocket.emit("start-game");
   });
 
-
-
   test("host starts game event", (done) => {
-
     let createLobbyDTO = new CreateLobbyDTO("Anmol");
 
     // Request to create a new lobby
@@ -98,8 +91,8 @@ describe("Create-lobby event test", () => {
 
     // Host client should subscribe to confirm-game-start - this is the host client.
     clientSocket.on("confirm-game-start", () => {
-        // Host should receive a different event than the client
-        done();
+      // Host should receive a different event than the client
+      done();
     });
 
     // todo: doesnt work until justin pushes his code in.
@@ -113,5 +106,22 @@ describe("Create-lobby event test", () => {
     clientSocket.emit("lobby-ready", createLobbyDTO);
   });
 
+  test("Reset lobby", (done) => {
+    let createLobbyDTO = new CreateLobbyDTO("Anmol");
 
+    // Subscribe to lobby-code
+    clientSocket.on("lobby-code", (lobbyCodeDTO) => {
+      expect(lobbyCodeDTO.code).toBeDefined();
+      // Only emit reset-lobby once lobby code has been received
+      clientSocket.emit("reset-lobby");
+    });
+
+    // Finish test once reset-lobby-update has been received
+    clientSocket.on("reset-lobby-update", () => {
+      done();
+    });
+
+    // Request to create a new lobby
+    clientSocket.emit("create-lobby", createLobbyDTO);
+  });
 });
