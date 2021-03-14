@@ -12,7 +12,7 @@ const HomeScreen = () => {
     const [open, setOpen] = useState(false);
     
     return(
-        <Grid container direction= "column">
+        <Grid container direction= "column" justify="space-evenly" spacing="2">
             
             <Toolbar>
                 <button

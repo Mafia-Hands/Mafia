@@ -1,4 +1,8 @@
 import  React, {useState} from 'react';
+import {TextField} from '@material-ui/core';
+import SendIcon from '@material-ui/icons/Send';
+import IconButton from '@material-ui/core/IconButton';
+
 
 const NicknameBar = () => {
     const [data, setData] = useState(null);
@@ -26,8 +30,8 @@ const NicknameBar = () => {
                 <h1>{data}</h1>
                 :null
             }
-            <input placeholder="Enter Nickname" type= "text" onChange = {handleName}></input>
-            {data && (<button onClick={saveNickName}> ENTER </button>)}
+            <TextField color="secondary" id="userNickName" label="Enter Nickname" variant="outlined" onChange = {handleName}></TextField>
+            {data && (<IconButton color="inherit" onClick={saveNickName}> <SendIcon/> </IconButton>)}
         </div>
     );
 };
