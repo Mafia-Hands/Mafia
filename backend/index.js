@@ -1,6 +1,9 @@
 const app = require("express")();
 const server = require("http").createServer(app);
 const config = require('./config.json');
+const MafiaGame = require('./domain/MafiaGame');
+
+const loadLobbyEvents = require("./Events/LobbyEvents");
 const io = require("socket.io")(server, {
     // Set up of CORS settings for socket.io server
     // Reason for all site access is for the ease of development, since we might have various local/cloud website setup for testing purposes.
@@ -13,16 +16,22 @@ const io = require("socket.io")(server, {
 });
 const port = process.env.PORT || config.local_port;
 
+const mafiaGame = new MafiaGame();
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
 // Listen for a "connection" event for incoming sockets.
 io.on("connection", (socket) => {
-    console.log("User has connected");
+    loadLobbyEvents(io, socket, mafiaGame);
 });
 
 // Start the server on our predetermined port number.
 server.listen(port, () => {
     console.log("Listening on *:" + port);
 })
+
+// Export the server for testing
+exports.server = server;
+exports.io = io;
