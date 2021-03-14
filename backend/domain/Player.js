@@ -1,6 +1,3 @@
-const INTIAL_IS_ALIVE = true;
-const INITIAL_ROLE = null;
-
 class Player {
     constructor(socketID, roomID, nickname, role) {
         this.socketID = socketID;
@@ -31,8 +28,8 @@ class Player {
     }
 
     resetPlayer() {
-        this.role = INITIAL_ROLE;
-        this.isAlive = INTIAL_IS_ALIVE;
+        this.role = null;
+        this.isAlive = true;
     }
 }
 
