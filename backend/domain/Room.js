@@ -10,6 +10,11 @@ class Room {
         this.maxPlayerCount = 6;
         this.players = new Array(this.maxPlayerCount);
         this.roundNumber = 0;
+
+        // Specific player objects, storing references to the players that have been chosen by 
+        // mafia/medic players in the night time voting period.
+        this.mafiaChosenPlayer = null
+        this.medicChosenPlayer = null
     }
 
     getRoomID() {
@@ -26,6 +31,14 @@ class Room {
 
     getPlayers() {
         return this.players;
+    }
+
+    getPlayerByNickname(nickname) {
+        for (player of this.players) {
+            if (player.nickname == nickname) {
+                return player
+            }
+        }
     }
 
     addPlayer(player) {
