@@ -27,30 +27,8 @@ function createLobby(io, socket, mafiaGame) {
     io.in(roomID).emit("lobby-code", new LobbyCodeDTO(roomID));
   });
 
-    // this overlaps with justins code.
-    // This code acts to send messages to the host and all players in a room.
-    socket.on("lobby-ready", () => {
-      let roomID = socket.player.roomID;
-
-      let mafiaGameRoom = mafiaGame.gameRoomsDict[roomID];
-
-      let hostsocketID = mafiaGameRoom.players[0].socketID; //(host is first person)
-      let mafiaGamePlayers = mafiaGameRoom.players;
-
-      // message should show the confirmation button only for the host.
-      io.to(hostsocketID).emit("confirm-game-start");
-
-      // to all other members tell them that game is ready
-      // host is position 0, so skip.
-      for (i = 1; i < mafiaGamePlayers.length; i++) {
-        let player = mafiaGamePlayers[i];
-        io.to(hostsocketID).emit("game-ready");
-      }
-    });
-
     // host has clicked start game
     socket.on("start-game", () => {
- 
         let roomID = socket.player.roomID;
 
         // sending to all clients in "game" room, including sender
