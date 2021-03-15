@@ -59,11 +59,7 @@ const TopBarGame = ({ userDetails, showTimer, showRole }) => {
                         </div>
                     ) : (
                         <div>
-                            <TopBarSettings
-                                showUp={setOpen}
-                                currentScreen="SETTINGS"
-                                showSettings={false}
-                            />
+                            <TopBarSettings showUp={setOpen} currentScreen="SETTINGS" showSettings={false} />
                             <SettingDialog />
                         </div>
                     )}
