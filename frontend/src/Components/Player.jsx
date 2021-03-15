@@ -25,11 +25,14 @@ export default function Player({
     const { state: gameState } = useContext(GameContext);
     // console.log(gameState);
 
+    const isDead = !gameState.alivePlayers.includes(playerName);
+
     const isHoverable =
-        !!votingState.phase && votingState.votablePlayers.includes(playerName);
+        !!votingState.phase &&
+        votingState.votablePlayers.includes(playerName) &&
+        !isDead;
     const hasVoted = votingState.playersWhoVoted.includes(playerName);
     const isClicked = !!votingState.vote;
-    const isDead = !gameState.alivePlayers.includes(playerName);
 
     // apply styles based on whether certain props is true
     const playerStyle = classNames({

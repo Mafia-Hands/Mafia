@@ -21,10 +21,13 @@ const initialState = {
 const reducer = (state, action) => {
     switch (action.type) {
         case 'init': {
+            console.log(action);
             return {
                 ...state,
                 alivePlayers: [...action.alivePlayers],
-                ...action.extraRoleState,
+                ...(action.checkedPlayers && {
+                    checkedPlayers: action.checkedPlayers,
+                }),
             };
         }
         case 'change-screen': {
@@ -166,7 +169,9 @@ export default function GamePage() {
             const { role } = generalState;
 
             const status = nightTimeStatus[role];
-            console.log(status);
+            // console.log(status);
+
+            console.log(gameState);
 
             const getVotablePlayers = {
                 mafia: gameState.alivePlayers.filter(
@@ -177,7 +182,7 @@ export default function GamePage() {
                     (p) =>
                         p !== generalState.nickname &&
                         gameState.checkedPlayers &&
-                        gameState.checkedPlayers.exists((c) => c.nickname !== p)
+                        !gameState.checkedPlayers.some((c) => c.nickname === p)
                 ),
                 medic: gameState.alivePlayers,
                 civilian: [],
@@ -232,26 +237,37 @@ export default function GamePage() {
             });
         },
         discussionEnd: (playersOnTrial) => {
+            votingDispatch({
+                type: 'reset',
+            });
+
             const status = constructPlayersOnTrialStatus(playersOnTrial);
+
             dispatch({
                 type: 'update-status',
                 status,
             });
 
-            votingDispatch({
-                type: 'reset',
-            });
-
-            votingDispatch({
-                type: 'trial-vote',
-                votablePlayers: playersOnTrial,
-            });
+            if (!playersOnTrial.includes(generalState.nickname)) {
+                votingDispatch({
+                    type: 'trial-vote',
+                    votablePlayers: playersOnTrial,
+                });
+            }
         },
         trialStart: (timeToVote) => {
             votingDispatch({
                 type: 'update-vote-time',
                 timeToVote,
             });
+
+            if (!votingState.votablePlayers.length) {
+                dispatch({
+                    type: 'update-status',
+                    status: 'You are on trial',
+                });
+                return;
+            }
 
             dispatch({
                 type: 'update-status',
@@ -287,10 +303,11 @@ export default function GamePage() {
      * We may need to lie about the dependency so that players dont just 'leave'
      */
     useEffect(() => {
-        const { role } = generalState.role;
-
+        const { role } = generalState;
+        console.log(role);
         const extraRoleState =
             role === 'detective' ? { checkedPlayers: [] } : {};
+        console.log(extraRoleState);
 
         dispatch({
             type: 'init',
@@ -334,10 +351,10 @@ export default function GamePage() {
             });
         }
 
-        function onSuspectReveal({ nickname, isMafia }) {
+        function onSuspectReveal(checkedPlayer) {
             dispatch({
                 type: 'check-player',
-                playersWhoVoted: { nickname, isMafia },
+                checkedPlayer,
             });
         }
 
@@ -367,7 +384,7 @@ export default function GamePage() {
 
             socket.removeListener('suspect-reveal', onSuspectReveal);
         };
-    }, [gameState.alivePlayers]);
+    }, [gameState.alivePlayers, votingState.votablePlayers, gameState]);
 
     let component;
 
