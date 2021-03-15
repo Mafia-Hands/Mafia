@@ -13,3 +13,7 @@ assignees: ''
 ### In-Depth Feature Description
 
 ### Images for Reference:
+
+
+### Feature Approval:
+- [ ]  Feature approved by:

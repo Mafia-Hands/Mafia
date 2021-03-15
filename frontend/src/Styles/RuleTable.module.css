@@ -1,0 +1,20 @@
+.roleTable {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: separate;
+    width: 100%;
+    
+}
+
+.roleTable td, .roleTable th {
+    /* border: 1px solid #ddd; */
+    padding: 8px;
+}
+
+.roleTable tr:hover {background-color: #ddd;}
+
+.roleTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+}
+

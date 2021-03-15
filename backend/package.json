@@ -1,0 +1,20 @@
+{
+    "name": "mafia-backend",
+    "description": "The server for the game Mafia",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "start": "node index.js",
+        "live": "nodemon index.js",
+        "test": "jest"
+    },
+    "dependencies": {
+        "express": "^4.17.1",
+        "nodemon": "^2.0.7",
+        "socket.io": "^3.1.2",
+        "socket.io-client": "^4.0.0"
+    },
+    "devDependencies": {
+        "jest": "^26.6.3"
+    }
+}
