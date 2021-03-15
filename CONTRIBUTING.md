@@ -1,6 +1,6 @@
 # Contributing
 
-If you would like to contribute code you can do so through GitHub by first forking then cloning this repository, then sending a pull request.
+If you would like to contribute code you can do so through GitHub by first forking this repository, using the [forking workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow), then cloning the forked repository, then sending a pull request.
 All code or documentation contributions should be associated with an open issue. If an issue does not exist, you should create one first (see guidance below).    
 All  additions or modifications to code should include associated tests (an automated test suite should be created).  
 When submitting code, please make every effort to follow existing conventions and style in order to keep the code as readable as possible.
@@ -18,7 +18,7 @@ npm start
 ```  
 
 ## Branch naming conventions
-When creating a new branch make sure to use the correct prefix depending on the type of issue.   
+When creating a new branch in your fork, make sure to use the correct prefix depending on the type of issue.   
     
 New feature:   
 ```bash
@@ -42,7 +42,7 @@ When completely a PR make sure you use 'Squash & Merge'.
 
   
 ## Creating issues
-All issues need to be approved by one other contributer before it can be completed.
+All issues need to be approved by one other contributer before work on that issue can begin.
 You can create a new issue to document bugs (including documentation issues) or request new features that were not included in the initial list of 
 issues.  
 For a new feature request, the issue should describe the new feature and why it is needed.  
