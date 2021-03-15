@@ -51,8 +51,8 @@ function getAvailableRolesToAssign(numOfPlayers) {
   }
   const numOfDetectives = ceil(numOfPlayers / roleLogic.detective_divisor);
   const numOfMedics = ceil(numOfPlayers / roleLogic.medic_divisor);
-  const numOfTanners = ceil(numOfPlayers / roleLogic.tanner_divisor);
-  const numOfVillagers = numOfPlayers - (numOfMafia + numOfDetectives + numOfMedics + numOfTanners);
+  const numOfJesterss = ceil(numOfPlayers / roleLogic.jester_divisor);
+  const numOfVillagers = numOfPlayers - (numOfMafia + numOfDetectives + numOfMedics + numOfJesterss);
 
   // Return an array of roles, with each role occuring once or more depending on the number of players
   // playing the game
@@ -60,7 +60,7 @@ function getAvailableRolesToAssign(numOfPlayers) {
     ...Array(numOfMafia).fill(roles.MAFIA),
     ...Array(numOfDetectives).fill(roles.DETECTIVE),
     ...Array(numOfMedics).fill(roles.MEDIC),
-    ...Array(numOfTanners).fill(roles.TANNER),
+    ...Array(numOfJesterss).fill(roles.JESTER),
     ...Array(numOfVillagers).fill(roles.CIVILIAN),
   ];
 }

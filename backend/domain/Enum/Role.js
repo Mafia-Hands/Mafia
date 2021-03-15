@@ -5,7 +5,7 @@ const RoleEnum = {
   MAFIA: "mafia",
   MEDIC: "medic",
   DETECTIVE: "detective",
-  TANNER: "tanner",
+  JESTER: "jester",
 };
 Object.freeze(RoleEnum);
 
