@@ -1,3 +1,7 @@
+/**
+ * A class used to handle any voting related events or calculations for a Room.
+ * This includes tallying votes, and figuring out who the most voted player is.
+ */
 class VoteHandler {
     constructor() {
         this.daytimeVoteMap = {};
@@ -26,6 +30,10 @@ class VoteHandler {
         }
     }
 
+    getDaytimeVotedPlayer() {
+        return this.getVotedPlayer(this.daytimeVoteMap);
+    }
+
     getVotedPlayer(voteMap) {
         // Generate map of players who have been voted for, and the number of votes they have.
         let voteTally = {};
@@ -47,7 +55,7 @@ class VoteHandler {
         }
 
         if (votedPlayer === undefined) {
-            // Just return random player?
+            // TODO: should discuss what to do in this case, probably just return random player
         } else {
             return votedPlayer;
         }
