@@ -1,10 +1,11 @@
-const app = require("express")();
-const server = require("http").createServer(app);
-const config = require("./config.json");
-const MafiaGame = require("./domain/MafiaGame");
-const joinLobbyFunction = require("./Events/LobbyManager.js");
-const loadLobbyEvents = require("./Events/LobbyEvents");
-const io = require("socket.io")(server, {
+const app = require('express')();
+const server = require('http').createServer(app);
+const config = require('./config.json');
+const MafiaGame = require('./domain/MafiaGame');
+
+const loadLobbyEvents = require('./Events/LobbyEvents');
+
+const io = require('socket.io')(server, {
     // Set up of CORS settings for socket.io server
     // Reason for all site access is for the ease of development, since we might have various local/cloud website setup for testing purposes.
     // While allowing all origins may pose a security thread for a banking website, as any site can make a request using the same session
@@ -23,15 +24,13 @@ app.get("/", (req, res) => {
 });
 
 // Listen for a "connection" event for incoming sockets.
-io.on("connection", (socket) => {
-    console.log("User has connected");
-
+io.on('connection', (socket) => {
     loadLobbyEvents(io, socket, mafiaGame);
 });
 
 // Start the server on our predetermined port number.
 server.listen(port, () => {
-    console.log("Listening on *:" + port);
+    console.log('Listening on *:' + port);
 });
 
 // Export the server for testing

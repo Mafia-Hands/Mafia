@@ -1,10 +1,11 @@
 import  React from 'react';
+import Button from '@material-ui/core/Button';
 
 const CreateGame = () => {
     return (
         /* button will have onClick to create a new Lobby */
         <div>
-            <button> Create Game </button>
+            <Button variant="outlined"> Create Game </Button>
         </div>
     );
 };

@@ -1,0 +1,14 @@
+.container{
+    display: block;
+   
+}
+
+.avatar{
+
+    height: 40%;
+    border: solid white;
+    border-radius: 80%;
+
+    
+}
+
