@@ -27,6 +27,10 @@ class Player {
         this.isAlive = isAlive;
     }
 
+    resetPlayer() {
+        this.role = null;
+        this.setIsAlive(true);
+    }
 }
 
-module.export = Player;
+module.exports = Player;

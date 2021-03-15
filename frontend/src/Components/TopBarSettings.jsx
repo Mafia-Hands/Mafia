@@ -9,18 +9,15 @@ import { Button } from '@material-ui/core';
 const TopBarSettings = ({
     currentScreen,
     showSettings,
-    showUp,
+    showBack,
     setOpenInfo,
 }) => {
     return (
         <div className={styles.container}>
-            <Button
-                variant="contained"
-                className={styles.backButton}
-                onClick={() => showUp(false)}
-            >
+            {showBack &&
+            <button className={styles.backButton}>
                 Go Back
-            </Button>
+            </button>}
             {currentScreen && (
                 <h2 className={styles.header}>{`${currentScreen}`}</h2>
             )}
