@@ -1,16 +1,19 @@
 const GameStateEnum = require('./Enum/GameStateEnum');
 const VoteHandler = require('./VoteHandler');
 
+const INITIAL_GAME_STATE = GameStateEnum.NIGHTTIME;
+const INITIAL_ROUND_NUMBER = 0;
+
 class Room {
     constructor() {
         // Initialize a roomID
         this.roomID = this.getRandomID();
 
         // Default game settings.
-        this.gameState = GameStateEnum.NIGHTTIME;
+        this.gameState = INITIAL_GAME_STATE;
         this.maxPlayerCount = 6;
         this.players = new Array(this.maxPlayerCount);
-        this.roundNumber = 0;
+        this.roundNumber = INITIAL_ROUND_NUMBER;
 
         // Handler used to keep track of votes and calculate tallies
         this.voteHandler = new VoteHandler();
@@ -20,12 +23,12 @@ class Room {
         return this.roomID;
     }
 
-    getGamestate() {
-        return this.gamestate;
+    getGameState() {
+        return this.gameState;
     }
 
-    setGamestate(gamestate) {
-        this.gamestate = gamestate;
+    setGameState(gameState) {
+        this.gameState = gameState;
     }
 
     getPlayers() {
@@ -52,6 +55,16 @@ class Room {
 
     incrementRoundNumber() {
         this.roundNumber++;
+    }
+
+    resetGame() {
+        this.setGameState(INITIAL_GAME_STATE);
+        this.roundNumber = INITIAL_ROUND_NUMBER;
+        for (let i = 0; i < this.players.length; i++) {
+            if (this.players[i]) {
+                this.players[i].resetPlayer();
+            }
+        }
     }
 
     /**

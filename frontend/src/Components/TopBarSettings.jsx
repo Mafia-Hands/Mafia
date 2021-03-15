@@ -1,5 +1,6 @@
 import { React } from 'react';
 import styles from '../Styles/TopBarSettings.module.css';
+import { Button } from '@material-ui/core';
 
 /**
  * @param currentScreen true/false OPTIONAL prop that will current screen Header text if true
@@ -13,19 +14,26 @@ const TopBarSettings = ({
 }) => {
     return (
         <div className={styles.container}>
-            <button className={styles.backButton} onClick={() => showUp(false)}>
-                Go Back
-            </button>
+            {showUp && (
+                <Button
+                    variant="contained"
+                    className={styles.backButton}
+                    onClick={() => showUp(false)}
+                >
+                    Go Back
+                </Button>
+            )}
             {currentScreen && (
                 <h2 className={styles.header}>{`${currentScreen}`}</h2>
             )}
             {showSettings && (
-                <button
+                <Button
+                    variant="contained"
                     className={styles.settingsButton}
                     onClick={() => setOpenInfo(false)}
                 >
                     Settings
-                </button>
+                </Button>
             )}
         </div>
     );

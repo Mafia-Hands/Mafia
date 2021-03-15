@@ -29,7 +29,7 @@ exports.loadNightTimeEvents = (io, socket, mafiaGame) => {
      */
     socket.on('medic-vote', (medicVoteObj) => {
         let room = socket.player.roomID;
-        room.setMedicChosenPlayer(
+        room.voteHandler.setMedicChosenPlayer(
             room.getPlayerByNickname(mafiaVoteObj.votingFor)
         );
     });

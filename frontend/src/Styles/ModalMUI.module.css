@@ -1,9 +1,12 @@
-.gradient {
-    background-color: grey;
-    background-image: linear-gradient(to top right, #988be7, grey);
+.modal {
+    width: 70%;
+    background-color: #282c34;
+    padding: 1em 2em 1em 2em;
+    color: white;
+    border-radius: 10px;
 }
 
-.modal {
+.background {
     position: absolute;
     top: 0;
     left: 0;
@@ -17,4 +20,5 @@
     align-items: center;
     background-color: rgba(0, 0, 0, 0.3);
     z-index: 100;
+    outline: 'none';
 }
