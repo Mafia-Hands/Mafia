@@ -4,7 +4,7 @@ const config = require('./config.json');
 const MafiaGame = require('./domain/MafiaGame');
 
 const loadLobbyEvents = require('./Events/LobbyEvents');
-const { loadNightTimeEvents } = require('./events/nightTimeVoteEvents');
+const { loadNightTimeEvents } = require('./Events/NightTimeVoteEvents');
 
 const io = require('socket.io')(server, {
     // Set up of CORS settings for socket.io server
