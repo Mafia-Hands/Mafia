@@ -1,5 +1,6 @@
 const Client = require('socket.io-client');
 const CreateLobbyDTO = require('../domain/DTO/request/CreateLobbyDTO');
+const JoinLobbyDTO = require('../domain/DTO/request/JoinLobbyDTO');
 const config = require('../config.json');
 const SocketIOServer = require('../index');
 
@@ -81,5 +82,43 @@ describe('Create-lobby event test', () => {
 
         // Request to create a new lobby
         clientSocket.emit('create-lobby', createLobbyDTO);
+    });
+    let lobbyCode;
+    test('join lobby', (done) => {
+        let createLobbyDTO = new CreateLobbyDTO('Anmol');
+
+        clientSocket.on('lobby-code', (lobbyCodeDTO) => {
+            expect(lobbyCodeDTO.code).toBeDefined();
+            lobbyCode = lobbyCodeDTO.code;
+
+            let joinLobbyDTO = new JoinLobbyDTO('Justin', lobbyCode);
+
+            // Subscribe to lobby-join
+            clientSocket.on('lobby-join', (lobbyJoinDTO) => {
+                expect(lobbyJoinDTO.players.length).toBe(2);
+                expect(lobbyJoinDTO.players).toEqual(['Anmol', 'Justin']);
+                done();
+            });
+
+            // Request to join a lobby
+            clientSocket.emit('join-lobby', joinLobbyDTO);
+        });
+
+        // Request to create a new lobby
+        clientSocket.emit('create-lobby', createLobbyDTO);
+    });
+
+    test('join lobby 2', (done) => {
+        let joinLobbyDTO = new JoinLobbyDTO('Homer', lobbyCode);
+
+        // Subscribe to lobby-join
+        clientSocket.on('lobby-join', (lobbyJoinDTO) => {
+            expect(lobbyJoinDTO.players.length).toBe(3);
+            expect(lobbyJoinDTO.players).toEqual(['Anmol', 'Justin', 'Homer']);
+            done();
+        });
+
+        // Request to join a lobby
+        clientSocket.emit('join-lobby', joinLobbyDTO);
     });
 });

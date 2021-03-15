@@ -11,7 +11,7 @@ class Room {
         // Default game settings.
         this.gameState = INITIAL_GAME_STATE;
         this.maxPlayerCount = 6;
-        this.players = new Array(this.maxPlayerCount);
+        this.players = new Array();
         this.roundNumber = INITIAL_ROUND_NUMBER;
     }
 

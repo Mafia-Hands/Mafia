@@ -1,7 +1,7 @@
-class LobbyCodeDTO{
-    constructor(players){
-        this.players = players
+class LobbyJoinDTO {
+    constructor(players) {
+        this.players = players;
     }
 }
 
-module.exports = LobbyCodeDTO;
+module.exports = LobbyJoinDTO;
