@@ -31,7 +31,7 @@ function voteDay(io, socket, mafiaGame) {
  * @param {any} socket
  * @param {MafiaGame} mafiaGame
  */
-function voteTrail(io, socket, mafiaGame) {
+function voteTrial(io, socket, mafiaGame) {
     socket.on('trial-vote', (voteForDTO) => {
         const room = mafiaGame.gameRoomsDict[socket.player.roomID];
         const voter = socket.player;
@@ -53,5 +53,5 @@ function voteTrail(io, socket, mafiaGame) {
  */
 module.exports = function (io, socket, mafiaGame) {
     voteDay(io, socket, mafiaGame);
-    voteTrail(io, socket, mafiaGame);
+    voteTrial(io, socket, mafiaGame);
 };
