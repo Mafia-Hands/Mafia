@@ -4,7 +4,7 @@
     "rules": {
         "prettier/prettier": "error",
         "no-unused-vars": "warn",
-        "no-console": "off",
+        "no-console": "warn",
         "func-names": "off",
         "no-process-exit": "off",
         "object-shorthand": "off",
@@ -14,6 +14,8 @@
         "no-plusplus": "warn",
         "no-param-reassign": "warn",
         "jest/no-done-callback": "warn",
+        "prefer-const": "warn",
+        "no-array-constructor": "warn",
         "require-jsdoc": [
             "warn",
             {

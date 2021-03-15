@@ -1,7 +1,7 @@
 const Player = require('../domain/Player');
 const LobbyCodeDTO = require('../domain/DTO/response/LobbyCodeDTO');
 const MafiaGame = require('../domain/MafiaGame');
-
+const Room = require('../domain/Room');
 /**
  * Event handlers and logic for `create-lobby` and `lobby-code`
  * The goal of these lobby events is to allow a host to create a game and receive a new room id.
@@ -15,6 +15,7 @@ function createLobby(io, socket, mafiaGame) {
         // Create room and assign host player to the room
         const roomID = mafiaGame.newGame();
         const host = new Player(socket.id, roomID, createLobbyDTO.nickname);
+        mafiaGame.gameRoomsDict[roomID].host = host;
         mafiaGame.gameRoomsDict[roomID].addPlayer(host);
 
         // Subscribe to the room events
@@ -25,6 +26,14 @@ function createLobby(io, socket, mafiaGame) {
 
         // Send room ID back to host.
         io.in(roomID).emit('lobby-code', new LobbyCodeDTO(roomID));
+    });
+
+    // host has clicked start game
+    socket.on('start-game', () => {
+        const { roomID } = socket.player;
+
+        // sending to all clients in "game" room, including sender
+        io.in(roomID).emit('game-start');
     });
 }
 

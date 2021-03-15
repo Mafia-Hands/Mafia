@@ -64,6 +64,24 @@ describe('Create-lobby event test', () => {
         clientSocket.emit('create-lobby', createLobbyDTO);
     });
 
+    test('Host starts game event', (done) => {
+        const createLobbyDTO = new CreateLobbyDTO('Anmol');
+
+        // Request to create a new lobby
+        // this will set the socket id to the host to be tested.
+        clientSocket.emit('create-lobby', createLobbyDTO);
+
+        // Subscribe to game start event
+        // server should send this event back once host clicks start.
+        // Client to subscribe to "game-start"
+        clientSocket.on('game-start', () => {
+            done();
+        });
+
+        // Request to server that game is ready to be started.
+        clientSocket.emit('start-game');
+    });
+
     test('Reset lobby', (done) => {
         const createLobbyDTO = new CreateLobbyDTO('Anmol');
 
