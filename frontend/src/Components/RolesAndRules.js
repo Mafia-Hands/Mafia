@@ -70,7 +70,7 @@ const RolesAndRules = ({ userRole }) => {
         <div>
             <div className={styles.roleContainer}>
                 {roles.map((role) => (
-                    <div className={styles.roleInfo}>
+                    <div className={styles.roleInfo} key={role.name}>
                         <div>
                             {role.name.toLowerCase() ===
                                 userRole.toLowerCase() && (
