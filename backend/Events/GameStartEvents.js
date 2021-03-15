@@ -43,7 +43,7 @@ function getAvailableRolesToAssign(numOfPlayers) {
   const roleLogic = config.role_distribution_logic;
 
   // Calculate the number of roles available of each type
-  const numOfMafia;
+  let numOfMafia;
   if (numOfPlayers < roleLogic.mafia_role_threshold) {
     numOfMafia = ceil(numOfPlayers / roleLogic.mafia_divisor_1);
   } else {
