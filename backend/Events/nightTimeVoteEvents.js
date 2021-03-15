@@ -18,8 +18,9 @@ exports.nightTimeEvents = (io, socket, mafiaGame) => {
      */
     socket.on('mafia-vote', (mafiaVoteObj) => {
         let room = socket.player.roomID;
-        room.mafiaChosenPlayer = room.getPlayerByNickname(
-            mafiaVoteObj.votingFor
+        room.voteHandler.addMafiaVote(
+            socket.player,
+            room.getPlayerByNickname(mafiaVoteObj.votingFor)
         );
     });
 
@@ -28,8 +29,8 @@ exports.nightTimeEvents = (io, socket, mafiaGame) => {
      */
     socket.on('medic-vote', (medicVoteObj) => {
         let room = socket.player.roomID;
-        room.medicChosenPlayer = room.getPlayerByNickname(
-            mafiaVoteObj.votingFor
+        room.setMedicChosenPlayer(
+            room.getPlayerByNickname(mafiaVoteObj.votingFor)
         );
     });
 
@@ -41,14 +42,13 @@ exports.nightTimeEvents = (io, socket, mafiaGame) => {
         let room = socket.player.roomID;
 
         let suspect = room.getPlayerByNickname(detectiveVoteObj.votingFor);
-        let isMafia = false;
-        if (suspect.role == RoleEnum.MAFIA) {
-            isMafia = true;
-        }
 
         socket.emit(
             'suspect-reveal',
-            new SuspectRevealDTO(suspect.nickname, isMafia)
+            new SuspectRevealDTO(
+                suspect.nickname,
+                suspect.role == RoleEnum.MAFIA
+            )
         );
     });
 };
