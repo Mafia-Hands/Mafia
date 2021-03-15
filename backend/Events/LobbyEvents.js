@@ -1,7 +1,7 @@
-const Player = require("../domain/Player");
-const LobbyCodeDTO = require("../domain/DTO/response/LobbyCodeDTO");
-const MafiaGame = require("../domain/MafiaGame");
-const Room = require("../domain/Room");
+const Player = require('../domain/Player');
+const LobbyCodeDTO = require('../domain/DTO/response/LobbyCodeDTO');
+const MafiaGame = require('../domain/MafiaGame');
+const Room = require('../domain/Room');
 /**
  * Event handlers and logic for `create-lobby` and `lobby-code`
  * The goal of these lobby events is to allow a host to create a game and receive a new room id.
@@ -10,35 +10,32 @@ const Room = require("../domain/Room");
  * @param {MafiaGame} mafiaGame
  */
 function createLobby(io, socket, mafiaGame) {
-  socket.on("create-lobby", (createLobbyDTO) => {
-    console.log("New room request received");
-    // Create room and assign host player to the room
-    let roomID = mafiaGame.newGame();
-    let host = new Player(socket.id, roomID, createLobbyDTO.nickname);
-    mafiaGame.gameRoomsDict[roomID].host = host;
-    mafiaGame.gameRoomsDict[roomID].addPlayer(host);
+    socket.on('create-lobby', (createLobbyDTO) => {
+        console.log('New room request received');
+        // Create room and assign host player to the room
+        const roomID = mafiaGame.newGame();
+        const host = new Player(socket.id, roomID, createLobbyDTO.nickname);
+        mafiaGame.gameRoomsDict[roomID].host = host;
+        mafiaGame.gameRoomsDict[roomID].addPlayer(host);
 
-    // Subscribe to the room events
-    socket.join(roomID);
+        // Subscribe to the room events
+        socket.join(roomID);
 
-    // Add player information to the host socket
-    socket.player = host;
+        // Add player information to the host socket
+        socket.player = host;
 
-    // Send room ID back to host.
-    io.in(roomID).emit("lobby-code", new LobbyCodeDTO(roomID));
-  });
+        // Send room ID back to host.
+        io.in(roomID).emit('lobby-code', new LobbyCodeDTO(roomID));
+    });
 
     // host has clicked start game
-    socket.on("start-game", () => {
-        let roomID = socket.player.roomID;
+    socket.on('start-game', () => {
+        const { roomID } = socket.player;
 
         // sending to all clients in "game" room, including sender
-        io.in(roomID).emit("game-start");
-
+        io.in(roomID).emit('game-start');
     });
-  
-};
-
+}
 
 /**
  * Event handlers and logic for `reset-lobby` and `reset-lobby-update`

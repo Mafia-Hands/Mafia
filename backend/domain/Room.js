@@ -37,8 +37,7 @@ class Room {
     }
 
     addPlayer(player) {
-        if (player !== null &&
-            this.players.length < this.maxPlayerCount) {
+        if (player !== null && this.players.length < this.maxPlayerCount) {
             this.players.push(player);
         }
     }
