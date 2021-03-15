@@ -21,6 +21,7 @@ function startGame(socket, mafiaGame) {
 
 function broadcastRandomRoleToEachPlayer(players, availableRoles) {
   const playersDeepCopy = JSON.parse(JSON.stringify(players));
+
   while (playersDeepCopy.length > 0) {
     // Determine random indices to help allocate a random role to a random player
     let randomRoleIndex = Math.floor(Math.random() * availableRoles.length);
@@ -41,18 +42,20 @@ function broadcastRandomRoleToEachPlayer(players, availableRoles) {
 function getAvailableRolesToAssign(numOfPlayers) {
   const roleLogic = config.role_distribution_logic;
 
+  // Calculate the number of roles available of each type
   const numOfMafia;
   if (numOfPlayers < roleLogic.mafia_role_threshold) {
     numOfMafia = ceil(numOfPlayers / roleLogic.mafia_divisor_1);
   } else {
     numOfMafia = ceil(numOfPlayers / roleLogic.mafia_divisor_2);
   }
-
   const numOfDetectives = ceil(numOfPlayers / roleLogic.detective_divisor);
   const numOfMedics = ceil(numOfPlayers / roleLogic.medic_divisor);
   const numOfTanners = ceil(numOfPlayers / roleLogic.tanner_divisor);
   const numOfVillagers = numOfPlayers - (numOfMafia + numOfDetectives + numOfMedics + numOfTanners);
 
+  // Return an array of roles, with each role occuring once or more depending on the number of players
+  // playing the game
   return [
     ...Array(numOfMafia).fill(roles.MAFIA),
     ...Array(numOfDetectives).fill(roles.DETECTIVE),
@@ -63,9 +66,8 @@ function getAvailableRolesToAssign(numOfPlayers) {
 }
 
 /**
- * Event handlers and logic for all of the lobby-related event
+ * Event handlers and logic for all of the game start related events
  * Current namespaces: start-game
- * @param {any} io
  * @param {any} socket
  * @param {MafiaGame} mafiaGame
  */
