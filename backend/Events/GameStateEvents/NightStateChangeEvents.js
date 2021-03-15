@@ -51,6 +51,11 @@ function endNight(io, socket, mafiaGame) {
  * @param {any} socket
  * @param {MafiaGame} mafiaGame
  */
-module.exports = function (io, socket, mafiaGame) {
+module.exports.eventHandlersRegistration = function (io, socket, mafiaGame) {
   startNight(io, socket, mafiaGame);
 };
+
+/**
+ * Visible for testing
+ */
+module.exports.endNight = endNight;
