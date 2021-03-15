@@ -1,30 +1,50 @@
 import { React } from 'react';
 import styles from '../Styles/LobbySettings.module.css';
+import { makeStyles } from '@material-ui/core/styles';
+import { Button, Card, CardActions, CardContent, CardHeader, FormControl, InputLabel, List, ListItem, MenuItem, Select, Typography } from '@material-ui/core';
+
+const useStyles = makeStyles({
+    root: {
+        minHeight: 500,
+    },
+    title: {
+        fontSize: 14,
+    },
+    pos: {
+        marginBottom: 12,
+    },
+});
 
 /**
  * @param gameCode MANDATORY prop: string of game entry code
  */
 const LobbySettings = ({gameCode}) => {
+    const classes = useStyles();
+
     return (
-        <div className={styles.container}>
-            <div className={styles.lobbySettingsHeader}>
-                <h3 className={styles.lobbySettingsTitle}>Game Settings</h3>
-                <h3 className={styles.gameCode}>Game Code: {gameCode}</h3>
-            </div>
-            <div className={styles.lobbySettingsOptions}>
-                <button className={styles.rolesButton} onClick={() => alert('Roles explanation screen goes here')}>
+        <Card className={classes.root} variant="Outlined">
+            <CardHeader title="Game Settings"></CardHeader>
+            <CardContent>
+                <List>
+                    <ListItem>
+                        <Typography>Game Code: {gameCode}</Typography>
+                    </ListItem>
+                    <ListItem>
+                        <Typography>Mafia Number</Typography>
+                        <Select>
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                        </Select>
+                    </ListItem>
+                </List>
+            </CardContent>
+            <CardActions>
+                <Button onClick={() => alert('Roles explanation screen goes here')}>
                     Roles
-                </button>
-                <div className={styles.mafiaSelectorContainer}>
-                    <p className={styles.mafiaSelectorText}>Mafia</p>
-                    <select className={styles.mafiaSelectorDropdown} name="MafiaNum">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                    </select>
-                </div>
-            </div>
-        </div>
+                </Button>
+            </CardActions>
+        </Card>
     )
 }
 

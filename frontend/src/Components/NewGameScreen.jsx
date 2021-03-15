@@ -4,20 +4,38 @@ import PlayerList from './PlayerList'
 import LobbySettings from './LobbySettings'
 import Chatbox from './Chatbox'
 import styles from '../Styles/NewGameScreen.module.css';
+import { makeStyles } from '@material-ui/core/styles';
+import { Button, Grid } from '@material-ui/core';
+
+const useStyles = makeStyles({
+    title: {
+      fontSize: 14,
+    },
+    pos: {
+      marginBottom: 12,
+    },
+  });
 
 const NewGameScreen = () => {
+    const classes = useStyles();
+
     return (
-        <div className={styles.container}>
+        <Grid>
             <TopBarSettings currentScreen="LOBBY" showSettings={true} />
-            <div className={styles.gameSettingsContainer}>
+            <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+            >
                 <PlayerList playerNames={["Alice","Bob","Carla","Dave","Errol","Fong"]}/>
                 <LobbySettings gameCode="ABC123"/>
                 <Chatbox messageList={["hi","sup","these are dummy messages, chat isn't currently implemented"]}/>
-                <button className={styles.startGameButton} onClick={() => alert('Game screen goes here')}>
+                <Button onClick={() => alert('Game screen goes here')}>
                     Start Game
-                </button>
-            </div>
-        </div>
+                </Button>
+            </Grid>
+        </Grid>
     )
 }
 
