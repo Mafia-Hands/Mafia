@@ -5,15 +5,20 @@ import { Button, Card, CardActions, CardContent, CardHeader, Input, List, ListIt
 
 const useStyles = makeStyles({
     root: {
-        minWidth: 800,
-        minHeight: 800
+        minWidth: 600,
+        minHeight: 600,
+        display: "grid",
+        gridGap: "24px",
     },
-    title: {
-        fontSize: 14,
+    body: {
+        alignSelf: "end",
+        textAlign: "center"
     },
-    pos: {
-        marginBottom: 12,
-    },
+    actions: {
+        display: "flex",
+        justifyContent: "space-between",
+        flexDirection:'column' 
+    }
 });
 
 /**

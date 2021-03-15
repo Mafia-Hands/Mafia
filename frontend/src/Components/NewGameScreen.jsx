@@ -28,12 +28,20 @@ const NewGameScreen = () => {
                 justify="center"
                 alignItems="center"
             >
-                <PlayerList playerNames={["Alice","Bob","Carla","Dave","Errol","Fong"]}/>
-                <LobbySettings gameCode="ABC123"/>
-                <Chatbox messageList={["hi","sup","these are dummy messages, chat isn't currently implemented"]}/>
-                <Button onClick={() => alert('Game screen goes here')}>
-                    Start Game
-                </Button>
+                <Grid item xs={6}>
+                    <Chatbox messageList={["hi","sup","these are dummy messages, chat isn't currently implemented"]}/>
+                </Grid>
+                <Grid item xs={3}>
+                    <PlayerList playerNames={["Alice","Bob","Carla","Dave","Errol","Fong"]}/>
+                </Grid>
+                <Grid item xs={3}>
+                    <LobbySettings gameCode="ABC123"/>
+                </Grid>
+                <Grid item xs={3}>
+                    <Button variant="contained" color="primary" onClick={() => alert('Game screen goes here')}>
+                        Start Game
+                    </Button>
+                </Grid>
             </Grid>
         </Grid>
     )

@@ -5,7 +5,9 @@ import { Button, Card, CardActions, CardContent, CardHeader, FormControl, InputL
 
 const useStyles = makeStyles({
     root: {
-        minHeight: 500,
+        minHeight: 600,
+        display: "grid",
+        gridGap: "24px",
     },
     title: {
         fontSize: 14,
@@ -13,6 +15,11 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: 12,
     },
+    actions: {
+        display: "flex",
+        justifyContent: "space-between",
+        flexDirection:'column' 
+    }
 });
 
 /**
@@ -27,10 +34,10 @@ const LobbySettings = ({gameCode}) => {
             <CardContent>
                 <List>
                     <ListItem>
-                        <Typography>Game Code: {gameCode}</Typography>
+                        <Typography variant="h5">Game Code: {gameCode}</Typography>
                     </ListItem>
                     <ListItem>
-                        <Typography>Mafia Number</Typography>
+                        <Typography>Mafia Number: </Typography>
                         <Select>
                             <MenuItem value={1}>1</MenuItem>
                             <MenuItem value={2}>2</MenuItem>

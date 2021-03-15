@@ -7,8 +7,9 @@ import { Card, CardContent, CardHeader} from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 800,
-    minHeight: 500
+    minHeight: 600,
+    display: "grid",
+    gridGap: "24px",
   },
   title: {
     fontSize: 14,
@@ -16,6 +17,11 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  actions: {
+    display: "flex",
+    justifyContent: "space-between",
+    flexDirection:'column' 
+  }
 });
 
 
