@@ -15,6 +15,7 @@ function createLobby(io, socket, mafiaGame) {
     // Create room and assign host player to the room
     let roomID = mafiaGame.newGame();
     let host = new Player(socket.id, roomID, createLobbyDTO.nickname);
+    mafiaGame.gameRoomsDict[roomID].host = host;
     mafiaGame.gameRoomsDict[roomID].addPlayer(host);
 
     // Subscribe to the room events

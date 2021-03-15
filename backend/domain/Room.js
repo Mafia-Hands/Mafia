@@ -13,6 +13,7 @@ class Room {
         this.maxPlayerCount = 6;
         this.players = new Array();
         this.roundNumber = INITIAL_ROUND_NUMBER;
+        this.host = null;
     }
 
     getRoomID() {
@@ -29,6 +30,10 @@ class Room {
 
     getPlayers() {
         return this.players;
+    }
+
+    getHost() {
+        return this.Host;
     }
 
     addPlayer(player) {

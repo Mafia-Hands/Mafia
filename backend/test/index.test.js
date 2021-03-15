@@ -64,7 +64,7 @@ describe("Create-lobby event test", () => {
     clientSocket.emit("create-lobby", createLobbyDTO);
   });
 
-  test("should start game event", (done) => {
+  test("Host starts game event", (done) => {
     let createLobbyDTO = new CreateLobbyDTO("Anmol");
 
     // Request to create a new lobby
@@ -80,30 +80,6 @@ describe("Create-lobby event test", () => {
 
     // Request to server that game is ready to be started.
     clientSocket.emit("start-game");
-  });
-
-  test("host starts game event", (done) => {
-    let createLobbyDTO = new CreateLobbyDTO("Anmol");
-
-    // Request to create a new lobby
-    // this will set the socket id to the host to be tested.
-    clientSocket.emit("create-lobby", createLobbyDTO);
-
-    // Host client should subscribe to confirm-game-start - this is the host client.
-    clientSocket.on("confirm-game-start", () => {
-      // Host should receive a different event than the client
-      done();
-    });
-
-    // todo: doesnt work until justin pushes his code in.
-    // // Or Client should recieve a to game-ready - this is the non-host client.
-    // clientSocket.on("game-ready", () => {
-    //     // Host should receive a different event than the client
-    //     done();
-    // });
-
-    // Request to server that lobby is full.
-    clientSocket.emit("lobby-ready", createLobbyDTO);
   });
 
   test("Reset lobby", (done) => {
