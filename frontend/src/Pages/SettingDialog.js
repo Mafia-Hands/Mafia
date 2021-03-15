@@ -1,14 +1,10 @@
 import React from 'react';
 import styles from '../Styles/SettingDialog.module.css';
-import Slider from '../Components/Slider';
+import { Slider, Button } from '@material-ui/core';
 
 const SettingDialog = () => {
     return (
-        <div className={styles.modal}>
-            <div>
-                <h2> Settings </h2>
-            </div>
-
+        <div className={styles.container}>
             <div>
                 <b> Sound </b>
                 <Slider />
@@ -20,8 +16,10 @@ const SettingDialog = () => {
             </div>
 
             {/* TODO: improve CSS and layout */}
-            <div className={styles.leaveBtn}>
-                <button> Leave Game </button>
+            <div>
+                <Button variant="contained" style={{ textAlign: 'center' }}>
+                    Leave Game
+                </Button>
             </div>
         </div>
     );
