@@ -1,4 +1,4 @@
-const Room = require("./Room");
+const Room = require('./Room');
 
 class MafiaGame {
     constructor() {
@@ -40,6 +40,10 @@ class MafiaGame {
             }
         }
         return room;
+    }
+
+    resetGame(roomID) {
+        this.gameRoomsDict[roomID].resetGame();
     }
 }
 

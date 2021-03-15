@@ -1,37 +1,57 @@
-const Player = require("../domain/Player");
-const LobbyCodeDTO = require("../domain/DTO/response/LobbyCodeDTO");
-const MafiaGame = require("../domain/MafiaGame");
-const VoteTimer = require("../Utilities/VoteTimer");
+const Player = require('../domain/Player');
+const ListVoteDTO = require('../domain/DTO/response/ListVoteDTO');
+const MafiaGame = require('../domain/MafiaGame');
 
 /**
- * Event handlers and logic for `create-lobby` and `lobby-code` and `join-lobby`
- * The goal of these lobby events is to allow a host to create a game and receive a new room id.
+ * Event handler and logic for `day-vote`
+ * The goal of these vote events is to allow a player to vote for another player and every
+ * other player to receive a list of votes.
+ * @param {any} io
+ * @param {any} socket
+ * @param {MafiaGame} mafiaGame
+ */
+function voteDay(io, socket, mafiaGame) {
+    socket.on('day-vote', (voteForDTO) => {
+        const room = mafiaGame.gameRoomsDict[socket.player.roomID];
+        const voter = socket.player;
+        const votee = voteForDTO.voteFor;
+        room.voteMapping[voter.nickname] = votee;
+        io.in(socket.player.roomID).emit(
+            'day-vote-update',
+            new ListVoteDTO(room.voteMapping)
+        );
+    });
+}
+
+/**
+ * Event handler and logic for `trail-vote`
+ * The goal of these vote events is to allow a player to vote for another player and every
+ * other player to receive a list of votes.
+ * @param {any} io
+ * @param {any} socket
+ * @param {MafiaGame} mafiaGame
+ */
+function voteTrail(io, socket, mafiaGame) {
+    socket.on('trial-vote', (voteForDTO) => {
+        const room = mafiaGame.gameRoomsDict[socket.player.roomID];
+        const voter = socket.player;
+        const votee = voteForDTO.voteFor;
+        room.voteMapping[voter.nickname] = votee;
+        io.in(socket.player.roomID).emit(
+            'day-vote-update',
+            new ListVoteDTO(room.voteMapping)
+        );
+    });
+}
+
+/**
+ * Event handlers and logic for all of the vote-related events
+ * Current namespaces: day-vote, trail-vote
  * @param {any} io
  * @param {any} socket
  * @param {MafiaGame} mafiaGame
  */
 module.exports = function (io, socket, mafiaGame) {
-    //on day vote message event will call day vote event handler
-    socket.on("day-vote", (voteForDTO) => {
-        const room = mafiaGame.gameRoomsDict[socket.player.roomID];
-        const player = socket.player;
-        const voteTimer = room.getVoteTimer(io, false);
-        voteTimer.votes[player.nickname] = voteForDTO.voteFor;
-        io.in(socket.player.roomID).emit(
-            "day-vote-update",
-            new ListVoteDTO(voteTimer.votes)
-        );
-    });
-
-    //on trail vote message event will call trail vote event handler
-    socket.on("trial-vote", (voteForDTO) => {
-        const room = mafiaGame.gameRoomsDict[socket.player.roomID];
-        const player = socket.player;
-        const voteTimer = room.getVoteTimer(io, true);
-        voteTimer.votes[player.nickname] = voteForDTO.voteFor;
-        io.in(socket.player.roomID).emit(
-            "trail-vote-update",
-            new ListVoteDTO(voteTimer.votes)
-        );
-    });
+    voteDay(io, socket, mafiaGame);
+    voteTrail(io, socket, mafiaGame);
 };

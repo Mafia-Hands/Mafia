@@ -1,6 +1,7 @@
-class JoinLobbyDTO{
-    constructor(nickname){
-        this.nickname = nickname
+class JoinLobbyDTO {
+    constructor(nickname, roomCode) {
+        this.nickname = nickname;
+        this.roomCode = roomCode;
     }
 }
 

@@ -1,4 +1,7 @@
-const GameStateEnum = require("./Enum/GameStateEnum");
+const GameStateEnum = require('./Enum/GameStateEnum');
+
+const INITIAL_GAME_STATE = GameStateEnum.NIGHTTIME;
+const INITIAL_ROUND_NUMBER = 0;
 
 class Room {
     constructor() {
@@ -6,37 +9,23 @@ class Room {
         this.roomID = this.getRandomID();
 
         // Default game settings.
-        this.gameState = GameStateEnum.NIGHTTIME;
+        this.gameState = INITIAL_GAME_STATE;
         this.maxPlayerCount = 6;
-        this.players = new Array(this.maxPlayerCount);
-        this.roundNumber = 0;
-        this.voteTimer = null;
-    }
-
-    /*
-     * This function creates a VoteTimer instance if one is not created already
-     * Params: io: io connection
-     * Returns: VoteTimer instance
-     */
-    getVoteTimer(io, isTrail) {
-        if (this.voteTimer == null) {
-            this.voteTimer = new VoteTimer(io, this, isTrail);
-            return this.voteTimer;
-        } else {
-            return this.voteTimer;
-        }
+        this.players = new Array();
+        this.roundNumber = INITIAL_ROUND_NUMBER;
+        this.voteMapping = {};
     }
 
     getRoomID() {
         return this.roomID;
     }
 
-    getGamestate() {
-        return this.gamestate;
+    getGameState() {
+        return this.gameState;
     }
 
-    setGamestate(gamestate) {
-        this.gamestate = gamestate;
+    setGameState(gameState) {
+        this.gameState = gameState;
     }
 
     getPlayers() {
@@ -45,13 +34,7 @@ class Room {
 
     addPlayer(player) {
         if (player !== null && this.players.length <= this.maxPlayerCount) {
-            if (!this.players.includes(player.nickname)) {
-                this.players.push(player);
-            } else {
-                return { reason: "Cannot join because name already taken" };
-            }
-        } else {
-            return { reason: "Cannot join because room is full" };
+            this.players.push(player);
         }
     }
 
@@ -62,7 +45,21 @@ class Room {
     incrementRoundNumber() {
         this.roundNumber++;
     }
-    
+
+    resetGame() {
+        this.setGameState(INITIAL_GAME_STATE);
+        this.roundNumber = INITIAL_ROUND_NUMBER;
+        for (let i = 0; i < this.players.length; i++) {
+            if (this.players[i]) {
+                this.players[i].resetPlayer();
+            }
+        }
+    }
+
+    resetVoteMapping() {
+        this.voteMapping = {};
+    }
+
     /**
      * Generate a random alphanumeric id
      * @returns {string} a random alphanumeric id

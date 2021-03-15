@@ -1,6 +1,6 @@
 class VoteForDTO {
     constructor(voteFor) {
-        this.c = voteFor;
+        this.voteFor = voteFor;
     }
 }
 

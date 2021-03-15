@@ -13,9 +13,10 @@ const TopBarSettings = ({
 }) => {
     return (
         <div className={styles.container}>
+            {showUp &&
             <button className={styles.backButton} onClick={() => showUp(false)}>
                 Go Back
-            </button>
+            </button>}
             {currentScreen && (
                 <h2 className={styles.header}>{`${currentScreen}`}</h2>
             )}
