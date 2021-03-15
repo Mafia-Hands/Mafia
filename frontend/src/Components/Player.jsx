@@ -55,10 +55,13 @@ export default function Player({
                 socket.emit(`${generalState.role}-vote`, {
                     votingFor: playerName,
                 });
+                break;
             case 'discussion':
                 socket.emit(`day-vote`, { votingFor: playerName });
+                break;
             case 'trial':
                 socket.emit(`trial-vote`, { votingFor: playerName });
+                break;
         }
     }
 

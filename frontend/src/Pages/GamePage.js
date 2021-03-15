@@ -6,6 +6,8 @@ import GameOverPage from './GameOverPage';
 import socket from '../Socket';
 import { GeneralContext } from '../App';
 
+import { nightTimeStatus, constructPlayersOnTrialStatus } from '../GameUtils';
+
 const initialState = {
     screen: 'entry',
     dayPeriod: 'day', // night or day
@@ -34,7 +36,6 @@ const reducer = (state, action) => {
         case 'start-night':
             return {
                 ...state,
-                dayPeriod: 'night',
                 status: action.status,
             };
         case 'update-status':
@@ -65,6 +66,12 @@ const reducer = (state, action) => {
                 winners: [...action.winners],
                 screen: 'end',
             };
+        case 'check-player': {
+            return {
+                ...state,
+                checkedPlayers: [...state.checkedPlayers, action.checkedPlayer],
+            };
+        }
     }
 };
 
@@ -113,6 +120,13 @@ const votingReducer = (state, action) => {
                 timeToVote: action.timeToVote,
             };
         }
+
+        case 'update-players-who-voted': {
+            return {
+                ...state,
+                playersWhoVoted: action.playersWhoVoted,
+            };
+        }
     }
 };
 // TODO move
@@ -128,27 +142,40 @@ export default function GamePage() {
         initialVotingState
     );
 
-    const { state: generalContext } = useContext(GeneralContext);
+    const { state: generalState } = useContext(GeneralContext);
 
+    // const stateMachine = {
+    //     state: undefined,
+    //     start: () => (state = entry),
+    //     next: () => (state = state.next()),
+
+    //     entry: { next: () => 'startNight' },
+    //     startNight: { next: () => 'dayStart' },
+    //     dayStart: { next: () => 'discussionEnd' },
+    //     discussionEnd: { next: () => 'trialStart' },
+    //     trialStart: { next: () => 'trialEnd' },
+    //     trialEnd: { next: () => 'startNight' },
+    // };
+
+    // if (!stateMachine.state) {
+    //     // entering night for the first time
+    //     stateMachine.start();
+    // }
     const cycle = {
         startNight: (duration) => {
-            const { role } = generalContext;
+            const { role } = generalState;
 
-            const status = {
-                mafia: 'Choose a player to kill',
-                detective: 'Choose a player to suspect',
-                medic: 'Choose a player to save',
-                civilian: 'Time to sleep...',
-            };
+            const status = nightTimeStatus[role];
+            console.log(status);
 
             const getVotablePlayers = {
                 mafia: gameState.alivePlayers.filter(
-                    (p) => p !== generalContext.nickname
+                    (p) => p !== generalState.nickname
                 ),
                 // TODO fix detective
                 detective: gameState.alivePlayers.filter(
                     (p) =>
-                        p !== generalContext.nickname &&
+                        p !== generalState.nickname &&
                         gameState.checkedPlayers &&
                         gameState.checkedPlayers.exists((c) => c.nickname !== p)
                 ),
@@ -163,7 +190,7 @@ export default function GamePage() {
             // update the status
             dispatch({
                 type: 'start-night',
-                status: status[role],
+                status: status,
             });
 
             // update the voting.
@@ -199,19 +226,13 @@ export default function GamePage() {
             votingDispatch({
                 type: 'discussion-vote',
                 timeToVote,
-                votablePlayers: gameState.alivePlayers,
+                votablePlayers: gameState.alivePlayers.filter(
+                    (p) => p !== generalState.nickname
+                ),
             });
         },
         discussionEnd: (playersOnTrial) => {
-            const status = playersOnTrial.reduce((str, p, idx, arr) => {
-                if (idx === arr.length - 1) {
-                    str += ` and ${p} is on trial`;
-                } else if (idx === 0) {
-                    str += p;
-                } else {
-                    str += `, ${p}`;
-                }
-            });
+            const status = constructPlayersOnTrialStatus(playersOnTrial);
             dispatch({
                 type: 'update-status',
                 status,
@@ -222,7 +243,7 @@ export default function GamePage() {
             });
 
             votingDispatch({
-                type: 'discussion-vote',
+                type: 'trial-vote',
                 votablePlayers: playersOnTrial,
             });
         },
@@ -241,7 +262,7 @@ export default function GamePage() {
         trialEnd: (playerKilled) => {
             dispatch({
                 type: 'update-status',
-                status: `${playerKilled} was killed in the night`,
+                status: `${playerKilled} was hanged`,
             });
             dispatch({
                 type: 'kill-player',
@@ -261,18 +282,22 @@ export default function GamePage() {
         },
     };
 
+    /**
+     * This effect will run on first render to initialise the alive players.
+     * We may need to lie about the dependency so that players dont just 'leave'
+     */
     useEffect(() => {
-        const { role } = generalContext.role;
+        const { role } = generalState.role;
 
         const extraRoleState =
             role === 'detective' ? { checkedPlayers: [] } : {};
 
         dispatch({
             type: 'init',
-            alivePlayers: generalContext.players,
+            alivePlayers: generalState.players,
             ...extraRoleState,
         });
-    }, []);
+    }, [generalState]);
 
     useEffect(() => {
         function onNightStart({ timeToVote }) {
@@ -295,11 +320,25 @@ export default function GamePage() {
         function onTrialStart({ playersOnTrial }) {
             cycle.trialStart(playersOnTrial);
         }
-        function onTrialEnd({ playersOnTrial }) {
-            cycle.trialEnd(playersOnTrial);
+        function onTrialEnd({ playerKilled }) {
+            cycle.trialEnd(playerKilled);
         }
         function onGameOver({ winningRole, winners }) {
             cycle.gameOver(winningRole, winners);
+        }
+
+        function onVoteUpdate({ voteMap }) {
+            votingDispatch({
+                type: 'update-players-who-voted',
+                playersWhoVoted: Object.keys(voteMap),
+            });
+        }
+
+        function onSuspectReveal({ nickname, isMafia }) {
+            dispatch({
+                type: 'check-player',
+                playersWhoVoted: { nickname, isMafia },
+            });
         }
 
         socket.on('night-start', onNightStart);
@@ -310,14 +349,23 @@ export default function GamePage() {
         socket.on('trial-end', onTrialEnd);
         socket.on('game-over', onGameOver);
 
+        socket.on('day-vote-update', onVoteUpdate);
+        socket.on('trial-vote-update', onVoteUpdate);
+
+        socket.on('suspect-reveal', onSuspectReveal);
+
         return () => {
             socket.removeListener('night-start', onNightStart);
-            socket.removeListener('night-start', onNightEnd);
+            socket.removeListener('night-end', onNightEnd);
             socket.removeListener('day-start', onDayStart);
             socket.removeListener('discussion-end', onDiscussionEnd);
             socket.removeListener('trial-start', onTrialStart);
             socket.removeListener('trial-end', onTrialEnd);
             socket.removeListener('game-over', onGameOver);
+            socket.removeListener('day-vote-update', onVoteUpdate);
+            socket.removeListener('trial-vote-update', onVoteUpdate);
+
+            socket.removeListener('suspect-reveal', onSuspectReveal);
         };
     }, [gameState.alivePlayers]);
 

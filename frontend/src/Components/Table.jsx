@@ -10,14 +10,12 @@ import { GeneralContext } from '../App';
  */
 export default function Table() {
     const { state } = useContext(GeneralContext);
-    console.log(state);
     const playerStates = state.players.map((p) => {
         return {
             playerId: p,
             name: p,
         };
     });
-    console.log(playerStates);
 
     // used to keep reference to table dom element (to get width/height of it)
     const tableRef = useRef(null);
