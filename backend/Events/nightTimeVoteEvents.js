@@ -11,7 +11,7 @@ const SuspectRevealDTO = require('../domain/DTO/response/SuspectRevealDTO');
  * @param {any} socket
  * @param {MafiaGame} mafiaGame
  */
-exports.nightTimeEvents = (io, socket, mafiaGame) => {
+exports.loadNightTimeEvents = (io, socket, mafiaGame) => {
     /**
      * Handler for 'mafia-vote', sets the chosen player for the Mafia to the player specified in the message.
      * In future iterations, this will be changed to tally votes from mafia members before setting the chosen player.
