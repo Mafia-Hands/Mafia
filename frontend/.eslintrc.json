@@ -17,6 +17,9 @@
         "react/destructuring-assignment": "warn",
         "react/prop-types": "warn",
         "react/button-has-type": "warn",
+        "import/no-unresolved": "warn",
+        "import/order": "warn",
+        "arrow-body-style": "warn",
         "require-jsdoc": [
             "warn",
             {
