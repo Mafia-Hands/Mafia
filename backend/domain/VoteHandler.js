@@ -50,6 +50,7 @@ class VoteHandler {
         let votedPlayer;
         for (const [player, numVotes] of Object.entries(voteTally)) {
             if (numVotes > maxVotes) {
+                maxVotes = numVotes;
                 votedPlayer = player;
             }
         }
