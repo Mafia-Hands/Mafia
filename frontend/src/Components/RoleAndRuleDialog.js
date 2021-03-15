@@ -1,6 +1,6 @@
 import React from 'react';
-import RoleTable from '../Components/RoleTable.js';
-import RuleParagraph from '../Components/RuleParagraph';
+import RoleTable from './RoleTable.js';
+import RuleParagraph from './RuleParagraph';
 import styles from '../Styles/RoleAndRuleDialog.module.css';
 
 const RoleAndRuleDialog = () => {

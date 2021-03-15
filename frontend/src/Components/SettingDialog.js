@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../Styles/SettingDialog.module.css';
-import Slider from '../Components/Slider';
+import Slider from './Slider';
 
 const SettingDialog = () => {
     return (
