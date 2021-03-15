@@ -1,4 +1,4 @@
-import  React from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 
 const CreateGame = () => {
@@ -10,4 +10,4 @@ const CreateGame = () => {
     );
 };
 
-export default CreateGame; 
+export default CreateGame;
