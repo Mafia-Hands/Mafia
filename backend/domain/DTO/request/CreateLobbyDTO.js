@@ -1,6 +1,6 @@
-class CreateLobbyDTO{
-    constructor(nickname){
-        this.nickname = nickname
+class CreateLobbyDTO {
+    constructor(nickname) {
+        this.nickname = nickname;
     }
 }
 

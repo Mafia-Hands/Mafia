@@ -14,6 +14,7 @@ class Room {
         this.players = new Array();
         this.roundNumber = INITIAL_ROUND_NUMBER;
         this.voteMapping = {};
+        this.host = null;
     }
 
     getRoomID() {
@@ -32,8 +33,12 @@ class Room {
         return this.players;
     }
 
+    getHost() {
+        return this.Host;
+    }
+
     addPlayer(player) {
-        if (player !== null && this.players.length <= this.maxPlayerCount) {
+        if (player !== null && this.players.length < this.maxPlayerCount) {
             this.players.push(player);
         }
     }

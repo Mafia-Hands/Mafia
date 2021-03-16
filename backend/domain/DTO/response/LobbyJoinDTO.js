@@ -1,6 +1,6 @@
 class LobbyJoinDTO {
-    constructor(players) {
-        this.players = players;
+    constructor(playerNames) {
+        this.playerNames = playerNames;
     }
 }
 
