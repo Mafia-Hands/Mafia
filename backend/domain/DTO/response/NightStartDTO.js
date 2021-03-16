@@ -1,5 +1,5 @@
-class NightStartDTO{
-    constructor(timeToVote){
+class NightStartDTO {
+    constructor(timeToVote) {
         this.timeToVote = timeToVote;
     }
 }

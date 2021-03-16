@@ -1,9 +1,9 @@
-const config = require("../../config.json");
-const GameStateEnum = require("../../domain/Enum/GameStateEnum");
+const config = require('../../config.json');
+const GameStateEnum = require('../../domain/Enum/GameStateEnum');
 
-const MafiaGame = require("../../domain/MafiaGame");
-const NightStartDTO = require("../../domain/DTO/response/NightStartDTO");
-const NightEndDTO = require("../../domain/DTO/response/NightEndDTO");
+const MafiaGame = require('../../domain/MafiaGame');
+const NightStartDTO = require('../../domain/DTO/response/NightStartDTO');
+const NightEndDTO = require('../../domain/DTO/response/NightEndDTO');
 
 /**
  * Event handlers and logic for `start-night`
@@ -14,17 +14,17 @@ const NightEndDTO = require("../../domain/DTO/response/NightEndDTO");
  * @param {MafiaGame} mafiaGame
  */
 function startNight(io, socket, mafiaGame) {
-  socket.on("start-night", () => {
-    const roomID = socket.player.roomID;
-    const room = mafiaGame.gameRoomsDict[roomID];
-    const TIME_TO_VOTE = config.night_total_vote_time_in_milliseconds;
+    socket.on('start-night', () => {
+        const roomID = socket.player.roomID;
+        const room = mafiaGame.gameRoomsDict[roomID];
+        const TIME_TO_VOTE = config.night_total_vote_time_in_milliseconds;
 
-    room.gameState = GameStateEnum.NIGHT_TIME;
+        room.gameState = GameStateEnum.NIGHT_TIME;
 
-    io.in(roomID).emit("night-start", new NightStartDTO(TIME_TO_VOTE));
+        io.in(roomID).emit('night-start', new NightStartDTO(TIME_TO_VOTE));
 
-    setTimeout(endNight(io, socket, mafiaGame), TIME_TO_VOTE);
-  });
+        setTimeout(endNight(io, socket, mafiaGame), TIME_TO_VOTE);
+    });
 }
 
 /**
@@ -35,13 +35,13 @@ function startNight(io, socket, mafiaGame) {
  * @param {MafiaGame} mafiaGame
  */
 function endNight(io, socket, mafiaGame) {
-  const roomID = socket.player.roomID;
-  const room = mafiaGame.gameRoomsDict[roomID];
+    const roomID = socket.player.roomID;
+    const room = mafiaGame.gameRoomsDict[roomID];
 
-  let playerKilled = null;
-  //TODO: calculate which player has been been murdered.
+    let playerKilled = null;
+    //TODO: calculate which player has been been murdered.
 
-  io.in(roomID).emit("night-end", new NightEndDTO(playerKilled));
+    io.in(roomID).emit('night-end', new NightEndDTO(playerKilled));
 }
 
 /**
@@ -52,7 +52,7 @@ function endNight(io, socket, mafiaGame) {
  * @param {MafiaGame} mafiaGame
  */
 module.exports.eventHandlersRegistration = function (io, socket, mafiaGame) {
-  startNight(io, socket, mafiaGame);
+    startNight(io, socket, mafiaGame);
 };
 
 /**
