@@ -4,9 +4,10 @@ const config = require('./config.json');
 const MafiaGame = require('./domain/MafiaGame');
 
 const loadLobbyEvents = require('./Events/LobbyEvents');
-const LoadVoteEvents = require('./Events/VoteEvents');
+const loadVoteEvents = require('./Events/VoteEvents');
 const loadGameStartEvents = require('./Events/GameStartEvents');
 const { loadNightTimeEvents } = require('./Events/NightTimeVoteEvents');
+const loadStateChangeEvents = require('./Events/GameStateEvents/StateChangeEvents');
 
 const io = require('socket.io')(server, {
     // Set up of CORS settings for socket.io server
@@ -29,22 +30,25 @@ app.get('/', (req, res) => {
 
 // Listen for a "connection" event for incoming sockets.
 io.on('connection', (socket) => {
-  //this function catches any lobby events sent from client
-  loadLobbyEvents(io, socket, mafiaGame);
+    // this function catches any lobby events sent from client
+    loadLobbyEvents(io, socket, mafiaGame);
 
-  //this function catches any vote events sent from client
-  LoadVoteEvents(io, socket, mafiaGame);
+    // this function catches any vote events sent from client
+    loadVoteEvents(io, socket, mafiaGame);
 
-  //this function catches any game starts event sent from client
-  loadGameStartEvents(socket, mafiaGame);
+    // this function catches any game starts event sent from client
+    loadGameStartEvents(socket, mafiaGame);
 
-  // this function catches any events related to mafia/medic/detective votes during the night
-  loadNightTimeEvents(io, socket, mafiaGame);
+    // this function catches any events related to mafia/medic/detective votes during the night
+    loadNightTimeEvents(io, socket, mafiaGame);
+
+    // this function catches events that relate to game state changes
+    loadStateChangeEvents(io, socket, mafiaGame);
 });
 
 // Start the server on our predetermined port number.
 server.listen(port, () => {
-    console.log(`Listening on *:${port}`);
+    console.log('Listening on *:' + port);
 });
 
 // Export the server for testing

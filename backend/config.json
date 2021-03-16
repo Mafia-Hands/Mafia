@@ -8,5 +8,6 @@
     "detective_divisor": 10,
     "medic_divisor": 10,
     "jester_divisor": 14
-  }
+  },
+  "night_total_vote_time_in_milliseconds": 60000
 }

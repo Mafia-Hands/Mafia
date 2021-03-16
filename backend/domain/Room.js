@@ -1,7 +1,7 @@
 const GameStateEnum = require('./Enum/GameStateEnum');
 const VoteHandler = require('./VoteHandler');
 
-const INITIAL_GAME_STATE = GameStateEnum.NIGHTTIME;
+const INITIAL_GAME_STATE = GameStateEnum.WAITINGLOBBY;
 const INITIAL_ROUND_NUMBER = 0;
 
 class Room {
