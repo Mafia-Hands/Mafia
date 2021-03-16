@@ -4,9 +4,6 @@ import TopBarGame from '../Components/TopBarGame';
 import GameEnv from '../Components/GameEnv';
 import BottomBar from '../Components/BottomBar';
 
-/**
- * Component that displays the Home Screen
- */
 function Home() {
     return (
         <div className="App">
