@@ -47,7 +47,8 @@ exports.loadNightTimeEvents = (io, socket, mafiaGame) => {
             'suspect-reveal',
             new SuspectRevealDTO(
                 suspect.nickname,
-                suspect.role == RoleEnum.MAFIA
+                suspect.role == RoleEnum.MAFIA ||
+                    suspect.role == RoleEnum.JESTER
             )
         );
     });
