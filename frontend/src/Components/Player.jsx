@@ -1,6 +1,5 @@
 import styles from '../Styles/Player.module.css';
 import classNames from 'classnames';
-import { GeneralContext } from '../App';
 import { GameContext } from '../Pages/GamePage';
 import socket from '../Socket';
 import { useContext } from 'react';
