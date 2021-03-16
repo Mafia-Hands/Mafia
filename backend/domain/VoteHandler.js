@@ -9,18 +9,6 @@ class VoteHandler {
         this.medicChosenPlayer = null;
     }
 
-    addDaytimeVote(voter, chosenPlayer) {
-        this.daytimeVoteMap[voter] = chosenPlayer;
-    }
-
-    addMafiaVote(voter, chosenPlayer) {
-        this.mafiaVoteMap[voter] = chosenPlayer;
-    }
-
-    setMedicChosenPlayer(player) {
-        this.medicChosenPlayer = player;
-    }
-
     getMafiaVotedPlayer() {
         mafiaChosenPlayer = this.getVotedPlayer(this.mafiaVoteMap);
         if (mafiaChosenPlayer === medicChosenPlayer) {

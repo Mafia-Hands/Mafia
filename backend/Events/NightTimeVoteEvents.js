@@ -18,10 +18,7 @@ exports.loadNightTimeEvents = (io, socket, mafiaGame) => {
      */
     socket.on('mafia-vote', (mafiaVoteObj) => {
         let room = mafiaGame.gameRoomsDict[socket.player.roomID];
-        room.voteHandler.addMafiaVote(
-            socket.player,
-            room.getPlayerByNickname(mafiaVoteObj.votingFor)
-        );
+        room.voteHandler.mafiaVoteMap[socket.player] = room.getPlayerByNickname(mafiaVoteObj.votingFor)
     });
 
     /**
@@ -29,9 +26,7 @@ exports.loadNightTimeEvents = (io, socket, mafiaGame) => {
      */
     socket.on('medic-vote', (medicVoteObj) => {
         let room = mafiaGame.gameRoomsDict[socket.player.roomID];
-        room.voteHandler.setMedicChosenPlayer(
-            room.getPlayerByNickname(medicVoteObj.votingFor)
-        );
+        room.voteHandler.medicChosenPlayer = room.getPlayerByNickname(medicVoteObj.votingFor)
     });
 
     /**
