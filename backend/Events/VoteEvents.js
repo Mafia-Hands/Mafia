@@ -38,7 +38,7 @@ function voteTrial(io, socket, mafiaGame) {
         const votee = voteForDTO.voteFor;
         room.voteMapping[voter.nickname] = votee;
         io.in(socket.player.roomID).emit(
-            'day-vote-update',
+            'trial-vote-update',
             new ListVoteDTO(room.voteMapping)
         );
     });
