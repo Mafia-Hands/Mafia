@@ -15,11 +15,9 @@ function voteDay(io, socket, mafiaGame) {
         const room = mafiaGame.gameRoomsDict[socket.player.roomID];
         const voter = socket.player;
         const votee = voteForDTO.voteFor;
-        room.voteMapping[voter.nickname] = votee;
-        io.in(socket.player.roomID).emit(
-            'day-vote-update',
-            new ListVoteDTO(room.voteMapping)
-        );
+        room.voteHandler.daytimeVoteMap[voter.nickname] = (room.getPlayerByNickname(votee)).nickname;
+
+        io.in(socket.player.roomID).emit('day-vote-update', new ListVoteDTO(room.voteHandler.daytimeVoteMap));
     });
 }
 
@@ -27,29 +25,26 @@ function voteDay(io, socket, mafiaGame) {
  * Event handler and logic for `trail-vote`
  * The goal of these vote events is to allow a player to vote for another player and every
  * other player to receive a list of votes.
- * @param {any} io: server socket instance 
+ * @param {any} io: server socket instance
  * @param {any} socket client socket connection to the server
- * @param {MafiaGame} mafiaGame: Object mirroring the real world Mafia game 
+ * @param {MafiaGame} mafiaGame: Object mirroring the real world Mafia game
  */
 function voteTrial(io, socket, mafiaGame) {
     socket.on('trial-vote', (voteForDTO) => {
         const room = mafiaGame.gameRoomsDict[socket.player.roomID];
         const voter = socket.player;
         const votee = voteForDTO.voteFor;
-        room.voteMapping[voter.nickname] = votee;
-        io.in(socket.player.roomID).emit(
-            'trial-vote-update',
-            new ListVoteDTO(room.voteMapping)
-        );
+        room.voteHandler.trialVoteMap[voter.nickname] = room.getPlayerByNickname(votee).nickname;
+        io.in(socket.player.roomID).emit('trial-vote-update', new ListVoteDTO(room.voteHandler.trialVoteMap));
     });
 }
 
 /**
  * Event handlers and logic for all of the vote-related events
  * Current namespaces: day-vote, trail-vote
- * @param {any} io: server socket instance 
+ * @param {any} io: server socket instance
  * @param {any} socket client socket connection to the server
- * @param {MafiaGame} mafiaGame: Object mirroring the real world Mafia game 
+ * @param {MafiaGame} mafiaGame: Object mirroring the real world Mafia game
  */
 module.exports = function (io, socket, mafiaGame) {
     voteDay(io, socket, mafiaGame);
