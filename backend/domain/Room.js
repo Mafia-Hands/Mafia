@@ -12,11 +12,14 @@ class Room {
         // Default game settings.
         this.gameState = INITIAL_GAME_STATE;
         this.maxPlayerCount = 6;
-        this.players = new Array(this.maxPlayerCount);
+        this.players = new Array();
         this.roundNumber = INITIAL_ROUND_NUMBER;
 
         // Handler used to keep track of votes and calculate tallies
         this.voteHandler = new VoteHandler();
+        
+        this.voteMapping = {};
+        this.host = null;
     }
 
     getRoomID() {
@@ -42,9 +45,13 @@ class Room {
             }
         }
     }
+    
+    getHost() {
+        return this.Host;
+    }
 
     addPlayer(player) {
-        if (player !== null && this.players.length <= this.maxPlayerCount) {
+        if (player !== null && this.players.length < this.maxPlayerCount) {
             this.players.push(player);
         }
     }
@@ -65,6 +72,10 @@ class Room {
                 this.players[i].resetPlayer();
             }
         }
+    }
+
+    resetVoteMapping() {
+        this.voteMapping = {};
     }
 
     /**

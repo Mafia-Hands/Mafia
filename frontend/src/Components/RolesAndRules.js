@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from '../Styles/RolesAndRules.module.css';
 import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import styles from '../Styles/RolesAndRules.module.css';
 
 const useStyles = makeStyles({
     root: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles({
  * @param userRole Civilian/Medic/Detective/Mafia - gets user's role to display what their current role is
  */
 const RolesAndRules = ({ userRole }) => {
-    var props = { backgroundColor: null };
+    const props = { backgroundColor: null };
     const classes = useStyles(props);
     // later for multi-mode version, maybe can fetch the data by the backend
     // eg: if the user choose to play one-night ultimate mode, this will be tanner, mason, etc
@@ -50,10 +50,8 @@ const RolesAndRules = ({ userRole }) => {
         {
             name: 'Mafia',
             isGood: false,
-            description:
-                'A BAD member of the town. Mafia can kill one person every night.',
-            winCondition:
-                'Civilian Population matches or is less than Mafia Population.',
+            description: 'A BAD member of the town. Mafia can kill one person every night.',
+            winCondition: 'Civilian Population matches or is less than Mafia Population.',
         },
     ];
 
@@ -72,19 +70,11 @@ const RolesAndRules = ({ userRole }) => {
                 {roles.map((role) => (
                     <div className={styles.roleInfo} key={role.name}>
                         <div>
-                            {role.name.toLowerCase() ===
-                                userRole.toLowerCase() && (
-                                <p className={styles.roleHighlight}>
-                                    This is your role!
-                                </p>
+                            {role.name.toLowerCase() === userRole.toLowerCase() && (
+                                <p className={styles.roleHighlight}>This is your role!</p>
                             )}
                         </div>
-                        <Paper
-                            elevation={2}
-                            className={`${classes.root} ${
-                                role.isGood ? classes.good : classes.bad
-                            }`}
-                        >
+                        <Paper elevation={2} className={`${classes.root} ${role.isGood ? classes.good : classes.bad}`}>
                             <h3>{role.name}</h3>
                             <p>{role.description}</p>
                             <div>

@@ -1,8 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import TopBarGame from '../Components/TopBarGame';
 import GameEnv from '../Components/GameEnv';
 import BottomBar from '../Components/BottomBar';
-import { Link } from 'react-router-dom';
 
 function Home() {
     return (
@@ -17,11 +17,7 @@ function Home() {
             </ul>
             <header className="App-header">
                 <div style={{ width: '80%' }}>
-                    <TopBarGame
-                        userDetails={['Reeve', 'Civilian']}
-                        showTimer={true}
-                        showRole={true}
-                    />
+                    <TopBarGame userDetails={['Reeve', 'Civilian']} showTimer showRole />
                     <GameEnv />
                     <BottomBar />
                 </div>
