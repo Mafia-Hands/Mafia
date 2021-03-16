@@ -114,8 +114,8 @@ describe('Create-lobby event test', () => {
 
             // Subscribe to lobby-join
             clientSocket.on('lobby-join', (lobbyJoinDTO) => {
-                expect(lobbyJoinDTO.players.length).toBe(2);
-                expect(lobbyJoinDTO.players).toEqual(['Anmol', 'Justin']);
+                expect(lobbyJoinDTO.playerNames.length).toBe(2);
+                expect(lobbyJoinDTO.playerNames).toEqual(['Anmol', 'Justin']);
                 done();
             });
 
@@ -132,8 +132,8 @@ describe('Create-lobby event test', () => {
 
         // Subscribe to lobby-join
         clientSocket.on('lobby-join', (lobbyJoinDTO) => {
-            expect(lobbyJoinDTO.players.length).toBe(3);
-            expect(lobbyJoinDTO.players).toEqual(['Anmol', 'Justin', 'Homer']);
+            expect(lobbyJoinDTO.playerNames.length).toBe(3);
+            expect(lobbyJoinDTO.playerNames).toEqual(['Anmol', 'Justin', 'Homer']);
             done();
         });
 
@@ -152,8 +152,8 @@ describe('Create-lobby event test', () => {
 
             // Subscribe to lobby-join
             clientSocket.on('lobby-join', (lobbyJoinDTO) => {
-                expect(lobbyJoinDTO.players.length).toBe(2);
-                expect(lobbyJoinDTO.players).toEqual(['Anmol', 'Justin']);
+                expect(lobbyJoinDTO.playerNames.length).toBe(2);
+                expect(lobbyJoinDTO.playerNames).toEqual(['Anmol', 'Justin']);
                 done();
             });
 
@@ -187,8 +187,8 @@ describe('Create-lobby event test', () => {
 
             // Subscribe to lobby-join
             clientSocket.on('lobby-join', (lobbyJoinDTO) => {
-                expect(lobbyJoinDTO.players.length).toBe(2);
-                expect(lobbyJoinDTO.players).toEqual(['Anmol', 'Justin']);
+                expect(lobbyJoinDTO.playerNames.length).toBe(2);
+                expect(lobbyJoinDTO.playerNames).toEqual(['Anmol', 'Justin']);
                 done();
             });
 
