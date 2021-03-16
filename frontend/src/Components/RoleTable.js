@@ -16,8 +16,7 @@ const RuleTable = () => {
         },
         {
             name: 'Medic',
-            description:
-                'At night, after Mafias killed one player, Medic can decide to save the killed player or not',
+            description: 'At night, after Mafias killed one player, Medic can decide to save the killed player or not',
             winCondition: 'All Mafias are killed',
         },
         {

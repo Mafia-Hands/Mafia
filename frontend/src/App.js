@@ -1,15 +1,20 @@
 import './App.css';
-import HomeScreenID from './Components/HomeScreenID';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import PlayScreen from './Pages/PlayScreen';
+import Home from './Pages/Home';
 
 function App() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <div style={{ width: '80%' }}>
-                    <HomeScreenID/>
-                </div>
-            </header>
-        </div>
+        <Router>
+            <Switch>
+                <Route exact path="/">
+                    <Home />
+                </Route>
+                <Route path="/play">
+                    <PlayScreen />
+                </Route>
+            </Switch>
+        </Router>
     );
 }
 
