@@ -17,7 +17,7 @@ exports.loadNightTimeEvents = (io, socket, mafiaGame) => {
      * In future iterations, this will be changed to tally votes from mafia members before setting the chosen player.
      */
     socket.on('mafia-vote', (mafiaVoteObj) => {
-        let room = socket.player.roomID;
+        let room = mafiaGame.gameRoomsDict[socket.player.roomID];
         room.voteHandler.addMafiaVote(
             socket.player,
             room.getPlayerByNickname(mafiaVoteObj.votingFor)
@@ -28,9 +28,9 @@ exports.loadNightTimeEvents = (io, socket, mafiaGame) => {
      * Handler for 'medic-vote', pretty much the same logic as the mafia vote, except it sets the chosen player for the Medics.
      */
     socket.on('medic-vote', (medicVoteObj) => {
-        let room = socket.player.roomID;
+        let room = mafiaGame.gameRoomsDict[socket.player.roomID];
         room.voteHandler.setMedicChosenPlayer(
-            room.getPlayerByNickname(mafiaVoteObj.votingFor)
+            room.getPlayerByNickname(medicVoteObj.votingFor)
         );
     });
 
@@ -39,7 +39,7 @@ exports.loadNightTimeEvents = (io, socket, mafiaGame) => {
      * SuspectRevealDTO that reveals whether the chosen player is Mafia or not.
      */
     socket.on('detective-vote', (detectiveVoteObj) => {
-        let room = socket.player.roomID;
+        let room = mafiaGame.gameRoomsDict[socket.player.roomID];
 
         let suspect = room.getPlayerByNickname(detectiveVoteObj.votingFor);
 
