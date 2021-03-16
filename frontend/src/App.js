@@ -1,15 +1,20 @@
 import './App.css';
-import NewGameScreen from './Components/NewGameScreen';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import PlayScreen from './Pages/PlayScreen';
+import Home from './Pages/Home';
 
 function App() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <div style={{ width: '80%' }}>
-                    <NewGameScreen/>
-                </div>
-            </header>
-        </div>
+        <Router>
+            <Switch>
+                <Route exact path="/">
+                    <Home />
+                </Route>
+                <Route path="/play">
+                    <PlayScreen />
+                </Route>
+            </Switch>
+        </Router>
     );
 }
 
