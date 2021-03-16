@@ -1,12 +1,7 @@
-import React, { useContext, useReducer, useEffect, useCallback } from 'react';
 import { createContext } from 'react';
 import CoreGamePage from './CoreGamePage';
 import EntryScreen from './EntryScreen';
 import GameOverPage from './GameOverPage';
-import socket from '../Socket';
-import { GeneralContext } from '../App';
-
-import { nightTimeStatus, constructPlayersOnTrialStatus } from '../GameUtils';
 
 import useGameState from '../Hooks/useGameState';
 
@@ -378,6 +373,8 @@ export default function GamePage() {
         case 'end':
             component = <GameOverPage />;
             break;
+        default:
+            throw new Error('Invalid Game Page screen state');
     }
     return (
         <GameContext.Provider value={{ state }}>

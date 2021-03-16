@@ -1,5 +1,5 @@
 import { constructPlayersOnTrialStatus, nightTimeStatus } from '../GameUtils';
-import React, { useContext, useReducer, useEffect, useCallback } from 'react';
+import { useContext, useReducer, useEffect } from 'react';
 import { GeneralContext } from '../App';
 import socket from '../Socket';
 
@@ -12,6 +12,7 @@ const initialState = {
     winningRole: '',
     winners: [],
     phase: '',
+    role: '',
     votingState: {
         type: '', // role or discussion or trial or undefined
         votablePlayers: [], // what other players can we vote for
@@ -28,6 +29,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 alivePlayers: [...action.alivePlayers],
+                role: action.role,
                 ...(action.checkedPlayers && {
                     checkedPlayers: action.checkedPlayers,
                 }),
@@ -140,16 +142,6 @@ const reducer = (state, action) => {
             };
         }
 
-        case 'vote-update': {
-            return {
-                ...state,
-                votingState: {
-                    ...state.votingState,
-                    playersWhoVoted: action.playersWhoVoted,
-                },
-            };
-        }
-
         case 'suspect-reveal': {
             return {
                 ...state,
@@ -157,40 +149,10 @@ const reducer = (state, action) => {
             };
         }
 
-        // case 'update-status':
-        //     return {
-        //         ...state,
-        //         status: action.status,
-        //     };
-        // case 'kill-player':
-        //     return {
-        //         ...state,
-        //         alivePlayers: state.alivePlayers.filter(
-        //             (p) => p !== action.playerKilled
-        //         ),
-        //     };
-        // case 'increment-time':
-        //     return {
-        //         ...state,
-        //         dayPeriod: state.dayPeriod === 'day' ? 'night' : 'day',
-        //         dayNumber:
-        //             state.dayPeriod === 'day'
-        //                 ? state.dayNumber
-        //                 : state.dayNumber + 1,
-        //     };
-        // case 'winner':
-        //     return {
-        //         ...state,
-        //         winningRole: action.winningRole,
-        //         winners: [...action.winners],
-        //         screen: 'end',
-        //     };
-        // case 'check-player': {
-        //     return {
-        //         ...state,
-        //         checkedPlayers: [...state.checkedPlayers, action.checkedPlayer],
-        //     };
-        // }
+        default:
+            throw new Error(
+                `Invalid Game State reducer action: ${action.type}`
+            );
     }
 };
 
@@ -210,6 +172,7 @@ export default function useGameState() {
         dispatch({
             type: 'init',
             alivePlayers: generalState.players,
+            role: role,
             ...extraRoleState,
         });
     }, [generalState]);
@@ -224,7 +187,6 @@ export default function useGameState() {
                 mafia: state.alivePlayers.filter(
                     (p) => p !== generalState.nickname
                 ),
-                // TODO fix detective
                 detective: state.alivePlayers.filter(
                     (p) =>
                         p !== generalState.nickname &&
@@ -241,8 +203,6 @@ export default function useGameState() {
                 votablePlayers,
                 timeToVote,
             });
-
-            // dispatch({ type: 'change-screen', screen: 'core' });
         }
 
         function onNightEnd({ playerKilled }) {
@@ -341,7 +301,7 @@ export default function useGameState() {
 
             socket.removeListener('suspect-reveal', onSuspectReveal);
         };
-    }, [state]);
+    }, [state, generalState]);
 
     return state;
 }

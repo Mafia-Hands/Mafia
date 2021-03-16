@@ -17,7 +17,7 @@ export default function Player({
     // onClick,
 }) {
     // TODO this is a lot of rerenders
-    const { state: generalState } = useContext(GeneralContext);
+    // const { state: generalState } = useContext(GeneralContext);
     // const votingContext = useContext(VotingContext);
 
     // console.log(votingContext);
@@ -54,7 +54,7 @@ export default function Player({
     function onClick() {
         switch (gameState.votingState.type) {
             case 'role':
-                socket.emit(`${generalState.role}-vote`, {
+                socket.emit(`${gameState.role}-vote`, {
                     votingFor: playerName,
                 });
                 break;
@@ -64,6 +64,8 @@ export default function Player({
             case 'trial':
                 socket.emit(`trial-vote`, { votingFor: playerName });
                 break;
+            default:
+                throw new Error('Invalid voting type');
         }
     }
 

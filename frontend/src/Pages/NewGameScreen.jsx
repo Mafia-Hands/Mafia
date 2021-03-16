@@ -8,7 +8,7 @@ import { GeneralContext } from '../App';
 import socket from '../Socket';
 
 const NewGameScreen = () => {
-    const { state, dispatch } = useContext(GeneralContext);
+    const { state } = useContext(GeneralContext);
     const startGame = () => {
         socket.emit('start-game');
     };
