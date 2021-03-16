@@ -4,7 +4,7 @@ import styles from '../Styles/LobbySettings.module.css';
 /**
  * @param gameCode MANDATORY prop: string of game entry code
  */
-const LobbySettings = ({gameCode}) => {
+const LobbySettings = ({ gameCode }) => {
     return (
         <div className={styles.container}>
             <div className={styles.lobbySettingsHeader}>
@@ -25,7 +25,7 @@ const LobbySettings = ({gameCode}) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default LobbySettings
+export default LobbySettings;

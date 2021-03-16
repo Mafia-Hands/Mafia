@@ -8,7 +8,7 @@ import styles from '../Styles/NewGameScreen.module.css';
 const NewGameScreen = () => {
     return (
         <div className={styles.container}>
-            <TopBarSettings currentScreen="LOBBY" showSettings={true} />
+            <TopBarSettings currentScreen="LOBBY" showSettings />
             <div className={styles.gameSettingsContainer}>
                 <PlayerList playerNames={['Alice', 'Bob', 'Carla', 'Dave', 'Errol', 'Fong']} />
                 <LobbySettings gameCode="ABC123" />

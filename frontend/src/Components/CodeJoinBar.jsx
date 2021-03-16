@@ -3,8 +3,8 @@ import { TextField } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import IconButton from '@material-ui/core/IconButton';
 
-const CodeJoinBar = () => {
-    const [data, setData] = useState(null);
+const CodeJoinBar = (props) => {
+    const [data, setData] = useState(props.lobbyId);
 
     const handleID = (LobbyID) => {
         setData(LobbyID.target.value);
@@ -17,14 +17,19 @@ const CodeJoinBar = () => {
             <TextField
                 color="secondary"
                 value={data}
-                label="Enter LobbyID"
+                label={props.lobbyId ? props.lobbyId : 'Enter LobbyID'}
                 variant="outlined"
                 type="text"
                 onChange={handleID}
             />
             <IconButton color="inherit">
                 {' '}
-                <SendIcon />{' '}
+                <SendIcon
+                    onClick={() => {
+                        props.setLobbyId(data);
+                        props.setAllowIn(true);
+                    }}
+                />{' '}
             </IconButton>
         </div>
     );

@@ -8,7 +8,7 @@ import TopBarSettings from './TopBarSettings';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { IconButton, Grid } from '@material-ui/core';
 
-const HomeScreen = () => {
+const HomeScreen = (props) => {
     const [open, setOpen] = useState(false);
 
     return (
@@ -33,13 +33,13 @@ const HomeScreen = () => {
                 </Grid>
             </Grid>
             <Grid item>
-                <CodeJoinBar />
+                <CodeJoinBar setLobbyId={props.setLobbyId} lobbyId={props.lobbyId} setAllowIn={props.setAllowIn} />
             </Grid>
             <Grid item>
                 <NicknameBar />
             </Grid>
             <Grid item>
-                <CreateGame />
+                <CreateGame lobbyId={props.lobbyId} setLobbyId={props.setLobbyId} setAllowIn={props.setAllowIn} />
             </Grid>
         </Grid>
     );
