@@ -5,7 +5,6 @@ import { Button, Card, CardActions, CardContent, CardHeader, FormControl, InputL
 
 const useStyles = makeStyles({
     root: {
-        minHeight: 600,
         display: "grid",
         gridGap: "24px",
     },

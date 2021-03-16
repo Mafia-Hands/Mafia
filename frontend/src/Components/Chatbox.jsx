@@ -1,14 +1,12 @@
 import { React } from 'react';
 import styles from '../Styles/Chatbox.module.css';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Card, CardActions, CardContent, CardHeader, Input, List, ListItem } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardHeader, Input, List, ListItem, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
-        minWidth: 600,
-        minHeight: 600,
         display: "grid",
-        gridGap: "24px",
+        gridGap: "0px",
     },
     body: {
         alignSelf: "end",
@@ -16,8 +14,10 @@ const useStyles = makeStyles({
     },
     actions: {
         display: "flex",
-        justifyContent: "space-between",
         flexDirection:'column' 
+    },
+    pos: {
+        marginBottom: 0
     }
 });
 
@@ -34,7 +34,7 @@ const Chatbox = ({messageList}) => {
                 <List>
                     {messageList.map((messageList, index) =>
                         <ListItem key={index}>
-                            {messageList}
+                            <Typography>{messageList}</Typography>
                         </ListItem>
                     )}
                 </List>
