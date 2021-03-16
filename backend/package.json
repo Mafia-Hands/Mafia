@@ -12,6 +12,7 @@
         "fix-lint": "eslint ./ --fix"
     },
     "dependencies": {
+        "@types/jest": "^26.0.20",
         "express": "^4.17.1",
         "nodemon": "^2.0.7",
         "socket.io": "^3.1.2",
