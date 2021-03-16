@@ -1,4 +1,5 @@
 const GameStateEnum = require('./Enum/GameStateEnum');
+const VoteHandler = require('./VoteHandler');
 
 const INITIAL_GAME_STATE = GameStateEnum.NIGHTTIME;
 const INITIAL_ROUND_NUMBER = 0;
@@ -13,6 +14,10 @@ class Room {
         this.maxPlayerCount = 6;
         this.players = new Array();
         this.roundNumber = INITIAL_ROUND_NUMBER;
+
+        // Handler used to keep track of votes and calculate tallies
+        this.voteHandler = new VoteHandler();
+        
         this.voteMapping = {};
         this.host = null;
     }
@@ -33,6 +38,14 @@ class Room {
         return this.players;
     }
 
+    getPlayerByNickname(nickname) {
+        for (player of this.players) {
+            if (player.nickname == nickname) {
+                return player;
+            }
+        }
+    }
+    
     getHost() {
         return this.Host;
     }
