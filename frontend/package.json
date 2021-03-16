@@ -32,8 +32,8 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject",
         "pretty-quick": "pretty-quick ./",
+        "eject": "react-scripts eject",
         "lint": "eslint ./"
     },
     "eslintConfig": {
