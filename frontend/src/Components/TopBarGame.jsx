@@ -6,6 +6,7 @@ import TopBarSettings from './TopBarSettings';
 import RolesAndRules from './RolesAndRules';
 import HelpIcon from '@material-ui/icons/Help';
 import { Button, IconButton } from '@material-ui/core';
+import Timer from './Timer';
 
 /**
  * @param userDetails [{userName: <string>, role: <string>}]
@@ -33,7 +34,12 @@ const TopBarGame = ({ userDetails, showTimer, showRole }) => {
                     </IconButton>
                 </div>
             )}
-            {showTimer && <div className={styles.timer}>Timer Placeholder</div>}
+            {showTimer && (
+                <div className={styles.timer}>
+                    {/* The default time just be set to 90 for now */}
+                    <Timer userPreferTime="90" />
+                </div>
+            )}
             <Button
                 variant="contained"
                 className={styles.settingsButton}
@@ -59,11 +65,7 @@ const TopBarGame = ({ userDetails, showTimer, showRole }) => {
                         </div>
                     ) : (
                         <div>
-                            <TopBarSettings
-                                showUp={setOpen}
-                                currentScreen="SETTINGS"
-                                showSettings={false}
-                            />
+                            <TopBarSettings showUp={setOpen} currentScreen="SETTINGS" showSettings={false} />
                             <SettingDialog />
                         </div>
                     )}
