@@ -1,14 +1,9 @@
-.container{
+.container {
     display: block;
-   
+    height: 100vh;
 }
 
-.avatar{
-
-    height: 40%;
-    border: solid white;
-    border-radius: 80%;
-
-    
+.avatar {
+    padding-top: 20px;
+    text-align: center;
 }
-

@@ -1,23 +1,33 @@
 import { React } from 'react';
 import styles from '../Styles/GameOver.module.css';
+import Player from './Player';
+import StatusBar from './StatusBar';
+import TopBarGame from './TopBarGame';
 
-function GameOver({playerName, groupName, winFlag}){
+function GameOver({ players, groupName }) {
     return (
-        <div className={styles.container} >
+        <div className={styles.container}>
+            <TopBarGame
+                userDetails={['Reeve', 'Civilian']}
+                showTimer={false}
+                showRole={true}
+            />
 
-            <div className={styles.top}> 
-                <h1 className={styles.title}>Game Over</h1>
+            <StatusBar text={`${groupName} Victory`} />
+
+            <div className={styles.avatar}>
+                <div>
+                    {players.map((player, index) => {
+                        if (player.role === groupName) {
+                            return (
+                                <Player key={index} playerName={player.name} />
+                            );
+                        }
+                    })}
+                </div>
             </div>
-            
-            <div>
-                <p className={styles.avatar}> Pic </p>
-                <h3> "groupName" placeholder is the winner</h3>   
-            </div>
-            
         </div>
     );
-
-
 }
 
 export default GameOver;
