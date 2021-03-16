@@ -1,0 +1,13 @@
+.container {
+    height: 40vh;
+    width: 50%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    justify-content: space-between;
+}
+
+b {
+    text-align: center;
+}
