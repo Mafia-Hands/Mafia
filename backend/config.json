@@ -9,5 +9,5 @@
     "medic_divisor": 10,
     "jester_divisor": 14
   },
-  "night_total_vote_time_in_milliseconds": 60
+  "night_total_vote_time_in_milliseconds": 60000
 }
