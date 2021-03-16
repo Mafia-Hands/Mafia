@@ -1,11 +1,12 @@
 import { React, useState } from 'react';
+import PropTypes from 'prop-types';
+import HelpIcon from '@material-ui/icons/Help';
+import { Button, IconButton } from '@material-ui/core';
 import styles from '../Styles/TopBarGame.module.css';
 import ModalMUI from '../Modal/ModalMUI';
 import SettingDialog from '../Pages/SettingDialog';
 import TopBarSettings from './TopBarSettings';
 import RolesAndRules from './RolesAndRules';
-import HelpIcon from '@material-ui/icons/Help';
-import { Button, IconButton } from '@material-ui/core';
 import Timer from './Timer';
 
 /**
@@ -76,3 +77,18 @@ const TopBarGame = ({ userDetails, showTimer, showRole }) => {
 };
 
 export default TopBarGame;
+
+TopBarGame.propTypes = {
+    userDetails: PropTypes.shape({
+        first: PropTypes.string,
+        last: PropTypes.string,
+    }),
+    showTimer: PropTypes.bool,
+    showRole: PropTypes.bool,
+};
+
+TopBarGame.defaultProps = {
+    userDetails: [null, 'Civilian'],
+    showTimer: false,
+    showRole: false,
+};
