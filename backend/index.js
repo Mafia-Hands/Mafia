@@ -4,9 +4,10 @@ const config = require('./config.json');
 const MafiaGame = require('./domain/MafiaGame');
 
 const loadLobbyEvents = require('./Events/LobbyEvents');
-const LoadVoteEvents = require('./Events/VoteEvents');
+const loadVoteEvents = require('./Events/VoteEvents');
 const loadGameStartEvents = require('./Events/GameStartEvents');
 const { loadNightTimeEvents } = require('./Events/NightTimeVoteEvents');
+const loadStateChangeEvents = require('./Events/GameStateEvents/StateChangeEvents');
 
 const io = require('socket.io')(server, {
     // Set up of CORS settings for socket.io server
@@ -33,7 +34,7 @@ io.on('connection', (socket) => {
     loadLobbyEvents(io, socket, mafiaGame);
 
     // this function catches any vote events sent from client
-    LoadVoteEvents(io, socket, mafiaGame);
+    loadVoteEvents(io, socket, mafiaGame);
 
     // this function catches any game starts event sent from client
     loadGameStartEvents(socket, mafiaGame);

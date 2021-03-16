@@ -12,8 +12,10 @@ const io = require('socket.io')(server, {
     },
 });
 
+let mafiaGame = null;
+
 module.exports.createMafiaGameWithOnePlayerMock = function (port) {
-    const mafiaGame = new MafiaGame();
+    mafiaGame = new MafiaGame();
     const roomID = mafiaGame.newGame();
     mafiaGame.gameRoomsDict[roomID] = new Room();
 
@@ -29,5 +31,12 @@ module.exports.createMafiaGameWithOnePlayerMock = function (port) {
         });
     });
 
-    return { io: io, mafiaGame: mafiaGame, socketIOServer: server };
+    return { io: io, mafiaGame: mafiaGame, socketIOServer: server, roomID: roomID };
+};
+
+module.exports.addMafiaVote = function (voter, votedFor, roomID) {
+    const room = mafiaGame.gameRoomsDict[roomID];
+    const mafiaVoteMap = room.voteHandler.mafiaVoteMap;
+
+    mafiaVoteMap[voter] = votedFor;
 };

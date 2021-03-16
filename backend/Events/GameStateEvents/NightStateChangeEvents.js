@@ -38,8 +38,7 @@ function endNight(io, socket, mafiaGame) {
     const roomID = socket.player.roomID;
     const room = mafiaGame.gameRoomsDict[roomID];
 
-    let playerKilled = null;
-    //TODO: calculate which player has been been murdered.
+    const playerKilled = room.voteHandler.getMafiaVotedPlayer();
 
     io.in(roomID).emit('night-end', new NightEndDTO(playerKilled));
 }
@@ -54,8 +53,3 @@ function endNight(io, socket, mafiaGame) {
 module.exports.eventHandlersRegistration = function (io, socket, mafiaGame) {
     startNight(io, socket, mafiaGame);
 };
-
-/**
- * Visible for testing
- */
-module.exports.endNight = endNight;
