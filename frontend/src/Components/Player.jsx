@@ -1,7 +1,7 @@
 import styles from '../Styles/Player.module.css';
 import classNames from 'classnames';
 import { GeneralContext } from '../App';
-import { GameContext, VotingContext } from '../Pages/GamePage';
+import { GameContext } from '../Pages/GamePage';
 import socket from '../Socket';
 import { useContext } from 'react';
 
@@ -19,7 +19,6 @@ export default function Player({
     // TODO this is a lot of rerenders
     const { state: generalState } = useContext(GeneralContext);
     // const votingContext = useContext(VotingContext);
-    const { state: votingState } = useContext(VotingContext);
 
     // console.log(votingContext);
     const { state: gameState } = useContext(GameContext);
@@ -28,11 +27,11 @@ export default function Player({
     const isDead = !gameState.alivePlayers.includes(playerName);
 
     const isHoverable =
-        !!votingState.phase &&
-        votingState.votablePlayers.includes(playerName) &&
+        !!gameState.votingState.type &&
+        gameState.votingState.votablePlayers.includes(playerName) &&
         !isDead;
-    const hasVoted = votingState.playersWhoVoted.includes(playerName);
-    const isClicked = !!votingState.vote;
+    const hasVoted = gameState.votingState.playersWhoVoted.includes(playerName);
+    const isClicked = !!gameState.votingState.vote;
 
     // apply styles based on whether certain props is true
     const playerStyle = classNames({
@@ -53,7 +52,7 @@ export default function Player({
     }
 
     function onClick() {
-        switch (votingState.phase) {
+        switch (gameState.votingState.type) {
             case 'role':
                 socket.emit(`${generalState.role}-vote`, {
                     votingFor: playerName,

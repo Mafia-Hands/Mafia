@@ -93,6 +93,7 @@ function App() {
     useEffect(() => {
         // Invoked only if player created lobby
         socket.on('lobby-code', ({ code }) => {
+            console.log('hi');
             dispatch({ type: 'lobby-code', code });
         });
 
