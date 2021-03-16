@@ -1,10 +1,11 @@
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 90px 360px 1fr;
+    grid-template-rows: 100px 360px 1fr;
     grid-template-areas: 
         "top-bar top-bar"
         "players game-settings"
+        "chat game-settings"
         "chat start-button";
   }
 

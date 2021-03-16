@@ -22,7 +22,7 @@ const NewGameScreen = () => {
                 <LobbySettings gameCode="ABC123"/>
             </div>
             <div className={styles.startButton}>
-                <Button variant="contained" color="primary" onClick={() => alert('Game screen goes here')}>
+                <Button variant="contained" color="primary" size="large" onClick={() => alert('Game screen goes here')}>
                     Start Game
                 </Button>
             </div>

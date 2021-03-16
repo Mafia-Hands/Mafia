@@ -1,12 +1,12 @@
 import { React } from 'react';
-import styles from '../Styles/LobbySettings.module.css';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Card, CardActions, CardContent, CardHeader, FormControl, InputLabel, List, ListItem, MenuItem, Select, Typography } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardHeader, List, ListItem, MenuItem, Select, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
         display: "grid",
         gridGap: "24px",
+        minHeight: "500px"
     },
     title: {
         fontSize: 14,
@@ -46,7 +46,7 @@ const LobbySettings = ({gameCode}) => {
                 </List>
             </CardContent>
             <CardActions>
-                <Button onClick={() => alert('Roles explanation screen goes here')}>
+                <Button size="large" onClick={() => alert('Roles explanation screen goes here')}>
                     Roles
                 </Button>
             </CardActions>

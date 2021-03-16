@@ -1,5 +1,4 @@
 import './App.css';
-import HomeScreenID from './Components/HomeScreenID';
 import NewGameScreen from './Components/NewGameScreen';
 
 function App() {
