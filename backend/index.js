@@ -4,6 +4,7 @@ const config = require("./config.json");
 const MafiaGame = require("./domain/MafiaGame");
 
 const loadLobbyEvents = require("./Events/LobbyEvents");
+const LoadVoteEvents = require('./Events/VoteEvents');
 const loadGameStartEvents = require("./Events/GameStartEvents");
 
 const io = require("socket.io")(server, {
@@ -27,7 +28,13 @@ app.get('/', (req, res) => {
 
 // Listen for a "connection" event for incoming sockets.
 io.on("connection", (socket) => {
+  //this function catches any lobby events sent from client
   loadLobbyEvents(io, socket, mafiaGame);
+
+  //this function catches any vote events sent from client
+  LoadVoteEvents(io, socket, mafiaGame);
+
+  //this function catches any game starts event sent from client
   loadGameStartEvents(socket, mafiaGame);
 });
 

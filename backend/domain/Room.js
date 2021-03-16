@@ -13,6 +13,7 @@ class Room {
         this.maxPlayerCount = 6;
         this.players = new Array();
         this.roundNumber = INITIAL_ROUND_NUMBER;
+        this.voteMapping = {};
         this.host = null;
     }
 
@@ -58,6 +59,10 @@ class Room {
                 this.players[i].resetPlayer();
             }
         }
+    }
+
+    resetVoteMapping() {
+        this.voteMapping = {};
     }
 
     /**
