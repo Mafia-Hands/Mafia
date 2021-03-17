@@ -44,7 +44,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 host: action.host,
-                players: action.players,
+                players: action.playerNames,
             };
         case 'set-role':
             return {
@@ -52,16 +52,14 @@ const reducer = (state, action) => {
                 role: action.role,
             };
         default:
-            throw new Error(
-                `Invalid General State reducer action: ${action.type}`
-            );
+            throw new Error(`Invalid General State reducer action: ${action.type}`);
     }
 };
 
 export default function useLobbyState() {
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const confirmLobby = ({ success, errMsg }) => {
+    const onConfirmLobby = ({ success, errMsg }) => {
         if (!success) {
             alert(errMsg);
         } else {
@@ -69,30 +67,45 @@ export default function useLobbyState() {
         }
     };
 
-    const gameStart = ({ role }) => {
+    const onGameStart = ({ role }) => {
+        console.log(role);
         // TODO: ROLE should be eunum
         dispatch({ type: 'set-role', role: role.toLowerCase() });
 
         dispatch({ type: 'change-screen', screen: 'game' });
     };
 
+    const onLobbyCode = ({ code }) => {
+        dispatch({ type: 'change-screen', screen: 'lobby' });
+
+        dispatch({ type: 'lobby-code', code });
+    };
+
+    const onlobbyJoin = (res) => {
+        console.log({ type: 'lobby-join', ...res });
+        dispatch({ type: 'change-screen', screen: 'lobby' });
+        dispatch({ type: 'lobby-join', ...res });
+    };
+
+    const onLobbyReady = () => dispatch({ type: 'lobby-ready' });
     useEffect(() => {
         // Invoked only if player created lobby
-        socket.on('lobby-code', ({ code }) => {
-            dispatch({ type: 'change-screen', screen: 'lobby' });
+        socket.on('lobby-code', onLobbyCode);
 
-            dispatch({ type: 'lobby-code', code });
-        });
+        socket.on('lobby-confirm', onConfirmLobby);
+        socket.on('lobby-join', onlobbyJoin);
+        socket.on('lobby-ready', onLobbyReady);
+        socket.on('game-start', onGameStart);
 
-        socket.on('lobby-confirm', confirmLobby);
-        socket.on('lobby-join', (res) => {
-            dispatch({ type: 'change-screen', screen: 'lobby' });
+        return () => {
+            socket.removeListener('lobby-code', onLobbyCode);
 
-            dispatch({ type: 'lobby-join', ...res });
-        });
-        socket.on('lobby-ready', () => dispatch({ type: 'lobby-ready' }));
-        socket.on('game-start', gameStart);
-    }, []);
+            socket.removeListener('lobby-confirm', onConfirmLobby);
+            socket.removeListener('lobby-join', onlobbyJoin);
+            socket.removeListener('lobby-ready', onLobbyReady);
+            socket.removeListener('game-start', onGameStart);
+        };
+    }, [state]);
 
     return [state, dispatch];
 }

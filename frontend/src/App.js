@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import PlayScreen from './Pages/PlayScreen';
-import Home from './Pages/Home';
+// import PlayScreen from './Pages/PlayScreen';
+// import Home from './Pages/Home';
 import HomePage from './Pages/HomePage';
 import GamePage from './Pages/GamePage';
 import React from 'react';
@@ -38,10 +38,12 @@ function App() {
             <Router>
                 <Switch>
                     <Route exact path="/">
-                        <Home />
+                        {/* <Home /> */}
+                        {component}
                     </Route>
                     <Route path="/play">
-                        <PlayScreen />
+                        {/* <PlayScreen /> */}
+                        {component}
                     </Route>
                 </Switch>
             </Router>
