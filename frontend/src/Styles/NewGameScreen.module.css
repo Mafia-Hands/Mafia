@@ -1,30 +1,22 @@
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 100px 360px 1fr;
-    grid-template-areas: 
-        "top-bar top-bar"
-        "players game-settings"
-        "chat game-settings"
-        "chat start-button";
-  }
-
-.topBar {
-    grid-area: top-bar;
+    column-gap: 2em;    
 }
 
-.chatbox {
-    grid-area: chat;
+.leftContainer{
+    display: grid;
+    row-gap: 2em;
+    grid-template-rows: 1fr 1fr;
 }
 
-.playerNames {
-    grid-area: players;
-}
-
-.lobbySettings {
-    grid-area: game-settings;
+.rightContainer{
+    display: grid;
+    grid-template-rows: 80% 1fr;
+    row-gap: 2em;
 }
 
 .startButton {
-    grid-area: start-button;
+    align-self: end;
+    justify-self: center;
 }

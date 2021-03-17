@@ -54,6 +54,7 @@ const TopBarGame = ({ showTimer, showRole }) => {
                     {openInfo ? (
                         <div>
                             <TopBarSettings
+                                showBack={true}
                                 showUp={setOpen}
                                 currentScreen="ROLES AND RULES"
                                 showSettings={false}
@@ -63,7 +64,12 @@ const TopBarGame = ({ showTimer, showRole }) => {
                         </div>
                     ) : (
                         <div>
-                            <TopBarSettings showUp={setOpen} currentScreen="SETTINGS" showSettings={false} />
+                            <TopBarSettings
+                                showBack={true}
+                                showUp={setOpen}
+                                currentScreen="SETTINGS"
+                                showSettings={false}
+                            />
                             <SettingDialog />
                         </div>
                     )}

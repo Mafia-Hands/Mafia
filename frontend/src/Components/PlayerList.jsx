@@ -10,6 +10,7 @@ const useStyles = makeStyles({
         display: 'grid',
         gridGap: '0px',
         paddingBottom: '0px',
+        backgroundColor: 'grey',
     },
     title: {
         fontSize: 14,
@@ -27,7 +28,9 @@ const PlayerList = () => {
                 <List>
                     {state.players.map((playerName, index) => (
                         <ListItem key={index}>
-                            <Typography>{playerName}</Typography>
+                            <Typography>
+                                Player {index + 1}: {playerName}
+                            </Typography>
                         </ListItem>
                     ))}
                 </List>
