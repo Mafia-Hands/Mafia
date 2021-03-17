@@ -12,7 +12,7 @@ const LobbySettings = ({ gameCode }) => {
         <div className={styles.container}>
             <div className={styles.lobbySettingsHeader}>
                 <h3 className={styles.lobbySettingsTitle}>Game Settings</h3>
-                <h3 className={styles.gameCode}>Game Code: {state.code}</h3>
+                <h3 className={styles.gameCode} id="room-code">Game Code: {state.code}</h3>
             </div>
             <div className={styles.lobbySettingsOptions}>
                 <button

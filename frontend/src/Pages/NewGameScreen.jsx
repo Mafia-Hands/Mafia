@@ -29,6 +29,7 @@ const NewGameScreen = () => {
                     className={styles.startGameButton}
                     disabled={!state.lobbyReady}
                     onClick={startGame}
+                    id="start-game"
                 >
                     Start Game
                 </button>

@@ -23,13 +23,13 @@ export default function HomePage() {
     return (
         <div>
             HOME <br />
-            Nickname <input type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} />
+            Nickname <input type="text" value={nickname} id="nickname" onChange={(e) => setNickname(e.target.value)} />
             <br />
             Code
-            <input type="text" value={code} onChange={(e) => setCode(e.target.value)} />
+            <input type="text" value={code} id="room-code" onChange={(e) => setCode(e.target.value)} />
             <br />
-            <button onClick={joinLobby}> Join </button>
-            <button onClick={createLobby}> createLobby </button>
+            <button onClick={joinLobby} id="join-lobby"> Join </button>
+            <button onClick={createLobby} id="create-lobby"> createLobby </button>
         </div>
     );
 }
