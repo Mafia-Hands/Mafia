@@ -25,7 +25,7 @@ function startTrial(io, socket, mafiaGame) {
 
         io.in(roomID).emit('trial-start', new TrialStartDTO(TIME_TO_VOTE));
 
-        setTimeout(endTrial(io, socket, mafiaGame), TIME_TO_VOTE);
+        setTimeout(() => endTrial(io, socket, mafiaGame), TIME_TO_VOTE);
     });
 }
 
@@ -45,6 +45,7 @@ function endTrial(io, socket, mafiaGame) {
     io.in(roomID).emit('trial-end', new TrialEndDTO(playerChosen));
 
     const winningRole = room.getWinningRole();
+
     if (winningRole !== null) {
         io.in(roomID).emit('game-over', new GameOverDTO(winningRole, room.getPlayersByRole(winningRole)));
     } else {

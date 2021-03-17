@@ -29,10 +29,11 @@ class VoteHandler {
     getVotedPlayer(voteMap) {
         // Generate map of players who have been voted for, and the number of votes they have.
         const voteTally = {};
-        voteTally.null = 0;
+        const abstainVote = null;
+        voteTally[abstainVote] = 0;
         for (const [voter, chosenPlayer] of Object.entries(voteMap)) {
             if (chosenPlayer == null) {
-                voteTally.null++;
+                voteTally[abstainVote]++;
             } else if (voteTally.hasOwnProperty(chosenPlayer)) {
                 voteTally[chosenPlayer.nickname]++;
             } else {

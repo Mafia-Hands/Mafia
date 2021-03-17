@@ -61,6 +61,20 @@ class Room {
         return playersOfTheRole;
     }
 
+    getWinningPlayers(role) {
+        const playersOfTheRole = [];
+        if (role === roles.CIVILIAN) {
+            playersOfTheRole = [
+                ...this.getPlayersByRole(roles.CIVILIAN),
+                ...this.getPlayersByRole(roles.MEDIC),
+                ...this.getPlayersByRole(roles.DETECTIVE),
+            ];
+        } else {
+            playersOfTheRole = this.getPlayersByRole(role);
+        }
+        return playersOfTheRole;
+    }
+
     getHost() {
         return this.Host;
     }
@@ -80,13 +94,13 @@ class Room {
     }
 
     getWinningRole() {
-        const numOfMafiaAlive = this.getPlayersByRole(roles.MAFIA).filter((player) => player.isAlive);
-        const numOfJesterAlive = this.getPlayersByRole(roles.JESTER).filter((player) => player.isAlive);
+        const numOfMafiaAlive = this.getPlayersByRole(roles.MAFIA).filter((player) => player.isAlive).length;
+        const numOfJesterAlive = this.getPlayersByRole(roles.JESTER).filter((player) => player.isAlive).length;
         const numOfCiviliansAlive = [
-            this.getPlayersByRole(roles.CIVILIAN),
-            this.getPlayersByRole(roles.MEDIC),
-            this.getPlayersByRole(roles.DETECTIVE),
-        ].filter((player) => player.isAlive);
+            ...this.getPlayersByRole(roles.CIVILIAN),
+            ...this.getPlayersByRole(roles.MEDIC),
+            ...this.getPlayersByRole(roles.DETECTIVE),
+        ].filter((player) => player.isAlive).length;
 
         if (numOfMafiaAlive === 0) {
             return roles.CIVILIAN;
