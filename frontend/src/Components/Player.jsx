@@ -4,31 +4,13 @@ import { GameContext } from '../Pages/GamePage';
 import socket from '../Socket';
 import { useContext } from 'react';
 
-export default function Player({
-    playerId,
-    playerName,
-    style,
-    childRef,
-    // isDead,
-    // isHoverable,
-    // hasVoted,
-    // isClicked,
-    // onClick,
-}) {
-    // TODO this is a lot of rerenders
-    // const { state: generalState } = useContext(GeneralContext);
-    // const votingContext = useContext(VotingContext);
-
-    // console.log(votingContext);
+export default function Player({ playerId, playerName, style, childRef }) {
     const { state: gameState } = useContext(GameContext);
-    // console.log(gameState);
 
     const isDead = !gameState.alivePlayers.includes(playerName);
 
     const isHoverable =
-        !!gameState.votingState.type &&
-        gameState.votingState.votablePlayers.includes(playerName) &&
-        !isDead;
+        !!gameState.votingState.type && gameState.votingState.votablePlayers.includes(playerName) && !isDead;
     const hasVoted = gameState.votingState.playersWhoVoted.includes(playerName);
     const isClicked = !!gameState.votingState.vote;
 
@@ -69,12 +51,7 @@ export default function Player({
     }
 
     return (
-        <div
-            className={playerStyle}
-            style={style}
-            ref={childRef}
-            onClick={validateOnClick(onClick)}
-        >
+        <div className={playerStyle} style={style} ref={childRef} onClick={validateOnClick(onClick)}>
             <div> {playerName} </div>
         </div>
     );

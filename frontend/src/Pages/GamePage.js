@@ -24,13 +24,5 @@ export default function GamePage() {
         default:
             throw new Error('Invalid Game Page screen state');
     }
-    return (
-        <GameContext.Provider value={{ state }}>
-            {/* <VotingContext.Provider
-                value={{ state: votingState, dispatch: votingDispatch }}
-            > */}
-            {component}
-            {/* </VotingContext.Provider> */}
-        </GameContext.Provider>
-    );
+    return <GameContext.Provider value={{ state }}>{component}</GameContext.Provider>;
 }

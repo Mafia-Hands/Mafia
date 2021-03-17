@@ -57,9 +57,7 @@ const reducer = (state, action) => {
                 ...state,
                 phase: 'night-end',
                 status: action.status,
-                alivePlayers: state.alivePlayers.filter(
-                    (p) => p !== action.playerKilled
-                ),
+                alivePlayers: state.alivePlayers.filter((p) => p !== action.playerKilled),
                 votingState: {
                     ...initialState.votingState,
                 },
@@ -81,7 +79,7 @@ const reducer = (state, action) => {
                 },
             };
         }
-        // Look into this
+
         case 'discussion-end': {
             return {
                 ...state,
@@ -113,9 +111,7 @@ const reducer = (state, action) => {
                 ...state,
                 phase: 'trial-start',
                 status: action.status,
-                alivePlayers: state.alivePlayers.filter(
-                    (p) => p !== action.playerKilled
-                ),
+                alivePlayers: state.alivePlayers.filter((p) => p !== action.playerKilled),
                 votingState: {
                     ...initialState.votingState,
                 },
@@ -150,9 +146,7 @@ const reducer = (state, action) => {
         }
 
         default:
-            throw new Error(
-                `Invalid Game State reducer action: ${action.type}`
-            );
+            throw new Error(`Invalid Game State reducer action: ${action.type}`);
     }
 };
 
@@ -166,8 +160,7 @@ export default function useGameState() {
      */
     useEffect(() => {
         const { role } = generalState;
-        const extraRoleState =
-            role === 'detective' ? { checkedPlayers: [] } : {};
+        const extraRoleState = role === 'detective' ? { checkedPlayers: [] } : {};
 
         dispatch({
             type: 'init',
@@ -184,9 +177,7 @@ export default function useGameState() {
             const status = nightTimeStatus[role];
 
             const votablePlayers = {
-                mafia: state.alivePlayers.filter(
-                    (p) => p !== generalState.nickname
-                ),
+                mafia: state.alivePlayers.filter((p) => p !== generalState.nickname),
                 detective: state.alivePlayers.filter(
                     (p) =>
                         p !== generalState.nickname &&
@@ -217,9 +208,7 @@ export default function useGameState() {
             dispatch({
                 type: 'day-start',
                 status: 'Please vote for someone',
-                votablePlayers: state.alivePlayers.filter(
-                    (p) => p !== generalState.nickname
-                ),
+                votablePlayers: state.alivePlayers.filter((p) => p !== generalState.nickname),
                 timeToVote,
             });
         }
@@ -228,18 +217,14 @@ export default function useGameState() {
             dispatch({
                 type: 'discussion-end',
                 status: constructPlayersOnTrialStatus(playersOnTrial),
-                votablePlayers: !playersOnTrial.includes(generalState.nickname)
-                    ? playersOnTrial
-                    : [],
+                votablePlayers: !playersOnTrial.includes(generalState.nickname) ? playersOnTrial : [],
             });
         }
 
         function onTrialStart({ timeToVote }) {
             dispatch({
                 type: 'trial-start',
-                status: state.votingState.votablePlayers.length
-                    ? 'Please vote for someone'
-                    : 'You are on trial',
+                status: state.votingState.votablePlayers.length ? 'Please vote for someone' : 'You are on trial',
                 timeToVote,
             });
         }

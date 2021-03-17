@@ -49,11 +49,7 @@ export default function Table() {
      * this used the parametric equations of a ellipse (i.e. the round table)
      *
      */
-    function getCoordinatesFromAngleAroundEllipse(
-        angleDegrees,
-        xRadius,
-        yRadius
-    ) {
+    function getCoordinatesFromAngleAroundEllipse(angleDegrees, xRadius, yRadius) {
         const rads = ((angleDegrees + 90) * Math.PI) / 180;
         const x = xRadius * Math.cos(rads) + xRadius;
         const y = yRadius * Math.sin(rads) + yRadius;
@@ -130,9 +126,7 @@ export default function Table() {
                 {playerCoords.map((p) => {
                     const { playerId, top, left } = p;
 
-                    const { name: playerName } = playerStates.find(
-                        (p) => p.playerId === playerId
-                    );
+                    const { name: playerName } = playerStates.find((p) => p.playerId === playerId);
 
                     return (
                         <Player
@@ -141,7 +135,6 @@ export default function Table() {
                             playerName={playerName}
                             childRef={playerRef}
                             style={{ top, left, position: 'absolute' }}
-                            // onClick={(e) => console.log(e)}
                         />
                     );
                 })}

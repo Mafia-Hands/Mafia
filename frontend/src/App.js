@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-// import PlayScreen from './Pages/PlayScreen';
-// import Home from './Pages/Home';
+
 import HomePage from './Pages/HomePage';
 import GamePage from './Pages/GamePage';
 import NewGameScreen from './Pages/NewGameScreen';
@@ -37,13 +36,9 @@ function App() {
             <Router>
                 <Switch>
                     <Route exact path="/">
-                        {/* <Home /> */}
                         {component}
                     </Route>
-                    <Route path="/play">
-                        {/* <PlayScreen /> */}
-                        {component}
-                    </Route>
+                    <Route path="/play">{component}</Route>
                 </Switch>
             </Router>
         </GeneralContext.Provider>
