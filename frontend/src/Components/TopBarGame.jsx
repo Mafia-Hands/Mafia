@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import HelpIcon from '@material-ui/icons/Help';
 import { Button, IconButton } from '@material-ui/core';
@@ -6,6 +6,7 @@ import styles from '../Styles/TopBarGame.module.css';
 import ModalMUI from '../Modal/ModalMUI';
 import SettingDialog from '../Pages/SettingDialog';
 import TopBarSettings from './TopBarSettings';
+import { GeneralContext } from '../App';
 import RolesAndRules from './RolesAndRules';
 
 /**
@@ -14,10 +15,12 @@ import RolesAndRules from './RolesAndRules';
  * @param showRole true/false OPTIONAL prop that will render Role if true
  */
 
-const TopBarGame = ({ userDetails, showTimer, showRole }) => {
+const TopBarGame = ({ showTimer, showRole }) => {
+    const { state } = useContext(GeneralContext);
     const [open, setOpen] = useState(false);
     const [openInfo, setOpenInfo] = useState(false);
-    const [userName, role] = userDetails;
+    const userName = state.nickname;
+    const role = state.role;
     return (
         <div className={styles.container}>
             <p className={styles.userName}>{`Name: ${userName}`}</p>

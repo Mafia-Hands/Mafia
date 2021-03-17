@@ -2,11 +2,11 @@ import { React } from 'react';
 import TopBarSettings from '../Components/TopBarSettings';
 import Player from '../Components/Player';
 
-const EntryScreen = ({ userName, role }) => {
+const GameOverPage = ({ userName, role }) => {
     return (
         <div>
             <TopBarSettings
-                currentScreen={`You are a ${role}`}
+                currentScreen={`WINNER are a ${role}`}
                 showSettings={true}
             />
             <div>
@@ -18,4 +18,4 @@ const EntryScreen = ({ userName, role }) => {
     );
 };
 
-export default EntryScreen;
+export default GameOverPage;
