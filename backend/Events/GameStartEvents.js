@@ -6,16 +6,17 @@ const config = require('../config.json');
 /**
  * Event handler of `start-game`
  * The game has started! Broadcast individual roles to everyone.
+ * @param {any} io
  * @param {any} socket
  * @param {MafiaGame} mafiaGame
  */
-function startGame(socket, mafiaGame) {
+function startGame(io, socket, mafiaGame) {
     socket.on('start-game', () => {
         const room = mafiaGame.gameRoomsDict[socket.player.roomID];
         const { players } = room;
         const availableRoles = getAvailableRolesToAssign(players.length);
 
-        broadcastRandomRoleToEachPlayer(socket, players, availableRoles);
+        broadcastRandomRoleToEachPlayer(io, players, availableRoles);
     });
 }
 
@@ -25,7 +26,7 @@ function startGame(socket, mafiaGame) {
  * @param {Array} players
  * @param {Array} availableRoles
  */
-function broadcastRandomRoleToEachPlayer(socket, players, availableRoles) {
+function broadcastRandomRoleToEachPlayer(io, players, availableRoles) {
     const playersDeepCopy = JSON.parse(JSON.stringify(players));
 
     while (playersDeepCopy.length > 0) {
@@ -37,7 +38,7 @@ function broadcastRandomRoleToEachPlayer(socket, players, availableRoles) {
         const player = playersDeepCopy[randomPlayerIndex];
 
         player.role = role;
-        socket.broadcast.to(player.socketID).emit('game-start', new GameStartDTO(role));
+        io.to(player.socketID).emit('game-start', new GameStartDTO(role));
 
         // Delete the player and the role which was just allocated
         availableRoles.splice(randomRoleIndex, 1);
@@ -89,6 +90,6 @@ function addRoleToArray(roleArray, role, occuranceCount) {
  * @param {any} socket
  * @param {MafiaGame} mafiaGame
  */
-module.exports = function (socket, mafiaGame) {
-    startGame(socket, mafiaGame);
+module.exports = function (io, socket, mafiaGame) {
+    startGame(io, socket, mafiaGame);
 };
