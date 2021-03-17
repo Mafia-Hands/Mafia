@@ -4,9 +4,7 @@ const MafiaGame = require('../domain/MafiaGame');
 const Room = require('../domain/Room');
 
 describe('Domain Model tests', () => {
-    console.log("File 1")
     test('room domain max model object', (done) => {
-        console.log("File 1.1")
         const player1 = new Player('00001', 'room1', 'nickname1');
         const player2 = new Player('00002', 'room1', 'nickname2');
         const player3 = new Player('00003', 'room1', 'nickname3');

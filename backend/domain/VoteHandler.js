@@ -34,9 +34,9 @@ class VoteHandler {
             if (chosenPlayer == null) {
                 voteTally.null++;
             } else if (voteTally.hasOwnProperty(chosenPlayer)) {
-                voteTally[chosenPlayer]++;
+                voteTally[chosenPlayer.nickname]++;
             } else {
-                voteTally[chosenPlayer] = 1;
+                voteTally[chosenPlayer.nickname] = 1;
             }
         }
 

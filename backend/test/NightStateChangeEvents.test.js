@@ -6,7 +6,6 @@ const roles = require('../domain/Enum/Role');
 
 describe('start-night unit tests', () => {
     const port = process.env.PORT || config.local_port;
-    console.log("File 3")
 
     roomElements = MafiaGameMock.createMafiaGameWithOnePlayerMock(port);
 
@@ -35,7 +34,6 @@ describe('start-night unit tests', () => {
     });
 
     test('start-night successful call, no one is killed', (done) => {
-        console.log("File 3.1")
         clientSocket.on('night-start', (nightStartDTO) => {
             expect(nightStartDTO.timeToVote).toBeDefined();
         });
