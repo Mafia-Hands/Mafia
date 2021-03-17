@@ -1,13 +1,11 @@
 import './App.css';
 // import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router';
-import PlayScreen from './Pages/PlayScreen';
-import Home from './Pages/Home';
+
 import React, { useState, useEffect } from 'react';
 import HomeScreen from './Components/HomeScreen';
 
 import { Switch, Route, useHistory } from 'react-router';
 
-import HomePage from './Pages/HomePage';
 import GamePage from './Pages/GamePage';
 import NewGameScreen from './Pages/NewGameScreen';
 import useLobbyState from './Hooks/useLobbyState';
@@ -53,9 +51,7 @@ function App() {
             <Switch>
                 {allowIn && (
                     <Route exact path="/:lobbyId">
-                        {/* {(state.screen = 'lobby')} */}
                         {component}
-                        {/* <NewGameScreen /> */}
                     </Route>
                 )}
                 <Route path="/*">{component}</Route>
