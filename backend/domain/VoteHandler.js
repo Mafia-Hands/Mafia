@@ -10,8 +10,8 @@ class VoteHandler {
     }
 
     getMafiaVotedPlayer() {
-        mafiaChosenPlayer = this.getVotedPlayer(this.mafiaVoteMap);
-        if (mafiaChosenPlayer === medicChosenPlayer) {
+        const mafiaChosenPlayer = this.getVotedPlayer(this.mafiaVoteMap);
+        if (mafiaChosenPlayer === this.medicChosenPlayer) {
             return null;
         } else {
             return mafiaChosenPlayer;
@@ -35,7 +35,7 @@ class VoteHandler {
 
         // Get the player with the most votes. In the event of a tie, we just select the first player to get that number of votes
         let maxVotes = 0;
-        let votedPlayer;
+        let votedPlayer = null;
         for (const [player, numVotes] of Object.entries(voteTally)) {
             if (numVotes > maxVotes) {
                 maxVotes = numVotes;
@@ -43,8 +43,9 @@ class VoteHandler {
             }
         }
 
-        if (votedPlayer === undefined) {
+        if (votedPlayer === null) {
             // TODO: should discuss what to do in this case, probably just return random player
+            return votedPlayer;
         } else {
             return votedPlayer;
         }
