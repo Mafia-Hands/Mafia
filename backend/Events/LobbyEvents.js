@@ -29,14 +29,6 @@ function createLobby(io, socket, mafiaGame) {
         // Send room ID back to host.
         io.in(roomID).emit('lobby-code', new LobbyCodeDTO(roomID));
     });
-
-    // host has clicked start game
-    socket.on('start-game', () => {
-        const { roomID } = socket.player;
-
-        // sending to all clients in "game" room, including sender
-        io.in(roomID).emit('game-start');
-    });
 }
 
 /**
@@ -49,8 +41,13 @@ function createLobby(io, socket, mafiaGame) {
 function joinLobby(io, socket, mafiaGame) {
     //on join lobby message event will call join lobby event handler
     socket.on('join-lobby', (joinLobbyDTO) => {
-        
         const room = mafiaGame.gameRoomsDict[joinLobbyDTO.roomCode];
+        if (room === undefined){
+            // TODO: Handle non-existent room after MVP is done.
+            console.log("Lobby " + joinLobbyDTO.roomCode + " doesn't exist")
+            return;
+        }
+
         let player = new Player(
             socket.id,
             joinLobbyDTO.roomCode,
@@ -67,11 +64,8 @@ function joinLobby(io, socket, mafiaGame) {
             'lobby-join',
             new LobbyJoinDTO(room.players.map((player) => player.nickname))
         );
-        if (room.players.length == 6) {
-            const host = room.players.find((element) => {
-                element.isHost == true;
-            });
-            io.to(host.socketID).emit('lobby-ready');
+        if (room.players.length === 6) {
+            io.to(room.host.socketID).emit('lobby-ready');
         }
     });
 }

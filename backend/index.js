@@ -37,7 +37,7 @@ io.on('connection', (socket) => {
     loadVoteEvents(io, socket, mafiaGame);
 
     // this function catches any game starts event sent from client
-    loadGameStartEvents(socket, mafiaGame);
+    loadGameStartEvents(io, socket, mafiaGame);
 
     // this function catches any events related to mafia/medic/detective votes during the night
     loadNightTimeEvents(io, socket, mafiaGame);
