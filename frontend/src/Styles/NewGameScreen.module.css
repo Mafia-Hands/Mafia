@@ -1,18 +1,30 @@
 .container {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    padding: 20px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100px 360px 1fr;
+    grid-template-areas: 
+        "top-bar top-bar"
+        "players game-settings"
+        "chat game-settings"
+        "chat start-button";
   }
 
-.gameSettingsContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    padding: 20px;
+.topBar {
+    grid-area: top-bar;
 }
 
-.startGameButton {
-    font-size: 24px;
-    padding: 20px;
+.chatbox {
+    grid-area: chat;
+}
+
+.playerNames {
+    grid-area: players;
+}
+
+.lobbySettings {
+    grid-area: game-settings;
+}
+
+.startButton {
+    grid-area: start-button;
 }

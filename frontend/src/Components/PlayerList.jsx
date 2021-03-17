@@ -1,21 +1,38 @@
 import { React, useContext } from 'react';
-import styles from '../Styles/PlayerList.module.css';
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import { Card, CardContent, CardHeader, Typography } from '@material-ui/core';
 import { GeneralContext } from '../App';
-/**
- * @param playerNames MANDATORY prop: a list of strings (player names)
- */
-const PlayerList = ({ playerNames }) => {
+
+const useStyles = makeStyles({
+    root: {
+        display: 'grid',
+        gridGap: '0px',
+        paddingBottom: '0px',
+    },
+    title: {
+        fontSize: 14,
+    },
+});
+
+const PlayerList = () => {
     const { state } = useContext(GeneralContext);
+    const classes = useStyles();
 
     return (
-        <div className={styles.container}>
-            <h3 className={styles.playerListHeader}>Player List</h3>
-            <ul className={styles.playerList}>
-                {state.players.map((playerName, index) => (
-                    <li key={index}>{playerName}</li>
-                ))}
-            </ul>
-        </div>
+        <Card className={classes.root} variant="outlined">
+            <CardHeader title="Player List"></CardHeader>
+            <CardContent className={classes.content}>
+                <List>
+                    {state.players.map((playerName, index) => (
+                        <ListItem key={index}>
+                            <Typography>{playerName}</Typography>
+                        </ListItem>
+                    ))}
+                </List>
+            </CardContent>
+        </Card>
     );
 };
 
