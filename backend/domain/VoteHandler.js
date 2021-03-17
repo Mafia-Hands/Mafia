@@ -6,6 +6,7 @@ class VoteHandler {
     constructor() {
         this.daytimeVoteMap = {};
         this.mafiaVoteMap = {};
+        this.trialVoteMap = {};
         this.medicChosenPlayer = null;
     }
 
@@ -13,23 +14,30 @@ class VoteHandler {
         const mafiaChosenPlayer = this.getVotedPlayer(this.mafiaVoteMap);
         if (mafiaChosenPlayer === this.medicChosenPlayer) {
             return null;
-        } else {
-            return mafiaChosenPlayer;
         }
+        return mafiaChosenPlayer;
     }
 
     getDaytimeVotedPlayer() {
         return this.getVotedPlayer(this.daytimeVoteMap);
     }
 
+    getTrialVotedPlayer() {
+        return this.getVotedPlayer(this.trialVoteMap);
+    }
+
     getVotedPlayer(voteMap) {
         // Generate map of players who have been voted for, and the number of votes they have.
-        let voteTally = {};
+        const voteTally = {};
+        const abstainVote = null;
+        voteTally[abstainVote] = 0;
         for (const [voter, chosenPlayer] of Object.entries(voteMap)) {
-            if (voteTally.hasOwnProperty(chosenPlayer)) {
-                voteTally[chosenPlayer]++;
+            if (chosenPlayer == null) {
+                voteTally[abstainVote]++;
+            } else if (voteTally.hasOwnProperty(chosenPlayer)) {
+                voteTally[chosenPlayer.nickname]++;
             } else {
-                voteTally[chosenPlayer] = 1;
+                voteTally[chosenPlayer.nickname] = 1;
             }
         }
 
@@ -46,9 +54,15 @@ class VoteHandler {
         if (votedPlayer === null) {
             // TODO: should discuss what to do in this case, probably just return random player
             return votedPlayer;
-        } else {
-            return votedPlayer;
         }
+        return votedPlayer;
+    }
+
+    resetVotes() {
+        this.daytimeVoteMap = {};
+        this.mafiaVoteMap = {};
+        this.trialVoteMap = {};
+        this.medicChosenPlayer = null;
     }
 }
 

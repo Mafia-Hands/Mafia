@@ -12,7 +12,7 @@ describe('start-night unit tests', () => {
     // Create a new client, and connect it to the server via a socket
     let clientSocket;
     beforeEach((done) => {
-        clientSocket = new Client(`http://localhost:` + port);
+        clientSocket = new Client(`http://localhost:${port}`);
         clientSocket.on('connect', done);
 
         jest.useFakeTimers();
@@ -20,8 +20,8 @@ describe('start-night unit tests', () => {
 
     // Disconnect each socket connected to the server
     afterEach((done) => {
-        const sockets = roomElements.io.sockets.sockets;
-        sockets.forEach(function (socket, key) {
+        const { sockets } = roomElements.io.sockets;
+        sockets.forEach((socket, key) => {
             socket.disconnect(true);
         });
 

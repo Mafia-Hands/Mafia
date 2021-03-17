@@ -102,15 +102,16 @@ describe('Create-lobby event test', () => {
         // Request to create a new lobby
         clientSocket.emit('create-lobby', createLobbyDTO);
     });
+
     let lobbyCode;
     test('join lobby', (done) => {
-        let createLobbyDTO = new CreateLobbyDTO('Anmol');
+        const createLobbyDTO = new CreateLobbyDTO('Anmol');
 
         clientSocket.on('lobby-code', (lobbyCodeDTO) => {
             expect(lobbyCodeDTO.code).toBeDefined();
             lobbyCode = lobbyCodeDTO.code;
 
-            let joinLobbyDTO = new JoinLobbyDTO('Justin', lobbyCode);
+            const joinLobbyDTO = new JoinLobbyDTO('Justin', lobbyCode);
 
             // Subscribe to lobby-join
             clientSocket.on('lobby-join', (lobbyJoinDTO) => {
@@ -128,7 +129,7 @@ describe('Create-lobby event test', () => {
     });
 
     test('join lobby 2', (done) => {
-        let joinLobbyDTO = new JoinLobbyDTO('Homer', lobbyCode);
+        const joinLobbyDTO = new JoinLobbyDTO('Homer', lobbyCode);
 
         // Subscribe to lobby-join
         clientSocket.on('lobby-join', (lobbyJoinDTO) => {
@@ -142,13 +143,13 @@ describe('Create-lobby event test', () => {
     });
 
     test('day vote test', (done) => {
-        let createLobbyDTO = new CreateLobbyDTO('Anmol');
+        const createLobbyDTO = new CreateLobbyDTO('Anmol');
 
         clientSocket.on('lobby-code', (lobbyCodeDTO) => {
             expect(lobbyCodeDTO.code).toBeDefined();
             lobbyCode = lobbyCodeDTO.code;
 
-            let joinLobbyDTO = new JoinLobbyDTO('Justin', lobbyCode);
+            const joinLobbyDTO = new JoinLobbyDTO('Justin', lobbyCode);
 
             // Subscribe to lobby-join
             clientSocket.on('lobby-join', (lobbyJoinDTO) => {
@@ -157,33 +158,33 @@ describe('Create-lobby event test', () => {
                 done();
             });
 
-            // Request to join a lobby
-            clientSocket.emit('join-lobby', joinLobbyDTO);
-
-            //vote test begins
-            let voteForDTO = new VoteForDTO('Justin');
-            clientSocket.emit('day-vote', voteForDTO);
-
             // Subscribe to day-vote-update
             clientSocket.on('day-vote-update', (listVoteDTO) => {
-                //Justin vote for Justin because nickname of clientSocket is Justin since thats the last joined player
+                // Justin vote for Justin because nickname of clientSocket is Justin since thats the last joined player
                 expect(listVoteDTO).toEqual({ voteMap: { Justin: 'Justin' } });
                 done();
             });
+
+            // Request to join a lobby
+            clientSocket.emit('join-lobby', joinLobbyDTO);
+
+            // vote test begins
+            const voteForDTO = new VoteForDTO('Justin');
+            clientSocket.emit('day-vote', voteForDTO);
         });
 
         // Request to create a new lobby
         clientSocket.emit('create-lobby', createLobbyDTO);
     });
 
-    test('trail vote test', (done) => {
-        let createLobbyDTO = new CreateLobbyDTO('Anmol');
+    test('trial vote test', (done) => {
+        const createLobbyDTO = new CreateLobbyDTO('Anmol');
 
         clientSocket.on('lobby-code', (lobbyCodeDTO) => {
             expect(lobbyCodeDTO.code).toBeDefined();
-            lobbyCode = lobbyCodeDTO.code;
+            const lobbyCode = lobbyCodeDTO.code;
 
-            let joinLobbyDTO = new JoinLobbyDTO('Justin', lobbyCode);
+            const joinLobbyDTO = new JoinLobbyDTO('Justin', lobbyCode);
 
             // Subscribe to lobby-join
             clientSocket.on('lobby-join', (lobbyJoinDTO) => {
@@ -195,13 +196,13 @@ describe('Create-lobby event test', () => {
             // Request to join a lobby
             clientSocket.emit('join-lobby', joinLobbyDTO);
 
-            //vote test begins
-            let voteForDTO = new VoteForDTO('Justin');
+            // vote test begins
+            const voteForDTO = new VoteForDTO('Justin');
             clientSocket.emit('trial-vote', voteForDTO);
 
             // Subscribe to day-vote-update
             clientSocket.on('trial-vote-update', (listVoteDTO) => {
-                //Justin vote for Justin because nickname of clientSocket is Justin since thats the last joined player
+                // Justin vote for Justin because nickname of clientSocket is Justin since thats the last joined player
                 expect(listVoteDTO).toEqual({ voteMap: { Justin: 'Justin' } });
                 done();
             });
