@@ -40,14 +40,11 @@ class Room {
     getPlayerByNickname(nickname) {
         let returnedPlayer;
 
-    this.players.forEach(function(player) {
-        
-            if (player.nickname == nickname){
+        this.players.forEach((player) => {
+            if (player.nickname === nickname) {
                 returnedPlayer = player;
             }
-            
-         })
-
+        });
 
         return returnedPlayer;
     }
@@ -55,11 +52,11 @@ class Room {
     getPlayersByRole(role) {
         const playersOfTheRole = [];
 
-        this.players.forEach(function(player) {
-            if (player.role === role){
+        this.players.forEach((player) => {
+            if (player.role === role) {
                 playersOfTheRole.push(player);
-        }
-    })
+            }
+        });
 
         return playersOfTheRole;
     }

@@ -62,4 +62,3 @@ function endNight(io, socket, mafiaGame) {
 module.exports.eventHandlersRegistration = function (io, socket, mafiaGame) {
     startNight(io, socket, mafiaGame);
 };
-

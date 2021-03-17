@@ -6,7 +6,6 @@ const config = require('../config.json');
 const SocketIOServer = require('../index');
 
 describe('Create-lobby event test', () => {
-    console.log("File 2")
     let clientSocket;
     const port = process.env.PORT || config.local_port;
 
@@ -33,7 +32,6 @@ describe('Create-lobby event test', () => {
     });
 
     test('Simple create lobby events', (done) => {
-        console.log("File 2.1")
         const createLobbyDTO = new CreateLobbyDTO('Anmol');
 
         // Subscribe to lobby-code
@@ -159,7 +157,7 @@ describe('Create-lobby event test', () => {
                 expect(lobbyJoinDTO.playerNames).toEqual(['Anmol', 'Justin']);
                 done();
             });
-            
+
             // Subscribe to day-vote-update
             clientSocket.on('day-vote-update', (listVoteDTO) => {
                 // Justin vote for Justin because nickname of clientSocket is Justin since thats the last joined player
@@ -173,7 +171,6 @@ describe('Create-lobby event test', () => {
             // vote test begins
             const voteForDTO = new VoteForDTO('Justin');
             clientSocket.emit('day-vote', voteForDTO);
-
         });
 
         // Request to create a new lobby
@@ -205,7 +202,6 @@ describe('Create-lobby event test', () => {
 
             // Subscribe to day-vote-update
             clientSocket.on('trial-vote-update', (listVoteDTO) => {
-
                 // Justin vote for Justin because nickname of clientSocket is Justin since thats the last joined player
                 expect(listVoteDTO).toEqual({ voteMap: { Justin: 'Justin' } });
                 done();

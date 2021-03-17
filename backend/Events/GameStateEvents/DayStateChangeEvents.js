@@ -23,7 +23,7 @@ function startDay(io, socket, mafiaGame) {
 
         io.in(roomID).emit('day-start', new DayStartDTO(TIME_TO_VOTE));
 
-        setTimeout(endDiscussion(io, socket, mafiaGame), TIME_TO_VOTE);
+        setTimeout(() => endDiscussion(io, socket, mafiaGame), TIME_TO_VOTE);
     });
 }
 
@@ -41,7 +41,6 @@ function endDiscussion(io, socket, mafiaGame) {
     const playerChosen = room.voteHandler.getDaytimeVotedPlayer();
 
     io.in(roomID).emit('discussion-end', new DiscussionEndDTO(playerChosen));
-
 }
 
 /**

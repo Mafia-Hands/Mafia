@@ -15,7 +15,7 @@ function voteDay(io, socket, mafiaGame) {
         const room = mafiaGame.gameRoomsDict[socket.player.roomID];
         const voter = socket.player;
         const votee = voteForDTO.voteFor;
-        room.voteHandler.daytimeVoteMap[voter.nickname] = (room.getPlayerByNickname(votee)).nickname;
+        room.voteHandler.daytimeVoteMap[voter.nickname] = room.getPlayerByNickname(votee).nickname;
 
         io.in(socket.player.roomID).emit('day-vote-update', new ListVoteDTO(room.voteHandler.daytimeVoteMap));
     });
