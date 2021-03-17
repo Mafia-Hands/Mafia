@@ -1,7 +1,7 @@
 class GameStartDTO {
-  constructor(role) {
-    this.role = role;
-  }
+    constructor(role) {
+        this.role = role;
+    }
 }
 
 module.exports = GameStartDTO;
