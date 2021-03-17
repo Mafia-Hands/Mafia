@@ -48,7 +48,7 @@ io.on('connection', (socket) => {
 
 // Start the server on our predetermined port number.
 server.listen(port, () => {
-    console.log('Listening on *:' + port);
+    console.log(`Listening on *:${port}`);
 });
 
 // Export the server for testing

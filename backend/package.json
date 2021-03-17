@@ -6,9 +6,10 @@
     "scripts": {
         "start": "node index.js",
         "live": "nodemon index.js",
-        "test": "jest --maxWorkers=1",
+        "test": "jest --maxWorkers=1 --detectOpenHandles",
         "lint": "eslint ./",
-        "pretty-quick": "pretty-quick ./"
+        "pretty-quick": "pretty-quick ./",
+        "fix-lint": "eslint ./ --fix"
     },
     "dependencies": {
         "express": "^4.17.1",

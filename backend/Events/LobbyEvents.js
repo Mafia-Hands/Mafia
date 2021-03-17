@@ -39,31 +39,22 @@ function createLobby(io, socket, mafiaGame) {
  * @param {MafiaGame} mafiaGame
  */
 function joinLobby(io, socket, mafiaGame) {
-    //on join lobby message event will call join lobby event handler
+    // on join lobby message event will call join lobby event handler
     socket.on('join-lobby', (joinLobbyDTO) => {
         const room = mafiaGame.gameRoomsDict[joinLobbyDTO.roomCode];
-        if (room === undefined){
+        if (room === undefined) {
             // TODO: Handle non-existent room after MVP is done.
-            console.log("Lobby " + joinLobbyDTO.roomCode + " doesn't exist")
+            console.log('Lobby ' + joinLobbyDTO.roomCode + " doesn't exist");
             return;
         }
 
-        let player = new Player(
-            socket.id,
-            joinLobbyDTO.roomCode,
-            joinLobbyDTO.nickname,
-            null,
-            false
-        );
+        let player = new Player(socket.id, joinLobbyDTO.roomCode, joinLobbyDTO.nickname, null, false);
         room.addPlayer(player);
         socket.player = player;
 
-        socket.join(socket.player.roomID);
+        socket.join(player.roomID);
 
-        io.in(socket.player.roomID).emit(
-            'lobby-join',
-            new LobbyJoinDTO(room.players.map((player) => player.nickname))
-        );
+        io.in(socket.player.roomID).emit('lobby-join', new LobbyJoinDTO(room.players.map((player) => player.nickname)));
         if (room.players.length === 6) {
             io.to(room.host.socketID).emit('lobby-ready');
         }
