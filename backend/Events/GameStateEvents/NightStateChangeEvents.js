@@ -51,6 +51,7 @@ function endNight(io, socket, mafiaGame) {
     } else {
         DayStateChangeEvents.eventHandlersRegistration(io, socket, mafiaGame);
     }
+    room.voteHandler.resetVotes();
 }
 
 /**

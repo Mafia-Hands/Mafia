@@ -57,12 +57,9 @@ class Room {
                 playersOfTheRole.push(player);
             }
         });
-<<<<<<< HEAD
 
         return playersOfTheRole;
     }
-=======
->>>>>>> fec4a8b9900227137678ae73e346a184a781a6d9
 
     getWinningPlayers(role) {
         const playersOfTheRole = [];

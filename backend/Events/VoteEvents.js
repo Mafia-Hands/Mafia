@@ -14,7 +14,7 @@ function voteDay(io, socket, mafiaGame) {
     socket.on('day-vote', (voteForDTO) => {
         const room = mafiaGame.gameRoomsDict[socket.player.roomID];
         const voter = socket.player;
-        const votee = voteForDTO.voteFor;
+        const votee = voteForDTO.votingFor;
         room.voteHandler.daytimeVoteMap[voter.nickname] = room.getPlayerByNickname(votee).nickname;
 
         io.in(socket.player.roomID).emit('day-vote-update', new ListVoteDTO(room.voteHandler.daytimeVoteMap));
@@ -33,7 +33,7 @@ function voteTrial(io, socket, mafiaGame) {
     socket.on('trial-vote', (voteForDTO) => {
         const room = mafiaGame.gameRoomsDict[socket.player.roomID];
         const voter = socket.player;
-        const votee = voteForDTO.voteFor;
+        const votee = voteForDTO.votingFor;
         room.voteHandler.trialVoteMap[voter.nickname] = room.getPlayerByNickname(votee).nickname;
         io.in(socket.player.roomID).emit('trial-vote-update', new ListVoteDTO(room.voteHandler.trialVoteMap));
     });
