@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HomePage from './Pages/HomePage';
 import GamePage from './Pages/GamePage';
 import NewGameScreen from './Pages/NewGameScreen';
-import SettingDialog from './Pages/SettingDialog';
 import useLobbyState from './Hooks/useLobbyState';
 
 export const GeneralContext = React.createContext();
