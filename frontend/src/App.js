@@ -28,7 +28,7 @@ function App() {
     useEffect(() => {
         history.push(lobbyId);
         state.screen = 'lobby';
-    }, [lobbyId]);
+    });
 
     let component;
 
