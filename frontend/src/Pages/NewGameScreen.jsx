@@ -18,14 +18,9 @@ const NewGameScreen = () => {
             <div className={styles.gameSettingsContainer}>
                 <PlayerList />
                 <LobbySettings />
-                <Chatbox
-                    messageList={[
-                        'hi',
-                        'sup',
-                        "these are dummy messages, chat isn't currently implemented",
-                    ]}
-                />
+                <Chatbox messageList={['hi', 'sup', "these are dummy messages, chat isn't currently implemented"]} />
                 <button
+                    id="start-game"
                     className={styles.startGameButton}
                     disabled={!state.lobbyReady}
                     onClick={startGame}

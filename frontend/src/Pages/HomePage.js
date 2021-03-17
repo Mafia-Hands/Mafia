@@ -15,7 +15,7 @@ export default function HomePage() {
     };
 
     const joinLobby = () => {
-        dispatch({ type: 'create-lobby', nickname, code });
+        dispatch({ type: 'join-lobby', nickname, code });
 
         socket.emit('join-lobby', { roomCode: code, nickname });
     };
@@ -23,13 +23,19 @@ export default function HomePage() {
     return (
         <div>
             HOME <br />
-            Nickname <input type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} />
+            Nickname <input id="nickname" type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} />
             <br />
             Code
-            <input type="text" value={code} onChange={(e) => setCode(e.target.value)} />
+            <input id="room-code" type="text" value={code} onChange={(e) => setCode(e.target.value)} />
             <br />
-            <button onClick={joinLobby}> Join </button>
-            <button onClick={createLobby}> createLobby </button>
+            <button id="join-lobby" onClick={joinLobby}>
+                {' '}
+                Join{' '}
+            </button>
+            <button id="create-lobby" onClick={createLobby}>
+                {' '}
+                createLobby{' '}
+            </button>
         </div>
     );
 }

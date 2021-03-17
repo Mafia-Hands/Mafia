@@ -1,6 +1,6 @@
 class DiscussionEndDTO {
-    constructor(playersOnTrial) {
-        this.playersOnTrial = playersOnTrial;
+    constructor(playerOnTrial) {
+        this.playerOnTrial = playerOnTrial;
     }
 }
 

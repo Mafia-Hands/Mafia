@@ -51,7 +51,6 @@ class Room {
 
     getPlayersByRole(role) {
         const playersOfTheRole = [];
-
         this.players.forEach((player) => {
             if (player.role === role) {
                 playersOfTheRole.push(player);
@@ -62,7 +61,7 @@ class Room {
     }
 
     getWinningPlayers(role) {
-        const playersOfTheRole = [];
+        let playersOfTheRole = [];
         if (role === roles.CIVILIAN) {
             playersOfTheRole = [
                 ...this.getPlayersByRole(roles.CIVILIAN),
@@ -94,6 +93,8 @@ class Room {
     }
 
     getWinningRole() {
+        console.log('getting Winning Role');
+
         const numOfMafiaAlive = this.getPlayersByRole(roles.MAFIA).filter((player) => player.isAlive).length;
         const numOfJesterAlive = this.getPlayersByRole(roles.JESTER).filter((player) => player.isAlive).length;
         const numOfCiviliansAlive = [
@@ -101,6 +102,13 @@ class Room {
             ...this.getPlayersByRole(roles.MEDIC),
             ...this.getPlayersByRole(roles.DETECTIVE),
         ].filter((player) => player.isAlive).length;
+
+        console.log('------------Jester----------------');
+        console.log(numOfJesterAlive);
+        console.log('------------Mafia----------------');
+        console.log(numOfMafiaAlive);
+        console.log('------------Civilians----------------');
+        console.log(numOfCiviliansAlive);
 
         if (numOfMafiaAlive === 0) {
             return roles.CIVILIAN;

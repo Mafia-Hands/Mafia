@@ -187,6 +187,7 @@ export default function useGameState() {
                 ),
                 medic: state.alivePlayers,
                 civilian: [],
+                jester: [], // TODO CHANGED
             }[role];
 
             dispatch({
@@ -205,7 +206,7 @@ export default function useGameState() {
             });
 
             if (!isGameOver) {
-                generalState.isHost && setTimeout(() => socket.emit('start-day'), 2000);
+                generalState.isHost && setTimeout(() => socket.emit('start-day'), 2000); 
             }
         }
 
@@ -218,19 +219,19 @@ export default function useGameState() {
             });
         }
 
-        function onDiscussionEnd({ playersOnTrial }) {
-            if (playersOnTrial === null) {
+        function onDiscussionEnd({ playerOnTrial }) {
+            if (playerOnTrial === null) {
                 generalState.isHost && setTimeout(() => socket.emit('start-night'), 2000); // TODO CHANGED
                 return;
             }
 
             dispatch({
                 type: 'discussion-end',
-                status: constructPlayersOnTrialStatus(playersOnTrial),
-                votablePlayers: playersOnTrial !== generalState.nickname ? [playersOnTrial] : [],
+                status: constructPlayersOnTrialStatus(playerOnTrial),
+                votablePlayers: playerOnTrial !== generalState.nickname ? [playerOnTrial] : [],
             });
 
-            generalState.isHost && setTimeout(() => socket.emit('start-trial'), 2000);
+            generalState.isHost && setTimeout(() => socket.emit('start-trial'), 2000); // TODO CHANGED
         }
 
         function onTrialStart({ timeToVote }) {
@@ -253,6 +254,7 @@ export default function useGameState() {
         }
 
         function onGameOver({ winningRole, winners }) {
+            console.log(winningRole + ' ' + winners);
             dispatch({
                 type: 'game-over',
                 winningRole: winningRole.toLowerCase(),

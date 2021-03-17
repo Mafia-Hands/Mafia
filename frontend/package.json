@@ -24,8 +24,7 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "pretty-quick": "pretty-quick ./",
-        "eject": "react-scripts eject",
-        "lint": "eslint ./"
+        "eject": "react-scripts eject"
     },
     "eslintConfig": {
         "extends": [

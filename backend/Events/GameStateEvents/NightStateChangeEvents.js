@@ -36,6 +36,8 @@ function startNight(io, socket, mafiaGame) {
  * @param {MafiaGame} mafiaGame
  */
 function endNight(io, socket, mafiaGame) {
+    console.log('endNight Event started');
+
     const { roomID } = socket.player;
     const room = mafiaGame.gameRoomsDict[roomID];
 
@@ -45,9 +47,8 @@ function endNight(io, socket, mafiaGame) {
         room.getPlayerByNickname(playerKilled).setIsAlive(false);
     }
 
-    io.in(roomID).emit('night-end', new NightEndDTO(playerKilled));
-
     const winningRole = room.getWinningRole();
+
     if (winningRole !== null) {
         io.in(roomID).emit('night-end', new NightEndDTO(playerKilled, true));
         io.in(roomID).emit(
