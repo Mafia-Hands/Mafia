@@ -41,8 +41,13 @@ function createLobby(io, socket, mafiaGame) {
 function joinLobby(io, socket, mafiaGame) {
     //on join lobby message event will call join lobby event handler
     socket.on('join-lobby', (joinLobbyDTO) => {
-        
         const room = mafiaGame.gameRoomsDict[joinLobbyDTO.roomCode];
+        if (room === undefined){
+            // TODO: Handle non-existent room after MVP is done.
+            console.log("Lobby " + joinLobbyDTO.roomCode + " doesn't exist")
+            return;
+        }
+
         let player = new Player(
             socket.id,
             joinLobbyDTO.roomCode,
