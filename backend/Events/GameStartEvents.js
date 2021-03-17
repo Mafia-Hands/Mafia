@@ -64,7 +64,7 @@ function getAvailableRolesToAssign(numOfPlayers) {
     const numOfDetectives = Math.ceil(numOfPlayers / roleLogic.detective_divisor);
     const numOfMedics = Math.ceil(numOfPlayers / roleLogic.medic_divisor);
     const numOfJesters = Math.ceil(numOfPlayers / roleLogic.jester_divisor);
-    const numOfCivilians = Math.numOfPlayers - (numOfMafia + numOfDetectives + numOfMedics + numOfJesters);
+    const numOfCivilians = numOfPlayers - (numOfMafia + numOfDetectives + numOfMedics + numOfJesters);
 
     // Return an array of roles, with each role occuring once or more depending on the number of players
     // playing the game
