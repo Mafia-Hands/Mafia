@@ -5,7 +5,7 @@ import Home from './Pages/Home';
 import React, { useState, useEffect } from 'react';
 import HomeScreen from './Components/HomeScreen';
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router';
 
 import HomePage from './Pages/HomePage';
 import GamePage from './Pages/GamePage';
@@ -18,36 +18,25 @@ export const GeneralContext = React.createContext();
  * Main React Component
  */
 function App() {
-    // const [lobbyId, setLobbyId] = useState();
-    // const [allowIn, setAllowIn] = useState(false);
-
-    // const history = useHistory();
-
-    // const url = history.location.pathname.substring(1);
-
-    // useEffect(() => {
-    //     history.push(lobbyId);
-    // }, [lobbyId]);
-
-    // return (
-    //     <Switch>
-    //         {allowIn && (
-    //             <Route exact path="/:lobbyId">
-    //                 <NewGameScreen />
-    //             </Route>
-    //         )}
-
-    //         <Route path="/*">
-    //             <HomeScreen lobbyId={url} setLobbyId={setLobbyId} setAllowIn={setAllowIn} />
-    //         </Route>
-    //     </Switch>
     const [state, dispatch] = useLobbyState();
+
+    const [lobbyId, setLobbyId] = useState();
+    const [allowIn, setAllowIn] = useState(false);
+
+    const history = useHistory();
+
+    const url = history.location.pathname.substring(1);
+
+    useEffect(() => {
+        history.push(lobbyId);
+        state.screen = 'lobby';
+    }, [lobbyId]);
 
     let component;
 
     switch (state.screen) {
         case 'home':
-            component = <HomePage />;
+            component = <HomeScreen lobbyId={url} setLobbyId={setLobbyId} setAllowIn={setAllowIn} />;
             break;
         case 'lobby':
             component = <NewGameScreen />;
@@ -61,14 +50,16 @@ function App() {
 
     return (
         <GeneralContext.Provider value={{ state, dispatch }}>
-            <Router>
-                <Switch>
-                    <Route exact path="/">
+            <Switch>
+                {allowIn && (
+                    <Route exact path="/:lobbyId">
+                        {/* {(state.screen = 'lobby')} */}
                         {component}
+                        {/* <NewGameScreen /> */}
                     </Route>
-                    <Route path="/play">{component}</Route>
-                </Switch>
-            </Router>
+                )}
+                <Route path="/*">{component}</Route>
+            </Switch>
         </GeneralContext.Provider>
     );
 }
