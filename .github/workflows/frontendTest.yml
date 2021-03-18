@@ -1,0 +1,13 @@
+name: Frontend Tests
+on: pull_request
+jobs:
+  frontendTest:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install modules
+      working-directory: ./frontend
+      run: npm ci
+    - name: Run frontend tests
+      working-directory: ./frontend
+      run: npm run build

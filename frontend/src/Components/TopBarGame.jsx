@@ -1,9 +1,13 @@
-import { React, useState } from 'react';
+import { React, useState, useContext } from 'react';
+import PropTypes from 'prop-types';
+import HelpIcon from '@material-ui/icons/Help';
+import { Button, IconButton } from '@material-ui/core';
 import styles from '../Styles/TopBarGame.module.css';
 import ModalMUI from '../Modal/ModalMUI';
-import RoleAndRuleDialog from '../Pages/RoleAndRuleDialog';
 import SettingDialog from '../Pages/SettingDialog';
 import TopBarSettings from './TopBarSettings';
+import { GeneralContext } from '../App';
+import RolesAndRules from './RolesAndRules';
 
 /**
  * @param userDetails [{userName: <string>, role: <string>}]
@@ -11,29 +15,31 @@ import TopBarSettings from './TopBarSettings';
  * @param showRole true/false OPTIONAL prop that will render Role if true
  */
 
-const TopBarGame = ({ userDetails, showTimer, showRole }) => {
+const TopBarGame = ({ showTimer, showRole }) => {
+    const { state } = useContext(GeneralContext);
     const [open, setOpen] = useState(false);
     const [openInfo, setOpenInfo] = useState(false);
-    const [userName, role] = userDetails;
+    const userName = state.nickname;
+    const role = state.role;
     return (
         <div className={styles.container}>
             <p className={styles.userName}>{`Name: ${userName}`}</p>
             {showRole && (
                 <div className={styles.userRole}>
-                    <span>{`Role: ${role}   `}</span>
-                    <button
+                    <span>{`Role: ${role}`}</span>
+                    <IconButton
                         onClick={() => {
                             setOpen(true);
                             setOpenInfo(true);
                         }}
                     >
-                        {' '}
-                        <i className="fa fa-info"></i>{' '}
-                    </button>
+                        <HelpIcon />
+                    </IconButton>
                 </div>
             )}
             {showTimer && <div className={styles.timer}>Timer Placeholder</div>}
-            <button
+            <Button
+                variant="contained"
                 className={styles.settingsButton}
                 onClick={() => {
                     setOpen(true);
@@ -41,25 +47,27 @@ const TopBarGame = ({ userDetails, showTimer, showRole }) => {
                 }}
             >
                 Settings
-            </button>
+            </Button>
 
             <div>
                 <ModalMUI open={open} setOpen={setOpen}>
                     {openInfo ? (
                         <div>
                             <TopBarSettings
+                                showBack={true}
                                 showUp={setOpen}
-                                currentScreen="LOBBY"
-                                showSettings={true}
+                                currentScreen="ROLES AND RULES"
+                                showSettings={false}
                                 setOpenInfo={setOpenInfo}
                             />
-                            <RoleAndRuleDialog />
+                            <RolesAndRules userRole="Mafia" />
                         </div>
                     ) : (
                         <div>
                             <TopBarSettings
+                                showBack={true}
                                 showUp={setOpen}
-                                currentScreen="LOBBY"
+                                currentScreen="SETTINGS"
                                 showSettings={false}
                             />
                             <SettingDialog />
@@ -72,3 +80,16 @@ const TopBarGame = ({ userDetails, showTimer, showRole }) => {
 };
 
 export default TopBarGame;
+
+TopBarGame.propTypes = {
+    // TODO BUG
+    showTimer: PropTypes.bool,
+    showRole: PropTypes.bool,
+};
+
+TopBarGame.defaultProps = {
+    // TODO BUG
+
+    showTimer: false,
+    showRole: false,
+};
