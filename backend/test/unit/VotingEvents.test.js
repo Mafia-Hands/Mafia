@@ -41,14 +41,10 @@ describe('voting-events tests', () => {
     });
 
     test('day vote test', (done) => {
-        clientSocket.emit('assign-player', {
-            nickname: 'P0',
-            roomID: roomElements.roomID,
-        });
         // Subscribe to day-vote-update
         clientSocket.on('day-vote-update', (listVoteDTO) => {
             // Justin vote for Justin because nickname of clientSocket is Justin since thats the last joined player
-            expect(listVoteDTO).toEqual({ voteMap: { P0: 'P1' } });
+            expect(listVoteDTO).toEqual({ voteMap: { a: 'P1' } });
             done();
         });
 
@@ -58,19 +54,10 @@ describe('voting-events tests', () => {
     });
 
     test('trial vote test', (done) => {
-        players = [
-            new Player(null, roomElements.roomID, 'P0', RoleEnum.CIVILIAN, false),
-            new Player(null, roomElements.roomID, 'P1', RoleEnum.CIVILIAN, true),
-        ];
-        MafiaGameMock.addPlayers(players, roomElements.roomID);
-        clientSocket.emit('assign-player', {
-            nickname: 'P0',
-            roomID: roomElements.roomID,
-        });
         // Subscribe to trial-vote-update
         clientSocket.on('trial-vote-update', (listVoteDTO) => {
             // Justin vote for Justin because nickname of clientSocket is Justin since thats the last joined player
-            expect(listVoteDTO).toEqual({ voteMap: { P0: 'P1' } });
+            expect(listVoteDTO).toEqual({ voteMap: { a: 'P1' } });
             done();
         });
 

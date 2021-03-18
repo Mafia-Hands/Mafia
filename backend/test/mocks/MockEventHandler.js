@@ -1,5 +1,6 @@
 /**
  * Mock Handler to help with the MockMafiaGame component
+ * Assigns a new player to a client socket, so that the socket can take on the role of a different player for testing purposes.
  * @param {any} io
  * @param {any} socket
  * @param {MafiaGame} mafiaGame
