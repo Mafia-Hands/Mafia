@@ -7,24 +7,37 @@ However, since this is an OSS project, developers are free to edit rules and add
 <img src="https://cdn2.iconfinder.com/data/icons/rounded-white-basic-ui-set-3/139/Photo_Add-RoundedWhite-512.png" height=200; width=200>
 </p>
 
-
 Please review the [documentation](https://github.com/Mafia-Hands/Mafia/wiki) for guidelines and information about the software.
 
-## Installation
+## Installation & Running
 
-Use the package manager [npm](https://www.npmjs.com/get-npm) to install all dependencies.
+This project requires the package manager [npm](https://www.npmjs.com/get-npm) to install dependencies.
 
 ```bash
+cd ./frontend
 npm install
+npm start # run development server
+# npm run build # build production files
 ```
+
+```bash
+cd ./backend
+npm install
+npm start
+```
+
+For more information, see [Getting Started](https://github.com/Mafia-Hands/Mafia/wiki/Getting-Started)
+
 ## Contributing
 
-For  contribution guidelines visit the [Contributing-Guidlines](https://github.com/Mafia-Hands/Mafia/wiki/Contributing-Guidelines) in the wiki. 
+For contribution guidelines visit the [Contributing Guidelines](https://github.com/Mafia-Hands/Mafia/wiki/Contributing-Guidelines) in the wiki. 
 
 Please make sure to update tests as appropriate.
 
 ## Code of Conduct
-Please ensure all [code of conduct](https://github.com/Mafia-Hands/Mafia/wiki/Code-of-Conduct) is followed.
+
+Please ensure the [Code of Conduct](https://github.com/Mafia-Hands/Mafia/wiki/Code-of-Conduct) is followed.
 
 ## License
+
 Licensed under the [Apache License 2.0](LICENSE.md) license
