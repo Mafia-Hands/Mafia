@@ -36,6 +36,7 @@ const NewGameScreen = () => {
                         variant="contained"
                         color="primary"
                         size="large"
+                        id="start-game"
                         disabled={!state.lobbyReady}
                         onClick={startGame}
                     >

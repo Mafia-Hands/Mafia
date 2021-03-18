@@ -1,0 +1,11 @@
+{
+    "name": "puppeteer-debug-tool-for-mafia",
+    "version": "1.0.0",
+    "private": true,
+    "dependencies": {
+        "puppeteer-core": "^8.0.0"
+    },
+    "scripts": {
+        "start": "node launchPlayers.js"
+    }
+}

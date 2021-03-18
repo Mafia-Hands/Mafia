@@ -34,7 +34,7 @@ const LobbySettings = ({ setOpen, setOpenInfo }) => {
                 <CardContent>
                     <List>
                         <ListItem>
-                            <Typography variant="h5">Game Code: {state.code}</Typography>
+                            <Typography variant="h5" id="room-code">Game Code: {state.code}</Typography>
                         </ListItem>
                         <ListItem>
                             <Typography style={{ marginRight: '20px' }}>Number of Mafia: </Typography>
