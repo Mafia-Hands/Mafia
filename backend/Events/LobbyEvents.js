@@ -44,7 +44,7 @@ function joinLobby(io, socket, mafiaGame) {
         const room = mafiaGame.gameRoomsDict[joinLobbyDTO.roomCode];
         if (room === undefined) {
             // TODO: Handle non-existent room after MVP is done.
-            console.log('Lobby ' + joinLobbyDTO.roomCode + " doesn't exist");
+            console.log(`Lobby ${joinLobbyDTO.roomCode} doesn't exist`);
             return;
         }
 

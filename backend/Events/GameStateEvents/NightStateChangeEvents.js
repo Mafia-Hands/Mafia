@@ -24,7 +24,7 @@ function startNight(io, socket, mafiaGame) {
 
         io.in(roomID).emit('night-start', new NightStartDTO(TIME_TO_VOTE));
 
-        setTimeout(endNight(io, socket, mafiaGame), TIME_TO_VOTE);
+        setTimeout(() => endNight(io, socket, mafiaGame), TIME_TO_VOTE);
     });
 }
 
@@ -41,10 +41,15 @@ function endNight(io, socket, mafiaGame) {
 
     const playerKilled = room.voteHandler.getMafiaVotedPlayer();
 
+    if (playerKilled) {
+        room.getPlayerByNickname(playerKilled).setIsAlive(false);
+    }
+
     io.in(roomID).emit('night-end', new NightEndDTO(playerKilled));
 
     const winningRole = room.getWinningRole();
     if (winningRole !== null) {
+        io.in(roomID).emit('night-end', new NightEndDTO(playerKilled, true));
         io.in(roomID).emit(
             'game-over',
             new GameOverDTO(
@@ -53,6 +58,7 @@ function endNight(io, socket, mafiaGame) {
             )
         );
     } else {
+        io.in(roomID).emit('night-end', new NightEndDTO(playerKilled, false));
     }
     room.voteHandler.resetVotes();
 }
