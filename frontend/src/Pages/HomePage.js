@@ -15,7 +15,7 @@ export default function HomePage() {
     };
 
     const joinLobby = () => {
-        dispatch({ type: 'create-lobby', nickname, code });
+        dispatch({ type: 'join-lobby', nickname, code });
 
         socket.emit('join-lobby', { roomCode: code, nickname });
     };

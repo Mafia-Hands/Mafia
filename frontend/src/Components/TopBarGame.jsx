@@ -82,16 +82,14 @@ const TopBarGame = ({ showTimer, showRole }) => {
 export default TopBarGame;
 
 TopBarGame.propTypes = {
-    userDetails: PropTypes.shape({
-        first: PropTypes.string,
-        last: PropTypes.string,
-    }),
+    // TODO BUG
     showTimer: PropTypes.bool,
     showRole: PropTypes.bool,
 };
 
 TopBarGame.defaultProps = {
-    userDetails: [null, 'Civilian'],
+    // TODO BUG
+
     showTimer: false,
     showRole: false,
 };

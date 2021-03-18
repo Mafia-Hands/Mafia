@@ -67,28 +67,28 @@ export default function useLobbyState() {
         }
     };
 
-    const onGameStart = ({ role }) => {
-        console.log(role);
-        // TODO: ROLE should be eunum
-        dispatch({ type: 'set-role', role: role.toLowerCase() });
-
-        dispatch({ type: 'change-screen', screen: 'game' });
-    };
-
-    const onLobbyCode = ({ code }) => {
-        dispatch({ type: 'change-screen', screen: 'lobby' });
-
-        dispatch({ type: 'lobby-code', code });
-    };
-
-    const onlobbyJoin = (res) => {
-        console.log({ type: 'lobby-join', ...res });
-        dispatch({ type: 'change-screen', screen: 'lobby' });
-        dispatch({ type: 'lobby-join', ...res });
-    };
-
-    const onLobbyReady = () => dispatch({ type: 'lobby-ready' });
     useEffect(() => {
+        const onGameStart = ({ role }) => {
+            // TODO: ROLE should be enum
+            dispatch({ type: 'set-role', role: role.toLowerCase() });
+
+            dispatch({ type: 'change-screen', screen: 'game' });
+            state.isHost && setTimeout(() => socket.emit('start-night'), 2000);
+        };
+
+        const onLobbyCode = ({ code }) => {
+            dispatch({ type: 'change-screen', screen: 'lobby' });
+
+            dispatch({ type: 'lobby-code', code });
+        };
+
+        const onlobbyJoin = (res) => {
+            console.log({ type: 'lobby-join', ...res });
+            dispatch({ type: 'change-screen', screen: 'lobby' });
+            dispatch({ type: 'lobby-join', ...res });
+        };
+
+        const onLobbyReady = () => dispatch({ type: 'lobby-ready' });
         // Invoked only if player created lobby
         socket.on('lobby-code', onLobbyCode);
 
