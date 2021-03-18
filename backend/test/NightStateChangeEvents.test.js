@@ -32,11 +32,11 @@ describe('start-night unit tests', () => {
     });
 
     test('start-night successful call, no one is killed', (done) => {
-        jest.useFakeTimers();
+        //jest.useFakeTimers();
 
         clientSocket.on('night-start', (nightStartDTO) => {
             expect(nightStartDTO.timeToVote).toBeDefined();
-            jest.runTimersToTime(6000);
+            //jest.runTimersToTime(6000);
             // jest.runAllTimers();
         });
 
@@ -49,7 +49,7 @@ describe('start-night unit tests', () => {
     });
 
     test('start-night successful call, someone is killed', (done) => {
-        jest.useFakeTimers();
+        //jest.useFakeTimers();
 
         const playerA = new Player(null, null, 'a', roles.MAFIA, true);
         const playerB = new Player(null, null, 'a', roles.MAFIA, true);
@@ -61,7 +61,7 @@ describe('start-night unit tests', () => {
 
         clientSocket.on('night-start', (nightStartDTO) => {
             expect(nightStartDTO.timeToVote).toBeDefined();
-            jest.runTimersToTime(6000);
+            //jest.runTimersToTime(6000);
             // jest.runAllTimers();
             // jest.runOnlyPendingTimers();
         });

@@ -42,5 +42,10 @@
     },
     "lint-staged": {
         "*.js": "eslint --cache --fix"
+    },
+    "jest": {
+        "moduleNameMapper": {
+            "../../config.json": "../../test/mocks/configTest.json"
+        }
     }
 }
