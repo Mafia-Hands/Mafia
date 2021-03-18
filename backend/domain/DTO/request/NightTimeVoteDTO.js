@@ -1,6 +1,6 @@
 class NightTimeVoteDTO {
-    constructor(votingFor){
-        this.votingFor = votingFor
+    constructor(votingFor) {
+        this.votingFor = votingFor;
     }
 }
 

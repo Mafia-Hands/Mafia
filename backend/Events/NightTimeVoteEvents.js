@@ -17,16 +17,16 @@ exports.loadNightTimeEvents = (io, socket, mafiaGame) => {
      * In future iterations, this will be changed to tally votes from mafia members before setting the chosen player.
      */
     socket.on('mafia-vote', (mafiaVoteObj) => {
-        let room = mafiaGame.gameRoomsDict[socket.player.roomID];
-        room.voteHandler.mafiaVoteMap[socket.player] = room.getPlayerByNickname(mafiaVoteObj.votingFor)
+        const room = mafiaGame.gameRoomsDict[socket.player.roomID];
+        room.voteHandler.mafiaVoteMap[socket.player.nickname] = room.getPlayerByNickname(mafiaVoteObj.votingFor);
     });
 
     /**
      * Handler for 'medic-vote', pretty much the same logic as the mafia vote, except it sets the chosen player for the Medics.
      */
     socket.on('medic-vote', (medicVoteObj) => {
-        let room = mafiaGame.gameRoomsDict[socket.player.roomID];
-        room.voteHandler.medicChosenPlayer = room.getPlayerByNickname(medicVoteObj.votingFor)
+        const room = mafiaGame.gameRoomsDict[socket.player.roomID];
+        room.voteHandler.medicChosenPlayer = room.getPlayerByNickname(medicVoteObj.votingFor);
     });
 
     /**
@@ -34,17 +34,13 @@ exports.loadNightTimeEvents = (io, socket, mafiaGame) => {
      * SuspectRevealDTO that reveals whether the chosen player is Mafia or not.
      */
     socket.on('detective-vote', (detectiveVoteObj) => {
-        let room = mafiaGame.gameRoomsDict[socket.player.roomID];
+        const room = mafiaGame.gameRoomsDict[socket.player.roomID];
 
-        let suspect = room.getPlayerByNickname(detectiveVoteObj.votingFor);
+        const suspect = room.getPlayerByNickname(detectiveVoteObj.votingFor);
 
         socket.emit(
             'suspect-reveal',
-            new SuspectRevealDTO(
-                suspect.nickname,
-                suspect.role == RoleEnum.MAFIA ||
-                    suspect.role == RoleEnum.JESTER
-            )
+            new SuspectRevealDTO(suspect.nickname, suspect.role === RoleEnum.MAFIA || suspect.role === RoleEnum.JESTER)
         );
     });
 };
