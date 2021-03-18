@@ -30,8 +30,8 @@ afterAll(() => {
     SocketIOServer.server.close();
 });
 
-describe('Create-lobby event test', () => {
-    test('Simple create lobby events', (done) => {
+describe('create-lobby event test', () => {
+    test('create one lobby', (done) => {
         const createLobbyDTO = new CreateLobbyDTO('Anmol');
 
         // Subscribe to lobby-code
@@ -44,7 +44,7 @@ describe('Create-lobby event test', () => {
         clientSocket.emit('create-lobby', createLobbyDTO);
     });
 
-    test('Two hosts with two rooms', (done) => {
+    test('two hosts, one room', (done) => {
         const createLobbyDTO = new CreateLobbyDTO('Anmol');
 
         // Client 1 to subscribe to lobby-code
@@ -59,7 +59,7 @@ describe('Create-lobby event test', () => {
         const clientSocket2 = new Client(`http://localhost:4001`);
         // Client 2 to subscribe to lobby-code
         clientSocket2.on('lobby-code', (lobbyCodeDTOString) => {
-            throw new Error("Client 2 shouldn't receive a lobby code");
+            fail("Client 2 shouldn't receive a lobby code");
         });
 
         // Request to create a new lobby
@@ -68,7 +68,7 @@ describe('Create-lobby event test', () => {
 });
 
 describe('start-game event test', () => {
-    test('Host starts game event', (done) => {
+    test('host starts game event', (done) => {
         const createLobbyDTO = new CreateLobbyDTO('Anmol');
 
         // Request to create a new lobby
