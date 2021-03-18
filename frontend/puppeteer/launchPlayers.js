@@ -1,12 +1,27 @@
 const puppeteer = require('puppeteer-core');
 
 (async () => {
-    const url = "http://localhost:3000/"
-    const browser = await puppeteer.launch({ 
-        executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', 
-        headless: false,
-        defaultViewport: null
-    });  
+    // Automatically find chrome or open chrome via the location that the user specifies
+    let chromeLocation;
+    if (process.argv[2] === undefined) {
+        chromeLocation = await getChromeLocation();
+    } else {
+        chromeLocation = process.argv[2];
+    }
+
+    // Change the url here to open different sites
+    const url = "http://localhost:3000/";
+
+    let browser;
+    try{
+        browser = await puppeteer.launch({ 
+            executablePath: chromeLocation,
+            headless: false,
+            defaultViewport: null
+        });  
+    } catch {
+        console.log("Chrome cannot be found, please check you have chrome installed or you have enter the correct location for chrome, for more information, please read the README.md")
+    }
 
     let pages = [];
     
@@ -59,6 +74,18 @@ async function clickJoin(page){
 
 async function clickCreateLobby(page){
     await page.evaluate(() => {document.querySelector("button#create-lobby").click()});
+}
+
+async function getChromeLocation(){
+    let chromeLocation;
+    if (process.platform === 'win32'){
+        chromeLocation = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+    } else if (process.platform === 'darwin'){
+        chromeLocation = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+    } else {
+        throw new Error("Unsupport OS, please manually enter the chrome location as an argument, e.g. npm start \"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\"")
+    }
+    return chromeLocation
 }
 
 function busyWait(seconds) {
