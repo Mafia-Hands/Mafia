@@ -3,17 +3,8 @@ export const nightTimeStatus = {
     detective: 'Choose a player to suspect',
     medic: 'Choose a player to save',
     civilian: 'Time to sleep...',
+    jester: 'Time to sleep...',
 };
 
-export const constructPlayersOnTrialStatus = (playersOnTrial) =>
-    playersOnTrial.reduce((str, p, idx, arr) => {
-        if (idx === arr.length - 1) {
-            str += ` and ${p} is on trial`;
-        } else if (idx === 0) {
-            str += p;
-        } else {
-            str += `, ${p}`;
-        }
+export const constructPlayersOnTrialStatus = (playerOnTrial) => `${playerOnTrial} is on trial`;
 
-        return str;
-    });

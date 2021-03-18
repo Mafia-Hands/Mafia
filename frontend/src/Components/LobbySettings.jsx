@@ -1,38 +1,64 @@
 import { React, useContext } from 'react';
 import { GeneralContext } from '../App';
-import styles from '../Styles/LobbySettings.module.css';
+import { makeStyles } from '@material-ui/core/styles';
+import {
+    Button,
+    Card,
+    CardActions,
+    CardContent,
+    CardHeader,
+    List,
+    ListItem,
+    MenuItem,
+    Select,
+    Typography,
+} from '@material-ui/core';
 
-/**
- * @param gameCode MANDATORY prop: string of game entry code
- */
-const LobbySettings = ({ gameCode }) => {
+const useStyles = makeStyles({
+    root: {
+        display: 'grid',
+        gridGap: '24px',
+        backgroundColor: 'pink',
+        justifyItems: 'center',
+    },
+});
+
+const LobbySettings = ({ setOpen, setOpenInfo }) => {
     const { state } = useContext(GeneralContext);
+    const classes = useStyles();
 
     return (
-        <div className={styles.container}>
-            <div className={styles.lobbySettingsHeader}>
-                <h3 className={styles.lobbySettingsTitle}>Game Settings</h3>
-                <h3 className={styles.gameCode}>Game Code: {state.code}</h3>
-            </div>
-            <div className={styles.lobbySettingsOptions}>
-                <button
-                    className={styles.rolesButton}
-                    onClick={() => alert('Roles explanation screen goes here')}
-                >
-                    Roles
-                </button>
-                <div className={styles.mafiaSelectorContainer}>
-                    <p className={styles.mafiaSelectorText}>Mafia</p>
-                    <select
-                        className={styles.mafiaSelectorDropdown}
-                        name="MafiaNum"
+        <div style={{ display: 'grid' }}>
+            <Card className={classes.root} variant="Outlined">
+                <CardHeader title="Game Settings"></CardHeader>
+                <CardContent>
+                    <List>
+                        <ListItem>
+                            <Typography variant="h5" id="room-code">Game Code: {state.code}</Typography>
+                        </ListItem>
+                        <ListItem>
+                            <Typography style={{ marginRight: '20px' }}>Number of Mafia: </Typography>
+                            <Select defaultValue={1} label="This is a label">
+                                <MenuItem value={1}>1</MenuItem>
+                                <MenuItem value={2}>2</MenuItem>
+                                <MenuItem value={3}>3</MenuItem>
+                            </Select>
+                        </ListItem>
+                    </List>
+                </CardContent>
+                <CardActions>
+                    <Button
+                        size="large"
+                        variant="contained"
+                        onClick={() => {
+                            setOpen(true);
+                            setOpenInfo(true);
+                        }}
                     >
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                    </select>
-                </div>
-            </div>
+                        Roles
+                    </Button>
+                </CardActions>
+            </Card>
         </div>
     );
 };

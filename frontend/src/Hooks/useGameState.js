@@ -122,6 +122,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 phase: 'game-over',
+                screen: 'end',
                 status: `${action.winningRole} wins!`,
                 winningRole: action.winningRole,
                 winners: [...action.winners],
@@ -186,6 +187,7 @@ export default function useGameState() {
                 ),
                 medic: state.alivePlayers,
                 civilian: [],
+                jester: [], // TODO CHANGED
             }[role];
 
             dispatch({
@@ -196,12 +198,16 @@ export default function useGameState() {
             });
         }
 
-        function onNightEnd({ playerKilled }) {
+        function onNightEnd({ playerKilled, isGameOver }) {
             dispatch({
                 type: 'night-end',
                 status: `${playerKilled} was killed in the night`,
                 playerKilled,
             });
+
+            if (!isGameOver) {
+                generalState.isHost && setTimeout(() => socket.emit('start-day'), 2000); 
+            }
         }
 
         function onDayStart({ timeToVote }) {
@@ -213,12 +219,19 @@ export default function useGameState() {
             });
         }
 
-        function onDiscussionEnd({ playersOnTrial }) {
+        function onDiscussionEnd({ playerOnTrial }) {
+            if (playerOnTrial === null) {
+                generalState.isHost && setTimeout(() => socket.emit('start-night'), 2000); // TODO CHANGED
+                return;
+            }
+
             dispatch({
                 type: 'discussion-end',
-                status: constructPlayersOnTrialStatus(playersOnTrial),
-                votablePlayers: !playersOnTrial.includes(generalState.nickname) ? playersOnTrial : [],
+                status: constructPlayersOnTrialStatus(playerOnTrial),
+                votablePlayers: playerOnTrial !== generalState.nickname ? [playerOnTrial] : [],
             });
+
+            generalState.isHost && setTimeout(() => socket.emit('start-trial'), 2000); // TODO CHANGED
         }
 
         function onTrialStart({ timeToVote }) {
@@ -229,15 +242,19 @@ export default function useGameState() {
             });
         }
 
-        function onTrialEnd({ playerKilled }) {
+        function onTrialEnd({ playerKilled, isGameOver }) {
             dispatch({
                 type: 'trial-end',
                 status: `${playerKilled} was hanged`, // TODO if playerKilled === null
                 playerKilled,
             });
+            if (!isGameOver) {
+                generalState.isHost && setTimeout(() => socket.emit('start-night'), 2000); // TODO CHANGED
+            }
         }
 
         function onGameOver({ winningRole, winners }) {
+            console.log(winningRole + ' ' + winners);
             dispatch({
                 type: 'game-over',
                 winningRole: winningRole.toLowerCase(),

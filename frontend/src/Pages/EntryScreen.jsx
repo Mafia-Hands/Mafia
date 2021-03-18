@@ -7,10 +7,7 @@ const EntryScreen = () => {
     const { state: generalState } = useContext(GeneralContext);
     return (
         <div>
-            <TopBarSettings
-                currentScreen={`You are a ${generalState.role}`}
-                showSettings={true}
-            />
+            <TopBarSettings currentScreen={`You are a ${generalState.role}`} />
             <div>
                 <Player playerName={generalState.nickname} />
             </div>

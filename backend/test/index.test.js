@@ -161,7 +161,7 @@ describe('Create-lobby event test', () => {
             // Subscribe to day-vote-update
             clientSocket.on('day-vote-update', (listVoteDTO) => {
                 // Justin vote for Justin because nickname of clientSocket is Justin since thats the last joined player
-                expect(listVoteDTO).toEqual({ voteMap: { Justin: 'Justin' } });
+                expect(listVoteDTO.voteMap.Justin).toBeInstanceOf(Object);
                 done();
             });
 
@@ -203,7 +203,7 @@ describe('Create-lobby event test', () => {
             // Subscribe to day-vote-update
             clientSocket.on('trial-vote-update', (listVoteDTO) => {
                 // Justin vote for Justin because nickname of clientSocket is Justin since thats the last joined player
-                expect(listVoteDTO).toEqual({ voteMap: { Justin: 'Justin' } });
+                expect(listVoteDTO.voteMap.Justin).toBeInstanceOf(Object);
                 done();
             });
         });

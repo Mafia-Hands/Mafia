@@ -60,6 +60,7 @@ const TopBarGame = ({ showTimer, showRole }) => {
                     {openInfo ? (
                         <div>
                             <TopBarSettings
+                                showBack={true}
                                 showUp={setOpen}
                                 currentScreen="ROLES AND RULES"
                                 showSettings={false}
@@ -69,7 +70,12 @@ const TopBarGame = ({ showTimer, showRole }) => {
                         </div>
                     ) : (
                         <div>
-                            <TopBarSettings showUp={setOpen} currentScreen="SETTINGS" showSettings={false} />
+                            <TopBarSettings
+                                showBack={true}
+                                showUp={setOpen}
+                                currentScreen="SETTINGS"
+                                showSettings={false}
+                            />
                             <SettingDialog />
                         </div>
                     )}
@@ -82,16 +88,14 @@ const TopBarGame = ({ showTimer, showRole }) => {
 export default TopBarGame;
 
 TopBarGame.propTypes = {
-    userDetails: PropTypes.shape({
-        first: PropTypes.string,
-        last: PropTypes.string,
-    }),
+    // TODO BUG
     showTimer: PropTypes.bool,
     showRole: PropTypes.bool,
 };
 
 TopBarGame.defaultProps = {
-    userDetails: [null, 'Civilian'],
+    // TODO BUG
+
     showTimer: false,
     showRole: false,
 };

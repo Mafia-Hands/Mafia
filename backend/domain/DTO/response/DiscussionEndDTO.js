@@ -1,6 +1,6 @@
 class DiscussionEndDTO {
-    constructor(playerKilled) {
-        this.playerKilled = playerKilled;
+    constructor(playerOnTrial) {
+        this.playerOnTrial = playerOnTrial;
     }
 }
 
