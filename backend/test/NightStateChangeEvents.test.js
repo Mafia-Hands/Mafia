@@ -12,16 +12,14 @@ describe('start-night unit tests', () => {
     // Create a new client, and connect it to the server via a socket
     let clientSocket;
     beforeEach((done) => {
-        clientSocket = new Client(`http://localhost:` + port);
+        clientSocket = new Client(`http://localhost:${port}`);
         clientSocket.on('connect', done);
-
-        jest.useFakeTimers();
     });
 
     // Disconnect each socket connected to the server
     afterEach((done) => {
-        const sockets = roomElements.io.sockets.sockets;
-        sockets.forEach(function (socket, key) {
+        const { sockets } = roomElements.io.sockets;
+        sockets.forEach((socket, key) => {
             socket.disconnect(true);
         });
 
@@ -34,8 +32,12 @@ describe('start-night unit tests', () => {
     });
 
     test('start-night successful call, no one is killed', (done) => {
+        // jest.useFakeTimers();
+
         clientSocket.on('night-start', (nightStartDTO) => {
             expect(nightStartDTO.timeToVote).toBeDefined();
+            // jest.runTimersToTime(6000);
+            // jest.runAllTimers();
         });
 
         clientSocket.on('night-end', (nightEndDTO) => {
@@ -47,14 +49,21 @@ describe('start-night unit tests', () => {
     });
 
     test('start-night successful call, someone is killed', (done) => {
-        MafiaGameMock.addMafiaVote(
-            new Player(null, null, 'a', roles.MAFIA, true),
-            new Player(null, null, 'b', roles.CIVILIAN, false),
-            roomElements.roomID
-        );
+        // jest.useFakeTimers();
+
+        const playerA = new Player(null, null, 'a', roles.MAFIA, true);
+        const playerB = new Player(null, null, 'a', roles.MAFIA, true);
+
+        MafiaGameMock.addPlayer(playerA, roomElements.roomID);
+        MafiaGameMock.addPlayer(playerB, roomElements.roomID);
+
+        MafiaGameMock.addMafiaVote(playerA, playerB, roomElements.roomID);
 
         clientSocket.on('night-start', (nightStartDTO) => {
             expect(nightStartDTO.timeToVote).toBeDefined();
+            // jest.runTimersToTime(6000);
+            // jest.runAllTimers();
+            // jest.runOnlyPendingTimers();
         });
 
         clientSocket.on('night-end', (nightEndDTO) => {

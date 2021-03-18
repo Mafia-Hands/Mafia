@@ -12,7 +12,6 @@ const Room = require('../domain/Room');
  */
 function createLobby(io, socket, mafiaGame) {
     socket.on('create-lobby', (createLobbyDTO) => {
-        console.log('New room request received');
         // Create room and assign host player to the room
         const roomID = mafiaGame.newGame();
         const host = new Player(socket.id, roomID, createLobbyDTO.nickname);
@@ -29,14 +28,6 @@ function createLobby(io, socket, mafiaGame) {
         // Send room ID back to host.
         io.in(roomID).emit('lobby-code', new LobbyCodeDTO(roomID));
     });
-
-    // host has clicked start game
-    socket.on('start-game', () => {
-        const { roomID } = socket.player;
-
-        // sending to all clients in "game" room, including sender
-        io.in(roomID).emit('game-start');
-    });
 }
 
 /**
@@ -47,31 +38,24 @@ function createLobby(io, socket, mafiaGame) {
  * @param {MafiaGame} mafiaGame
  */
 function joinLobby(io, socket, mafiaGame) {
-    //on join lobby message event will call join lobby event handler
+    // on join lobby message event will call join lobby event handler
     socket.on('join-lobby', (joinLobbyDTO) => {
-        
         const room = mafiaGame.gameRoomsDict[joinLobbyDTO.roomCode];
-        let player = new Player(
-            socket.id,
-            joinLobbyDTO.roomCode,
-            joinLobbyDTO.nickname,
-            null,
-            false
-        );
+        if (room === undefined) {
+            // TODO: Handle non-existent room after MVP is done.
+            console.log(`Lobby ${joinLobbyDTO.roomCode} doesn't exist`);
+            return;
+        }
+
+        const player = new Player(socket.id, joinLobbyDTO.roomCode, joinLobbyDTO.nickname, null, false);
         room.addPlayer(player);
         socket.player = player;
 
-        socket.join(socket.player.roomID);
+        socket.join(player.roomID);
 
-        io.in(socket.player.roomID).emit(
-            'lobby-join',
-            new LobbyJoinDTO(room.players.map((player) => player.nickname))
-        );
-        if (room.players.length == 6) {
-            const host = room.players.find((element) => {
-                element.isHost == true;
-            });
-            io.to(host.socketID).emit('lobby-ready');
+        io.in(socket.player.roomID).emit('lobby-join', new LobbyJoinDTO(room.players.map((player) => player.nickname)));
+        if (room.players.length === 6) {
+            io.to(room.host.socketID).emit('lobby-ready');
         }
     });
 }
