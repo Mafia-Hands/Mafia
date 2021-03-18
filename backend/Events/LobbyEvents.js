@@ -15,7 +15,7 @@ function createLobby(io, socket, mafiaGame) {
         console.log('New room request received');
         // Create room and assign host player to the room
         const roomID = mafiaGame.newGame();
-        const host = new Player(socket.id, roomID, createLobbyDTO.nickname);
+        const host = new Player(socket.id, roomID, createLobbyDTO.nickname, null, true);
         mafiaGame.gameRoomsDict[roomID].host = host;
         mafiaGame.gameRoomsDict[roomID].addPlayer(host);
 
@@ -56,6 +56,7 @@ function joinLobby(io, socket, mafiaGame) {
 
         io.in(socket.player.roomID).emit('lobby-join', new LobbyJoinDTO(room.players.map((player) => player.nickname)));
         if (room.players.length === 6) {
+            
             io.to(room.host.socketID).emit('lobby-ready');
         }
     });
