@@ -69,7 +69,7 @@ export default function useLobbyState() {
 
     useEffect(() => {
         const onGameStart = ({ role }) => {
-            // TODO: ROLE should be eunum
+            // TODO: ROLE should be enum
             dispatch({ type: 'set-role', role: role.toLowerCase() });
 
             dispatch({ type: 'change-screen', screen: 'game' });

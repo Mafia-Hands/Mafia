@@ -51,7 +51,6 @@ class Room {
 
     getPlayersByRole(role) {
         const playersOfTheRole = [];
-
         this.players.forEach((player) => {
             if (player.role === role) {
                 playersOfTheRole.push(player);
@@ -62,7 +61,7 @@ class Room {
     }
 
     getWinningPlayers(role) {
-        const playersOfTheRole = [];
+        let playersOfTheRole = [];
         if (role === roles.CIVILIAN) {
             playersOfTheRole = [
                 ...this.getPlayersByRole(roles.CIVILIAN),

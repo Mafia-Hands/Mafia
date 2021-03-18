@@ -3,6 +3,8 @@ export const nightTimeStatus = {
     detective: 'Choose a player to suspect',
     medic: 'Choose a player to save',
     civilian: 'Time to sleep...',
+    jester: 'Time to sleep...',
 };
 
-export const constructPlayersOnTrialStatus = (playersOnTrial) => `${playersOnTrial} is on trial`;
+export const constructPlayersOnTrialStatus = (playerOnTrial) => `${playerOnTrial} is on trial`;
+
