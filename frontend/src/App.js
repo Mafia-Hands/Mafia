@@ -36,7 +36,7 @@ function App() {
             <Router>
                 <Switch>
                     <Route exact path="/">
-                        {component}
+                        <div style={{ width: '70%', margin: 'auto' }}>{component}</div>
                     </Route>
                     <Route path="/play">{component}</Route>
                 </Switch>

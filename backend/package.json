@@ -6,7 +6,7 @@
     "scripts": {
         "start": "node index.js",
         "live": "nodemon index.js",
-        "test": "jest --maxWorkers=1 --detectOpenHandles",
+        "test": "jest --maxWorkers=1",
         "lint": "eslint ./",
         "pretty-quick": "pretty-quick ./",
         "fix-lint": "eslint ./ --fix"
@@ -42,5 +42,10 @@
     },
     "lint-staged": {
         "*.js": "eslint --cache --fix"
+    },
+    "jest": {
+        "moduleNameMapper": {
+            "config.json": "<rootDir>/test/mocks/configTest.json"
+        }
     }
 }

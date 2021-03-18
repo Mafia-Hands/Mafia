@@ -12,7 +12,7 @@ class VoteHandler {
 
     getMafiaVotedPlayer() {
         const mafiaChosenPlayer = this.getVotedPlayer(this.mafiaVoteMap);
-        if (mafiaChosenPlayer === this.medicChosenPlayer) {
+        if (this.medicChosenPlayer && mafiaChosenPlayer === this.medicChosenPlayer.nickname) {
             return null;
         }
         return mafiaChosenPlayer;
@@ -32,9 +32,7 @@ class VoteHandler {
         const abstainVote = null;
         voteTally[abstainVote] = 0;
         for (const [voter, chosenPlayer] of Object.entries(voteMap)) {
-            if (chosenPlayer == null) {
-                voteTally[abstainVote]++;
-            } else if (voteTally.hasOwnProperty(chosenPlayer)) {
+            if (voteTally.hasOwnProperty(chosenPlayer.nickname)) {
                 voteTally[chosenPlayer.nickname]++;
             } else {
                 voteTally[chosenPlayer.nickname] = 1;

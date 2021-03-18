@@ -1,6 +1,7 @@
 class NightEndDTO {
-    constructor(playerKilled) {
+    constructor(playerKilled, isGameOver) {
         this.playerKilled = playerKilled;
+        this.isGameOver = isGameOver;
     }
 }
 
