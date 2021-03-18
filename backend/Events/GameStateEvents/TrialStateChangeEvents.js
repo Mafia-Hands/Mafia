@@ -40,19 +40,23 @@ function endTrial(io, socket, mafiaGame) {
 
     const playerChosen = room.voteHandler.getTrialVotedPlayer();
 
-    io.in(roomID).emit('trial-end', new TrialEndDTO(playerChosen));
+    if (playerChosen) {
+        room.getPlayerByNickname(playerChosen).setIsAlive(false);
+    }
 
     const winningRole = room.getWinningRole();
 
     if (winningRole !== null) {
+        io.in(roomID).emit('trial-end', new TrialEndDTO(playerChosen, true));
         io.in(roomID).emit(
             'game-over',
             new GameOverDTO(
                 winningRole,
-                room.getPlayersByRole(winningRole).map((p) => p.nickname)
+                room.getWinningPlayers(winningRole).map((p) => p.nickname)
             )
         );
     } else {
+        io.in(roomID).emit('trial-end', new TrialEndDTO(playerChosen, false));
     }
     room.voteHandler.resetVotes();
 }
