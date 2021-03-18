@@ -1,6 +1,12 @@
 // Enums for Roles.
-// Can be developed into classes if functionality is required.  
-const RoleEnum = { "CIVILIAN": 1, "MAFIA": 2, "MEDIC": 3, "DETECTIVE": 4 }
-Object.freeze(RoleEnum)
+// Can be developed into classes if functionality is required.
+const RoleEnum = {
+    CIVILIAN: 'civilian',
+    MAFIA: 'mafia',
+    MEDIC: 'medic',
+    DETECTIVE: 'detective',
+    JESTER: 'jester',
+};
+Object.freeze(RoleEnum);
 
-module.export = RoleEnum;
+module.exports = RoleEnum;

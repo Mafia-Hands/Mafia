@@ -1,0 +1,36 @@
+.roleContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    align-items: stretch;
+    justify-items: stretch;
+    text-align: center;
+    width: 100%;
+    column-gap: 3em;
+}
+
+.roleContainer h3 {
+    margin-top: 0;
+    text-transform: uppercase;
+}
+
+.ruleContainer {
+    margin: 3em auto 2em auto;
+    width: 80%;
+    text-align: justify;
+    white-space: pre-line;
+}
+
+.roleInfo {
+    display: grid;
+    grid-template-rows: 2em 1fr;
+}
+
+.roleHighlight {
+    background-color: orange;
+    color: black;
+    margin: 0;
+    padding: 0.5em;
+    border-radius: 10px 10px 0 0;
+    font-weight: 500;
+}
