@@ -43,8 +43,12 @@ describe('voting-events tests', () => {
     test('day vote test', (done) => {
         // Subscribe to day-vote-update, to check that the vote has been registered correctly
         clientSocket.on('day-vote-update', (listVoteDTO) => {
-            expect(listVoteDTO).toEqual({ voteMap: { a: 'P1' } });
-            done();
+            try {
+                expect(listVoteDTO).toEqual({ voteMap: { a: 'P1' } });
+                done();
+            } catch (error) {
+                done.fail(error);
+            }
         });
 
         // Cast vote
@@ -55,8 +59,12 @@ describe('voting-events tests', () => {
     test('trial vote test', (done) => {
         // Subscribe to trial-vote-update
         clientSocket.on('trial-vote-update', (listVoteDTO) => {
-            expect(listVoteDTO).toEqual({ voteMap: { a: 'P1' } });
-            done();
+            try {
+                expect(listVoteDTO).toEqual({ voteMap: { a: 'P1' } });
+                done();
+            } catch (error) {
+                done.fail(error);
+            }
         });
 
         // Cast trial vote
