@@ -24,7 +24,7 @@ function startNight(io, socket, mafiaGame) {
 
         io.in(roomID).emit('night-start', new NightStartDTO(TIME_TO_VOTE));
 
-        setTimeout(() => endNight(io, socket, mafiaGame), TIME_TO_VOTE);
+        setTimeout(() => endNight(io, socket, mafiaGame), TIME_TO_VOTE); // TODO fixed bug
     });
 }
 

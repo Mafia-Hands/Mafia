@@ -45,7 +45,7 @@
     },
     "jest": {
         "moduleNameMapper": {
-            "../../config.json": "../../test/mocks/configTest.json"
+            "config.json": "<rootDir>/test/mocks/configTest.json"
         }
     }
 }

@@ -1,5 +1,9 @@
 class ListVoteDTO {
     constructor(votes) {
+        
+
+
+
         this.voteMap = votes;
     }
 }
