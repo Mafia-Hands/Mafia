@@ -1,28 +1,49 @@
 import { React } from 'react';
-import styles from '../Styles/Chatbox.module.css';
+import { makeStyles } from '@material-ui/core/styles';
+import {
+    Button,
+    Card,
+    CardActions,
+    CardContent,
+    CardHeader,
+    Input,
+    List,
+    ListItem,
+    Typography,
+} from '@material-ui/core';
+
+const useStyles = makeStyles({
+    root: {
+        display: 'grid',
+        gridGap: '0px',
+        backgroundColor: 'orange',
+    },
+});
 
 /**
  * @param messageList MANDATORY prop: a list of strings (previous chat messages)
  */
-const Chatbox = ({messageList}) => {
-    return (
-        <div className={styles.container}>
-            <h3 className={styles.chatboxHeader}>Chat</h3>
-            <ul className={styles.messageList}>
-                {messageList.map((messageList, index) =>
-                    <li key={index}>
-                        {messageList}
-                    </li>
-                )}
-            </ul>
-            <div className={styles.chatInputContainer}>
-                <input className={styles.chatInput} type="text" placeholder="Chat Here..."/>
-                <button className={styles.rolesButton} onClick={() => alert('Chat function not implemented yet')}>
-                    Send
-                </button>
-            </div>
-        </div>
-    )
-}
+const Chatbox = ({ messageList }) => {
+    const classes = useStyles();
 
-export default Chatbox
+    return (
+        <Card className={classes.root} variant="outlined">
+            <CardHeader title="Chat"></CardHeader>
+            <CardContent>
+                <List>
+                    {messageList.map((messageList, index) => (
+                        <ListItem key={index}>
+                            <Typography>{messageList}</Typography>
+                        </ListItem>
+                    ))}
+                </List>
+            </CardContent>
+            <CardActions>
+                <Input type="text" placeholder="Chat Here..." />
+                <Button onClick={() => alert('Chat function not implemented yet')}>Send</Button>
+            </CardActions>
+        </Card>
+    );
+};
+
+export default Chatbox;

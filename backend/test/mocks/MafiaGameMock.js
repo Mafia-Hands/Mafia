@@ -18,10 +18,11 @@ module.exports.createMafiaGameWithOnePlayerMock = function (port) {
     mafiaGame = new MafiaGame();
     const roomID = mafiaGame.newGame();
     mafiaGame.gameRoomsDict[roomID] = new Room();
+    const hostPlayer = new Player(null, roomID, 'a', 'mafia', true);
 
     io.on('connection', (socket) => {
         NightStateChangeEvents.eventHandlersRegistration(io, socket, mafiaGame);
-        socket.player = new Player(socket.id, roomID, '', '');
+        socket.player = hostPlayer;
         socket.join(roomID);
     });
 
@@ -31,7 +32,13 @@ module.exports.createMafiaGameWithOnePlayerMock = function (port) {
         });
     });
 
-    return { io: io, mafiaGame: mafiaGame, socketIOServer: server, roomID: roomID };
+    return { io: io, mafiaGame: mafiaGame, socketIOServer: server, roomID: roomID, hostPlayer: hostPlayer };
+};
+
+module.exports.addPlayer = function (player, roomID) {
+    room = mafiaGame.gameRoomsDict[roomID];
+
+    room.addPlayer(player);
 };
 
 module.exports.addMafiaVote = function (voter, votedFor, roomID) {
