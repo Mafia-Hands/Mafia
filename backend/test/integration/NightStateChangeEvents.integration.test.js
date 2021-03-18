@@ -5,6 +5,7 @@ const Player = require('../../domain/Player');
 const roles = require('../../domain/Enum/Role');
 const CreateLobbyDTO = require('../../domain/DTO/request/CreateLobbyDTO');
 const JoinLobbyDTO = require('../../domain/DTO/request/JoinLobbyDTO');
+const { JESTER } = require('../../domain/Enum/Role');
 
 describe('game-start integration tests', () => {
     const port = process.env.PORT || config.local_port;
@@ -20,6 +21,7 @@ describe('game-start integration tests', () => {
             clientSockets[0].emit('create-lobby', new CreateLobbyDTO('Leon'));
             clientSockets[0].on('lobby-code', (createLobbyDTO) => {
                 lobbyCode = createLobbyDTO.code;
+                done();
             });
         });
     });
@@ -53,22 +55,25 @@ describe('game-start integration tests', () => {
                     // Only end setup once all responses received
                     clientSockets[0].emit('start-game');
                     clientSockets[0].on('game-start', () => {
-                        clientSockets[0].emit('night-start');
+                        clientSockets[0].emit('start-night');
                         socketResponseCount = 0;
-                        for (let j = 0; j < clientSockets.length; j++) {}
+                        for (let j = 0; j < clientSockets.length; j++) {
+                            clientSockets[i].once('night-start', (nightStartDTO) => {
+                                expect(nightStartDTO.timeToVote).toBeDefined();
+                                socketResponseCount++;
+                                if(socketResponseCount>=12){
+                                    done();
+                                }
+                            });
+                            clientSockets[i].once('night-end', (nightEndDTO) => {
+                                expect(nightEndDTO.playerKilled).toBeNull();
+                                socketResponseCount++;
+                                if(socketResponseCount>=12){
+                                    done();
+                                }
+                            });
+                        }
                     });
-                }
-            });
-        }
-
-        let socketResponseCount = 0;
-        for (let i = 0; i < clientSockets.length; i++) {
-            clientSockets[i].once('game-start', (gameStartDTO) => {
-                expect(gameStartDTO.role).toBeDefined();
-                socketResponseCount++;
-                // Only end test if all 6 responses are received
-                if (socketResponseCount >= 6) {
-                    done();
                 }
             });
         }
