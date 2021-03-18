@@ -41,14 +41,13 @@ describe('voting-events tests', () => {
     });
 
     test('day vote test', (done) => {
-        // Subscribe to day-vote-update
+        // Subscribe to day-vote-update, to check that the vote has been registered correctly
         clientSocket.on('day-vote-update', (listVoteDTO) => {
-            // Justin vote for Justin because nickname of clientSocket is Justin since thats the last joined player
             expect(listVoteDTO).toEqual({ voteMap: { a: 'P1' } });
             done();
         });
 
-        // vote test begins
+        // Cast vote
         const voteForDTO = new VoteForDTO('P1');
         clientSocket.emit('day-vote', voteForDTO);
     });
@@ -56,12 +55,11 @@ describe('voting-events tests', () => {
     test('trial vote test', (done) => {
         // Subscribe to trial-vote-update
         clientSocket.on('trial-vote-update', (listVoteDTO) => {
-            // Justin vote for Justin because nickname of clientSocket is Justin since thats the last joined player
             expect(listVoteDTO).toEqual({ voteMap: { a: 'P1' } });
             done();
         });
 
-        // vote test begins
+        // Cast trial vote
         const voteForDTO = new VoteForDTO('P1');
         clientSocket.emit('trial-vote', voteForDTO);
     });
