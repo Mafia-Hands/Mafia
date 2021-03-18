@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
-
 import socket from '../Socket';
-
 import { GeneralContext } from '../App';
+import { TextField, Button } from '@material-ui/core';
+import styles from '../Styles/HomePage.module.css';
 
 export default function HomePage() {
     const { dispatch } = useContext(GeneralContext);
@@ -22,20 +22,33 @@ export default function HomePage() {
 
     return (
         <div>
-            HOME <br />
-            Nickname <input id="nickname" type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} />
-            <br />
-            Code
-            <input id="room-code" type="text" value={code} onChange={(e) => setCode(e.target.value)} />
-            <br />
-            <button id="join-lobby" onClick={joinLobby}>
-                {' '}
-                Join{' '}
-            </button>
-            <button id="create-lobby" onClick={createLobby}>
-                {' '}
-                createLobby{' '}
-            </button>
+            <div className={styles.container}>
+                <h1>MAFIA</h1>
+                <TextField
+                    color="secondary"
+                    id="nickname"
+                    label="Enter Nickname"
+                    variant="outlined"
+                    value={nickname}
+                    onChange={(e) => setNickname(e.target.value)}
+                ></TextField>
+                <TextField
+                    color="secondary"
+                    id="room-code"
+                    value={code}
+                    label="Enter LobbyID"
+                    variant="outlined"
+                    type="text"
+                    onChange={(e) => setCode(e.target.value)}
+                ></TextField>
+                <Button variant="outlined" onClick={joinLobby} id="join-lobby">
+                    Join Game
+                </Button>
+                Want to create a new lobby?
+                <Button variant="outlined" onClick={createLobby} id="create-lobby">
+                    Create Game
+                </Button>
+            </div>
         </div>
     );
 }
