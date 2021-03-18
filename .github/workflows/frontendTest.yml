@@ -1,7 +1,7 @@
 name: Frontend Tests
 on: pull_request
 jobs:
-  frontTest:
+  frontendTest:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
