@@ -15,24 +15,28 @@ describe('game-start integration tests', () => {
     beforeEach((done) => {
         // Create 6 clients to mock game every state
         clientSockets[0] = new Client(`http://localhost:` + port);
+        // Create host first
+        clientSockets[0].on('connect', () => {
+            clientSockets[0].emit('create-lobby', new CreateLobbyDTO('Leon'));
+        });
 
+        // Once lobby code recieved, create other players and join lobby
         clientSockets[0].on('lobby-code', (createLobbyDTO) => {
             let lobbyCode = createLobbyDTO.code;
             for (let i = 1; i < 6; i++) {
                 clientSockets[i] = new Client(`http://localhost:` + port);
+                clientSockets[i].on('connect', () => {
+                    clientSockets[i].emit('join-lobby', new JoinLobbyDTO('Leon' + i.toString(), lobbyCode));
+                });
                 clientSockets[i].once('lobby-join', () => {
                     beforeSocketResponseCount++;
                     if (beforeSocketResponseCount >= 5) {
+                        // Only end setup once all responses received
                         done();
                     }
                 });
-                clientSockets[i].emit('join-lobby', new JoinLobbyDTO(i.toString(), lobbyCode));
             }
         });
-
-        clientSockets[0].emit('create-lobby', new CreateLobbyDTO('Leon'));
-
-        jest.useFakeTimers();
     });
 
     // Disconnect each socket connected to the server
@@ -41,7 +45,6 @@ describe('game-start integration tests', () => {
         sockets.forEach(function (socket, key) {
             socket.disconnect(true);
         });
-
         done();
     });
 
@@ -50,14 +53,13 @@ describe('game-start integration tests', () => {
         SocketIOServer.server.close();
     });
 
-    test('start-game called, roles distribued', (done) => {
+    test('tests roles distributed on game start', (done) => {
         let socketResponseCount = 0;
-
         for (let i = 0; i < clientSockets.length; i++) {
-            clientSockets[i].on('game-start', (gameStartDTO) => {
-                console.log('what');
+            clientSockets[i].once('game-start', (gameStartDTO) => {
                 expect(gameStartDTO.role).toBeDefined();
                 socketResponseCount++;
+                // Only end test if all 6 responses are received
                 if (socketResponseCount >= 6) {
                     done();
                 }
