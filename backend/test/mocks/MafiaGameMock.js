@@ -5,7 +5,6 @@ const loadVoteEvents = require('../../Events/VoteEvents');
 const loadGameStartEvents = require('../../Events/GameStartEvents');
 const { loadNightTimeEvents } = require('../../Events/NightTimeVoteEvents');
 const loadStateChangeEvents = require('../../Events/GameStateEvents/StateChangeEvents');
-const { loadMockEvents } = require('./MockEventHandler');
 
 const MafiaGame = require('../../domain/MafiaGame');
 const Room = require('../../domain/Room');
