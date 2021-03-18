@@ -32,7 +32,7 @@ module.exports.createMafiaGameWithOnePlayerMock = function (port) {
         });
     });
 
-    return { io: io, mafiaGame: mafiaGame, socketIOServer: server, roomID: roomID, hostPlayer: hostPlayer};
+    return { io: io, mafiaGame: mafiaGame, socketIOServer: server, roomID: roomID, hostPlayer: hostPlayer };
 };
 
 module.exports.addPlayer = function (player, roomID) {
@@ -43,8 +43,7 @@ module.exports.addPlayer = function (player, roomID) {
 
 module.exports.addMafiaVote = function (voter, votedFor, roomID) {
     const room = mafiaGame.gameRoomsDict[roomID];
-    const mafiaVoteMap = room.voteHandler.mafiaVoteMap;
+    const { mafiaVoteMap } = room.voteHandler;
 
     mafiaVoteMap[voter] = votedFor;
 };
-

@@ -24,7 +24,7 @@ function startNight(io, socket, mafiaGame) {
 
         io.in(roomID).emit('night-start', new NightStartDTO(TIME_TO_VOTE));
 
-        setTimeout(() => endNight(io, socket, mafiaGame), TIME_TO_VOTE); // TODO fixed bug
+        setTimeout(() => endNight(io, socket, mafiaGame), TIME_TO_VOTE);
     });
 }
 
@@ -36,8 +36,6 @@ function startNight(io, socket, mafiaGame) {
  * @param {MafiaGame} mafiaGame
  */
 function endNight(io, socket, mafiaGame) {
-    console.log('endNight Event started');
-
     const { roomID } = socket.player;
     const room = mafiaGame.gameRoomsDict[roomID];
 

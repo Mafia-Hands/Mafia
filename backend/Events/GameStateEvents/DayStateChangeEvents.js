@@ -38,7 +38,7 @@ function endDiscussion(io, socket, mafiaGame) {
     const { roomID } = socket.player;
     const room = mafiaGame.gameRoomsDict[roomID];
 
-    let playerChosen = room.voteHandler.getDaytimeVotedPlayer();
+    const playerChosen = room.voteHandler.getDaytimeVotedPlayer();
 
     io.in(roomID).emit('discussion-end', new DiscussionEndDTO(playerChosen));
     room.voteHandler.resetVotes();

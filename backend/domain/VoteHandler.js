@@ -33,7 +33,6 @@ class VoteHandler {
         voteTally[abstainVote] = 0;
         for (const [voter, chosenPlayer] of Object.entries(voteMap)) {
             if (voteTally.hasOwnProperty(chosenPlayer.nickname)) {
-                // TODO bug obj key cannot be type obj
                 voteTally[chosenPlayer.nickname]++;
             } else {
                 voteTally[chosenPlayer.nickname] = 1;

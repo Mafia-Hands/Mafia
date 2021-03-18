@@ -5,7 +5,7 @@ const VoteForDTO = require('../domain/DTO/request/VoteForDTO');
 const config = require('../config.json');
 const SocketIOServer = require('../index');
 
-describe('Create-lobby event test', () => { 
+describe('Create-lobby event test', () => {
     let clientSocket;
     const port = process.env.PORT || config.local_port;
 
@@ -161,7 +161,7 @@ describe('Create-lobby event test', () => {
             // Subscribe to day-vote-update
             clientSocket.on('day-vote-update', (listVoteDTO) => {
                 // Justin vote for Justin because nickname of clientSocket is Justin since thats the last joined player
-                expect(listVoteDTO.voteMap['Justin']).toBeInstanceOf(Object);
+                expect(listVoteDTO.voteMap.Justin).toBeInstanceOf(Object);
                 done();
             });
 
@@ -203,7 +203,7 @@ describe('Create-lobby event test', () => {
             // Subscribe to day-vote-update
             clientSocket.on('trial-vote-update', (listVoteDTO) => {
                 // Justin vote for Justin because nickname of clientSocket is Justin since thats the last joined player
-                expect(listVoteDTO.voteMap['Justin']).toBeInstanceOf(Object);
+                expect(listVoteDTO.voteMap.Justin).toBeInstanceOf(Object);
                 done();
             });
         });

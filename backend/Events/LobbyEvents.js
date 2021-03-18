@@ -12,7 +12,6 @@ const Room = require('../domain/Room');
  */
 function createLobby(io, socket, mafiaGame) {
     socket.on('create-lobby', (createLobbyDTO) => {
-        console.log('New room request received');
         // Create room and assign host player to the room
         const roomID = mafiaGame.newGame();
         const host = new Player(socket.id, roomID, createLobbyDTO.nickname);
@@ -48,7 +47,7 @@ function joinLobby(io, socket, mafiaGame) {
             return;
         }
 
-        let player = new Player(socket.id, joinLobbyDTO.roomCode, joinLobbyDTO.nickname, null, false);
+        const player = new Player(socket.id, joinLobbyDTO.roomCode, joinLobbyDTO.nickname, null, false);
         room.addPlayer(player);
         socket.player = player;
 
