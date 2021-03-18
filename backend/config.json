@@ -1,4 +1,15 @@
 {
     "local_port": 4001,
-    "cors_origin": "*"
+    "cors_origin": "*",
+    "role_distribution_logic": {
+        "mafia_role_threshold": 11,
+        "mafia_divisor_1": 6,
+        "mafia_divisor_2": 10,
+        "detective_divisor": 10,
+        "medic_divisor": 10,
+        "jester_divisor": 14
+    },
+    "night_total_vote_time_in_milliseconds": 15000,
+    "day_total_vote_time_in_milliseconds": 15000,
+    "trial_total_vote_time_in_milliseconds": 15000
 }

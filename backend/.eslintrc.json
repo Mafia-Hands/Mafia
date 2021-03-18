@@ -1,0 +1,36 @@
+{
+    "extends": ["airbnb", "prettier", "plugin:node/recommended", "plugin:jest/recommended"],
+    "plugins": ["prettier", "jest"],
+    "rules": {
+        "prettier/prettier": "error",
+        "no-unused-vars": "warn",
+        "no-console": "warn",
+        "func-names": "off",
+        "no-process-exit": "off",
+        "object-shorthand": "off",
+        "class-methods-use-this": "off",
+        "jest/no-done-callback": "off",
+        "import/order": "warn",
+        "no-undef": "warn",
+        "no-plusplus": "warn",
+        "no-param-reassign": "warn",
+        "prefer-const": "warn",
+        "no-array-constructor": "warn",
+        "no-shadow": "warn",
+        "no-restricted-syntax": "warn",
+        "no-prototype-builtins": "warn",
+        "no-use-before-define": "warn",
+        "require-jsdoc": [
+            "warn",
+            {
+                "require": {
+                    "FunctionDeclaration": true,
+                    "MethodDefinition": true,
+                    "ClassDeclaration": false,
+                    "ArrowFunctionExpression": false,
+                    "FunctionExpression": false
+                }
+            }
+        ]
+    }
+}

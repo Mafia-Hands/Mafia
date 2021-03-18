@@ -1,13 +1,22 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useContext } from 'react';
 import Player from './Player';
 import styles from '../Styles/Table.module.css';
+import { GeneralContext } from '../App';
 
 /**
  *
  * @param playerState [{playerId: <unique id string>, name: <string>, state: <"alive", "dead", "onTrial">}]
  *
  */
-export default function Table({ playerStates }) {
+export default function Table() {
+    const { state } = useContext(GeneralContext);
+    const playerStates = state.players.map((p) => {
+        return {
+            playerId: p,
+            name: p,
+        };
+    });
+
     // used to keep reference to table dom element (to get width/height of it)
     const tableRef = useRef(null);
     // used to keep reference to player div (to get width)
@@ -40,11 +49,7 @@ export default function Table({ playerStates }) {
      * this used the parametric equations of a ellipse (i.e. the round table)
      *
      */
-    function getCoordinatesFromAngleAroundEllipse(
-        angleDegrees,
-        xRadius,
-        yRadius
-    ) {
+    function getCoordinatesFromAngleAroundEllipse(angleDegrees, xRadius, yRadius) {
         const rads = ((angleDegrees + 90) * Math.PI) / 180;
         const x = xRadius * Math.cos(rads) + xRadius;
         const y = yRadius * Math.sin(rads) + yRadius;
@@ -121,9 +126,7 @@ export default function Table({ playerStates }) {
                 {playerCoords.map((p) => {
                     const { playerId, top, left } = p;
 
-                    const { name: playerName } = playerStates.find(
-                        (p) => p.playerId === playerId
-                    );
+                    const { name: playerName } = playerStates.find((p) => p.playerId === playerId);
 
                     return (
                         <Player
@@ -132,7 +135,6 @@ export default function Table({ playerStates }) {
                             playerName={playerName}
                             childRef={playerRef}
                             style={{ top, left, position: 'absolute' }}
-                            onClick={(e) => console.log(e)}
                         />
                     );
                 })}

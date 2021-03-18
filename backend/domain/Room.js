@@ -1,6 +1,8 @@
 const GameStateEnum = require('./Enum/GameStateEnum');
+const VoteHandler = require('./VoteHandler');
+const roles = require('./Enum/Role');
 
-const INITIAL_GAME_STATE = GameStateEnum.NIGHTTIME;
+const INITIAL_GAME_STATE = GameStateEnum.WAITINGLOBBY;
 const INITIAL_ROUND_NUMBER = 0;
 
 class Room {
@@ -11,8 +13,12 @@ class Room {
         // Default game settings.
         this.gameState = INITIAL_GAME_STATE;
         this.maxPlayerCount = 6;
-        this.players = new Array(this.maxPlayerCount);
+        this.players = new Array();
         this.roundNumber = INITIAL_ROUND_NUMBER;
+
+        // Handler used to keep track of votes and calculate tallies
+        this.voteHandler = new VoteHandler();
+        this.host = null;
     }
 
     getRoomID() {
@@ -31,8 +37,49 @@ class Room {
         return this.players;
     }
 
+    getPlayerByNickname(nickname) {
+        let returnedPlayer;
+
+        this.players.forEach((player) => {
+            if (player.nickname === nickname) {
+                returnedPlayer = player;
+            }
+        });
+
+        return returnedPlayer;
+    }
+
+    getPlayersByRole(role) {
+        const playersOfTheRole = [];
+        this.players.forEach((player) => {
+            if (player.role === role) {
+                playersOfTheRole.push(player);
+            }
+        });
+
+        return playersOfTheRole;
+    }
+
+    getWinningPlayers(role) {
+        let playersOfTheRole = [];
+        if (role === roles.CIVILIAN) {
+            playersOfTheRole = [
+                ...this.getPlayersByRole(roles.CIVILIAN),
+                ...this.getPlayersByRole(roles.MEDIC),
+                ...this.getPlayersByRole(roles.DETECTIVE),
+            ];
+        } else {
+            playersOfTheRole = this.getPlayersByRole(role);
+        }
+        return playersOfTheRole;
+    }
+
+    getHost() {
+        return this.Host;
+    }
+
     addPlayer(player) {
-        if (player !== null && this.players.length <= this.maxPlayerCount) {
+        if (player !== null && this.players.length < this.maxPlayerCount) {
             this.players.push(player);
         }
     }
@@ -43,6 +90,28 @@ class Room {
 
     incrementRoundNumber() {
         this.roundNumber++;
+    }
+
+    getWinningRole() {
+        const numOfMafiaAlive = this.getPlayersByRole(roles.MAFIA).filter((player) => player.isAlive).length;
+        const numOfJesterAlive = this.getPlayersByRole(roles.JESTER).filter((player) => player.isAlive).length;
+        const numOfCiviliansAlive = [
+            ...this.getPlayersByRole(roles.CIVILIAN),
+            ...this.getPlayersByRole(roles.MEDIC),
+            ...this.getPlayersByRole(roles.DETECTIVE),
+        ].filter((player) => player.isAlive).length;
+
+        if (numOfMafiaAlive === 0) {
+            return roles.CIVILIAN;
+        }
+        if (numOfMafiaAlive === numOfCiviliansAlive + numOfJesterAlive) {
+            return roles.MAFIA;
+        }
+        if (numOfJesterAlive === 0) {
+            return roles.JESTER;
+        }
+
+        return null;
     }
 
     resetGame() {

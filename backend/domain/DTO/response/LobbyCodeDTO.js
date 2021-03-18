@@ -1,6 +1,6 @@
-class LobbyCodeDTO{
-    constructor(code){
-        this.code = code
+class LobbyCodeDTO {
+    constructor(code) {
+        this.code = code;
     }
 }
 
