@@ -20,6 +20,7 @@ const io = require('socket.io')(server, {
 });
 
 let mafiaGame = null;
+let testPlayerSocket;
 
 module.exports.createMafiaGameWithOnePlayerMock = function (port) {
     mafiaGame = new MafiaGame();
@@ -33,8 +34,8 @@ module.exports.createMafiaGameWithOnePlayerMock = function (port) {
         loadGameStartEvents(io, socket, mafiaGame);
         loadNightTimeEvents(io, socket, mafiaGame);
         loadStateChangeEvents(io, socket, mafiaGame);
-        loadMockEvents(io, socket, mafiaGame);
         socket.player = hostPlayer;
+        testPlayerSocket = socket;
         socket.join(roomID);
     });
 
@@ -65,4 +66,9 @@ module.exports.addPlayers = function (players, roomID) {
     for (player of players) {
         room.addPlayer(player);
     }
+};
+
+module.exports.switchPlayer = function (nickname, roomID) {
+    const room = mafiaGame.gameRoomsDict[roomID];
+    testPlayerSocket.player = room.getPlayerByNickname(nickname);
 };
