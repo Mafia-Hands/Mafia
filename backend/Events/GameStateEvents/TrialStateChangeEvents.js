@@ -5,8 +5,6 @@ const TrialStartDTO = require('../../domain/DTO/response/DayStartDTO');
 const TrialEndDTO = require('../../domain/DTO/response/TrialEndDTO');
 const GameOverDTO = require('../../domain/DTO/response/GameOverDTO');
 
-const NightStateChangeEvents = require('./NightStateChangeEvents');
-
 /**
  * Event handlers and logic for `start-trial`
  * When the client invokes this event handler, the game state will change in-game, the trial voting timer
@@ -47,9 +45,14 @@ function endTrial(io, socket, mafiaGame) {
     const winningRole = room.getWinningRole();
 
     if (winningRole !== null) {
-        io.in(roomID).emit('game-over', new GameOverDTO(winningRole, room.getPlayersByRole(winningRole)));
+        io.in(roomID).emit(
+            'game-over',
+            new GameOverDTO(
+                winningRole,
+                room.getPlayersByRole(winningRole).map((p) => p.nickname)
+            )
+        );
     } else {
-        NightStateChangeEvents.startNight(io, socket, mafiaGame);
     }
     room.voteHandler.resetVotes();
 }

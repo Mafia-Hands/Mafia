@@ -6,8 +6,6 @@ const NightStartDTO = require('../../domain/DTO/response/NightStartDTO');
 const NightEndDTO = require('../../domain/DTO/response/NightEndDTO');
 const GameOverDTO = require('../../domain/DTO/response/GameOverDTO');
 
-const DayStateChangeEvents = require('./DayStateChangeEvents');
-
 /**
  * Event handlers and logic for `start-night`
  * When the client invokes this event handler, the game state will change in-game, the night voting timer
@@ -47,9 +45,14 @@ function endNight(io, socket, mafiaGame) {
 
     const winningRole = room.getWinningRole();
     if (winningRole !== null) {
-        io.in(roomID).emit('game-over', new GameOverDTO(winningRole, room.getPlayersByRole(winningRole)));
+        io.in(roomID).emit(
+            'game-over',
+            new GameOverDTO(
+                winningRole,
+                room.getPlayersByRole(winningRole).map((p) => p.nickname)
+            )
+        );
     } else {
-        DayStateChangeEvents.eventHandlersRegistration(io, socket, mafiaGame);
     }
     room.voteHandler.resetVotes();
 }
