@@ -34,6 +34,12 @@ module.exports.createMafiaGameWithOnePlayerMock = function (port) {
     return { io: io, mafiaGame: mafiaGame, socketIOServer: server, roomID: roomID };
 };
 
+module.exports.addPlayer = function (player, roomID) {
+    room = mafiaGame.gameRoomsDict[roomID];
+
+    room.addPlayer(player);
+};
+
 module.exports.addMafiaVote = function (voter, votedFor, roomID) {
     const room = mafiaGame.gameRoomsDict[roomID];
     const { mafiaVoteMap } = room.voteHandler;
