@@ -1,10 +1,10 @@
 const Client = require('socket.io-client');
-const SocketIOServer = require('../index');
-const config = require('../config.json');
-const Player = require('../domain/Player');
-const roles = require('../domain/Enum/Role');
-const CreateLobbyDTO = require('../domain/DTO/request/CreateLobbyDTO');
-const JoinLobbyDTO = require('../domain/DTO/request/JoinLobbyDTO');
+const SocketIOServer = require('../../index');
+const config = require('../../config.json');
+const Player = require('../../domain/Player');
+const roles = require('../../domain/Enum/Role');
+const CreateLobbyDTO = require('../../domain/DTO/request/CreateLobbyDTO');
+const JoinLobbyDTO = require('../../domain/DTO/request/JoinLobbyDTO');
 
 describe('game-start integration tests', () => {
     const port = process.env.PORT || config.local_port;
