@@ -1,12 +1,13 @@
 const Client = require('socket.io-client');
-const CreateLobbyDTO = require('../../domain/DTO/request/CreateLobbyDTO');
-const JoinLobbyDTO = require('../../domain/DTO/request/JoinLobbyDTO');
 const VoteForDTO = require('../../domain/DTO/request/VoteForDTO');
 const config = require('../../config.json');
-const SocketIOServer = require('../../index');
+const MafiaGameMock = require('../mocks/MafiaGameMock');
+const Player = require('../../domain/Player');
+const RoleEnum = require('../../domain/Enum/Role');
 
 let clientSocket;
 const port = process.env.PORT || config.local_port;
+const roomElements = MafiaGameMock.createMafiaGameWithOnePlayerMock(port);
 
 beforeEach((done) => {
     clientSocket = new Client(`http://localhost:${port}`);
@@ -15,7 +16,7 @@ beforeEach((done) => {
 
 // Disconnect each socket connected to the server
 afterEach((done) => {
-    const { sockets } = SocketIOServer.io.sockets;
+    const { sockets } = roomElements.io.sockets;
 
     // Iterate through each connected client and disconnect them.
     sockets.forEach((socket, key) => {
@@ -27,77 +28,54 @@ afterEach((done) => {
 
 // Close the server once all tests are done
 afterAll(() => {
-    SocketIOServer.server.close();
+    roomElements.socketIOServer.close();
 });
 
 describe('voting-events tests', () => {
+    beforeAll(() => {
+        players = [
+            new Player(null, roomElements.roomID, 'P0', RoleEnum.CIVILIAN, false),
+            new Player(null, roomElements.roomID, 'P1', RoleEnum.CIVILIAN, true),
+        ];
+        MafiaGameMock.addPlayers(players, roomElements.roomID);
+    });
+
     test('day vote test', (done) => {
-        const createLobbyDTO = new CreateLobbyDTO('Anmol');
-
-        clientSocket.on('lobby-code', (lobbyCodeDTO) => {
-            expect(lobbyCodeDTO.code).toBeDefined();
-            lobbyCode = lobbyCodeDTO.code;
-
-            const joinLobbyDTO = new JoinLobbyDTO('Justin', lobbyCode);
-
-            // Subscribe to lobby-join
-            clientSocket.on('lobby-join', (lobbyJoinDTO) => {
-                expect(lobbyJoinDTO.playerNames.length).toBe(2);
-                expect(lobbyJoinDTO.playerNames).toEqual(['Anmol', 'Justin']);
-                done();
-            });
-
-            // Subscribe to day-vote-update
-            clientSocket.on('day-vote-update', (listVoteDTO) => {
-                // Justin vote for Justin because nickname of clientSocket is Justin since thats the last joined player
-                expect(listVoteDTO).toEqual({ voteMap: { Justin: 'Justin' } });
-                done();
-            });
-
-            // Request to join a lobby
-            clientSocket.emit('join-lobby', joinLobbyDTO);
-
-            // vote test begins
-            const voteForDTO = new VoteForDTO('Justin');
-            clientSocket.emit('day-vote', voteForDTO);
+        clientSocket.emit('assign-player', {
+            nickname: 'P0',
+            roomID: roomElements.roomID,
+        });
+        // Subscribe to day-vote-update
+        clientSocket.on('day-vote-update', (listVoteDTO) => {
+            // Justin vote for Justin because nickname of clientSocket is Justin since thats the last joined player
+            expect(listVoteDTO).toEqual({ voteMap: { P0: 'P1' } });
+            done();
         });
 
-        // Request to create a new lobby
-        clientSocket.emit('create-lobby', createLobbyDTO);
+        // vote test begins
+        const voteForDTO = new VoteForDTO('P1');
+        clientSocket.emit('day-vote', voteForDTO);
     });
 
     test('trial vote test', (done) => {
-        const createLobbyDTO = new CreateLobbyDTO('Anmol');
-
-        clientSocket.on('lobby-code', (lobbyCodeDTO) => {
-            expect(lobbyCodeDTO.code).toBeDefined();
-            const lobbyCode = lobbyCodeDTO.code;
-
-            const joinLobbyDTO = new JoinLobbyDTO('Justin', lobbyCode);
-
-            // Subscribe to lobby-join
-            clientSocket.on('lobby-join', (lobbyJoinDTO) => {
-                expect(lobbyJoinDTO.playerNames.length).toBe(2);
-                expect(lobbyJoinDTO.playerNames).toEqual(['Anmol', 'Justin']);
-                done();
-            });
-
-            // Request to join a lobby
-            clientSocket.emit('join-lobby', joinLobbyDTO);
-
-            // vote test begins
-            const voteForDTO = new VoteForDTO('Justin');
-            clientSocket.emit('trial-vote', voteForDTO);
-
-            // Subscribe to day-vote-update
-            clientSocket.on('trial-vote-update', (listVoteDTO) => {
-                // Justin vote for Justin because nickname of clientSocket is Justin since thats the last joined player
-                expect(listVoteDTO).toEqual({ voteMap: { Justin: 'Justin' } });
-                done();
-            });
+        players = [
+            new Player(null, roomElements.roomID, 'P0', RoleEnum.CIVILIAN, false),
+            new Player(null, roomElements.roomID, 'P1', RoleEnum.CIVILIAN, true),
+        ];
+        MafiaGameMock.addPlayers(players, roomElements.roomID);
+        clientSocket.emit('assign-player', {
+            nickname: 'P0',
+            roomID: roomElements.roomID,
+        });
+        // Subscribe to trial-vote-update
+        clientSocket.on('trial-vote-update', (listVoteDTO) => {
+            // Justin vote for Justin because nickname of clientSocket is Justin since thats the last joined player
+            expect(listVoteDTO).toEqual({ voteMap: { P0: 'P1' } });
+            done();
         });
 
-        // Request to create a new lobby
-        clientSocket.emit('create-lobby', createLobbyDTO);
+        // vote test begins
+        const voteForDTO = new VoteForDTO('P1');
+        clientSocket.emit('trial-vote', voteForDTO);
     });
 });

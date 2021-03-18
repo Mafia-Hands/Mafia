@@ -5,6 +5,7 @@ const loadVoteEvents = require('../../Events/VoteEvents');
 const loadGameStartEvents = require('../../Events/GameStartEvents');
 const { loadNightTimeEvents } = require('../../Events/NightTimeVoteEvents');
 const loadStateChangeEvents = require('../../Events/GameStateEvents/StateChangeEvents');
+const { loadMockEvents } = require('./MockEventHandler');
 
 const MafiaGame = require('../../domain/MafiaGame');
 const Room = require('../../domain/Room');
@@ -32,6 +33,7 @@ module.exports.createMafiaGameWithOnePlayerMock = function (port) {
         loadGameStartEvents(io, socket, mafiaGame);
         loadNightTimeEvents(io, socket, mafiaGame);
         loadStateChangeEvents(io, socket, mafiaGame);
+        loadMockEvents(io, socket, mafiaGame);
         socket.player = hostPlayer;
         socket.join(roomID);
     });
@@ -56,4 +58,11 @@ module.exports.addMafiaVote = function (voter, votedFor, roomID) {
     const { mafiaVoteMap } = room.voteHandler;
 
     mafiaVoteMap[voter] = votedFor;
+};
+
+module.exports.addPlayers = function (players, roomID) {
+    const room = mafiaGame.gameRoomsDict[roomID];
+    for (player of players) {
+        room.addPlayer(player);
+    }
 };
