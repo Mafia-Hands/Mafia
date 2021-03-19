@@ -2,10 +2,8 @@ import React, { useContext, useState } from 'react';
 import socket from '../Socket';
 import { GeneralContext } from '../App';
 import { TextField, Button } from '@material-ui/core';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
 import styles from '../Styles/HomePage.module.css';
-import classNames from 'classnames';
 
 export default function HomePage() {
     const { dispatch } = useContext(GeneralContext);
