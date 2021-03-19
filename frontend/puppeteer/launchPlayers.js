@@ -32,7 +32,7 @@ const puppeteer = require('puppeteer-core');
     // Set up for host
     let host = pages[0];
     await host.goto(url);
-    await enterNickname(host, "Test-mynameisreallylonglol")
+    await enterNickname(host, "Test")
     await clickCreateLobby(host);
 
     // Wait until room code appears
