@@ -103,4 +103,47 @@ describe('game-start integration tests', () => {
 
         done();
     });
+
+    test('test game win 1 player', async (done) => {
+        // Single player should immediately win as only player left
+        // May break in the future if we decide to enforce starts with more than 3 players
+
+        // Start the game
+        async function startGame() {
+            return new Promise((resolve) => {
+                // Start the game
+                clientSockets[0].emit('start-game');
+                clientSockets[0].on('game-start', () => {
+                    resolve();
+                });
+            });
+        }
+
+        // Start the night
+        async function startNight() {
+            return new Promise((resolve) => {
+                // Start the night when response retrieved
+                clientSockets[0].emit('start-night');
+                // Attach handlers to night-start and night-end. In total should be 12 responses
+                clientSockets[0].once('night-start', (nightStartDTO) => {
+                    expect(nightStartDTO.timeToVote).toBeDefined();
+                });
+                clientSockets[0].once('night-end', (nightEndDTO) => {
+                    // Player killed should be null, as no one voted
+                    expect(nightEndDTO.playerKilled).toBeNull();
+                });
+                clientSockets[0].once('game-over', (gameOverDTO) => {
+                    // Player killed should be null, as no one voted
+                    expect(gameOverDTO.winningRole).toBeDefined();
+                    expect(gameOverDTO.winners).toBeDefined();
+                    resolve();
+                });
+            });
+        }
+
+        await startGame();
+        await startNight();
+
+        done();
+    });
 });
