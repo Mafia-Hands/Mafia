@@ -42,7 +42,7 @@ describe('game-start integration tests', () => {
         SocketIOServer.server.close();
     });
 
-    test('tests roles distributed on game start', async (done) => {
+    test('integration test start-game 6 players', async (done) => {
         // Connect to lobby created in before each with 5 other players
         async function connectAndJoin(index) {
             return new Promise((resolve) => {

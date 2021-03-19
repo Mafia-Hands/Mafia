@@ -43,7 +43,7 @@ describe('game-start integration tests', () => {
         SocketIOServer.server.close();
     });
 
-    test('test night-start night-end sent', async (done) => {
+    test('integration test start-night 6 players', async (done) => {
         // Connect to lobby created in before each with 5 other players
         async function connectAndJoin(index) {
             return new Promise((resolve) => {
@@ -104,9 +104,9 @@ describe('game-start integration tests', () => {
         done();
     });
 
-    test('test game win 1 player', async (done) => {
+    test('integration test night-start 1 player', async (done) => {
         // Single player should immediately win as only player left
-        // May break in the future if we decide to enforce starts with more than 3 players
+        // May be invalid in the future if we decide to enforce starts with more than 3 players
 
         // Start the game
         async function startGame() {
