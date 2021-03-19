@@ -4,6 +4,8 @@ import { GeneralContext } from '../App';
 import { TextField, Button } from '@material-ui/core';
 import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
 import styles from '../Styles/HomePage.module.css';
+import Tooltip from '@material-ui/core/Tooltip';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 export default function HomePage() {
     const { dispatch } = useContext(GeneralContext);
@@ -18,6 +20,15 @@ export default function HomePage() {
     const [tickNoSpaces, setTickNoSpaces] = useState(true);
     const [lessThanTen, setLessThanTen] = useState(validNickname);
     const [tickLessThanTen, setTickLessThanTen] = useState(true);
+    const [open, setOpen] = useState(false);
+
+    const handleTooltipClose = () => {
+        setOpen(false);
+    };
+
+    const handleTooltipOpen = () => {
+        setOpen(true);
+    };
 
     const createLobby = () => {
         dispatch({ type: 'create-lobby', nickname });
@@ -68,47 +79,70 @@ export default function HomePage() {
         <div>
             <div className={styles.container}>
                 <h1>MAFIA</h1>
-                <TextField
-                    color="secondary"
-                    id="nickname"
-                    label="Enter Nickname"
-                    autoComplete="off"
-                    variant="outlined"
-                    value={nickname}
-                    onChange={(e) => validateNickname(e.target.value)}
-                ></TextField>
-                <div className={styles.checkers}>
-                    <li className={nonEmpty}>
-                        {tickNonempty ? (
-                            <span>
-                                <CheckRoundedIcon fontSize="small" />
-                                <span className={styles.checkitems}> Non-empty nickname</span>{' '}
-                            </span>
-                        ) : (
-                            <span className={styles.checkitems}> Non-empty nickname</span>
-                        )}
-                    </li>
-                    <li className={noSpaces}>
-                        {tickNoSpaces ? (
-                            <span>
-                                <CheckRoundedIcon fontSize="small" />
-                                <span className={styles.checkitems}> No spaces</span>{' '}
-                            </span>
-                        ) : (
-                            <span className={styles.checkitems}>No spaces</span>
-                        )}
-                    </li>
-                    <li className={lessThanTen}>
-                        {tickLessThanTen ? (
-                            <span>
-                                <CheckRoundedIcon fontSize="small" />
-                                <span className={styles.checkitems}>Less than 10 characters</span>{' '}
-                            </span>
-                        ) : (
-                            <span className={styles.checkitems}>Less than 10 characters</span>
-                        )}
-                    </li>
-                </div>
+                <ClickAwayListener onClickAway={handleTooltipClose}>
+                    <div>
+                        <Tooltip
+                            PopperProps={{
+                                disablePortal: true,
+                            }}
+                            onClose={handleTooltipClose}
+                            open={open}
+                            disableFocusListener
+                            disableHoverListener
+                            disableTouchListener
+                            title={
+                                <React.Fragment>
+                                    <div className={styles.checkers}>
+                                        <li className={nonEmpty}>
+                                            {tickNonempty ? (
+                                                <span>
+                                                    <CheckRoundedIcon fontSize="small" />
+                                                    <span className={styles.checkitems}> Non-empty nickname</span>{' '}
+                                                </span>
+                                            ) : (
+                                                <span className={styles.checkitems}> Non-empty nickname</span>
+                                            )}
+                                        </li>
+                                        <li className={noSpaces}>
+                                            {tickNoSpaces ? (
+                                                <span>
+                                                    <CheckRoundedIcon fontSize="small" />
+                                                    <span className={styles.checkitems}> No spaces</span>{' '}
+                                                </span>
+                                            ) : (
+                                                <span className={styles.checkitems}>No spaces</span>
+                                            )}
+                                        </li>
+                                        <li className={lessThanTen}>
+                                            {tickLessThanTen ? (
+                                                <span>
+                                                    <CheckRoundedIcon fontSize="small" />
+                                                    <span className={styles.checkitems}>
+                                                        Less than 10 characters
+                                                    </span>{' '}
+                                                </span>
+                                            ) : (
+                                                <span className={styles.checkitems}>Less than 10 characters</span>
+                                            )}
+                                        </li>
+                                    </div>
+                                </React.Fragment>
+                            }
+                            placement="right"
+                        >
+                            <TextField
+                                color="secondary"
+                                id="nickname"
+                                label="Enter Nickname"
+                                autoComplete="off"
+                                variant="outlined"
+                                value={nickname}
+                                onChange={(e) => validateNickname(e.target.value)}
+                                onClick={handleTooltipOpen}
+                            ></TextField>
+                        </Tooltip>
+                    </div>
+                </ClickAwayListener>
                 <TextField
                     color="secondary"
                     id="room-code"
