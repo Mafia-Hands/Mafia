@@ -6,10 +6,25 @@ import Chatbox from '../Components/Chatbox';
 import styles from '../Styles/NewGameScreen.module.css';
 import { GeneralContext } from '../App';
 import socket from '../Socket';
-import { Button } from '@material-ui/core';
+import { Button, withStyles } from '@material-ui/core';
 import ModalMUI from '../Modal/ModalMUI';
 import RolesAndRules from '../Components/RolesAndRules';
 import SettingDialog from '../Pages/SettingDialog';
+
+const StyledButton = withStyles({
+    root: {
+        alignSelf: 'start',
+        height: '100%',
+        borderRadius: '10px',
+        backgroundColor: '#EE6644',
+    },
+    label: {
+        fontWeight: 'bolder',
+        textTransform: 'capitalize',
+        letterSpacing: '2px',
+        fontSize:'1.5rem',
+    },
+})(Button);
 
 const NewGameScreen = () => {
     const { state } = useContext(GeneralContext);
@@ -20,18 +35,24 @@ const NewGameScreen = () => {
     };
     return (
         <div>
-            <TopBarSettings currentScreen="LOBBY" showSettings={true} showUp={setOpen} setOpenInfo={setOpenInfo} />
+            <TopBarSettings
+                currentScreen={`LOBBY ID: ${state.code}`}
+                showSettings={true}
+                showUp={setOpen}
+                setOpenInfo={setOpenInfo}
+            />
             <div className={styles.container}>
                 <div className={styles.leftContainer}>
                     <PlayerList className={styles.playerNames} />
+                    <LobbySettings className={styles.lobbySettings} setOpen={setOpen} setOpenInfo={setOpenInfo} />
+                </div>
+                <div className={styles.rightContainer}>
                     <Chatbox
                         className={styles.chatbox}
                         messageList={['hi', 'sup', "these are dummy messages, chat isn't currently implemented"]}
                     />
-                </div>
-                <div className={styles.rightContainer}>
-                    <LobbySettings className={styles.lobbySettings} setOpen={setOpen} setOpenInfo={setOpenInfo} />
-                    <Button
+
+                    <StyledButton
                         className={styles.startButton}
                         variant="contained"
                         color="primary"
@@ -41,7 +62,7 @@ const NewGameScreen = () => {
                         onClick={startGame}
                     >
                         Start Game
-                    </Button>
+                    </StyledButton>
                 </div>
             </div>
             <div style={{ display: 'none' }}>

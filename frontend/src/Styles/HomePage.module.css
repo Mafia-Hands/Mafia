@@ -10,16 +10,15 @@
 
 .contents{
     display: grid;
-    grid-template-rows: 2fr 1fr 1fr 0fr 2fr 0.5fr;
+    grid-template-rows: 2fr 1fr 1fr 0fr 1fr 0.5fr;
     grid-template-columns: 3fr 1fr;
     grid-row-gap: 1em;
-    row-gap: 1em;
     background-color:var(--deepBlue);
     border-radius: 20px;
     width: 60vh;
     height: 60vh;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .header{
@@ -30,7 +29,7 @@
     font-family: Helvetica, sans-serif;
     font-size: 10vh;
     font-weight: bold;
-    padding-top: 10px;
+    padding-top: 15px;
 }
 
 .nameInputs{

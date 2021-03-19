@@ -1,6 +1,6 @@
 import { React, useContext } from 'react';
 import { GeneralContext } from '../App';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
     Button,
     Card,
@@ -17,28 +17,48 @@ import {
 const useStyles = makeStyles({
     root: {
         display: 'grid',
-        gridGap: '24px',
-        backgroundColor: 'pink',
-        justifyItems: 'center',
+        gridGap: '0px',
+        backgroundColor: '#3E5B7F',
+        gridTemplateRows: '0.5fr 5fr',
+        border: 'none',
+        borderRadius: '10px',
     },
+    title: {
+        fontSize: '10px',
+        fontFamily: 'Helvetica, sans-serif',
+        backgroundColor: 'rgb(152, 193, 217,0.6)',
+        color: '#E3F1F1',
+        padding: '10px',
+        paddingLeft: '16px',
+    },
+    content:{
+        padding: '0px',
+        color:'#E3F1F1',
+    }
 });
 
+const StyledButton = withStyles({
+    root:{
+        backgroundColor: 'rgb(152, 193, 217,0.6)',
+    },
+    label:{
+        textTransform: 'capitalize',
+        color: '#E3F1F1',
+    }
+    })(Button);
+
 const LobbySettings = ({ setOpen, setOpenInfo }) => {
-    const { state } = useContext(GeneralContext);
     const classes = useStyles();
 
     return (
-        <div style={{ display: 'grid' }}>
+        
             <Card className={classes.root} variant="Outlined">
-                <CardHeader title="Game Settings"></CardHeader>
-                <CardContent>
+                <CardHeader className={classes.title} title="Game Settings"></CardHeader>
+                <CardContent className={classes.content}>
                     <List>
                         <ListItem>
-                            <Typography variant="h5" id="room-code">Game Code: {state.code}</Typography>
-                        </ListItem>
-                        <ListItem>
-                            <Typography style={{ marginRight: '20px' }}>Number of Mafia: </Typography>
-                            <Select defaultValue={1} label="This is a label">
+                            <Typography style={{ marginRight: '20px'}}>Number of Mafia: </Typography>
+                            <Select style={{ color:'#E3F1F1' }} defaultValue={1} label="This is a label">
                                 <MenuItem value={1}>1</MenuItem>
                                 <MenuItem value={2}>2</MenuItem>
                                 <MenuItem value={3}>3</MenuItem>
@@ -47,7 +67,7 @@ const LobbySettings = ({ setOpen, setOpenInfo }) => {
                     </List>
                 </CardContent>
                 <CardActions>
-                    <Button
+                    <StyledButton
                         size="large"
                         variant="contained"
                         onClick={() => {
@@ -56,10 +76,10 @@ const LobbySettings = ({ setOpen, setOpenInfo }) => {
                         }}
                     >
                         Roles
-                    </Button>
+                    </StyledButton>
                 </CardActions>
             </Card>
-        </div>
+        
     );
 };
 

@@ -1,3 +1,13 @@
+@import './colourScheme.css';
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 2em;
+    height: 100vh; 
+    padding-bottom: 30px;
+}
+
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -7,16 +17,30 @@
 .leftContainer{
     display: grid;
     row-gap: 2em;
+    height: 100vh;
     grid-template-rows: 1fr 1fr;
 }
 
 .rightContainer{
     display: grid;
-    grid-template-rows: 80% 1fr;
+    height: 100vh;
+    grid-template-rows: 85% 1fr;
     row-gap: 2em;
 }
 
-.startButton {
-    align-self: end;
-    justify-self: center;
+.playerNames{
+    grid-row: 1;
+    grid-row-end: 2;
+
+}
+
+.chatbox{
+    grid-row-start: 1;
+    grid-row-end: 3;
+
+}
+
+.lobbySettings{
+    grid-row-start: 2;
+    grid-row-end: 3;
 }

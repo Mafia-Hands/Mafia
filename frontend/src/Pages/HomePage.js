@@ -6,7 +6,7 @@ import styles from '../Styles/HomePage.module.css';
 
 const CustomTextField = withStyles({
     root: {
-        padding: '5px',
+        
         '& label.Mui-focused': {
             color: '#3E5B7F',
         },
@@ -47,6 +47,8 @@ const CustomCreateButton = withStyles({
         color: 'white',
         fontWeight: 'bold',
         letterSpacing: '1px',
+        textTransform:'capitalize',
+        fontSize: '1.2rem'
       },
 })(Button);
 
