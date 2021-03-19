@@ -9,7 +9,7 @@ export default function CoreGamePage({dayPeriod,dayNumber}) {
         <div>
             <TopBarGame showTimer={true} showRole={true} />
             <GameEnv />
-            <BottomBar Period={dayPeriod} Number ={dayNumber}/>
+            <BottomBar />
         </div>
     );
 }
