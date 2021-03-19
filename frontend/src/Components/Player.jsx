@@ -48,7 +48,7 @@ export default function Player({ playerId, playerName, style, childRef }) {
                 break;
             case 'trial':
                 socket.emit(`trial-vote`, { votingFor: playerName });
-                dispatch( { type:'show-selected' , status: `Voted to hang ${playerName}`, votedPlayer: playerName } );
+                dispatch( { type:'show-selected' , status: `Voted to kill ${playerName}`, votedPlayer: playerName } );
                 break;
             default:
                 throw new Error('Invalid voting type');
