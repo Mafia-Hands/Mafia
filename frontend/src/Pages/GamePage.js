@@ -16,7 +16,7 @@ export default function GamePage() {
             component = <EntryScreen />;
             break;
         case 'core':
-            component = <CoreGamePage />;
+            component = <CoreGamePage dayPeriod={state.dayPeriod} dayNumber={state.dayNumber}/>;
             break;
         case 'end':
             component = <GameOverPage />;
