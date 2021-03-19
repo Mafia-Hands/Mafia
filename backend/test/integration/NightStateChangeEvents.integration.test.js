@@ -12,10 +12,10 @@ describe('game-start integration tests', () => {
 
     // Create a new client, and connect it to the server via a socket
     beforeEach(async (done) => {
-        clientSockets[0] = new Client(`http://localhost:` + port);
         // Host creates lobby
         async function connectAndCreateLobby() {
             return new Promise((resolve) => {
+                clientSockets[0] = new Client(`http://localhost:` + port);
                 clientSockets[0].on('connect', () => {
                     clientSockets[0].emit('create-lobby', new CreateLobbyDTO('Leon'));
                     clientSockets[0].on('lobby-code', (createLobbyDTO) => {
