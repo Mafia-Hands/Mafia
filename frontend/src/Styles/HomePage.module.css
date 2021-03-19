@@ -1,7 +1,65 @@
+@import './colourScheme.css';
+
 .container{
-    display:grid;
-    grid-template-rows: 2fr 1fr 1fr 2fr 0.3fr 1fr;
+    height: 100vh;
+    margin: 20px;   
+    display: flex;
     align-items: center;
-    justify-items: center;
-    row-gap: 1em;
+    justify-content: center;
 }
+
+.contents{
+    display: grid;
+    grid-template-rows: 2fr 1fr 1fr 0fr 2fr 0.5fr;
+    grid-template-columns: 3fr 1fr;
+    grid-row-gap: 1em;
+    row-gap: 1em;
+    background-color:var(--deepBlue);
+    border-radius: 20px;
+    width: 60vh;
+    height: 60vh;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.header{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    text-align: center;
+    color: var(--lightBlue);
+    font-family: Helvetica, sans-serif;
+    font-size: 10vh;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+.nameInputs{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: rgba(227, 241, 241,0.5)
+
+}
+.codeInputs{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    justify-content: center;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: rgba(227, 241, 241,0.5)
+}
+
+.joinButton{
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.createButton{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 5;
+    grid-row-end: 6;
+}
+

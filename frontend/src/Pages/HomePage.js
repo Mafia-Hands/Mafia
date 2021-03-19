@@ -1,8 +1,55 @@
 import React, { useContext, useState } from 'react';
 import socket from '../Socket';
 import { GeneralContext } from '../App';
-import { TextField, Button } from '@material-ui/core';
+import { makeStyles, withStyles, TextField, Button } from '@material-ui/core';
 import styles from '../Styles/HomePage.module.css';
+import classNames from 'classnames';
+
+const CustomTextField = withStyles({
+    root: {
+        padding: '5px',
+        '& label.Mui-focused': {
+            color: '#3E5B7F',
+        },
+    },
+})(TextField);
+
+const CustomJoinButton = withStyles({
+    root: {
+        backgroundColor: 'rgba(227, 241, 241)',
+        borderTopLeftRadius: '0',
+        borderBottomLeftRadius: '0',
+        borderTopRightRadius: '5px',
+        borderBottomRightRadius: '5px',
+        border: 'none',
+        '&:hover': {
+            backgroundColor: 'rgba(152, 193, 217)',
+        },
+    },
+    label: {
+        fontFamily: 'Helvetica, sans-serif',
+        fontWeight: 'bold',
+        color: 'rgba((62,91,127))',
+      },
+})(Button);
+
+const CustomCreateButton = withStyles({
+    root: {
+        backgroundColor: 'rgba(238, 102, 68)',
+        borderRadius: '5px',
+        border: 'none',
+        '&:hover': {
+            backgroundColor: 'rgb(180, 63, 34)',
+            
+        },
+    },
+    label: {
+        fontFamily: 'Helvetica, sans-serif',
+        color: 'white',
+        fontWeight: 'bold',
+        letterSpacing: '1px',
+      },
+})(Button);
 
 export default function HomePage() {
     const { dispatch } = useContext(GeneralContext);
@@ -21,33 +68,32 @@ export default function HomePage() {
     };
 
     return (
-        <div>
-            <div className={styles.container}>
-                <h1>MAFIA</h1>
-                <TextField
-                    color="secondary"
+        <div className={styles.container}>
+            <div className={styles.contents}>
+                <div className={styles.header}> Mafia </div>
+                <CustomTextField
+                    className={styles.nameInputs}
                     id="nickname"
                     label="Enter Nickname"
-                    variant="outlined"
                     value={nickname}
                     onChange={(e) => setNickname(e.target.value)}
-                ></TextField>
-                <TextField
-                    color="secondary"
+                    InputProps={{ disableUnderline: true }}
+                ></CustomTextField>
+                <CustomTextField
+                    className={styles.codeInputs}
                     id="room-code"
                     value={code}
                     label="Enter LobbyID"
-                    variant="outlined"
                     type="text"
                     onChange={(e) => setCode(e.target.value)}
-                ></TextField>
-                <Button variant="outlined" onClick={joinLobby} id="join-lobby">
-                    Join Game
-                </Button>
-                Want to create a new lobby?
-                <Button variant="outlined" onClick={createLobby} id="create-lobby">
-                    Create Game
-                </Button>
+                    InputProps={{ disableUnderline: true }}
+                ></CustomTextField>
+                <CustomJoinButton className={styles.joinButton} variant="outlined" onClick={joinLobby} id="join-lobby" >
+                    Join
+                </CustomJoinButton>
+                <CustomCreateButton className={styles.createButton} variant="outlined" onClick={createLobby} id="create-lobby">
+                    Create new game
+                </CustomCreateButton>
             </div>
         </div>
     );
