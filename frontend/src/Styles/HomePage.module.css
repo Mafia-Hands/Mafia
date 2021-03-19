@@ -1,7 +1,31 @@
-.container{
-    display:grid;
+.container {
+    display: grid;
     grid-template-rows: 2fr 1fr 1fr 2fr 0.3fr 1fr;
     align-items: center;
     justify-items: center;
     row-gap: 1em;
+}
+
+.validNickname {
+    background-color: lightgreen;
+    list-style-type: none;
+}
+
+.invalidNickname {
+    background-color: none;
+    list-style-type: none;
+}
+
+.checkers {
+    display: grid;
+    grid-template-areas:
+        'a b'
+        'c c';
+    justify-items: center;
+    align-items: center;
+    row-gap: 2px;
+}
+
+.checkitems {
+    font-size: 12px;
 }
