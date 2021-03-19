@@ -52,7 +52,7 @@ export default function Player({ playerId, playerName, style, childRef }) {
 
     return (
         <div className={playerStyle} style={style} ref={childRef} onClick={validateOnClick(onClick)}>
-            <div> {playerName} </div>
+            <div> {playerName.concat(isDead ? " (DEAD)": "")} </div>
         </div>
     );
 }
