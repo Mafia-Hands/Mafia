@@ -36,7 +36,6 @@
 .nameInputs{
     grid-column-start: 1;
     grid-column-end: 3;
-    justify-content: center;
     border-radius: 5px;
     background-color: rgba(227, 241, 241,0.5)
 
@@ -44,7 +43,6 @@
 .codeInputs{
     grid-column-start: 1;
     grid-column-end: 2;
-    justify-content: center;
     border-radius: 5px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;

@@ -1,9 +1,8 @@
 import React, { useContext, useState } from 'react';
 import socket from '../Socket';
 import { GeneralContext } from '../App';
-import { makeStyles, withStyles, TextField, Button } from '@material-ui/core';
+import { withStyles, TextField, Button } from '@material-ui/core';
 import styles from '../Styles/HomePage.module.css';
-import classNames from 'classnames';
 
 const CustomTextField = withStyles({
     root: {
