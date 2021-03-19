@@ -28,15 +28,15 @@
     background-color: red;
 }
 
-.isClicked {
-    background-color: #d85a5a;
-    border: 1px solid #da2323;
+.isClicked {  
+    background-color: rgb(19, 88, 179);
+    border: 1px solid #020086;
 }
 
 .isClicked:hover {
-    background-color: #d85a5a;
+    background-color: #1f22c2;
 }
 
 .isDead {
-    background-color: rgb(0, 0, 0);
+    background-color: #ab2635;
 }
