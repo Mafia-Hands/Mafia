@@ -129,6 +129,7 @@ export default function HomePage() {
                                 </React.Fragment>
                             }
                             placement="right"
+                            arrow
                         >
                             <TextField
                                 color="secondary"
