@@ -52,6 +52,15 @@ const reducer = (state, action) => {
             };
         }
 
+        case 'show-selected': {
+            return {
+                ...state,
+                status: action.status,
+                votingState: {...state.votingState, vote: action.votedPlayer },
+            };
+        }
+
+
         case 'night-end': {
             return {
                 ...state,
@@ -309,5 +318,5 @@ export default function useGameState() {
         };
     }, [state, generalState]);
 
-    return state;
+    return [state, dispatch];
 }
