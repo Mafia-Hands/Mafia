@@ -201,19 +201,19 @@ export default function useGameState() {
         function onNightEnd({ playerKilled, isGameOver }) {
             dispatch({
                 type: 'night-end',
-                status: `${playerKilled} was killed in the night`,
+                status: playerKilled ? `${playerKilled} was killed in the night...` : `Nobody died in the night!`,
                 playerKilled,
             });
 
             if (!isGameOver) {
-                generalState.isHost && setTimeout(() => socket.emit('start-day'), 2000); 
+                generalState.isHost && setTimeout(() => socket.emit('start-day'), 2000);
             }
         }
 
         function onDayStart({ timeToVote }) {
             dispatch({
                 type: 'day-start',
-                status: 'Please vote for someone',
+                status: 'Select someone to be on trial',
                 votablePlayers: state.alivePlayers.filter((p) => p !== generalState.nickname),
                 timeToVote,
             });
@@ -237,7 +237,9 @@ export default function useGameState() {
         function onTrialStart({ timeToVote }) {
             dispatch({
                 type: 'trial-start',
-                status: state.votingState.votablePlayers.length ? 'Please vote for someone' : 'You are on trial',
+                status: state.votingState.votablePlayers.length
+                    ? 'Vote for the player on trial to kill them'
+                    : 'You are on trial',
                 timeToVote,
             });
         }
@@ -245,7 +247,9 @@ export default function useGameState() {
         function onTrialEnd({ playerKilled, isGameOver }) {
             dispatch({
                 type: 'trial-end',
-                status: `${playerKilled} was hanged`, // TODO if playerKilled === null
+                status: playerKilled
+                    ? `The town voted to kill ${playerKilled}!`
+                    : `${playerKilled} was saved by the Town!`, // TODO if playerKilled === null
                 playerKilled,
             });
             if (!isGameOver) {

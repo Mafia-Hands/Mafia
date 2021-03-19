@@ -6,6 +6,7 @@
 .userRole {
     grid-area: userRole;
     justify-self: start;
+    text-transform: capitalize;
 }
 
 .info {
