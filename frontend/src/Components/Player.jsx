@@ -18,9 +18,8 @@ export default function Player({ playerId, playerName, style, childRef }) {
     const playerStyle = classNames({
         [styles.playerWrapper]: true,
         [styles.isHoverable]: isHoverable,
-        [styles.hasVoted]: hasVoted,
+        [styles.hasVoted]: isDead ? isDead : hasVoted,
         [styles.isClicked]: isClicked,
-        [styles.isDead]: isDead,
     });
 
     // this only allows clicks if a player is actually hoverable.
