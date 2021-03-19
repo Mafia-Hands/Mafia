@@ -1,13 +1,7 @@
-.time{
+.time {
     margin-bottom: 1rem;
 }
 
-.time span{
+.time span {
     font-size: 3rem;
-}
-.my_button{
-    background-color: #3ed927;
-    color: white;
-    font-size: xx-large;
-    margin-bottom: 1rem;
 }

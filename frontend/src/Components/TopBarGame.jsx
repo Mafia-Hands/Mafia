@@ -9,6 +9,7 @@ import TopBarSettings from './TopBarSettings';
 import { GeneralContext } from '../App';
 import RolesAndRules from './RolesAndRules';
 import Timer from './Timer';
+import { GameContext } from '../Pages/GamePage';
 
 /**
  * @param userDetails [{userName: <string>, role: <string>}]
@@ -22,6 +23,8 @@ const TopBarGame = ({ showTimer, showRole }) => {
     const [openInfo, setOpenInfo] = useState(false);
     const userName = state.nickname;
     const role = state.role;
+    const { state: gameState } = useContext(GameContext);
+
     return (
         <div className={styles.container}>
             <p className={styles.userName}>{`Name: ${userName}`}</p>
@@ -40,8 +43,7 @@ const TopBarGame = ({ showTimer, showRole }) => {
             )}
             {showTimer && (
                 <div className={styles.timer}>
-                    {/* The default time just be set to 90 for now */}
-                    <Timer userPreferTime="90" />
+                    <Timer userPreferTime={gameState.votingState.timeToVote} />
                 </div>
             )}
             <Button
