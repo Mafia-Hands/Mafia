@@ -27,6 +27,7 @@ export default function HomePage() {
                     color="secondary"
                     id="nickname"
                     label="Enter Nickname"
+                    autoComplete="off"
                     variant="outlined"
                     value={nickname}
                     onChange={(e) => setNickname(e.target.value)}
@@ -36,6 +37,7 @@ export default function HomePage() {
                     id="room-code"
                     value={code}
                     label="Enter LobbyID"
+                    autoComplete="off"
                     variant="outlined"
                     type="text"
                     onChange={(e) => setCode(e.target.value)}
