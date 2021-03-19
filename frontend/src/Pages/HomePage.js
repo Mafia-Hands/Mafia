@@ -12,13 +12,8 @@ export default function HomePage() {
     const [nickname, setNickname] = useState('');
     const [code, setCode] = useState('');
     const [joinDisabled, setjoinDisabled] = useState(true);
-    let validNickname = styles.validNickname;
-    let invalidNickname = styles.invalidNickname;
-    const [nonEmpty, setnonEmpty] = useState(invalidNickname);
     const [tickNonempty, setTickNonempty] = useState(false);
-    const [noSpaces, setnoSpaces] = useState(validNickname);
     const [tickNoSpaces, setTickNoSpaces] = useState(true);
-    const [lessThanTen, setLessThanTen] = useState(validNickname);
     const [tickLessThanTen, setTickLessThanTen] = useState(true);
     const [open, setOpen] = useState(false);
 
@@ -46,26 +41,20 @@ export default function HomePage() {
         setNickname(nickname);
         if (nickname === '') {
             validCheck = false;
-            setnonEmpty(invalidNickname);
             setTickNonempty(false);
         } else {
-            setnonEmpty(validNickname);
             setTickNonempty(true);
         }
         if (nickname.includes(' ')) {
             validCheck = false;
-            setnoSpaces(invalidNickname);
             setTickNoSpaces(false);
         } else {
-            setnoSpaces(validNickname);
             setTickNoSpaces(true);
         }
         if (nickname.length > 10) {
             validCheck = false;
-            setLessThanTen(invalidNickname);
             setTickLessThanTen(false);
         } else {
-            setLessThanTen(validNickname);
             setTickLessThanTen(true);
         }
         if (validCheck) {
@@ -93,7 +82,7 @@ export default function HomePage() {
                             title={
                                 <React.Fragment>
                                     <div className={styles.checkers}>
-                                        <li className={nonEmpty}>
+                                        <span className={tickNonempty? styles.validNickname : styles.invalidNickname}>
                                             {tickNonempty ? (
                                                 <span>
                                                     <CheckRoundedIcon fontSize="small" />
@@ -102,8 +91,8 @@ export default function HomePage() {
                                             ) : (
                                                 <span className={styles.checkitems}> Non-empty nickname</span>
                                             )}
-                                        </li>
-                                        <li className={noSpaces}>
+                                        </span>
+                                        <span className={tickNoSpaces? styles.validNickname : styles.invalidNickname}>
                                             {tickNoSpaces ? (
                                                 <span>
                                                     <CheckRoundedIcon fontSize="small" />
@@ -112,8 +101,8 @@ export default function HomePage() {
                                             ) : (
                                                 <span className={styles.checkitems}>No spaces</span>
                                             )}
-                                        </li>
-                                        <li className={lessThanTen}>
+                                        </span>
+                                        <span className={tickLessThanTen? styles.validNickname : styles.invalidNickname}>
                                             {tickLessThanTen ? (
                                                 <span>
                                                     <CheckRoundedIcon fontSize="small" />
@@ -124,7 +113,7 @@ export default function HomePage() {
                                             ) : (
                                                 <span className={styles.checkitems}>Less than 10 characters</span>
                                             )}
-                                        </li>
+                                        </span>
                                     </div>
                                 </React.Fragment>
                             }
@@ -158,7 +147,7 @@ export default function HomePage() {
                     Join Game
                 </Button>
                 Want to create a new lobby?
-                <Button variant="outlined" onClick={createLobby} id="create-lobby">
+                <Button variant="outlined" onClick={createLobby} id="create-lobby" disabled={joinDisabled}>
                     Create Game
                 </Button>
             </div>

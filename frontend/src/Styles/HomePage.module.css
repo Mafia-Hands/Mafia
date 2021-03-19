@@ -12,7 +12,7 @@
 }
 
 .invalidNickname {
-    background-color: none;
+    background-color: rgb(255, 44, 44);
     list-style-type: none;
 }
 
@@ -22,10 +22,10 @@
         'a b'
         'c c';
     justify-items: center;
-    align-items: center;
     row-gap: 2px;
 }
 
 .checkitems {
     font-size: 12px;
+    color: black;
 }
