@@ -4,7 +4,7 @@ const config = require('../../config.json');
 const CreateLobbyDTO = require('../../domain/DTO/request/CreateLobbyDTO');
 const JoinLobbyDTO = require('../../domain/DTO/request/JoinLobbyDTO');
 
-describe('game-start integration tests', () => {
+describe('NightStateEvents integration tests', () => {
     const port = process.env.PORT || config.local_port;
 
     let clientSockets = [];
