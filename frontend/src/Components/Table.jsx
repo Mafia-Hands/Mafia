@@ -135,7 +135,6 @@ export default function Table() {
     return (
         <div className={styles.tableWrapper}>
             <div className={styles.table} ref={tableRef}>
-                {console.log(playerCoords)}
                 {playerCoords
                     .filter((p) => !p.onTrial)
                     .map((p) => {
