@@ -7,20 +7,26 @@ const JoinLobbyDTO = require('../../domain/DTO/request/JoinLobbyDTO');
 describe('game-start integration tests', () => {
     const port = process.env.PORT || config.local_port;
 
-    // Create a new client, and connect it to the server via a socket
     let clientSockets = [];
-    let lobbyCode = [];
-    beforeEach((done) => {
-        // Create 6 clients to mock game every state
+    let lobbyCode = null;
+
+    // Create a new client, and connect it to the server via a socket
+    beforeEach(async (done) => {
         clientSockets[0] = new Client(`http://localhost:` + port);
-        // Create host first
-        clientSockets[0].on('connect', () => {
-            clientSockets[0].emit('create-lobby', new CreateLobbyDTO('Leon'));
-            clientSockets[0].on('lobby-code', (createLobbyDTO) => {
-                lobbyCode = createLobbyDTO.code;
-                done();
+        // Host creates lobby
+        async function connectAndCreateLobby() {
+            return new Promise((resolve) => {
+                clientSockets[0].on('connect', () => {
+                    clientSockets[0].emit('create-lobby', new CreateLobbyDTO('Leon'));
+                    clientSockets[0].on('lobby-code', (createLobbyDTO) => {
+                        resolve(createLobbyDTO.code);
+                    });
+                });
             });
-        });
+        }
+
+        lobbyCode = await connectAndCreateLobby();
+        done();
     });
 
     // Disconnect each socket connected to the server
@@ -37,42 +43,64 @@ describe('game-start integration tests', () => {
         SocketIOServer.server.close();
     });
 
-    test('test night-end sent', (done) => {
-        // Once lobby code recieved, create other players and join lobby
-        let socketResponseCount = 0;
-
-        for (let i = 1; i < 6; i++) {
-            clientSockets[i] = new Client(`http://localhost:` + port);
-            clientSockets[i].on('connect', () => {
-                clientSockets[i].emit('join-lobby', new JoinLobbyDTO('Leon' + i.toString(), lobbyCode));
+    test('test night-start night-end sent', async (done) => {
+        // Connect to lobby created in before each with 5 other players
+        async function connectAndJoin(index) {
+            return new Promise((resolve) => {
+                clientSockets[index] = new Client(`http://localhost:` + port);
+                clientSockets[index].on('connect', () => {
+                    clientSockets[index].emit('join-lobby', new JoinLobbyDTO('Leon' + index.toString(), lobbyCode));
+                    clientSockets[index].once('lobby-join', () => {
+                        resolve();
+                    });
+                });
             });
-            clientSockets[i].once('lobby-join', () => {
-                socketResponseCount++;
-                if (socketResponseCount >= 5) {
-                    // Only end setup once all responses received
-                    clientSockets[0].emit('start-game');
-                    clientSockets[0].on('game-start', () => {
-                        clientSockets[0].emit('start-night');
-                        socketResponseCount = 0;
-                        for (let j = 0; j < clientSockets.length; j++) {
-                            clientSockets[i].once('night-start', (nightStartDTO) => {
-                                expect(nightStartDTO.timeToVote).toBeDefined();
-                                socketResponseCount++;
-                                if(socketResponseCount>=12){
-                                    done();
-                                }
-                            });
-                            clientSockets[i].once('night-end', (nightEndDTO) => {
-                                expect(nightEndDTO.playerKilled).toBeNull();
-                                socketResponseCount++;
-                                if(socketResponseCount>=12){
-                                    done();
-                                }
-                            });
+        }
+
+        // Start the game
+        async function startGame() {
+            return new Promise((resolve) => {
+                // Start the game
+                clientSockets[0].emit('start-game');
+                clientSockets[0].on('game-start', () => {
+                    resolve();
+                });
+            });
+        }
+
+        // Start the night
+        async function startNight() {
+            return new Promise((resolve) => {
+                let socketResponseCount = 0;
+                // Start the night when response retrieved
+                clientSockets[0].emit('start-night');
+                // Attach handlers to night-start and night-end. In total should be 12 responses
+                for (let i = 0; i < 6; i++) {
+                    clientSockets[i].once('night-start', (nightStartDTO) => {
+                        expect(nightStartDTO.timeToVote).toBeDefined();
+                        socketResponseCount++;
+                        if (socketResponseCount >= 12) {
+                            resolve();
+                        }
+                    });
+                    clientSockets[i].once('night-end', (nightEndDTO) => {
+                        // Player killed should be null, as no one voted
+                        expect(nightEndDTO.playerKilled).toBeNull();
+                        socketResponseCount++;
+                        if (socketResponseCount >= 12) {
+                            resolve();
                         }
                     });
                 }
             });
         }
+
+        for (let i = 1; i < 6; i++) {
+            await connectAndJoin(i);
+        }
+        await startGame();
+        await startNight();
+
+        done();
     });
 });
