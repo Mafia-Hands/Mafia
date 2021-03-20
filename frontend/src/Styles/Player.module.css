@@ -40,3 +40,7 @@
 .isDead {
     background-color: #ab2635;
 }
+
+.playerText {
+    text-align: center;
+}

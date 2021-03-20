@@ -63,7 +63,10 @@ export default function Player({ playerId, playerName, style, childRef }) {
 
     return (
         <div className={playerStyle} style={style} ref={childRef} onClick={validateOnClick(onClick)}>
-            <div> {playerName.concat(mafiaString).concat(isDead ? " (DEAD)" : "")} </div>
+            <div className={styles.playerText}>
+                <p>{playerName.concat(isDead ? " (DEAD)" : "")}</p>
+                <p>{mafiaString}</p>
+            </div>
         </div>
     );
 }
