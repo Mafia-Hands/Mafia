@@ -5,7 +5,7 @@ import socket from '../Socket';
 
 const initialState = {
     screen: 'entry',
-    dayPeriod: 'day', // night or day
+    dayPeriod: 'Day', // night or day
     dayNumber: 1, // what day it is
     alivePlayers: [],
     status: '',
@@ -41,7 +41,7 @@ const reducer = (state, action) => {
                 ...state,
                 phase: 'night-start',
                 status: action.status,
-                dayPeriod: 'night',
+                dayPeriod: 'Night',
                 screen: 'core',
                 votingState: {
                     ...state.votingState,
@@ -51,6 +51,15 @@ const reducer = (state, action) => {
                 },
             };
         }
+
+        case 'show-selected': {
+            return {
+                ...state,
+                status: action.status,
+                votingState: {...state.votingState, vote: action.votedPlayer },
+            };
+        }
+
 
         case 'night-end': {
             return {
@@ -68,7 +77,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 phase: 'day-start',
-                dayPeriod: 'day',
+                dayPeriod: 'Day',
                 dayNumber: state.dayNumber + 1,
                 status: action.status,
                 votingState: {
@@ -146,6 +155,16 @@ const reducer = (state, action) => {
             };
         }
 
+        case 'skip-trial': {
+            return {
+                ...state,
+                status: action.status,
+                votingState: {
+                    ...initialState.votingState,
+                },
+            };
+        }
+
         default:
             throw new Error(`Invalid Game State reducer action: ${action.type}`);
     }
@@ -201,19 +220,19 @@ export default function useGameState() {
         function onNightEnd({ playerKilled, isGameOver }) {
             dispatch({
                 type: 'night-end',
-                status: `${playerKilled} was killed in the night`,
+                status: playerKilled ? `${playerKilled} was killed in the night...` : `Nobody died in the night!`,
                 playerKilled,
             });
 
             if (!isGameOver) {
-                generalState.isHost && setTimeout(() => socket.emit('start-day'), 2000); 
+                generalState.isHost && setTimeout(() => socket.emit('start-day'), 2000);
             }
         }
 
         function onDayStart({ timeToVote }) {
             dispatch({
                 type: 'day-start',
-                status: 'Please vote for someone',
+                status: 'Select someone to be on trial',
                 votablePlayers: state.alivePlayers.filter((p) => p !== generalState.nickname),
                 timeToVote,
             });
@@ -221,6 +240,11 @@ export default function useGameState() {
 
         function onDiscussionEnd({ playerOnTrial }) {
             if (playerOnTrial === null) {
+                dispatch({
+                    type: 'skip-trial',
+                    status: 'No one is on trial',
+                });
+
                 generalState.isHost && setTimeout(() => socket.emit('start-night'), 2000); // TODO CHANGED
                 return;
             }
@@ -237,7 +261,9 @@ export default function useGameState() {
         function onTrialStart({ timeToVote }) {
             dispatch({
                 type: 'trial-start',
-                status: state.votingState.votablePlayers.length ? 'Please vote for someone' : 'You are on trial',
+                status: state.votingState.votablePlayers.length
+                    ? 'Vote for the player on trial to kill them'
+                    : 'You are on trial',
                 timeToVote,
             });
         }
@@ -245,7 +271,9 @@ export default function useGameState() {
         function onTrialEnd({ playerKilled, isGameOver }) {
             dispatch({
                 type: 'trial-end',
-                status: `${playerKilled} was hanged`, // TODO if playerKilled === null
+                status: playerKilled
+                    ? `The town voted to kill ${playerKilled}!`
+                    : `${playerKilled} was saved by the Town!`, // TODO if playerKilled === null
                 playerKilled,
             });
             if (!isGameOver) {
@@ -305,5 +333,5 @@ export default function useGameState() {
         };
     }, [state, generalState]);
 
-    return state;
+    return [state, dispatch];
 }
