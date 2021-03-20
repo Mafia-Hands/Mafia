@@ -5,7 +5,7 @@ import socket from '../Socket';
 
 const initialState = {
     screen: 'entry',
-    dayPeriod: 'day', // night or day
+    dayPeriod: 'Day', // night or day
     dayNumber: 1, // what day it is
     alivePlayers: [],
     status: '',
@@ -41,7 +41,7 @@ const reducer = (state, action) => {
                 ...state,
                 phase: 'night-start',
                 status: action.status,
-                dayPeriod: 'night',
+                dayPeriod: 'Night',
                 screen: 'core',
                 votingState: {
                     ...state.votingState,
@@ -77,7 +77,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 phase: 'day-start',
-                dayPeriod: 'day',
+                dayPeriod: 'Day',
                 dayNumber: state.dayNumber + 1,
                 status: action.status,
                 votingState: {
