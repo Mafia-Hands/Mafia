@@ -7,7 +7,6 @@ import styles from '../Styles/HomePage.module.css';
 import Tooltip from '@material-ui/core/Tooltip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
-
 const CustomTextField = withStyles({
     root: {
         
@@ -55,6 +54,7 @@ const CustomCreateButton = withStyles({
         fontSize: '1.2rem'
       },
 })(Button);
+
 
 export default function HomePage() {
     const { dispatch } = useContext(GeneralContext);
