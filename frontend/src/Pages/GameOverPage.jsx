@@ -13,11 +13,11 @@ const GameOverPage = () => {
 
     return (
         <div> 
-            <Grid container direction='row'>
+            <Grid container direction='row' alignItems='center' justify='center'>
             <Grid item xs={0} sm={2}></Grid>
             <Grid item xs={10} sm={8}><h1>{`WINNER are a ${state.winningRole}`}</h1></Grid>
 
-            <Grid item xs={0} sm={2}>
+            <Grid item xs={2} sm={2}>
                 <Button
                     variant="contained"
                     onClick={() => {
@@ -26,15 +26,16 @@ const GameOverPage = () => {
                 >
                     Settings
                 </Button>
-            </Grid>      
-            
-            </Grid>
-            
+            </Grid>   
             <div>
                 {state.winners.map((name) => {
                     return <Player playerName={name} />;
                 })}
-            </div>
+            </div>   
+            
+            </Grid>
+            
+            
 
             <div>
                 <ModalMUI open={open} setOpen={setOpen}>
