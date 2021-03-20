@@ -1,13 +1,12 @@
 const Client = require('socket.io-client');
-const MafiaGameMock = require('./mocks/MafiaGameMock');
-const config = require('../config.json');
-const Player = require('../domain/Player');
-const roles = require('../domain/Enum/Role');
+const MafiaGameMock = require('../mocks/MafiaGameMock');
+const config = require('../../config.json');
+const Player = require('../../domain/Player');
+const roles = require('../../domain/Enum/Role');
 
 describe('start-night unit tests', () => {
     const port = process.env.PORT || config.local_port;
-
-    roomElements = MafiaGameMock.createMafiaGameWithOnePlayerMock(port);
+    const roomElements = MafiaGameMock.createMafiaGameWithOnePlayerMock(port);
 
     // Create a new client, and connect it to the server via a socket
     let clientSocket;

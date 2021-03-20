@@ -8,7 +8,7 @@ import useGameState from '../Hooks/useGameState';
 export const GameContext = createContext();
 
 export default function GamePage() {
-    const state = useGameState();
+    const [state, dispatch ] = useGameState();
     let component;
 
     switch (state.screen) {
@@ -24,5 +24,5 @@ export default function GamePage() {
         default:
             throw new Error('Invalid Game Page screen state');
     }
-    return <GameContext.Provider value={{ state }}>{component}</GameContext.Provider>;
+    return <GameContext.Provider value={{ state, dispatch }}>{component}</GameContext.Provider>;
 }
