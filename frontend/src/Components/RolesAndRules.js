@@ -1,8 +1,9 @@
-import React from 'react';
+import { React, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import styles from '../Styles/RolesAndRules.module.css';
+import { GameContext } from '../Pages/GamePage';
 
 const useStyles = makeStyles({
     root: {
@@ -14,18 +15,18 @@ const useStyles = makeStyles({
     },
     good: { backgroundColor: 'palegreen' },
     bad: { backgroundColor: 'lightcoral' },
+    jester: { backgroundColor: 'gold' },
 });
 
 /**
  * @param userRole Civilian/Medic/Detective/Mafia - gets user's role to display what their current role is
  */
-const RolesAndRules = ({ userRole }) => {
+const RolesAndRules = () => {
+    const { state: gameState } = useContext(GameContext);
+    const userRole = gameState.role;
     const props = { backgroundColor: null };
     const classes = useStyles(props);
-    // later for multi-mode version, maybe can fetch the data by the backend
-    // eg: if the user choose to play one-night ultimate mode, this will be tanner, mason, etc
-    // or just leave it static
-    // TODO: formalize/polish the role and rule description
+
     const roles = [
         {
             name: 'Civilian',
@@ -54,12 +55,20 @@ const RolesAndRules = ({ userRole }) => {
             description: 'A BAD member of the town. Mafia can kill one person every night.',
             winCondition: 'Civilian Population matches or is less than Mafia Population.',
         },
+        {
+            name: 'Jester',
+            isGood: false,
+            description:
+                'NOT a member of the town. Jesters have no special powers but they must convince Town Members to vote them out.',
+            winCondition: 'Get voted out by Town.',
+        },
     ];
 
     const rulesText =
         'During Day, the actions of the previous night get revealed. Then, the Town must choose someone to Eliminate;' +
         ' they are trying to get rid of the Mafia, but the Mafia can lead them astray by casting suspicion elsewhere.' +
-        ' When a player gets a majority of the votes, they are eliminated. Their role is revealed, and it becomes Night.' +
+        ' When a player gets a majority of the votes, they are eliminated. If the Jester gets voted out, the game ends' +
+        ' and they win. Otherwise, and it becomes Night.' +
         '\n\nDuring Night, the roles get to perform their actions. Mafia members can decide which Town member to kill.' +
         ' Medics can try to guess who will be killed and save them. Detectives can find out if a Town member is Mafia or not.' +
         ' Once all actions have been completed, the night will be over.' +
@@ -75,7 +84,12 @@ const RolesAndRules = ({ userRole }) => {
                                 <p className={styles.roleHighlight}>This is your role!</p>
                             )}
                         </div>
-                        <Paper elevation={2} className={`${classes.root} ${role.isGood ? classes.good : classes.bad}`}>
+                        <Paper
+                            elevation={2}
+                            className={`${classes.root} ${
+                                role.name === 'Jester' ? classes.jester : role.isGood ? classes.good : classes.bad
+                            }`}
+                        >
                             <h3>{role.name}</h3>
                             <p>{role.description}</p>
                             <div>
