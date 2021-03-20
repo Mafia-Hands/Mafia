@@ -38,13 +38,12 @@ const GameOverPage = () => {
                             Settings
                         </Button>
                     </Grid>
-
                 </Grid>
-                                    <div style={{ textAlign: 'center' }}>
-                        {state.winners.map((name) => {
-                            return <Player playerName={name} />;
-                        })}
-                    </div>
+                <div style={{ textAlign: 'center' }}>
+                    {state.winners.map((name) => {
+                        return <Player playerName={name} />;
+                    })}
+                </div>
             </animated.div>
             <div>
                 <ModalMUI open={open} setOpen={setOpen}>
