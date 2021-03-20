@@ -39,7 +39,6 @@
     background-color: rgba(227, 241, 241,0.5);
     height: 100%;
     width: 133%;
-
 }
 .codeInputs{
     grid-column-start: 1;
@@ -75,13 +74,15 @@
 .checkers {
     display: grid;
     grid-template-areas:
-        'a b'
-        'c c';
-    justify-items: center;
+        'a '
+        'b '
+        'c ';
+    justify-items: stretch;
     row-gap: 2px;
+    height: 100px;
 }
 
 .checkitems {
-    font-size: 12px;
+    font-size: 23px;
     color: black;
 }

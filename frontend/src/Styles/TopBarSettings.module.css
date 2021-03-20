@@ -6,6 +6,7 @@
 .header {
     grid-area: Header;
     justify-self: center;
+    text-transform: capitalize;
 }
 
 .settingsButton {

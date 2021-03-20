@@ -1,6 +1,6 @@
 import { React } from 'react';
 import PropTypes from 'prop-types';
-import { IconButton, withStyles } from '@material-ui/core';
+import { IconButton, recomposeColor, withStyles } from '@material-ui/core';
 import styles from '../Styles/TopBarSettings.module.css';
 import SettingsIcon from '@material-ui/icons/Settings';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
@@ -23,7 +23,7 @@ const TopBarSettings = ({ currentScreen, showSettings, showUp, setOpenInfo, show
                <KeyboardBackspaceIcon />
             </StyledIconButton>
         )}
-        {currentScreen && <h2 className={styles.header}>{`${currentScreen}`}</h2>}
+        {currentScreen && <h2 id= "room-code" className={styles.header}>{`${currentScreen}`}</h2>}
         {showSettings && (
             
             <StyledIconButton
