@@ -36,12 +36,7 @@ const Timer = (props) => {
 
     return (
         <div>
-            <div className={styles.time}>
-                <span>Timer: </span>
-                <span>{minute}</span>
-                <span>:</span>
-                <span>{second}</span>
-            </div>
+            <div className={styles.time}> {`Timer: ${minute}:${second}`}</div>
         </div>
     );
 };
