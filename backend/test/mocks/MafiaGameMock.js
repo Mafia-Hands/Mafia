@@ -1,5 +1,11 @@
 const config = require('../../config.json');
-const NightStateChangeEvents = require('../../Events/GameStateEvents/NightStateChangeEvents');
+
+const loadLobbyEvents = require('../../Events/LobbyEvents');
+const loadVoteEvents = require('../../Events/VoteEvents');
+const loadGameStartEvents = require('../../Events/GameStartEvents');
+const { loadNightTimeEvents } = require('../../Events/NightTimeVoteEvents');
+const loadStateChangeEvents = require('../../Events/GameStateEvents/StateChangeEvents');
+
 const MafiaGame = require('../../domain/MafiaGame');
 const Room = require('../../domain/Room');
 const Player = require('../../domain/Player');
@@ -13,6 +19,7 @@ const io = require('socket.io')(server, {
 });
 
 let mafiaGame = null;
+let testPlayerSocket;
 
 module.exports.createMafiaGameWithOnePlayerMock = function (port) {
     mafiaGame = new MafiaGame();
@@ -21,8 +28,13 @@ module.exports.createMafiaGameWithOnePlayerMock = function (port) {
     const hostPlayer = new Player(null, roomID, 'a', 'mafia', true);
 
     io.on('connection', (socket) => {
-        NightStateChangeEvents.eventHandlersRegistration(io, socket, mafiaGame);
+        loadLobbyEvents(io, socket, mafiaGame);
+        loadVoteEvents(io, socket, mafiaGame);
+        loadGameStartEvents(io, socket, mafiaGame);
+        loadNightTimeEvents(io, socket, mafiaGame);
+        loadStateChangeEvents(io, socket, mafiaGame);
         socket.player = hostPlayer;
+        testPlayerSocket = socket;
         socket.join(roomID);
     });
 
@@ -46,4 +58,16 @@ module.exports.addMafiaVote = function (voter, votedFor, roomID) {
     const { mafiaVoteMap } = room.voteHandler;
 
     mafiaVoteMap[voter] = votedFor;
+};
+
+module.exports.addPlayers = function (players, roomID) {
+    const room = mafiaGame.gameRoomsDict[roomID];
+    for (player of players) {
+        room.addPlayer(player);
+    }
+};
+
+module.exports.switchPlayer = function (nickname, roomID) {
+    const room = mafiaGame.gameRoomsDict[roomID];
+    testPlayerSocket.player = room.getPlayerByNickname(nickname);
 };
