@@ -8,6 +8,8 @@ import SettingDialog from '../Pages/SettingDialog';
 import TopBarSettings from './TopBarSettings';
 import { GeneralContext } from '../App';
 import RolesAndRules from './RolesAndRules';
+import Timer from './Timer';
+import { GameContext } from '../Pages/GamePage';
 
 /**
  * @param userDetails [{userName: <string>, role: <string>}]
@@ -21,6 +23,8 @@ const TopBarGame = ({ showTimer, showRole }) => {
     const [openInfo, setOpenInfo] = useState(false);
     const userName = state.nickname;
     const role = state.role;
+    const { state: gameState } = useContext(GameContext);
+
     return (
         <div className={styles.container}>
             <p className={styles.userName}>{`Name: ${userName}`}</p>
@@ -37,7 +41,11 @@ const TopBarGame = ({ showTimer, showRole }) => {
                     </IconButton>
                 </div>
             )}
-            {showTimer && <div className={styles.timer}>Timer Placeholder</div>}
+            {showTimer && (
+                <div className={styles.timer}>
+                    <Timer userPreferTime={gameState.votingState.timeToVote} />
+                </div>
+            )}
             <Button
                 variant="contained"
                 className={styles.settingsButton}
