@@ -81,7 +81,6 @@ export default function HomePage() {
 
     const joinLobby = () => {
         dispatch({ type: 'join-lobby', nickname, code });
-
         socket.emit('join-lobby', { roomCode: code, nickname });
     };
 
