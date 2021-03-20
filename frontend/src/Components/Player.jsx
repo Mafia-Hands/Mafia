@@ -15,6 +15,9 @@ export default function Player({ playerId, playerName, style, childRef }) {
 
     const isVoted = (gameState.votingState.vote === playerName);
 
+    // forces the detctive to only be able to look at one other player per day
+    const detectiveHasSuspected = (gameState.checkedPlayers.length === gameState.dayNumber)
+
     var mafiaString = ""
     for (const suspectedPlayer of gameState.checkedPlayers) {
         if (suspectedPlayer.nickname === playerName) {
@@ -43,10 +46,13 @@ export default function Player({ playerId, playerName, style, childRef }) {
     function onClick() {
         switch (gameState.votingState.type) {
             case 'role':
-                socket.emit(`${gameState.role}-vote`, {
-                    votingFor: playerName,
-                });
-                dispatch( { type:'show-selected' , status: `Selected ${playerName} for ability`, votedPlayer: playerName } );
+                if (!((gameState.role === 'detective') && detectiveHasSuspected)) {
+                    socket.emit(`${gameState.role}-vote`, {
+                        votingFor: playerName,
+                    });
+                    dispatch( { type:'show-selected' , status: `Selected ${playerName} for ability`, votedPlayer: playerName } );
+                    break;
+                }
                 break;
             case 'discussion':
                 socket.emit(`day-vote`, { votingFor: playerName });
