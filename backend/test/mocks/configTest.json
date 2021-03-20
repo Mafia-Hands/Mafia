@@ -10,6 +10,6 @@
         "jester_divisor": 14
     },
     "night_total_vote_time_in_milliseconds": 0,
-    "day_total_vote_time_in_milliseconds": 6000,
-    "trial_total_vote_time_in_milliseconds": 6000
+    "day_total_vote_time_in_milliseconds": 0,
+    "trial_total_vote_time_in_milliseconds": 0
 }

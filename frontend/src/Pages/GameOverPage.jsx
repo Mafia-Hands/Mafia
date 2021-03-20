@@ -22,30 +22,28 @@ const GameOverPage = () => {
     return (
         <div> 
             <animated.div style={props}>
-                <Grid container direction='row' alignItems='center' justify='center'>
-                <Grid item xs={0} sm={2}></Grid>
-                <Grid item xs={10} sm={8}><h1>{`WINNER are a ${state.winningRole}`}</h1></Grid>
+                <Grid container direction='row' alignItems='center' justifyItems='center'>
+                    <Grid item xs={0} sm={2}></Grid>
+                    <Grid item xs={10} sm={8}><h1>{`WINNER are a ${state.winningRole}`}</h1></Grid>
 
-                <Grid item xs={2} sm={2}>
-                    <Button
-                        variant="contained"
-                        onClick={() => {
-                            setOpen(true);
-                        }}
-                    >
-                        Settings
-                    </Button>
-                </Grid>   
-                <div>
-                    {state.winners.map((name) => {
-                        return <Player playerName={name} />;
-                    })}
-                </div>   
+                    <Grid item xs={2} sm={2}>
+                        <Button
+                            variant="contained"
+                            onClick={() => {
+                                setOpen(true);
+                            }}
+                        >
+                            Settings
+                        </Button>
+                    </Grid>   
+                    <div>
+                        {state.winners.map((name) => {
+                            return <Player playerName={name} />;
+                        })}
+                    </div>   
                 
                 </Grid>
-                
-                
-
+            </animated.div>
                 <div>
                     <ModalMUI open={open} setOpen={setOpen}>
                         <div>
@@ -59,7 +57,6 @@ const GameOverPage = () => {
                         </div>
                     </ModalMUI>
                 </div>
-            </animated.div>
         </div>
     );
 };

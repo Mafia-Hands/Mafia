@@ -1,6 +1,10 @@
 class ListVoteDTO {
     constructor(votes) {
-        this.voteMap = votes;
+        const nicknameVoteMap = {};
+        for (const [voter, chosenPlayer] of Object.entries(votes)) {
+            nicknameVoteMap[voter] = chosenPlayer.nickname;
+        }
+        this.voteMap = nicknameVoteMap;
     }
 }
 
