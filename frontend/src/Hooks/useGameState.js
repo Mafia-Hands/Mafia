@@ -211,12 +211,21 @@ export default function useGameState() {
         }
 
         function onDayStart({ timeToVote }) {
-            dispatch({
-                type: 'day-start',
-                status: 'Select someone to be on trial',
-                votablePlayers: state.alivePlayers.filter((p) => p !== generalState.nickname),
-                timeToVote,
-            });
+            const amIDead = !state.alivePlayers.includes(generalState.nickname);
+            if (amIDead) {
+                dispatch({
+                    type: 'day-start',
+                    status: 'You are dead so cannot vote anymore',
+                    votablePlayers: []
+                })
+            } else {
+                dispatch({
+                    type: 'day-start',
+                    status: 'Select someone to be on trial',
+                    votablePlayers: state.alivePlayers.filter((p) => p !== generalState.nickname),
+                    timeToVote,
+                });
+            }
         }
 
         function onDiscussionEnd({ playerOnTrial }) {

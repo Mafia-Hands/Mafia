@@ -18,7 +18,7 @@ export default function Player({ playerId, playerName, style, childRef }) {
     const playerStyle = classNames({
         [styles.playerWrapper]: true,
         [styles.isHoverable]: isHoverable,
-        [styles.hasVoted]: isDead ? isDead : hasVoted,
+        [styles.hasVoted]: hasVoted,
         [styles.isClicked]: isClicked,
     });
 
