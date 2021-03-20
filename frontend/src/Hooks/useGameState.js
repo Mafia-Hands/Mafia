@@ -284,7 +284,6 @@ export default function useGameState() {
         }
 
         function onVoteUpdate({ voteMap }) {
-            console.log(voteMap);
             dispatch({
                 type: 'vote-update',
                 playersWhoVoted: Object.keys(voteMap),
