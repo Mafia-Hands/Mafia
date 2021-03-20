@@ -59,20 +59,20 @@ const RolesAndRules = () => {
             name: 'Jester',
             isGood: false,
             description:
-                'NOT a member of the town. Jesters have no special powers but they must convince Town Members to vote them out.',
-            winCondition: 'Get voted out by Town.',
+                'NOT a member of the town. Jesters have no special powers but they must convince the Town to kill them.',
+            winCondition: 'Get voted out by Town or killed by Mafia.',
         },
     ];
 
     const rulesText =
         'During Day, the actions of the previous night get revealed. Then, the Town must choose someone to Eliminate;' +
         ' they are trying to get rid of the Mafia, but the Mafia can lead them astray by casting suspicion elsewhere.' +
-        ' When a player gets a majority of the votes, they are eliminated. If the Jester gets voted out, the game ends' +
-        ' and they win. Otherwise, and it becomes Night.' +
+        ' When a player gets a majority of the votes, they are eliminated. and it becomes Night.' +
         '\n\nDuring Night, the roles get to perform their actions. Mafia members can decide which Town member to kill.' +
         ' Medics can try to guess who will be killed and save them. Detectives can find out if a Town member is Mafia or not.' +
         ' Once all actions have been completed, the night will be over.' +
-        '\n\nThe Day and Night cycle repeats until the Town or Mafia win the game.';
+        '\n\nThe Day and Night cycle repeats until the Town or Mafia win the game.' +
+        'If the Jester ever dies, they win and the game ends.';
 
     return (
         <div>
