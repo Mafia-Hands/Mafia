@@ -6,27 +6,31 @@ const Timer = (props) => {
     const startTime = userPreferTime * 0.001;
     const startMinute = parseInt(startTime / 60, 10);
     const startSecond = startTime % 60;
-
     const [second, setSecond] = React.useState(startSecond.toString());
     const [minute, setMinute] = React.useState(startMinute.toString());
     const [counter, setCounter] = React.useState(startTime);
 
     React.useEffect(() => {
+        setCounter(startTime);
+    }, [startTime]);
+
+    React.useEffect(() => {
+        let interval = null;
         if (counter > 0) {
             const secondCounter = counter % 60;
             const minuteCounter = parseInt(counter / 60, 10);
-
             const strSecond = String(secondCounter).length === 1 ? `0${secondCounter}` : secondCounter;
             const strMinute = String(minuteCounter).length === 1 ? `0${minuteCounter}` : minuteCounter;
-
             setSecond(strSecond);
             setMinute(strMinute);
-            // eslint-disable-next-line no-shadow
-            setTimeout(() => setCounter((counter) => counter - 1), 1000);
-            if (counter === 0) {
-                setSecond('00');
-                setMinute('00');
-            }
+            interval = setInterval(() => {
+                setCounter((counter) => counter - 1);
+            }, 1000);
+
+            return () => clearInterval(interval);
+        } else if (counter === 0) {
+            setSecond('00');
+            setMinute('00');
         }
     }, [counter]);
 
