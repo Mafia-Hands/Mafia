@@ -1,8 +1,12 @@
 import { React, useContext } from 'react';
+import socket from '../Socket';
+import { Button } from '@material-ui/core';
 import TopBarSettings from '../Components/TopBarSettings';
 import Player from '../Components/Player';
 import { GameContext } from './GamePage';
 import { animated, useSpring } from 'react-spring';
+import useLobbyState from '../Hooks/useLobbyState';
+
 
 const GameOverPage = ({ userName, role }) => {
     const { state } = useContext(GameContext);
@@ -12,6 +16,11 @@ const GameOverPage = ({ userName, role }) => {
         delay: 500,
         reset: true,
     });
+
+    const returnToLobby = () => {
+        socket.emit('reset-lobby');
+    };
+
     return (
         <div>
             <animated.div style={props}>
@@ -22,6 +31,15 @@ const GameOverPage = ({ userName, role }) => {
                     })}
                 </div>
             </animated.div>
+            <Button
+                variant="contained"
+                color="secondary"
+                size="small"
+                id="reset-lobby"
+                onClick={returnToLobby}
+            >
+                Return to the Lobby
+            </Button>
         </div>
     );
 };
