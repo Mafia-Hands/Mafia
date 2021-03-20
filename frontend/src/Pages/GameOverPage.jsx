@@ -24,7 +24,7 @@ const GameOverPage = () => {
             <animated.div style={props}>
                 <Grid container direction='row' alignItems='center' justifyItems='center'>
                     <Grid item xs={0} sm={2}></Grid>
-                    <Grid item xs={10} sm={8}><h1>{`WINNER are a ${state.winningRole}`}</h1></Grid>
+                    <Grid item xs={10} sm={8}><h1>{`${state.winningRole} team wins!`}</h1></Grid>
 
                     <Grid item xs={2} sm={2}>
                         <Button

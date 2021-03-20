@@ -1,3 +1,5 @@
+@import './colourScheme.css';
+
 .container {
     height: 40vh;
     width: 50%;
@@ -6,6 +8,7 @@
     flex-direction: column;
     margin: auto;
     justify-content: space-between;
+    padding-top: 16px;
 }
 
 b {

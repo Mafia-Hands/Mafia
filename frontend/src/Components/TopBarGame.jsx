@@ -1,13 +1,14 @@
 import { React, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import HelpIcon from '@material-ui/icons/Help';
-import { Button, IconButton } from '@material-ui/core';
+import { withStyles, IconButton } from '@material-ui/core';
 import styles from '../Styles/TopBarGame.module.css';
 import ModalMUI from '../Modal/ModalMUI';
 import SettingDialog from '../Pages/SettingDialog';
 import TopBarSettings from './TopBarSettings';
 import { GeneralContext } from '../App';
 import RolesAndRules from './RolesAndRules';
+import SettingsIcon from '@material-ui/icons/Settings';
 import Timer from './Timer';
 import { GameContext } from '../Pages/GamePage';
 
@@ -16,6 +17,13 @@ import { GameContext } from '../Pages/GamePage';
  * @param showTimer true/false OPTIONAL prop that will render Timer if true
  * @param showRole true/false OPTIONAL prop that will render Role if true
  */
+
+ const StyledIconButton = withStyles({
+    root:{
+        padding:'5px',
+        color:'#E3F1F1',
+    },
+    })(IconButton);
 
 const TopBarGame = ({ showTimer, showRole }) => {
     const { state } = useContext(GeneralContext);
@@ -46,16 +54,15 @@ const TopBarGame = ({ showTimer, showRole }) => {
                     <Timer userPreferTime={gameState.votingState.timeToVote} />
                 </div>
             )}
-            <Button
+            <StyledIconButton
                 variant="contained"
                 className={styles.settingsButton}
                 onClick={() => {
                     setOpen(true);
                     setOpenInfo(false);
                 }}
-            >
-                Settings
-            </Button>
+            ><SettingsIcon/>
+            </StyledIconButton>
 
             <div>
                 <ModalMUI open={open} setOpen={setOpen}>

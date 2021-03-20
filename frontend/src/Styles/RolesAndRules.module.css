@@ -1,3 +1,5 @@
+@import './colourScheme.css';
+
 .roleContainer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -27,7 +29,7 @@
 }
 
 .roleHighlight {
-    background-color: orange;
+    background-color: var(--darkOrange);
     color: black;
     margin: 0;
     padding: 0.5em;
