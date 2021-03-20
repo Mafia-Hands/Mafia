@@ -10,7 +10,7 @@
 
 .settingsButton {
     grid-area: Settings;
-    justify-self: center;
+    justify-self: end;
 
 }
 

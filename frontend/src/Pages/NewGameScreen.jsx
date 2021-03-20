@@ -6,8 +6,7 @@ import Chatbox from '../Components/Chatbox';
 import styles from '../Styles/NewGameScreen.module.css';
 import { GeneralContext } from '../App';
 import socket from '../Socket';
-import { Button, withStyles } from '@material-ui/core';
-import ModalMUI from '../Modal/ModalMUI';
+import { Button, makeStyles, Modal, withStyles } from '@material-ui/core';
 import RolesAndRules from '../Components/RolesAndRules';
 import SettingDialog from '../Pages/SettingDialog';
 
@@ -26,7 +25,22 @@ const StyledButton = withStyles({
     },
 })(Button);
 
+const useStyles = makeStyles({
+    root: {
+        display: 'none',
+        
+        
+    },
+    modal:{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+       
+    }
+})
+
 const NewGameScreen = () => {
+    const classes = useStyles();
     const { state } = useContext(GeneralContext);
     const [open, setOpen] = useState(false);
     const [openInfo, setOpenInfo] = useState(false);
@@ -65,31 +79,31 @@ const NewGameScreen = () => {
                     </StyledButton>
                 </div>
             </div>
-            <div style={{ display: 'none' }}>
-                <ModalMUI open={open} setOpen={setOpen}>
+            <div className={classes.root}>
+                <Modal className={classes.modal} open={open} setOpen={setOpen}>
                     {openInfo ? (
-                        <div>
+                        <div  className = {styles.Modal}>
                             <TopBarSettings
                                 showBack={true}
                                 showUp={setOpen}
-                                currentScreen="ROLES AND RULES"
+                                currentScreen="Roles and Rules"
                                 showSettings={false}
                                 setOpenInfo={setOpenInfo}
                             />
                             <RolesAndRules userRole="Mafia" />
                         </div>
                     ) : (
-                        <div>
+                        <div className = {styles.Modal} >
                             <TopBarSettings
                                 showBack={true}
                                 showUp={setOpen}
-                                currentScreen="SETTINGS"
+                                currentScreen="Settings"
                                 showSettings={false}
                             />
                             <SettingDialog />
                         </div>
                     )}
-                </ModalMUI>
+                </Modal>
             </div>
         </div>
     );

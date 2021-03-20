@@ -11,9 +11,10 @@ const useStyles = makeStyles({
         gridTemplateRows: '2em 1fr 0.5fr',
         alignItems: 'stretch',
         justifySelf: 'end',
+        
     },
     good: { backgroundColor: 'palegreen' },
-    bad: { backgroundColor: 'lightcoral' },
+    bad: { backgroundColor: '#EE6644' },
 });
 
 /**

@@ -1,5 +1,4 @@
-import { React, useContext } from 'react';
-import { GeneralContext } from '../App';
+import { React } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
     Button,
