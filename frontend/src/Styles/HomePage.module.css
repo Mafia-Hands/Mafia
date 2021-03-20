@@ -1,9 +1,64 @@
-.container {
-    display: grid;
-    grid-template-rows: 2fr 1fr 1fr 2fr 0.3fr 1fr;
+@import './colourScheme.css';
+
+.container{
+    height: 100vh;
+    margin: 20px;   
+    display: flex;
     align-items: center;
-    justify-items: center;
-    row-gap: 1em;
+    justify-content: center;
+}
+
+.contents{
+    display: grid;
+    grid-template-rows: 2fr 1fr 1fr 0fr 1fr 0.5fr;
+    grid-template-columns: 3fr 1fr;
+    grid-row-gap: 1em;
+    background-color:var(--deepBlue);
+    border-radius: 20px;
+    width: 60vh;
+    height: 60vh;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.header{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    text-align: center;
+    color: var(--lightBlue);
+    font-family: Helvetica, sans-serif;
+    font-size: 10vh;
+    font-weight: bold;
+    padding-top: 20px;
+}
+
+.nameInputs{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    border-radius: 5px;
+    background-color: rgba(227, 241, 241,0.5);
+    height: 100%;
+    width: 133%;
+}
+.codeInputs{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: rgba(227, 241, 241,0.5)
+}
+
+.joinButton{
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.createButton{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 5;
+    grid-row-end: 6;
 }
 
 .validNickname {
@@ -19,13 +74,15 @@
 .checkers {
     display: grid;
     grid-template-areas:
-        'a b'
-        'c c';
-    justify-items: center;
+        'a '
+        'b '
+        'c ';
+    justify-items: stretch;
     row-gap: 2px;
+    height: 100px;
 }
 
 .checkitems {
-    font-size: 12px;
+    font-size: 23px;
     color: black;
 }
