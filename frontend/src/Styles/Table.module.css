@@ -17,6 +17,9 @@
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.199);
     border-radius: 50%;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* .overlay {
