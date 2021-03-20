@@ -9,12 +9,23 @@ const useStyles = makeStyles({
     root: {
         display: 'grid',
         gridGap: '0px',
-        paddingBottom: '0px',
-        backgroundColor: 'grey',
+        backgroundColor: '#3E5B7F',
+        gridTemplateRows: '0.5fr 5fr',
+        border: 'none',
+        borderRadius: '10px',
     },
     title: {
-        fontSize: 14,
+        fontSize: '10px',
+        fontFamily: 'Helvetica, sans-serif',
+        backgroundColor: 'rgb(152, 193, 217,0.6)',
+        color: '#E3F1F1',
+        padding: '10px',
+        paddingLeft: '16px',
     },
+    content:{
+        padding: '0px',
+        color: '#E3F1F1',
+    }
 });
 
 const PlayerList = () => {
@@ -23,7 +34,7 @@ const PlayerList = () => {
 
     return (
         <Card className={classes.root} variant="outlined">
-            <CardHeader title="Player List"></CardHeader>
+            <CardHeader className={classes.title} title="Player List"></CardHeader>
             <CardContent className={classes.content}>
                 <List>
                     {state.players.map((playerName, index) => (

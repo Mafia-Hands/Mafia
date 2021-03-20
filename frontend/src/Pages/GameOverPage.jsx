@@ -14,14 +14,14 @@ const GameOverPage = ({ userName, role }) => {
     });
     return (
         <div>
-            <animated.div style={props}>
-                <TopBarSettings currentScreen={`WINNER are a ${state.winningRole}`} showSettings={true} />
-                <div>
-                    {state.winners.map((name) => {
-                        return <Player playerName={name} />;
-                    })}
-                </div>
-            </animated.div>
+          <animated.div style={props}>
+            <TopBarSettings currentScreen={`${state.winningRole} team wins!`} showSettings={true} />
+            <div style={{textAlign: 'center'}}>
+                {state.winners.map((name) => {
+                    return <Player playerName={name} />;
+                })}
+            </div>
+          </animated.div>
         </div>
     );
 };
