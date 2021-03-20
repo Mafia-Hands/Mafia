@@ -15,6 +15,12 @@ export default function Player({ playerId, playerName, style, childRef }) {
 
     const isVoted = (gameState.votingState.vote === playerName);
 
+    var mafiaString = ""
+    for (const suspectedPlayer of gameState.checkedPlayers) {
+        if (suspectedPlayer.nickname === playerName) {
+            mafiaString = (suspectedPlayer.isMafia ? " (Mafia)" : " (Not Mafia)");
+        }
+    }
 
     // apply styles based on whether certain props is true
     const playerStyle = classNames({
@@ -57,7 +63,7 @@ export default function Player({ playerId, playerName, style, childRef }) {
 
     return (
         <div className={playerStyle} style={style} ref={childRef} onClick={validateOnClick(onClick)}>
-            <div> {playerName.concat(isDead ? " (DEAD)": "")} </div>
+            <div> {playerName.concat(mafiaString).concat(isDead ? " (DEAD)" : "")} </div>
         </div>
     );
 }
