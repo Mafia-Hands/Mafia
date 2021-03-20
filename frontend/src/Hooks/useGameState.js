@@ -155,6 +155,16 @@ const reducer = (state, action) => {
             };
         }
 
+        case 'skip-trial': {
+            return {
+                ...state,
+                status: action.status,
+                votingState: {
+                    ...initialState.votingState,
+                },
+            };
+        }
+
         default:
             throw new Error(`Invalid Game State reducer action: ${action.type}`);
     }
@@ -230,6 +240,11 @@ export default function useGameState() {
 
         function onDiscussionEnd({ playerOnTrial }) {
             if (playerOnTrial === null) {
+                dispatch({
+                    type: 'skip-trial',
+                    status: 'No one is on trial',
+                });
+
                 generalState.isHost && setTimeout(() => socket.emit('start-night'), 2000); // TODO CHANGED
                 return;
             }
