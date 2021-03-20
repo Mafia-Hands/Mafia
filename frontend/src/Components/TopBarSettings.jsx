@@ -1,6 +1,6 @@
 import { React } from 'react';
 import PropTypes from 'prop-types';
-import { Button, IconButton, withStyles } from '@material-ui/core';
+import { IconButton, withStyles } from '@material-ui/core';
 import styles from '../Styles/TopBarSettings.module.css';
 import SettingsIcon from '@material-ui/icons/Settings';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';

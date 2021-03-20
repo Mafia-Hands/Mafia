@@ -8,7 +8,7 @@ const EntryScreen = () => {
     return (
         <div>
             <TopBarSettings currentScreen={`You are a ${generalState.role}`} />
-            <div>
+            <div style={{textAlign: 'center'}}>
                 <Player playerName={generalState.nickname} />
             </div>
         </div>

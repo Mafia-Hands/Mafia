@@ -7,8 +7,8 @@ const GameOverPage = ({ userName, role }) => {
     const { state } = useContext(GameContext);
     return (
         <div>
-            <TopBarSettings currentScreen={`WINNER are a ${state.winningRole}`} showSettings={true} />
-            <div>
+            <TopBarSettings currentScreen={`${state.winningRole} team wins!`} showSettings={true} />
+            <div style={{textAlign: 'center'}}>
                 {state.winners.map((name) => {
                     return <Player playerName={name} />;
                 })}
