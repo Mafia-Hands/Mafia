@@ -1,10 +1,14 @@
-import { React } from 'react';
+import { React, useContext } from 'react';
+import { GameContext } from '../Pages/GamePage';
 // import styles from '../Styles/BottomBar.module.css';
 
-const BottomBar = () => (
+const BottomBar = () => {
+    const { state } = useContext(GameContext);
+    return(    
     <div>
-        <p>This is the Bottom Bar.</p>
+        <h1>{`${state.dayPeriod} ${state.dayNumber}`}</h1>
     </div>
-);
+    )
+};
 
 export default BottomBar;
