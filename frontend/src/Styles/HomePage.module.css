@@ -36,7 +36,9 @@
     grid-column-start: 1;
     grid-column-end: 3;
     border-radius: 5px;
-    background-color: rgba(227, 241, 241,0.5)
+    background-color: rgba(227, 241, 241,0.5);
+    height: 100%;
+    width: 133%;
 
 }
 .codeInputs{
@@ -60,3 +62,26 @@
     grid-row-end: 6;
 }
 
+.validNickname {
+    background-color: lightgreen;
+    list-style-type: none;
+}
+
+.invalidNickname {
+    background-color: rgb(255, 44, 44);
+    list-style-type: none;
+}
+
+.checkers {
+    display: grid;
+    grid-template-areas:
+        'a b'
+        'c c';
+    justify-items: center;
+    row-gap: 2px;
+}
+
+.checkitems {
+    font-size: 12px;
+    color: black;
+}

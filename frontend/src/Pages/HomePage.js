@@ -2,7 +2,10 @@ import React, { useContext, useState } from 'react';
 import socket from '../Socket';
 import { GeneralContext } from '../App';
 import { withStyles, TextField, Button } from '@material-ui/core';
+import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
 import styles from '../Styles/HomePage.module.css';
+import Tooltip from '@material-ui/core/Tooltip';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 
 const CustomTextField = withStyles({
@@ -57,6 +60,19 @@ export default function HomePage() {
     const { dispatch } = useContext(GeneralContext);
     const [nickname, setNickname] = useState('');
     const [code, setCode] = useState('');
+    const [joinDisabled, setjoinDisabled] = useState(true);
+    const [tickNonempty, setTickNonempty] = useState(false);
+    const [tickNoSpaces, setTickNoSpaces] = useState(true);
+    const [tickLessThanTen, setTickLessThanTen] = useState(true);
+    const [open, setOpen] = useState(false);
+
+    const handleTooltipClose = () => {
+        setOpen(false);
+    };
+
+    const handleTooltipOpen = () => {
+        setOpen(true);
+    };
 
     const createLobby = () => {
         dispatch({ type: 'create-lobby', nickname });
@@ -69,31 +85,117 @@ export default function HomePage() {
         socket.emit('join-lobby', { roomCode: code, nickname });
     };
 
+    const validateNickname = (nickname) => {
+        let validCheck = true;
+        setNickname(nickname);
+        if (nickname === '') {
+            validCheck = false;
+            setTickNonempty(false);
+        } else {
+            setTickNonempty(true);
+        }
+        if (nickname.includes(' ')) {
+            validCheck = false;
+            setTickNoSpaces(false);
+        } else {
+            setTickNoSpaces(true);
+        }
+        if (nickname.length > 10) {
+            validCheck = false;
+            setTickLessThanTen(false);
+        } else {
+            setTickLessThanTen(true);
+        }
+        if (validCheck) {
+            setjoinDisabled(false);
+        } else {
+            setjoinDisabled(true);
+        }
+    };
+
     return (
         <div className={styles.container}>
             <div className={styles.contents}>
                 <div className={styles.header}> Mafia </div>
+                <ClickAwayListener onClickAway={handleTooltipClose}>
+                    <div>
+                        <Tooltip
+                            PopperProps={{
+                                disablePortal: true,
+                            }}
+                            onClose={handleTooltipClose}
+                            open={open}
+                            disableFocusListener
+                            disableHoverListener
+                            disableTouchListener
+                            title={
+                                <React.Fragment>
+                                    <div className={styles.checkers}>
+                                        <span className={tickNonempty? styles.validNickname : styles.invalidNickname}>
+                                            {tickNonempty ? (
+                                                <span>
+                                                    <CheckRoundedIcon fontSize="small" />
+                                                    <span className={styles.checkitems}> Non-empty nickname</span>{' '}
+                                                </span>
+                                            ) : (
+                                                <span className={styles.checkitems}> Non-empty nickname</span>
+                                            )}
+                                        </span>
+                                        <span className={tickNoSpaces? styles.validNickname : styles.invalidNickname}>
+                                            {tickNoSpaces ? (
+                                                <span>
+                                                    <CheckRoundedIcon fontSize="small" />
+                                                    <span className={styles.checkitems}> No spaces</span>{' '}
+                                                </span>
+                                            ) : (
+                                                <span className={styles.checkitems}>No spaces</span>
+                                            )}
+                                        </span>
+                                        <span className={tickLessThanTen? styles.validNickname : styles.invalidNickname}>
+                                            {tickLessThanTen ? (
+                                                <span>
+                                                    <CheckRoundedIcon fontSize="small" />
+                                                    <span className={styles.checkitems}>
+                                                        Less than 10 characters
+                                                    </span>{' '}
+                                                </span>
+                                            ) : (
+                                                <span className={styles.checkitems}>Less than 10 characters</span>
+                                            )}
+                                        </span>
+                                    </div>
+                                </React.Fragment>
+                            }
+                            placement="right"
+                            arrow
+                        >
                 <CustomTextField
                     className={styles.nameInputs}
                     id="nickname"
                     label="Enter Nickname"
+                    autoComplete="off"
                     value={nickname}
-                    onChange={(e) => setNickname(e.target.value)}
+                    onChange={(e) => validateNickname(e.target.value)}
+                    onClick={handleTooltipOpen}
                     InputProps={{ disableUnderline: true }}
                 ></CustomTextField>
+                </Tooltip>
+                    </div>
+                </ClickAwayListener>
                 <CustomTextField
                     className={styles.codeInputs}
                     id="room-code"
                     value={code}
                     label="Enter LobbyID"
+                    autoComplete="off"
                     type="text"
                     onChange={(e) => setCode(e.target.value)}
                     InputProps={{ disableUnderline: true }}
                 ></CustomTextField>
-                <CustomJoinButton className={styles.joinButton} variant="outlined" onClick={joinLobby} id="join-lobby" >
+                <CustomJoinButton className={styles.joinButton} variant="outlined" onClick={joinLobby} id="join-lobby" disabled={joinDisabled}>
                     Join
                 </CustomJoinButton>
-                <CustomCreateButton className={styles.createButton} variant="outlined" onClick={createLobby} id="create-lobby">
+                <CustomCreateButton className={styles.createButton} variant="outlined" onClick={createLobby} id="create-lobby" disabled={joinDisabled}>
                     Create new game
                 </CustomCreateButton>
             </div>
