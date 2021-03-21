@@ -16,7 +16,7 @@ export default function StatusBar() {
     });
 
     return (
-        <div key={state.status} className={containerStyle}>
+        <div className={containerStyle}>
             <h1 key={state.status} className={styles.heading}>
                 {state.status}
             </h1>

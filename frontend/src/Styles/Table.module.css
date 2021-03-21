@@ -6,11 +6,12 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    animation: fadeIn ease 1s;
+    transition: all 3s;
 }
 
 .day {
     background-color: var(--dayBG);
+    color: black;
 }
 
 .night {

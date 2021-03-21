@@ -9,11 +9,12 @@
 
 .container {
     padding: 1em 0 1em 0;
-    transition: 'all 10s ease';
+    transition: all 3s;
 }
 
 .day {
     background-color: var(--dayBG);
+    color: black;
 }
 
 .night {
