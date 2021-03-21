@@ -6,13 +6,11 @@
 .header {
     grid-area: Header;
     justify-self: center;
-    text-transform: capitalize;
 }
 
 .settingsButton {
     grid-area: Settings;
     justify-self: end;
-
 }
 
 .container {
