@@ -40,7 +40,7 @@ function endTrial(io, socket, mafiaGame) {
 
     const playerChosen = room.voteHandler.getTrialVotedPlayer();
 
-    if (playerChosen) {
+    if (playerChosen && playerChosen !== 'abstain Vote') {
         room.getPlayerByNickname(playerChosen).setIsAlive(false);
     }
 
