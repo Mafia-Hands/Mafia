@@ -14,11 +14,11 @@ const EntryScreen = () => {
     });
     return (
         <div>
-            <animated.div style={props}>
-                <TopBarSettings currentScreen={`You are a ${generalState.role}`} />
-                <div>
-                    <Player playerName={generalState.nickname} />
-                </div>
+          <animated.div style={props}>
+            <TopBarSettings currentScreen={`You are a ${generalState.role}`} />
+            <div style={{textAlign: 'center'}}>
+                <Player playerName={generalState.nickname} />
+            </div>
             </animated.div>
         </div>
     );
