@@ -1,18 +1,15 @@
-const Client = require('socket.io-client');
 const SocketIOServer = require('../../index');
 const config = require('../../config.json');
-const CreateLobbyDTO = require('../../domain/DTO/request/CreateLobbyDTO');
-const JoinLobbyDTO = require('../../domain/DTO/request/JoinLobbyDTO');
+const { connectAndCreateLobby, startGame, connectAndJoin, startGameOnePlayer } = require('./IntegrationTestHelpers');
 
 const port = process.env.PORT || config.local_port;
-
 let clientSockets = [];
 let lobbyCode = null;
 
 // Create a new client, and connect it to the server via a socket
 beforeEach(async (done) => {
     // Setting lobby code field
-    lobbyCode = await connectAndCreateLobby();
+    lobbyCode = await connectAndCreateLobby(clientSockets, port);
     done();
 });
 
@@ -55,7 +52,6 @@ describe('NightStateChangeEvents integration tests', () => {
                         socketResponseCount++;
                         if (socketResponseCount >= 12) {
                             resolve();
-                            console.log('what');
                         }
                     });
                 }
@@ -63,9 +59,9 @@ describe('NightStateChangeEvents integration tests', () => {
         }
 
         for (let i = 1; i < 6; i++) {
-            await connectAndJoin(i);
+            await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        await startGame();
+        await startGame(clientSockets);
         await startNight();
 
         done();
@@ -97,7 +93,7 @@ describe('NightStateChangeEvents integration tests', () => {
             });
         }
 
-        await startGame();
+        await startGameOnePlayer(clientSockets);
         await startNight();
 
         done();
@@ -134,9 +130,9 @@ describe('DayStateEvents integration tests', () => {
         }
 
         for (let i = 1; i < 6; i++) {
-            await connectAndJoin(i);
+            await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        await startGame();
+        await startGame(clientSockets);
         await startDay();
 
         done();
@@ -173,9 +169,9 @@ describe('TrialStateChangeEvents integration tests', () => {
         }
 
         for (let i = 1; i < 6; i++) {
-            await connectAndJoin(i);
+            await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        await startGame();
+        await startGame(clientSockets);
         await startTrial();
 
         done();
@@ -207,48 +203,9 @@ describe('TrialStateChangeEvents integration tests', () => {
             });
         }
 
-        await startGame();
+        await startGameOnePlayer(clientSockets);
         await startTrial();
 
         done();
     });
 });
-
-/** -----------------HELPER PROMISE FUNCTIONS------------------*/
-// Host creates lobby, returns lobby code
-async function connectAndCreateLobby() {
-    return new Promise((resolve) => {
-        clientSockets[0] = new Client(`http://localhost:` + port);
-        clientSockets[0].on('connect', () => {
-            clientSockets[0].emit('create-lobby', new CreateLobbyDTO('Leon'));
-            clientSockets[0].on('lobby-code', (createLobbyDTO) => {
-                resolve(createLobbyDTO.code);
-            });
-        });
-    });
-}
-
-// Connect to lobby created in before each with 5 other players
-// Should always be called after connectAndCreateLobby
-async function connectAndJoin(index) {
-    return new Promise((resolve) => {
-        clientSockets[index] = new Client(`http://localhost:` + port);
-        clientSockets[index].on('connect', () => {
-            clientSockets[index].emit('join-lobby', new JoinLobbyDTO('Leon' + index.toString(), lobbyCode));
-            clientSockets[index].once('lobby-join', () => {
-                resolve();
-            });
-        });
-    });
-}
-
-// Start the game
-async function startGame() {
-    return new Promise((resolve) => {
-        // Start the game
-        clientSockets[0].emit('start-game');
-        clientSockets[0].on('game-start', () => {
-            resolve();
-        });
-    });
-}

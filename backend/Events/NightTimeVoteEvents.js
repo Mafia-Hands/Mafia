@@ -35,9 +35,7 @@ exports.loadNightTimeEvents = (io, socket, mafiaGame) => {
      */
     socket.on('detective-vote', (detectiveVoteObj) => {
         const room = mafiaGame.gameRoomsDict[socket.player.roomID];
-
         const suspect = room.getPlayerByNickname(detectiveVoteObj.votingFor);
-
         socket.emit(
             'suspect-reveal',
             new SuspectRevealDTO(suspect.nickname, suspect.role === RoleEnum.MAFIA || suspect.role === RoleEnum.JESTER)
