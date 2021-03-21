@@ -13,6 +13,7 @@ const initialState = {
     winners: [],
     phase: '',
     role: '',
+    amIDead: false,
     checkedPlayers: [],
     votingState: {
         type: '', // role or discussion or trial or undefined
@@ -193,6 +194,18 @@ export default function useGameState() {
 
     useEffect(() => {
         function onNightStart({ timeToVote }) {
+
+            const amIDead = !state.alivePlayers.includes(generalState.nickname);
+            if (amIDead) {
+                dispatch({
+                    type: 'night-start',
+                    status: 'You are dead',
+                    votablePlayers: [],
+                    timeToVote,
+                });
+                return;
+            }
+
             const { role } = generalState;
 
             const status = nightTimeStatus[role];
