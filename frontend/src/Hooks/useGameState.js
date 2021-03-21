@@ -57,10 +57,17 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 status: action.status,
-                votingState: {...state.votingState, vote: action.votedPlayer },
+                votingState: { ...state.votingState, vote: action.votedPlayer },
             };
         }
 
+        case 'abstain': {
+            return {
+                ...state,
+                status: action.status,
+                votingState: { ...state.votingState, vote: '' },
+            };
+        }
 
         case 'night-end': {
             return {
@@ -272,9 +279,10 @@ export default function useGameState() {
         function onTrialEnd({ playerKilled, isGameOver }) {
             dispatch({
                 type: 'trial-end',
-                status: playerKilled
-                    ? `The town voted to kill ${playerKilled}!`
-                    : `${playerKilled} was saved by the Town!`, // TODO if playerKilled === null
+                status:
+                    playerKilled === 'abstainVote' || !playerKilled
+                        ? `Nobody was killed in the Trial!`
+                        : `The town voted to kill ${playerKilled}!`,
                 playerKilled,
             });
             if (!isGameOver) {
