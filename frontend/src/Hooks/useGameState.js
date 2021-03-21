@@ -5,7 +5,7 @@ import socket from '../Socket';
 
 const initialState = {
     screen: 'entry',
-    dayPeriod: 'day', // night or day
+    dayPeriod: 'Day', // night or day
     dayNumber: 1, // what day it is
     alivePlayers: [],
     status: '',
@@ -13,6 +13,7 @@ const initialState = {
     winners: [],
     phase: '',
     role: '',
+    checkedPlayers: [],
     votingState: {
         type: '', // role or discussion or trial or undefined
         votablePlayers: [], // what other players can we vote for
@@ -41,7 +42,7 @@ const reducer = (state, action) => {
                 ...state,
                 phase: 'night-start',
                 status: action.status,
-                dayPeriod: 'night',
+                dayPeriod: 'Night',
                 screen: 'core',
                 votingState: {
                     ...state.votingState,
@@ -77,7 +78,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 phase: 'day-start',
-                dayPeriod: 'day',
+                dayPeriod: 'Day',
                 dayNumber: state.dayNumber + 1,
                 status: action.status,
                 votingState: {
@@ -152,6 +153,16 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 checkedPlayers: [...state.checkedPlayers, action.checkedPlayer],
+            };
+        }
+
+        case 'skip-trial': {
+            return {
+                ...state,
+                status: action.status,
+                votingState: {
+                    ...initialState.votingState,
+                },
             };
         }
 
@@ -230,6 +241,11 @@ export default function useGameState() {
 
         function onDiscussionEnd({ playerOnTrial }) {
             if (playerOnTrial === null) {
+                dispatch({
+                    type: 'skip-trial',
+                    status: 'No one is on trial',
+                });
+
                 generalState.isHost && setTimeout(() => socket.emit('start-night'), 2000); // TODO CHANGED
                 return;
             }
@@ -282,7 +298,7 @@ export default function useGameState() {
             });
         }
 
-        function onSuspectReveal(checkedPlayer) {
+        function onSuspectReveal(checkedPlayer) {          
             dispatch({
                 type: 'suspect-reveal',
                 checkedPlayer,
