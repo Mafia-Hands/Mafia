@@ -18,7 +18,7 @@ const GameOverPage = ({ userName, role }) => {
     });
 
     const returnToLobby = () => {
-        socket.emit('reset-lobby-update');
+        socket.emit('reset-lobby');
     };
 
     return (
