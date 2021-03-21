@@ -13,6 +13,8 @@ const initialState = {
     winners: [],
     phase: '',
     role: '',
+    amIDead: false,
+    checkedPlayers: [],
     votingState: {
         type: '', // role or discussion or trial or undefined
         votablePlayers: [], // what other players can we vote for
@@ -56,10 +58,17 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 status: action.status,
-                votingState: {...state.votingState, vote: action.votedPlayer },
+                votingState: { ...state.votingState, vote: action.votedPlayer },
             };
         }
 
+        case 'abstain': {
+            return {
+                ...state,
+                status: action.status,
+                votingState: { ...state.votingState, vote: '' },
+            };
+        }
 
         case 'night-end': {
             return {
@@ -192,6 +201,17 @@ export default function useGameState() {
 
     useEffect(() => {
         function onNightStart({ timeToVote }) {
+            const amIDead = !state.alivePlayers.includes(generalState.nickname);
+            if (amIDead) {
+                dispatch({
+                    type: 'night-start',
+                    status: 'You are dead',
+                    votablePlayers: [],
+                    timeToVote,
+                });
+                return;
+            }
+
             const { role } = generalState;
 
             const status = nightTimeStatus[role];
@@ -230,9 +250,10 @@ export default function useGameState() {
         }
 
         function onDayStart({ timeToVote }) {
+            const amIDead = !state.alivePlayers.includes(generalState.nickname);
             dispatch({
                 type: 'day-start',
-                status: 'Select someone to be on trial',
+                status: amIDead ? 'You are dead' : 'Select someone to be on trial',
                 votablePlayers: state.alivePlayers.filter((p) => p !== generalState.nickname),
                 timeToVote,
             });
@@ -259,9 +280,12 @@ export default function useGameState() {
         }
 
         function onTrialStart({ timeToVote }) {
+            const amIDead = !state.alivePlayers.includes(generalState.nickname);
             dispatch({
                 type: 'trial-start',
-                status: state.votingState.votablePlayers.length
+                status: amIDead
+                    ? 'You are dead'
+                    : state.votingState.votablePlayers.length
                     ? 'Vote for the player on trial to kill them'
                     : 'You are on trial',
                 timeToVote,
@@ -271,9 +295,10 @@ export default function useGameState() {
         function onTrialEnd({ playerKilled, isGameOver }) {
             dispatch({
                 type: 'trial-end',
-                status: playerKilled
-                    ? `The town voted to kill ${playerKilled}!`
-                    : `${playerKilled} was saved by the Town!`, // TODO if playerKilled === null
+                status:
+                    playerKilled === 'abstain Vote' || !playerKilled
+                        ? `Nobody was killed in the Trial!`
+                        : `The town voted to kill ${playerKilled}!`,
                 playerKilled,
             });
             if (!isGameOver) {

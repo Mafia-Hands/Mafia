@@ -3,6 +3,9 @@ import Player from './Player';
 import styles from '../Styles/Table.module.css';
 import { GeneralContext } from '../App';
 import { GameContext } from '../Pages/GamePage';
+import { Button } from '@material-ui/core';
+import socket from '../Socket';
+import classNames from 'classnames';
 
 /**
  *
@@ -11,7 +14,17 @@ import { GameContext } from '../Pages/GamePage';
  */
 export default function Table() {
     const { state: generalState } = useContext(GeneralContext);
-    const { state: gameState } = useContext(GameContext);
+    const { state: gameState, dispatch } = useContext(GameContext);
+
+    const isNight = gameState.dayPeriod === 'Night';
+    const amIDead = !gameState.alivePlayers.includes(generalState.nickname);
+
+    // apply styles based on whether certain props is true
+    const tableWrapperStyle = classNames({
+        [styles.tableWrapper]: true,
+        [styles.day]: !isNight,
+        [styles.night]: isNight,
+    });
 
     // used to keep reference to table dom element (to get width/height of it)
     const tableRef = useRef(null);
@@ -116,6 +129,11 @@ export default function Table() {
         };
     }
 
+    function abstainHandler() {
+        socket.emit(`trial-vote`, { votingFor: `abstain Vote` });
+        dispatch({ type: 'show-selected', status: `Voted to Abstain` });
+    }
+
     useEffect(() => {
         // we want the positions to be computed after the first render
         if (firstRender.current) {
@@ -133,7 +151,7 @@ export default function Table() {
     });
 
     return (
-        <div className={styles.tableWrapper}>
+        <div className={tableWrapperStyle}>
             <div className={styles.table} ref={tableRef}>
                 {playerCoords
                     .filter((p) => !p.onTrial)
@@ -157,7 +175,22 @@ export default function Table() {
                         .map((p) => {
                             const { playerId, name } = p;
 
-                            return <Player key={playerId} playerId={playerId} playerName={name} childRef={playerRef} />;
+                            return (
+                                <>
+                                    <Player key={playerId} playerId={playerId} playerName={name} childRef={playerRef} />{' '}
+                                    <Button
+                                        onClick={() => {
+                                            abstainHandler();
+                                        }}
+                                        style={{
+                                            visibility: (gameState.phase !== 'trial-start' || amIDead) && 'hidden',
+                                        }}
+                                        variant="contained"
+                                    >
+                                        Abstain
+                                    </Button>
+                                </>
+                            );
                         })}
                 </div>
             </div>

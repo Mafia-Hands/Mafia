@@ -4,53 +4,51 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 2em;
-    height: 100vh; 
+    height: 80vh;
     padding-bottom: 30px;
 }
 
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: 2em;    
+    column-gap: 2em;
 }
 
-.leftContainer{
+.leftContainer {
     display: grid;
     row-gap: 2em;
-    height: 100vh;
+    height: 80vh;
     grid-template-rows: 1fr 1fr;
 }
 
-.rightContainer{
+.rightContainer {
     display: grid;
-    height: 100vh;
+    height: 80vh;
     grid-template-rows: 85% 1fr;
     row-gap: 2em;
 }
 
-.playerNames{
+.playerNames {
     grid-row: 1;
     grid-row-end: 2;
-
 }
 
-.chatbox{
+.chatbox {
     grid-row-start: 1;
     grid-row-end: 3;
-
 }
 
-.lobbySettings{
+.lobbySettings {
     grid-row-start: 2;
     grid-row-end: 3;
 }
 
-.Modal{
-    background-color: var(--mediumBlue);
-     border: 2px solid #E3F1F1;
-     border-radius: 10px;
-     padding: 10px;
-     outline: none;
-     min-width: 60vh;
-     
+.Modal {
+    background-color: var(--darkBlue);
+    border: 2px solid #e3f1f1;
+    border-radius: 10px;
+    padding: 10px;
+    outline: none;
+    min-width: 60vh;
+    width: 70%;
 }

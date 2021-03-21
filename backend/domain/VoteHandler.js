@@ -23,16 +23,17 @@ class VoteHandler {
     }
 
     getTrialVotedPlayer() {
-        return this.getVotedPlayer(this.trialVoteMap);
+        return this.getVotedPlayer(this.trialVoteMap, true);
     }
 
-    getVotedPlayer(voteMap) {
+    getVotedPlayer(voteMap, isTrial) {
         // Generate map of players who have been voted for, and the number of votes they have.
         const voteTally = {};
-        const abstainVote = null;
-        voteTally[abstainVote] = 0;
+        voteTally['abstain Vote'] = 0;
         for (const [voter, chosenPlayer] of Object.entries(voteMap)) {
-            if (voteTally.hasOwnProperty(chosenPlayer.nickname)) {
+            if (chosenPlayer === 'abstain Vote') {
+                voteTally['abstain Vote']++;
+            } else if (voteTally.hasOwnProperty(chosenPlayer.nickname)) {
                 voteTally[chosenPlayer.nickname]++;
             } else {
                 voteTally[chosenPlayer.nickname] = 1;
@@ -43,7 +44,7 @@ class VoteHandler {
         let maxVotes = 0;
         let votedPlayer = null;
         for (const [player, numVotes] of Object.entries(voteTally)) {
-            if (numVotes > maxVotes) {
+            if ((numVotes > maxVotes) || (isTrial && player == 'abstain Vote' && numVotes == maxVotes)) {
                 maxVotes = numVotes;
                 votedPlayer = player;
             }

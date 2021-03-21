@@ -33,7 +33,7 @@ function voteTrial(io, socket, mafiaGame) {
         const room = mafiaGame.gameRoomsDict[socket.player.roomID];
         const voter = socket.player;
         const votee = voteForDTO.votingFor;
-        room.voteHandler.trialVoteMap[voter.nickname] = room.getPlayerByNickname(votee);
+        room.voteHandler.trialVoteMap[voter.nickname] = votee === 'abstain Vote' ? 'abstain Vote' : room.getPlayerByNickname(votee);
         io.in(socket.player.roomID).emit('trial-vote-update', new ListVoteDTO(room.voteHandler.trialVoteMap));
     });
 }

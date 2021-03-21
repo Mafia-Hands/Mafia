@@ -9,23 +9,26 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
  * @param showSettings true/false OPTIONAL prop that will render settings button if true
  */
 
- const StyledIconButton = withStyles({
-    root:{
-        padding:'5px',
-        color:'#293241',
+const StyledIconButton = withStyles({
+    root: {
+        padding: '5px',
+        color: '#293241',
     },
-    })(IconButton);
+})(IconButton);
 
 const TopBarSettings = ({ currentScreen, showSettings, showUp, setOpenInfo, showBack }) => (
     <div className={styles.container}>
         {showBack && (
-            <StyledIconButton variant="contained" className={styles.backButton} onClick={() => showUp(false)}>
-               <KeyboardBackspaceIcon />
+            <StyledIconButton
+                variant="contained"
+                className={`${styles.backButton} ${!currentScreen.includes('Lobby') && styles.rolesAndRules}`}
+                onClick={() => showUp(false)}
+            >
+                <KeyboardBackspaceIcon />
             </StyledIconButton>
         )}
-        {currentScreen && <h2 id= "room-code" className={styles.header}>{`${currentScreen}`}</h2>}
+        {currentScreen && <h2 id="room-code" className={styles.header}>{`${currentScreen}`}</h2>}
         {showSettings && (
-            
             <StyledIconButton
                 variant="contained"
                 className={styles.settingsButton}
@@ -33,7 +36,8 @@ const TopBarSettings = ({ currentScreen, showSettings, showUp, setOpenInfo, show
                     showUp(true);
                     setOpenInfo(false);
                 }}
-            ><SettingsIcon/>
+            >
+                <SettingsIcon />
             </StyledIconButton>
         )}
     </div>

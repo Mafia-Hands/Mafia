@@ -9,15 +9,9 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 const CustomTextField = withStyles({
     root: {
-        
         '& label.Mui-focused': {
-        
             color: '#3E5B7F',
-
-            
         },
-
-
     },
 })(TextField);
 
@@ -37,7 +31,7 @@ const CustomJoinButton = withStyles({
         fontFamily: 'Helvetica, sans-serif',
         fontWeight: 'bold',
         color: 'rgba((62,91,127))',
-      },
+    },
 })(Button);
 
 const CustomCreateButton = withStyles({
@@ -47,7 +41,6 @@ const CustomCreateButton = withStyles({
         border: 'none',
         '&:hover': {
             backgroundColor: 'rgb(180, 63, 34)',
-            
         },
     },
     label: {
@@ -55,11 +48,10 @@ const CustomCreateButton = withStyles({
         color: 'white',
         fontWeight: 'bold',
         letterSpacing: '1px',
-        textTransform:'capitalize',
-        fontSize: '1.2rem'
-      },
+        textTransform: 'capitalize',
+        fontSize: '1.2rem',
+    },
 })(Button);
-
 
 export default function HomePage() {
     const { dispatch } = useContext(GeneralContext);
@@ -121,8 +113,8 @@ export default function HomePage() {
         <div className={styles.container}>
             <div className={styles.contents}>
                 <div className={styles.header}> Mafia </div>
-                <ClickAwayListener onClickAway={handleTooltipClose}>
-                    <div>
+                <ClickAwayListener onClickAway={handleTooltipClose} style={{ display: 'grid' }}>
+                    <div style={{ display: 'grid' }}>
                         <Tooltip
                             PopperProps={{
                                 disablePortal: true,
@@ -135,7 +127,7 @@ export default function HomePage() {
                             title={
                                 <React.Fragment>
                                     <div className={styles.checkers}>
-                                        <span className={tickNonempty? styles.validNickname : styles.invalidNickname}>
+                                        <span className={tickNonempty ? styles.validNickname : styles.invalidNickname}>
                                             {tickNonempty ? (
                                                 <span>
                                                     <CheckRoundedIcon fontSize="small" />
@@ -145,7 +137,7 @@ export default function HomePage() {
                                                 <span className={styles.checkitems}> Non-empty nickname</span>
                                             )}
                                         </span>
-                                        <span className={tickNoSpaces? styles.validNickname : styles.invalidNickname}>
+                                        <span className={tickNoSpaces ? styles.validNickname : styles.invalidNickname}>
                                             {tickNoSpaces ? (
                                                 <span>
                                                     <CheckRoundedIcon fontSize="small" />
@@ -155,7 +147,9 @@ export default function HomePage() {
                                                 <span className={styles.checkitems}>No spaces</span>
                                             )}
                                         </span>
-                                        <span className={tickLessThanTen? styles.validNickname : styles.invalidNickname}>
+                                        <span
+                                            className={tickLessThanTen ? styles.validNickname : styles.invalidNickname}
+                                        >
                                             {tickLessThanTen ? (
                                                 <span>
                                                     <CheckRoundedIcon fontSize="small" />
@@ -173,17 +167,18 @@ export default function HomePage() {
                             placement="right"
                             arrow
                         >
-                <CustomTextField
-                    className={styles.nameInputs}
-                    id="nickname"
-                    label="Enter Nickname"
-                    autoComplete="off"
-                    value={nickname}
-                    onChange={(e) => validateNickname(e.target.value)}
-                    onClick={handleTooltipOpen}
-                    InputProps={{ disableUnderline: true }}
-                ></CustomTextField>
-                </Tooltip>
+                            <CustomTextField
+                                className={styles.nameInputs}
+                                id="nickname"
+                                label="Enter Nickname"
+                                autoComplete="off"
+                                value={nickname}
+                                onChange={(e) => validateNickname(e.target.value)}
+                                onClick={handleTooltipOpen}
+                                InputLabelProps={{ style: { fontSize: '20px', paddingLeft: '2em' } }}
+                                InputProps={{ disableUnderline: true, style: { fontSize: '30px', paddingLeft: '1em' } }}
+                            ></CustomTextField>
+                        </Tooltip>
                     </div>
                 </ClickAwayListener>
                 <CustomTextField
@@ -194,12 +189,25 @@ export default function HomePage() {
                     autoComplete="off"
                     type="text"
                     onChange={(e) => setCode(e.target.value)}
-                    InputProps={{ disableUnderline: true }}
+                    InputLabelProps={{ style: { fontSize: '20px', paddingLeft: '2em' } }}
+                    InputProps={{ disableUnderline: true, style: { fontSize: '30px', paddingLeft: '1em' } }}
                 ></CustomTextField>
-                <CustomJoinButton className={styles.joinButton} variant="outlined" onClick={joinLobby} id="join-lobby" disabled={joinDisabled}>
+                <CustomJoinButton
+                    className={styles.joinButton}
+                    variant="outlined"
+                    onClick={joinLobby}
+                    id="join-lobby"
+                    disabled={joinDisabled}
+                >
                     Join
                 </CustomJoinButton>
-                <CustomCreateButton className={styles.createButton} variant="outlined" onClick={createLobby} id="create-lobby" disabled={joinDisabled}>
+                <CustomCreateButton
+                    className={styles.createButton}
+                    variant="outlined"
+                    onClick={createLobby}
+                    id="create-lobby"
+                    disabled={joinDisabled}
+                >
                     Create new game
                 </CustomCreateButton>
             </div>

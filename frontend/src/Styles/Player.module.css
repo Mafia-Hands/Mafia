@@ -1,11 +1,11 @@
 @import './colourScheme.css';
 
 .playerWrapper {
-    height: 150px;
-    width: 150px;
+    height: 7vw;
+    width: 7vw;
     border-radius: 50%;
-    background-color: var(--deepBlue);
-    color: var(--lightBlue);
+    background-color: var(--mediumBlue);
+    color: var(--deepBlue);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -13,13 +13,15 @@
     font-size: 1.5rem;
 }
 
-.isHoverable{
-    background-color: var(--mediumBlue);
+.player {
+    background-color: var(--deepBlue);
+    color: var(--lightBlue);
 }
 
 .isHoverable:hover {
     background-color: var(--mediumBlue);
     cursor: pointer;
+    border: 5px solid var(--deepBlue);
     transition: 0.2s ease background-color box-shadow;
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.479);
     transform: scale(1.1);
@@ -38,6 +40,7 @@
 
 .isClicked {
     background-color: var(--darkOrange);
+    color: var(--lightBlue);
 }
 
 .isClicked:hover {
@@ -46,4 +49,9 @@
 
 .isDead {
     background-color: var(--darkBlue);
+    color: var(--lightOrange);
+}
+
+.playerText {
+    text-align: center;
 }
