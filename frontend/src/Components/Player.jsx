@@ -17,7 +17,6 @@ export default function Player({ playerId, playerName, style, childRef }) {
 
     // forces the detctive to only be able to look at one other player per day
     const detectiveHasSuspected = (gameState.votingState.vote !== '')
-    console.log(detectiveHasSuspected)
 
     var mafiaString = ""
     for (const suspectedPlayer of gameState.checkedPlayers) {
