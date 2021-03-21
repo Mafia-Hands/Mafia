@@ -38,7 +38,6 @@ describe('night time vote event tests', () => {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
         hostRole = await startGame(clientSockets);
-        console.log(hostRole);
         await nightTimeVote(hostRole);
         done();
     });
@@ -56,7 +55,6 @@ describe('night time vote event tests', () => {
             }
             // check if receiving suspect reveal
             clientSockets[1].on('suspect-reveal', (suspectRevealDTO) => {
-                console.log(suspectRevealDTO);
                 expect(suspectRevealDTO.nickname).toBe('Leon');
                 expect(suspectRevealDTO.isMafia).toBe(isMafia);
                 resolve();

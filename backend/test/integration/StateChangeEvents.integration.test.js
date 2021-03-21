@@ -2,7 +2,6 @@ const SocketIOServer = require('../../index');
 const config = require('../../config.json');
 const { connectAndCreateLobby, startGame, connectAndJoin, startGameOnePlayer } = require('./IntegrationTestHelpers');
 
-
 const port = process.env.PORT || config.local_port;
 let clientSockets = [];
 let lobbyCode = null;
@@ -53,7 +52,6 @@ describe('NightStateChangeEvents integration tests', () => {
                         socketResponseCount++;
                         if (socketResponseCount >= 12) {
                             resolve();
-                            console.log('what');
                         }
                     });
                 }
@@ -61,7 +59,7 @@ describe('NightStateChangeEvents integration tests', () => {
         }
 
         for (let i = 1; i < 6; i++) {
-            await connectAndJoin(clientSockets, i, port,lobbyCode);
+            await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
         await startGame(clientSockets);
         await startNight();
@@ -132,7 +130,7 @@ describe('DayStateEvents integration tests', () => {
         }
 
         for (let i = 1; i < 6; i++) {
-            await connectAndJoin(clientSockets,i,port,lobbyCode);
+            await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
         await startGame(clientSockets);
         await startDay();
@@ -171,7 +169,7 @@ describe('TrialStateChangeEvents integration tests', () => {
         }
 
         for (let i = 1; i < 6; i++) {
-            await connectAndJoin(clientSockets,i,port,lobbyCode);
+            await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
         await startGame(clientSockets);
         await startTrial();
@@ -211,5 +209,3 @@ describe('TrialStateChangeEvents integration tests', () => {
         done();
     });
 });
-
-
