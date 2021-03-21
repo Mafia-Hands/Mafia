@@ -296,13 +296,10 @@ export default function useGameState() {
                 dispatch({
                     type: 'trial-start',
                     status: 'You are dead so cannot vote anymore',
-                    amIDead: amIDead,
-                    votablePlayers: []
                 });
             } else {
                 dispatch({
                     type: 'trial-start',
-                    amIDead: amIDead,
                     status: state.votingState.votablePlayers.length
                         ? 'Vote for the player on trial to kill them'
                         : 'You are on trial',
@@ -315,7 +312,7 @@ export default function useGameState() {
             dispatch({
                 type: 'trial-end',
                 status:
-                    playerKilled === 'abstainVote' || !playerKilled
+                    playerKilled === 'abstain Vote' || !playerKilled
                         ? `Nobody was killed in the Trial!`
                         : `The town voted to kill ${playerKilled}!`,
                 playerKilled,

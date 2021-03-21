@@ -3,18 +3,26 @@ import classNames from 'classnames';
 import { GameContext } from '../Pages/GamePage';
 import socket from '../Socket';
 import { useContext } from 'react';
+import { GeneralContext } from '../App';
+
 
 export default function Player({ playerId, playerName, style, childRef }) {
+    const { state: generalState } = useContext(GeneralContext);
     const { state: gameState, dispatch } = useContext(GameContext);
 
     const isDead = !gameState.alivePlayers.includes(playerName);
 
+    const amIDead = !gameState.alivePlayers.includes(generalState.nickname);
+
     const isHoverable =
-        !!gameState.votingState.type && gameState.votingState.votablePlayers.includes(playerName) && !isDead;
+        !!gameState.votingState.type && gameState.votingState.votablePlayers.includes(playerName) && !isDead && !amIDead;
     const hasVoted = gameState.votingState.playersWhoVoted.includes(playerName);
 
     const isVoted = (gameState.votingState.vote === playerName);
 
+
+
+    
     // forces the detctive to only be able to look at one other player per day
     const detectiveHasSuspected = (gameState.votingState.vote !== '')
 
