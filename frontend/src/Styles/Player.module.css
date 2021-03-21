@@ -47,3 +47,7 @@
 .isDead {
     background-color: var(--darkBlue);
 }
+
+.playerText {
+    text-align: center;
+}

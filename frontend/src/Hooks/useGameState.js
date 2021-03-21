@@ -13,6 +13,7 @@ const initialState = {
     winners: [],
     phase: '',
     role: '',
+    checkedPlayers: [],
     votingState: {
         type: '', // role or discussion or trial or undefined
         votablePlayers: [], // what other players can we vote for
@@ -297,7 +298,7 @@ export default function useGameState() {
             });
         }
 
-        function onSuspectReveal(checkedPlayer) {
+        function onSuspectReveal(checkedPlayer) {          
             dispatch({
                 type: 'suspect-reveal',
                 checkedPlayer,
