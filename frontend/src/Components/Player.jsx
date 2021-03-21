@@ -20,6 +20,7 @@ export default function Player({ playerId, playerName, style, childRef }) {
         [styles.isHoverable]: isHoverable,
         [styles.hasVoted]: hasVoted,
         [styles.isClicked]: isClicked,
+        [styles.isDead]: isDead,
     });
 
     // this only allows clicks if a player is actually hoverable.

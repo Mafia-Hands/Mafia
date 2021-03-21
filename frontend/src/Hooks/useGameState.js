@@ -13,6 +13,7 @@ const initialState = {
     winners: [],
     phase: '',
     role: '',
+    amIDead: false,
     votingState: {
         type: '', // role or discussion or trial or undefined
         votablePlayers: [], // what other players can we vote for
@@ -216,7 +217,8 @@ export default function useGameState() {
                 dispatch({
                     type: 'day-start',
                     status: 'You are dead so cannot vote anymore',
-                    votablePlayers: []
+                    votablePlayers: [],
+                    amIDead: amIDead
                 })
             } else {
                 dispatch({
@@ -224,6 +226,7 @@ export default function useGameState() {
                     status: 'Select someone to be on trial',
                     votablePlayers: state.alivePlayers.filter((p) => p !== generalState.nickname),
                     timeToVote,
+                    amIDead: amIDead
                 });
             }
         }
@@ -244,13 +247,24 @@ export default function useGameState() {
         }
 
         function onTrialStart({ timeToVote }) {
-            dispatch({
-                type: 'trial-start',
-                status: state.votingState.votablePlayers.length
-                    ? 'Vote for the player on trial to kill them'
-                    : 'You are on trial',
-                timeToVote,
-            });
+            const amIDead = !state.alivePlayers.includes(generalState.nickname);
+            if (amIDead) {
+                dispatch({
+                    type: 'trial-start',
+                    status: 'You are dead so cannot vote anymore',
+                    amIDead: amIDead,
+                    votablePlayers: []
+                });
+            } else {
+                dispatch({
+                    type: 'trial-start',
+                    amIDead: amIDead,
+                    status: state.votingState.votablePlayers.length
+                        ? 'Vote for the player on trial to kill them'
+                        : 'You are on trial',
+                    timeToVote,
+                });
+            }
         }
 
         function onTrialEnd({ playerKilled, isGameOver }) {
