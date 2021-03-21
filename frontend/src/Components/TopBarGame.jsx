@@ -18,12 +18,12 @@ import { GameContext } from '../Pages/GamePage';
  * @param showRole true/false OPTIONAL prop that will render Role if true
  */
 
- const StyledIconButton = withStyles({
-    root:{
-        padding:'5px',
-        color:'#E3F1F1',
+const StyledIconButton = withStyles({
+    root: {
+        padding: '5px',
+        color: 'white',
     },
-    })(IconButton);
+})(IconButton);
 
 const TopBarGame = ({ showTimer, showRole }) => {
     const { state } = useContext(GeneralContext);
@@ -39,14 +39,14 @@ const TopBarGame = ({ showTimer, showRole }) => {
             {showRole && (
                 <div className={styles.userRole}>
                     <span>{`Role: ${role}`}</span>
-                    <IconButton
+                    <StyledIconButton
                         onClick={() => {
                             setOpen(true);
                             setOpenInfo(true);
                         }}
                     >
                         <HelpIcon />
-                    </IconButton>
+                    </StyledIconButton>
                 </div>
             )}
             {showTimer && (
@@ -61,7 +61,8 @@ const TopBarGame = ({ showTimer, showRole }) => {
                     setOpen(true);
                     setOpenInfo(false);
                 }}
-            ><SettingsIcon/>
+            >
+                <SettingsIcon />
             </StyledIconButton>
 
             <div>

@@ -21,23 +21,20 @@ const StyledButton = withStyles({
         fontWeight: 'bolder',
         textTransform: 'capitalize',
         letterSpacing: '2px',
-        fontSize:'1.5rem',
+        fontSize: '1.5rem',
     },
 })(Button);
 
 const useStyles = makeStyles({
     root: {
         display: 'none',
-        
-        
     },
-    modal:{
+    modal: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-       
-    }
-})
+    },
+});
 
 const NewGameScreen = () => {
     const classes = useStyles();
@@ -82,7 +79,7 @@ const NewGameScreen = () => {
             <div className={classes.root}>
                 <Modal className={classes.modal} open={open} setOpen={setOpen}>
                     {openInfo ? (
-                        <div  className = {styles.Modal}>
+                        <div className={styles.Modal}>
                             <TopBarSettings
                                 showBack={true}
                                 showUp={setOpen}
@@ -90,10 +87,10 @@ const NewGameScreen = () => {
                                 showSettings={false}
                                 setOpenInfo={setOpenInfo}
                             />
-                            <RolesAndRules userRole="Mafia" />
+                            <RolesAndRules inLobby />
                         </div>
                     ) : (
-                        <div className = {styles.Modal} >
+                        <div className={styles.Modal}>
                             <TopBarSettings
                                 showBack={true}
                                 showUp={setOpen}

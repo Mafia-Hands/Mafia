@@ -1,8 +1,8 @@
 @import './colourScheme.css';
 
 .playerWrapper {
-    height: 150px;
-    width: 150px;
+    height: 7vw;
+    width: 7vw;
     border-radius: 50%;
     background-color: var(--mediumBlue);
     color: var(--deepBlue);
