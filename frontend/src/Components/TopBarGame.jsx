@@ -1,13 +1,16 @@
 import { React, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import HelpIcon from '@material-ui/icons/Help';
-import { Button, IconButton } from '@material-ui/core';
+import { withStyles, IconButton } from '@material-ui/core';
 import styles from '../Styles/TopBarGame.module.css';
 import ModalMUI from '../Modal/ModalMUI';
 import SettingDialog from '../Pages/SettingDialog';
 import TopBarSettings from './TopBarSettings';
 import { GeneralContext } from '../App';
 import RolesAndRules from './RolesAndRules';
+import SettingsIcon from '@material-ui/icons/Settings';
+import Timer from './Timer';
+import { GameContext } from '../Pages/GamePage';
 
 /**
  * @param userDetails [{userName: <string>, role: <string>}]
@@ -15,12 +18,21 @@ import RolesAndRules from './RolesAndRules';
  * @param showRole true/false OPTIONAL prop that will render Role if true
  */
 
+ const StyledIconButton = withStyles({
+    root:{
+        padding:'5px',
+        color:'#E3F1F1',
+    },
+    })(IconButton);
+
 const TopBarGame = ({ showTimer, showRole }) => {
     const { state } = useContext(GeneralContext);
     const [open, setOpen] = useState(false);
     const [openInfo, setOpenInfo] = useState(false);
     const userName = state.nickname;
     const role = state.role;
+    const { state: gameState } = useContext(GameContext);
+
     return (
         <div className={styles.container}>
             <p className={styles.userName}>{`Name: ${userName}`}</p>
@@ -37,17 +49,20 @@ const TopBarGame = ({ showTimer, showRole }) => {
                     </IconButton>
                 </div>
             )}
-            {showTimer && <div className={styles.timer}>Timer Placeholder</div>}
-            <Button
+            {showTimer && (
+                <div className={styles.timer}>
+                    <Timer userPreferTime={gameState.votingState.timeToVote} />
+                </div>
+            )}
+            <StyledIconButton
                 variant="contained"
                 className={styles.settingsButton}
                 onClick={() => {
                     setOpen(true);
                     setOpenInfo(false);
                 }}
-            >
-                Settings
-            </Button>
+            ><SettingsIcon/>
+            </StyledIconButton>
 
             <div>
                 <ModalMUI open={open} setOpen={setOpen}>
