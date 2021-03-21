@@ -15,3 +15,8 @@
     margin-top: 3em;
     column-gap: 3em;
 }
+
+.lobbyBtn {
+    margin-top: 20em !important;
+    font-size: large !important;
+}

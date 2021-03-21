@@ -88,6 +88,10 @@ export default function useLobbyState() {
             dispatch({ type: 'lobby-join', ...res });
         };
 
+        const onResetLobby = () => {
+            dispatch({ type: 'change-screen', screen: 'lobby' });
+        };
+
         const onLobbyReady = () => dispatch({ type: 'lobby-ready' });
         // Invoked only if player created lobby
         socket.on('lobby-code', onLobbyCode);
@@ -96,6 +100,7 @@ export default function useLobbyState() {
         socket.on('lobby-join', onlobbyJoin);
         socket.on('lobby-ready', onLobbyReady);
         socket.on('game-start', onGameStart);
+        socket.on('reset-lobby-update', onResetLobby);
 
         return () => {
             socket.removeListener('lobby-code', onLobbyCode);
@@ -104,6 +109,7 @@ export default function useLobbyState() {
             socket.removeListener('lobby-join', onlobbyJoin);
             socket.removeListener('lobby-ready', onLobbyReady);
             socket.removeListener('game-start', onGameStart);
+            socket.removeListener('reset-lobby-update', onResetLobby);
         };
     }, [state]);
 
