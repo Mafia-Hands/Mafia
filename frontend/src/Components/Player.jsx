@@ -11,7 +11,7 @@ export default function Player({ playerId, playerName, style, childRef }) {
     const { state: gameState, dispatch } = useContext(GameContext);
 
     const isDead = !gameState.alivePlayers.includes(playerName);
-
+    
     const amIDead = !gameState.alivePlayers.includes(generalState.nickname);
 
     const isHoverable =
