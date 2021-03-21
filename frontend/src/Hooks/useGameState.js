@@ -280,7 +280,7 @@ export default function useGameState() {
             dispatch({
                 type: 'trial-end',
                 status:
-                    playerKilled === 'abstainVote' || !playerKilled
+                    playerKilled === 'abstain Vote' || !playerKilled
                         ? `Nobody was killed in the Trial!`
                         : `The town voted to kill ${playerKilled}!`,
                 playerKilled,
@@ -306,7 +306,7 @@ export default function useGameState() {
             });
         }
 
-        function onSuspectReveal(checkedPlayer) {          
+        function onSuspectReveal(checkedPlayer) {
             dispatch({
                 type: 'suspect-reveal',
                 checkedPlayer,
