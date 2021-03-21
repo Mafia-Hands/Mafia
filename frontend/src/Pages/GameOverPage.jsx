@@ -5,7 +5,6 @@ import TopBarSettings from '../Components/TopBarSettings';
 import Player from '../Components/Player';
 import { GameContext } from './GamePage';
 import { animated, useSpring } from 'react-spring';
-import useLobbyState from '../Hooks/useLobbyState';
 
 
 const GameOverPage = ({ userName, role }) => {
