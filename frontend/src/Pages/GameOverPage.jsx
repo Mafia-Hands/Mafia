@@ -25,10 +25,10 @@ const GameOverPage = () => {
                 <Grid container direction="row" alignItems="center" justifyItems="center">
                     <Grid item xs={0} sm={2}></Grid>
                     <Grid item xs={10} sm={8}>
-                        <h1 style={{ textAlign: 'center' }}>{`${state.winningRole} team wins!`}</h1>
+                        <h1 style={{ textAlign: 'center', textAlign: 'capitalize' }}>{`${state.winningRole} team wins!`}</h1>
                     </Grid>
 
-                    <Grid item xs={2} sm={2}>
+                    <Grid item xs={2} sm={2}> 
                         <Button
                             variant="contained"
                             onClick={() => {
