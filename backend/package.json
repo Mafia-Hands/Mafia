@@ -35,11 +35,6 @@
         "prettier": "^2.2.1",
         "pretty-quick": "^3.1.0"
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": "npm run lint"
-        }
-    },
     "lint-staged": {
         "*.js": "eslint --cache --fix"
     },

@@ -1,11 +1,65 @@
 import React, { useContext, useState } from 'react';
 import socket from '../Socket';
 import { GeneralContext } from '../App';
-import { TextField, Button } from '@material-ui/core';
+import { withStyles, TextField, Button } from '@material-ui/core';
 import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
 import styles from '../Styles/HomePage.module.css';
 import Tooltip from '@material-ui/core/Tooltip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+
+const CustomTextField = withStyles({
+    root: {
+        
+        '& label.Mui-focused': {
+        
+            color: '#3E5B7F',
+
+            
+        },
+
+
+    },
+})(TextField);
+
+const CustomJoinButton = withStyles({
+    root: {
+        backgroundColor: 'rgba(227, 241, 241)',
+        borderTopLeftRadius: '0',
+        borderBottomLeftRadius: '0',
+        borderTopRightRadius: '5px',
+        borderBottomRightRadius: '5px',
+        border: 'none',
+        '&:hover': {
+            backgroundColor: 'rgba(152, 193, 217)',
+        },
+    },
+    label: {
+        fontFamily: 'Helvetica, sans-serif',
+        fontWeight: 'bold',
+        color: 'rgba((62,91,127))',
+      },
+})(Button);
+
+const CustomCreateButton = withStyles({
+    root: {
+        backgroundColor: 'rgba(238, 102, 68)',
+        borderRadius: '5px',
+        border: 'none',
+        '&:hover': {
+            backgroundColor: 'rgb(180, 63, 34)',
+            
+        },
+    },
+    label: {
+        fontFamily: 'Helvetica, sans-serif',
+        color: 'white',
+        fontWeight: 'bold',
+        letterSpacing: '1px',
+        textTransform:'capitalize',
+        fontSize: '1.2rem'
+      },
+})(Button);
+
 
 export default function HomePage() {
     const { dispatch } = useContext(GeneralContext);
@@ -32,7 +86,6 @@ export default function HomePage() {
 
     const joinLobby = () => {
         dispatch({ type: 'join-lobby', nickname, code });
-
         socket.emit('join-lobby', { roomCode: code, nickname });
     };
 
@@ -65,9 +118,9 @@ export default function HomePage() {
     };
 
     return (
-        <div>
-            <div className={styles.container}>
-                <h1>MAFIA</h1>
+        <div className={styles.container}>
+            <div className={styles.contents}>
+                <div className={styles.header}> Mafia </div>
                 <ClickAwayListener onClickAway={handleTooltipClose}>
                     <div>
                         <Tooltip
@@ -120,36 +173,35 @@ export default function HomePage() {
                             placement="right"
                             arrow
                         >
-                            <TextField
-                                color="secondary"
-                                id="nickname"
-                                label="Enter Nickname"
-                                autoComplete="off"
-                                variant="outlined"
-                                value={nickname}
-                                onChange={(e) => validateNickname(e.target.value)}
-                                onClick={handleTooltipOpen}
-                            ></TextField>
-                        </Tooltip>
+                <CustomTextField
+                    className={styles.nameInputs}
+                    id="nickname"
+                    label="Enter Nickname"
+                    autoComplete="off"
+                    value={nickname}
+                    onChange={(e) => validateNickname(e.target.value)}
+                    onClick={handleTooltipOpen}
+                    InputProps={{ disableUnderline: true }}
+                ></CustomTextField>
+                </Tooltip>
                     </div>
                 </ClickAwayListener>
-                <TextField
-                    color="secondary"
+                <CustomTextField
+                    className={styles.codeInputs}
                     id="room-code"
                     value={code}
                     label="Enter LobbyID"
                     autoComplete="off"
-                    variant="outlined"
                     type="text"
                     onChange={(e) => setCode(e.target.value)}
-                ></TextField>
-                <Button variant="outlined" onClick={joinLobby} id="join-lobby" disabled={joinDisabled}>
-                    Join Game
-                </Button>
-                Want to create a new lobby?
-                <Button variant="outlined" onClick={createLobby} id="create-lobby" disabled={joinDisabled}>
-                    Create Game
-                </Button>
+                    InputProps={{ disableUnderline: true }}
+                ></CustomTextField>
+                <CustomJoinButton className={styles.joinButton} variant="outlined" onClick={joinLobby} id="join-lobby" disabled={joinDisabled}>
+                    Join
+                </CustomJoinButton>
+                <CustomCreateButton className={styles.createButton} variant="outlined" onClick={createLobby} id="create-lobby" disabled={joinDisabled}>
+                    Create new game
+                </CustomCreateButton>
             </div>
         </div>
     );

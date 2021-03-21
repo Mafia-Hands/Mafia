@@ -1,6 +1,21 @@
 import React from 'react';
-import { Slider, Button } from '@material-ui/core';
+import { Slider, Button, withStyles } from '@material-ui/core';
 import styles from '../Styles/SettingDialog.module.css';
+
+const StyledButton = withStyles({
+    root: {
+        alignSelf: 'start',
+        height: '100%',
+        borderRadius: '10px',
+        backgroundColor: '#EE6644',
+    },
+    label: {
+        textTransform: 'capitalize',
+        letterSpacing: '2px',
+        fontSize:'1.2rem',
+        color: 'white'
+    },
+})(Button);
 
 const SettingDialog = () => (
     <div className={styles.container}>
@@ -8,17 +23,14 @@ const SettingDialog = () => (
             <b> Sound </b>
             <Slider />
         </div>
-
         <div>
             <b> Brightness </b>
             <Slider />
         </div>
-
-        {/* TODO: improve CSS and layout */}
         <div>
-            <Button variant="contained" style={{ textAlign: 'center' }}>
+            <StyledButton variant="contained">
                 Leave Game
-            </Button>
+            </StyledButton>
         </div>
     </div>
 );
