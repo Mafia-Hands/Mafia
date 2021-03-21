@@ -7,6 +7,7 @@ import SettingDialog from '../Pages/SettingDialog';
 import { Button } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import { animated, useSpring } from 'react-spring';
+import styles from '../Styles/GameOver.module.css';
 
 const GameOverPage = () => {
     const { state } = useContext(GameContext);
@@ -25,11 +26,12 @@ const GameOverPage = () => {
                 <Grid container direction="row" alignItems="center" justifyItems="center">
                     <Grid item xs={0} sm={2}></Grid>
                     <Grid item xs={10} sm={8}>
-                        <h1 style={{ textAlign: 'center' }}>{`${state.winningRole.charAt(0).toUpperCase() +
-                             state.winningRole.slice(1)} team wins!`}</h1>
+                        <h1 style={{ textAlign: 'center' }}>{`${
+                            state.winningRole.charAt(0).toUpperCase() + state.winningRole.slice(1)
+                        } team wins!`}</h1>
                     </Grid>
 
-                    <Grid item xs={2} sm={2}> 
+                    <Grid item xs={2} sm={2}>
                         <Button
                             variant="contained"
                             onClick={() => {
@@ -40,7 +42,7 @@ const GameOverPage = () => {
                         </Button>
                     </Grid>
                 </Grid>
-                <div style={{ textAlign: 'center' }}>
+                <div className={styles.playerMap} style={{ textAlign: 'center' }}>
                     {state.winners.map((name) => {
                         return <Player playerName={name} />;
                     })}

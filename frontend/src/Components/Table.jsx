@@ -17,6 +17,7 @@ export default function Table() {
     const { state: gameState, dispatch } = useContext(GameContext);
 
     const isNight = gameState.dayPeriod === 'Night';
+    const amIDead = !gameState.alivePlayers.includes(generalState.nickname);
 
     // apply styles based on whether certain props is true
     const tableWrapperStyle = classNames({
@@ -181,7 +182,9 @@ export default function Table() {
                                         onClick={() => {
                                             abstainHandler();
                                         }}
-                                        style={{ visibility: gameState.phase === 'discussion-end' && 'hidden' }}
+                                        style={{
+                                            visibility: (gameState.phase !== 'trial-start' || amIDead) && 'hidden',
+                                        }}
                                         variant="contained"
                                     >
                                         Abstain

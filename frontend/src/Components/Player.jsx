@@ -4,12 +4,10 @@ import { GameContext } from '../Pages/GamePage';
 import { GeneralContext } from '../App';
 import socket from '../Socket';
 import { useContext } from 'react';
-import { GeneralContext } from '../App';
 
 export default function Player({ playerId, playerName, style, childRef }) {
     const { state: generalState } = useContext(GeneralContext);
     const { state: gameState, dispatch } = useContext(GameContext);
-    const { state: generalState } = useContext(GeneralContext);
 
     const isDead = !gameState.alivePlayers.includes(playerName);
 

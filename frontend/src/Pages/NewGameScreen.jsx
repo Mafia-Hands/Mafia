@@ -6,7 +6,7 @@ import Chatbox from '../Components/Chatbox';
 import styles from '../Styles/NewGameScreen.module.css';
 import { GeneralContext } from '../App';
 import socket from '../Socket';
-import { Button, makeStyles, Modal, withStyles } from '@material-ui/core';
+import { Button, withStyles } from '@material-ui/core';
 import RolesAndRules from '../Components/RolesAndRules';
 import SettingDialog from '../Pages/SettingDialog';
 import ModalMUI from '../Modal/ModalMUI';
@@ -26,20 +26,7 @@ const StyledButton = withStyles({
     },
 })(Button);
 
-const useStyles = makeStyles({
-    root: {
-        display: 'none',
-    },
-    modal: {
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
-
 const NewGameScreen = () => {
-    const classes = useStyles();
     const { state } = useContext(GeneralContext);
     const [open, setOpen] = useState(false);
     const [openInfo, setOpenInfo] = useState(false);
