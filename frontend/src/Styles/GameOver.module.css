@@ -1,14 +1,22 @@
-.container{
-    display: block;
-   
+.container {
+    display: grid;
 }
 
-.avatar{
-
+.avatar {
     height: 40%;
     border: solid white;
     border-radius: 80%;
-
-    
 }
 
+.playerMap {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    margin-top: 3em;
+    column-gap: 3em;
+}
+
+.lobbyBtn {
+    margin-top: 20em !important;
+    font-size: large !important;
+}
