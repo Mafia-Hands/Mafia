@@ -12,14 +12,18 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 const StyledIconButton = withStyles({
     root: {
         padding: '5px',
-        color: 'white',
+        color: '#293241',
     },
 })(IconButton);
 
 const TopBarSettings = ({ currentScreen, showSettings, showUp, setOpenInfo, showBack }) => (
     <div className={styles.container}>
         {showBack && (
-            <StyledIconButton variant="contained" className={styles.backButton} onClick={() => showUp(false)}>
+            <StyledIconButton
+                variant="contained"
+                className={`${styles.backButton} ${!currentScreen.includes('Lobby') && styles.rolesAndRules}`}
+                onClick={() => showUp(false)}
+            >
                 <KeyboardBackspaceIcon />
             </StyledIconButton>
         )}

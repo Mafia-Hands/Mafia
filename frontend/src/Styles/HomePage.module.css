@@ -1,19 +1,19 @@
 @import './colourScheme.css';
 
-.container{
+.container {
     height: 100vh;
-    margin: 20px;   
-    display: flex;
+    margin: 20px;
+    display: grid;
     align-items: center;
     justify-content: center;
 }
 
-.contents{
+.contents {
     display: grid;
     grid-template-rows: 2fr 1fr 1fr 0fr 1fr 0.5fr;
     grid-template-columns: 3fr 1fr;
     grid-row-gap: 1em;
-    background-color:var(--deepBlue);
+    background-color: var(--deepBlue);
     border-radius: 20px;
     width: 60vh;
     height: 60vh;
@@ -21,7 +21,7 @@
     padding-right: 30px;
 }
 
-.header{
+.header {
     grid-column-start: 1;
     grid-column-end: 3;
     text-align: center;
@@ -32,29 +32,29 @@
     padding-top: 20px;
 }
 
-.nameInputs{
+.nameInputs {
     grid-column-start: 1;
     grid-column-end: 3;
     border-radius: 5px;
-    background-color: rgba(227, 241, 241,0.5);
+    background-color: rgba(227, 241, 241, 0.5);
     height: 100%;
     width: 133%;
 }
-.codeInputs{
+.codeInputs {
     grid-column-start: 1;
     grid-column-end: 2;
     border-radius: 5px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    background-color: rgba(227, 241, 241,0.5)
+    background-color: rgba(227, 241, 241, 0.5);
 }
 
-.joinButton{
+.joinButton {
     grid-column-start: 2;
     grid-column-end: 3;
 }
 
-.createButton{
+.createButton {
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 5;

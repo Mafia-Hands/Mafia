@@ -3,6 +3,10 @@
     justify-self: start;
 }
 
+.rolesAndRules {
+    color: white !important;
+}
+
 .header {
     grid-area: Header;
     justify-self: center;

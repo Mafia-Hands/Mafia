@@ -9,6 +9,7 @@ import socket from '../Socket';
 import { Button, makeStyles, Modal, withStyles } from '@material-ui/core';
 import RolesAndRules from '../Components/RolesAndRules';
 import SettingDialog from '../Pages/SettingDialog';
+import ModalMUI from '../Modal/ModalMUI';
 
 const StyledButton = withStyles({
     root: {
@@ -30,6 +31,7 @@ const useStyles = makeStyles({
         display: 'none',
     },
     modal: {
+        color: 'white',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -58,10 +60,7 @@ const NewGameScreen = () => {
                     <LobbySettings className={styles.lobbySettings} setOpen={setOpen} setOpenInfo={setOpenInfo} />
                 </div>
                 <div className={styles.rightContainer}>
-                    <Chatbox
-                        className={styles.chatbox}
-                        messageList={['hi', 'sup', "these are dummy messages, chat isn't currently implemented"]}
-                    />
+                    <Chatbox className={styles.chatbox} messageList={['hi', 'sup', 'Hi SOFTENG 701 :)']} />
 
                     <StyledButton
                         className={styles.startButton}
@@ -76,10 +75,10 @@ const NewGameScreen = () => {
                     </StyledButton>
                 </div>
             </div>
-            <div className={classes.root}>
-                <Modal className={classes.modal} open={open} setOpen={setOpen}>
+            <div style={{ display: 'none' }}>
+                <ModalMUI open={open} setOpen={setOpen}>
                     {openInfo ? (
-                        <div className={styles.Modal}>
+                        <div>
                             <TopBarSettings
                                 showBack={true}
                                 showUp={setOpen}
@@ -90,7 +89,7 @@ const NewGameScreen = () => {
                             <RolesAndRules inLobby />
                         </div>
                     ) : (
-                        <div className={styles.Modal}>
+                        <div>
                             <TopBarSettings
                                 showBack={true}
                                 showUp={setOpen}
@@ -100,7 +99,7 @@ const NewGameScreen = () => {
                             <SettingDialog />
                         </div>
                     )}
-                </Modal>
+                </ModalMUI>
             </div>
         </div>
     );
