@@ -5,6 +5,7 @@ import { GeneralContext } from '../App';
 import { GameContext } from '../Pages/GamePage';
 import { Button } from '@material-ui/core';
 import socket from '../Socket';
+import classNames from 'classnames';
 
 /**
  *
@@ -14,6 +15,16 @@ import socket from '../Socket';
 export default function Table() {
     const { state: generalState } = useContext(GeneralContext);
     const { state: gameState, dispatch } = useContext(GameContext);
+
+    const isNight = gameState.dayPeriod === 'Night';
+    const amIDead = !gameState.alivePlayers.includes(generalState.nickname);
+
+    // apply styles based on whether certain props is true
+    const tableWrapperStyle = classNames({
+        [styles.tableWrapper]: true,
+        [styles.day]: !isNight,
+        [styles.night]: isNight,
+    });
 
     // used to keep reference to table dom element (to get width/height of it)
     const tableRef = useRef(null);
@@ -140,7 +151,7 @@ export default function Table() {
     });
 
     return (
-        <div className={styles.tableWrapper}>
+        <div className={tableWrapperStyle}>
             <div className={styles.table} ref={tableRef}>
                 {playerCoords
                     .filter((p) => !p.onTrial)
@@ -171,7 +182,9 @@ export default function Table() {
                                         onClick={() => {
                                             abstainHandler();
                                         }}
-                                        style={{ visibility: gameState.phase === 'discussion-end' && 'hidden' }}
+                                        style={{
+                                            visibility: (gameState.phase !== 'trial-start' || amIDead) && 'hidden',
+                                        }}
                                         variant="contained"
                                     >
                                         Abstain

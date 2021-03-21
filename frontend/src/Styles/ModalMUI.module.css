@@ -2,7 +2,7 @@
 
 .modal {
     width: 70%;
-    background-color: var(--lightBlue);
+    background-color: var(--darkBlue);
     padding: 1em 2em 1em 2em;
     color: white;
     border-radius: 10px;

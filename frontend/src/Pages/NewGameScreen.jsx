@@ -6,9 +6,10 @@ import Chatbox from '../Components/Chatbox';
 import styles from '../Styles/NewGameScreen.module.css';
 import { GeneralContext } from '../App';
 import socket from '../Socket';
-import { Button, makeStyles, Modal, withStyles } from '@material-ui/core';
+import { Button, withStyles } from '@material-ui/core';
 import RolesAndRules from '../Components/RolesAndRules';
 import SettingDialog from '../Pages/SettingDialog';
+import ModalMUI from '../Modal/ModalMUI';
 
 const StyledButton = withStyles({
     root: {
@@ -21,26 +22,11 @@ const StyledButton = withStyles({
         fontWeight: 'bolder',
         textTransform: 'capitalize',
         letterSpacing: '2px',
-        fontSize:'1.5rem',
+        fontSize: '1.5rem',
     },
 })(Button);
 
-const useStyles = makeStyles({
-    root: {
-        display: 'none',
-        
-        
-    },
-    modal:{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-       
-    }
-})
-
 const NewGameScreen = () => {
-    const classes = useStyles();
     const { state } = useContext(GeneralContext);
     const [open, setOpen] = useState(false);
     const [openInfo, setOpenInfo] = useState(false);
@@ -61,10 +47,7 @@ const NewGameScreen = () => {
                     <LobbySettings className={styles.lobbySettings} setOpen={setOpen} setOpenInfo={setOpenInfo} />
                 </div>
                 <div className={styles.rightContainer}>
-                    <Chatbox
-                        className={styles.chatbox}
-                        messageList={['hi', 'sup', "these are dummy messages, chat isn't currently implemented"]}
-                    />
+                    <Chatbox className={styles.chatbox} messageList={['hi', 'sup', 'Hi SOFTENG 701 :)']} />
 
                     <StyledButton
                         className={styles.startButton}
@@ -79,10 +62,10 @@ const NewGameScreen = () => {
                     </StyledButton>
                 </div>
             </div>
-            <div className={classes.root}>
-                <Modal className={classes.modal} open={open} setOpen={setOpen}>
+            <div style={{ display: 'none' }}>
+                <ModalMUI open={open} setOpen={setOpen}>
                     {openInfo ? (
-                        <div  className = {styles.Modal}>
+                        <div>
                             <TopBarSettings
                                 showBack={true}
                                 showUp={setOpen}
@@ -90,10 +73,10 @@ const NewGameScreen = () => {
                                 showSettings={false}
                                 setOpenInfo={setOpenInfo}
                             />
-                            <RolesAndRules userRole="Mafia" />
+                            <RolesAndRules inLobby />
                         </div>
                     ) : (
-                        <div className = {styles.Modal} >
+                        <div>
                             <TopBarSettings
                                 showBack={true}
                                 showUp={setOpen}
@@ -103,7 +86,7 @@ const NewGameScreen = () => {
                             <SettingDialog />
                         </div>
                     )}
-                </Modal>
+                </ModalMUI>
             </div>
         </div>
     );

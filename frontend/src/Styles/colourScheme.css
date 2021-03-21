@@ -1,9 +1,10 @@
 :root {
-    --lightBlue:  #E3F1F1;
+    --lightBlue: #e3f1f1;
     --mediumBlue: #98c1d9;
-    --deepBlue: #3E5B7F;
+    --deepBlue: #3e5b7f;
     --darkBlue: #293241;
-    --lightOrange: #EE6644;
+    --lightOrange: #ee6644;
     --darkOrange: #b43f22;
-  }
-  
+    --dayBG: #e6e6e6;
+    --nightBG: #282828;
+}

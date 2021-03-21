@@ -201,7 +201,6 @@ export default function useGameState() {
 
     useEffect(() => {
         function onNightStart({ timeToVote }) {
-
             const amIDead = !state.alivePlayers.includes(generalState.nickname);
             if (amIDead) {
                 dispatch({
@@ -252,22 +251,12 @@ export default function useGameState() {
 
         function onDayStart({ timeToVote }) {
             const amIDead = !state.alivePlayers.includes(generalState.nickname);
-            if (amIDead) {
-                dispatch({
-                    type: 'day-start',
-                    status: 'You are dead so cannot vote anymore',
-                    votablePlayers: [],
-                    amIDead: amIDead
-                })
-            } else {
-                dispatch({
-                    type: 'day-start',
-                    status: 'Select someone to be on trial',
-                    votablePlayers: state.alivePlayers.filter((p) => p !== generalState.nickname),
-                    timeToVote,
-                    amIDead: amIDead
-                });
-            }
+            dispatch({
+                type: 'day-start',
+                status: amIDead ? 'You are dead' : 'Select someone to be on trial',
+                votablePlayers: state.alivePlayers.filter((p) => p !== generalState.nickname),
+                timeToVote,
+            });
         }
 
         function onDiscussionEnd({ playerOnTrial }) {
@@ -292,20 +281,15 @@ export default function useGameState() {
 
         function onTrialStart({ timeToVote }) {
             const amIDead = !state.alivePlayers.includes(generalState.nickname);
-            if (amIDead) {
-                dispatch({
-                    type: 'trial-start',
-                    status: 'You are dead so cannot vote anymore',
-                });
-            } else {
-                dispatch({
-                    type: 'trial-start',
-                    status: state.votingState.votablePlayers.length
-                        ? 'Vote for the player on trial to kill them'
-                        : 'You are on trial',
-                    timeToVote,
-                });
-            }
+            dispatch({
+                type: 'trial-start',
+                status: amIDead
+                    ? 'You are dead'
+                    : state.votingState.votablePlayers.length
+                    ? 'Vote for the player on trial to kill them'
+                    : 'You are on trial',
+                timeToVote,
+            });
         }
 
         function onTrialEnd({ playerKilled, isGameOver }) {

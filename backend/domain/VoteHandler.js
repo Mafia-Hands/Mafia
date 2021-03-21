@@ -23,10 +23,10 @@ class VoteHandler {
     }
 
     getTrialVotedPlayer() {
-        return this.getVotedPlayer(this.trialVoteMap);
+        return this.getVotedPlayer(this.trialVoteMap, true);
     }
 
-    getVotedPlayer(voteMap) {
+    getVotedPlayer(voteMap, isTrial) {
         // Generate map of players who have been voted for, and the number of votes they have.
         const voteTally = {};
         voteTally['abstain Vote'] = 0;
@@ -44,7 +44,7 @@ class VoteHandler {
         let maxVotes = 0;
         let votedPlayer = null;
         for (const [player, numVotes] of Object.entries(voteTally)) {
-            if (numVotes > maxVotes) {
+            if ((numVotes > maxVotes) || (isTrial && player == 'abstain Vote' && numVotes == maxVotes)) {
                 maxVotes = numVotes;
                 votedPlayer = player;
             }

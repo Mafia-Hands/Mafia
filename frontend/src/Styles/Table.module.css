@@ -1,16 +1,25 @@
 .tableWrapper {
-    height: 80vh;
+    height: 60vh;
     width: 100%;
-    background-color: rgb(230, 230, 230);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
+    animation: fadeIn ease 1s;
+}
+
+.day {
+    background-color: var(--dayBG);
+}
+
+.night {
+    background-color: var(--nightBG);
+    color: white;
 }
 
 .table {
-    width: 70%;
+    width: 60%;
     height: 70%;
     background-color: #b58343;
     border: 5px solid rgb(255 208 147);

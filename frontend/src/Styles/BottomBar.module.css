@@ -1,0 +1,15 @@
+@import './colourScheme.css';
+
+.container {
+    padding: 1em 1em 1em 3em;
+    transition: 'all 10s ease';
+}
+
+.day {
+    background-color: var(--dayBG);
+}
+
+.night {
+    background-color: var(--nightBG);
+    color: white;
+}

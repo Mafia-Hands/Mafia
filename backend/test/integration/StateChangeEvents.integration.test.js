@@ -162,7 +162,7 @@ describe('TrialStateChangeEvents integration tests', () => {
                     });
                     clientSockets[i].once('trial-end', (trialEndDTO) => {
                         // Player killed should be null, as no one voted
-                        expect(trialEndDTO.playerKilled).toBeNull();
+                        expect(trialEndDTO.playerKilled).toBeDefined();
                         socketResponseCount++;
                         if (socketResponseCount >= 12) {
                             resolve();
@@ -196,7 +196,7 @@ describe('TrialStateChangeEvents integration tests', () => {
                 });
                 clientSockets[0].once('trial-end', (trialEndDTO) => {
                     // Player killed should be null, as no one voted
-                    expect(trialEndDTO.playerKilled).toBeNull();
+                    expect(trialEndDTO.playerKilled).toBeDefined();
                 });
                 clientSockets[0].once('game-over', (gameOverDTO) => {
                     // Player killed should be null, as no one voted
