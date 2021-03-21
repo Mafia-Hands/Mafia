@@ -79,7 +79,7 @@ async function clickCreateLobby(page){
 async function getChromeLocation(){
     let chromeLocation;
     if (process.platform === 'win32'){
-        chromeLocation = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe';
+        chromeLocation = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
     } else if (process.platform === 'darwin'){
         chromeLocation = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
     } else {
