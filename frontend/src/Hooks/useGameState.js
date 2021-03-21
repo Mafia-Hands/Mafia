@@ -58,10 +58,17 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 status: action.status,
-                votingState: {...state.votingState, vote: action.votedPlayer },
+                votingState: { ...state.votingState, vote: action.votedPlayer },
             };
         }
 
+        case 'abstain': {
+            return {
+                ...state,
+                status: action.status,
+                votingState: { ...state.votingState, vote: '' },
+            };
+        }
 
         case 'night-end': {
             return {
@@ -244,12 +251,23 @@ export default function useGameState() {
         }
 
         function onDayStart({ timeToVote }) {
-            dispatch({
-                type: 'day-start',
-                status: 'Select someone to be on trial',
-                votablePlayers: state.alivePlayers.filter((p) => p !== generalState.nickname),
-                timeToVote,
-            });
+            const amIDead = !state.alivePlayers.includes(generalState.nickname);
+            if (amIDead) {
+                dispatch({
+                    type: 'day-start',
+                    status: 'You are dead so cannot vote anymore',
+                    votablePlayers: [],
+                    amIDead: amIDead
+                })
+            } else {
+                dispatch({
+                    type: 'day-start',
+                    status: 'Select someone to be on trial',
+                    votablePlayers: state.alivePlayers.filter((p) => p !== generalState.nickname),
+                    timeToVote,
+                    amIDead: amIDead
+                });
+            }
         }
 
         function onDiscussionEnd({ playerOnTrial }) {
@@ -273,21 +291,33 @@ export default function useGameState() {
         }
 
         function onTrialStart({ timeToVote }) {
-            dispatch({
-                type: 'trial-start',
-                status: state.votingState.votablePlayers.length
-                    ? 'Vote for the player on trial to kill them'
-                    : 'You are on trial',
-                timeToVote,
-            });
+            const amIDead = !state.alivePlayers.includes(generalState.nickname);
+            if (amIDead) {
+                dispatch({
+                    type: 'trial-start',
+                    status: 'You are dead so cannot vote anymore',
+                    amIDead: amIDead,
+                    votablePlayers: []
+                });
+            } else {
+                dispatch({
+                    type: 'trial-start',
+                    amIDead: amIDead,
+                    status: state.votingState.votablePlayers.length
+                        ? 'Vote for the player on trial to kill them'
+                        : 'You are on trial',
+                    timeToVote,
+                });
+            }
         }
 
         function onTrialEnd({ playerKilled, isGameOver }) {
             dispatch({
                 type: 'trial-end',
-                status: playerKilled
-                    ? `The town voted to kill ${playerKilled}!`
-                    : `${playerKilled} was saved by the Town!`, // TODO if playerKilled === null
+                status:
+                    playerKilled === 'abstainVote' || !playerKilled
+                        ? `Nobody was killed in the Trial!`
+                        : `The town voted to kill ${playerKilled}!`,
                 playerKilled,
             });
             if (!isGameOver) {
@@ -311,7 +341,7 @@ export default function useGameState() {
             });
         }
 
-        function onSuspectReveal(checkedPlayer) {          
+        function onSuspectReveal(checkedPlayer) {
             dispatch({
                 type: 'suspect-reveal',
                 checkedPlayer,
