@@ -20,13 +20,16 @@ const GameOverPage = () => {
     });
 
     return (
-        <div> 
+        <div>
             <animated.div style={props}>
-                <Grid container direction='row' alignItems='center' justifyItems='center'>
+                <Grid container direction="row" alignItems="center" justifyItems="center">
                     <Grid item xs={0} sm={2}></Grid>
-                    <Grid item xs={10} sm={8}><h1>{`${state.winningRole} team wins!`}</h1></Grid>
+                    <Grid item xs={10} sm={8}>
+                        <h1 style={{ textAlign: 'center' }}>{`${state.winningRole.charAt(0).toUpperCase() +
+                             state.winningRole.slice(1)} team wins!`}</h1>
+                    </Grid>
 
-                    <Grid item xs={2} sm={2}>
+                    <Grid item xs={2} sm={2}> 
                         <Button
                             variant="contained"
                             onClick={() => {
@@ -35,28 +38,27 @@ const GameOverPage = () => {
                         >
                             Settings
                         </Button>
-                    </Grid>   
-                    <div>
-                        {state.winners.map((name) => {
-                            return <Player playerName={name} />;
-                        })}
-                    </div>   
-                
+                    </Grid>
                 </Grid>
-            </animated.div>
-                <div>
-                    <ModalMUI open={open} setOpen={setOpen}>
-                        <div>
-                            <TopBarSettings
-                                showBack={true}
-                                showUp={setOpen}
-                                currentScreen="SETTINGS"
-                                showSettings={false}
-                            />
-                            <SettingDialog />
-                        </div>
-                    </ModalMUI>
+                <div style={{ textAlign: 'center' }}>
+                    {state.winners.map((name) => {
+                        return <Player playerName={name} />;
+                    })}
                 </div>
+            </animated.div>
+            <div>
+                <ModalMUI open={open} setOpen={setOpen}>
+                    <div>
+                        <TopBarSettings
+                            showBack={true}
+                            showUp={setOpen}
+                            currentScreen="SETTINGS"
+                            showSettings={false}
+                        />
+                        <SettingDialog />
+                    </div>
+                </ModalMUI>
+            </div>
         </div>
     );
 };
