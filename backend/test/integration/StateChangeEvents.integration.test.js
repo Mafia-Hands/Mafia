@@ -1,8 +1,5 @@
-const Client = require('socket.io-client');
 const SocketIOServer = require('../../index');
 const config = require('../../config.json');
-const CreateLobbyDTO = require('../../domain/DTO/request/CreateLobbyDTO');
-const JoinLobbyDTO = require('../../domain/DTO/request/JoinLobbyDTO');
 const { connectAndCreateLobby, startGame, connectAndJoin, startGameOnePlayer } = require('./IntegrationTestHelpers');
 
 
