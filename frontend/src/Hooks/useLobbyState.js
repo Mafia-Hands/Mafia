@@ -89,7 +89,7 @@ export default function useLobbyState() {
         };
 
         const onResetLobby = () => {
-            dispatch({ type: 'change-screen', screen: 'home' });
+            dispatch({ type: 'change-screen', screen: 'lobby' });
         };
 
         const onLobbyReady = () => dispatch({ type: 'lobby-ready' });
@@ -100,7 +100,7 @@ export default function useLobbyState() {
         socket.on('lobby-join', onlobbyJoin);
         socket.on('lobby-ready', onLobbyReady);
         socket.on('game-start', onGameStart);
-        socket.on('reset-lobby', onResetLobby);
+        socket.on('reset-lobby-update', onResetLobby);
 
         return () => {
             socket.removeListener('lobby-code', onLobbyCode);
@@ -109,7 +109,7 @@ export default function useLobbyState() {
             socket.removeListener('lobby-join', onlobbyJoin);
             socket.removeListener('lobby-ready', onLobbyReady);
             socket.removeListener('game-start', onGameStart);
-            socket.removeListener('reset-lobby', onResetLobby);
+            socket.removeListener('reset-lobby-update', onResetLobby);
         };
     }, [state]);
 
