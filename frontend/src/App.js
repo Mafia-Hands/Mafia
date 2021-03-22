@@ -43,7 +43,6 @@ function App() {
                     <Route path="/*">
                         <Redirect to="/" />
                     </Route>
-                    {/* <Route path="/play">{component}</Route> */}
                 </Switch>
             </Router>
         </GeneralContext.Provider>
