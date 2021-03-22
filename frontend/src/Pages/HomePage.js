@@ -53,10 +53,10 @@ const CustomCreateButton = withStyles({
     },
 })(Button);
 
-export default function HomePage() {
+export default function HomePage(props) {
     const { dispatch } = useContext(GeneralContext);
     const [nickname, setNickname] = useState('');
-    const [code, setCode] = useState('');
+    const [code, setCode] = useState(props.url);
     const [joinDisabled, setjoinDisabled] = useState(true);
     const [tickNonempty, setTickNonempty] = useState(false);
     const [tickNoSpaces, setTickNoSpaces] = useState(true);
