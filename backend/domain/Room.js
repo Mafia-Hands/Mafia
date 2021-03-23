@@ -21,20 +21,8 @@ class Room {
         this.host = null;
     }
 
-    getRoomID() {
-        return this.roomID;
-    }
-
-    getGameState() {
-        return this.gameState;
-    }
-
     setGameState(gameState) {
         this.gameState = gameState;
-    }
-
-    getPlayers() {
-        return this.players;
     }
 
     getPlayerByNickname(nickname) {
@@ -74,18 +62,10 @@ class Room {
         return playersOfTheRole;
     }
 
-    getHost() {
-        return this.Host;
-    }
-
     addPlayer(player) {
         if (player !== null && this.players.length < this.maxPlayerCount) {
             this.players.push(player);
         }
-    }
-
-    getRoundNumber() {
-        return this.roundNumber;
     }
 
     incrementRoundNumber() {
