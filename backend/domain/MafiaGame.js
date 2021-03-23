@@ -22,7 +22,7 @@ class MafiaGame {
      * @param {number} roomID
      */
     closeGame(roomID) {
-        delete gameRoomsDict[roomID];
+        delete this.gameRoomsDict[roomID];
     }
 
     /**
