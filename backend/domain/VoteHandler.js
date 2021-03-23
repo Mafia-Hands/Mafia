@@ -26,15 +26,16 @@ class VoteHandler {
         return this.getVotedPlayer(this.trialVoteMap, true);
     }
 
+    // eslint-disable-next-line class-methods-use-this
     getVotedPlayer(voteMap, isTrial) {
         // Generate map of players who have been voted for, and the number of votes they have.
         const voteTally = {};
         voteTally['abstain Vote'] = 0;
-        for (const [voter, chosenPlayer] of Object.entries(voteMap)) {
+        for (const [, chosenPlayer] of Object.entries(voteMap)) {
             if (chosenPlayer === 'abstain Vote') {
-                voteTally['abstain Vote']++;
-            } else if (voteTally.hasOwnProperty(chosenPlayer.nickname)) {
-                voteTally[chosenPlayer.nickname]++;
+                voteTally['abstain Vote'] += 1;
+            } else if (Object.prototype.hasOwnProperty.call(voteTally, chosenPlayer.nickname)) {
+                voteTally[chosenPlayer.nickname] += 1;
             } else {
                 voteTally[chosenPlayer.nickname] = 1;
             }
@@ -44,7 +45,7 @@ class VoteHandler {
         let maxVotes = 0;
         let votedPlayer = null;
         for (const [player, numVotes] of Object.entries(voteTally)) {
-            if ((numVotes > maxVotes) || (isTrial && player == 'abstain Vote' && numVotes == maxVotes)) {
+            if (numVotes > maxVotes || (isTrial && player === 'abstain Vote' && numVotes === maxVotes)) {
                 maxVotes = numVotes;
                 votedPlayer = player;
             }
