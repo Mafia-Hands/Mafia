@@ -1,8 +1,9 @@
 const config = require('../../config.json');
 const SocketIOServer = require('../../index');
 const { connectAndCreateLobby, connectAndJoin } = require('./IntegrationTestHelpers');
+
 describe('lobby events tests', () => {
-    let clientSockets = [];
+    const clientSockets = [];
     let lobbyCode;
     const port = process.env.PORT || config.local_port;
 
@@ -14,7 +15,7 @@ describe('lobby events tests', () => {
     // Disconnect each socket connected to the server
     afterEach((done) => {
         const { sockets } = SocketIOServer.io.sockets;
-        sockets.forEach((socket, key) => {
+        sockets.forEach((socket) => {
             socket.disconnect(true);
         });
         done();
@@ -29,13 +30,12 @@ describe('lobby events tests', () => {
      */
     test('full lobby events intergration test', async (done) => {
         // connect players to lobby
-        for (let i; i < 6; i++) {
+        for (let i; i < 6; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
         await resetLobby();
         done();
     });
-
 
     /**
      * This function tests the reset lobby function
@@ -44,6 +44,7 @@ describe('lobby events tests', () => {
     async function resetLobby() {
         return new Promise((resolve) => {
             clientSockets[0].on('reset-lobby-update', () => {
+                // eslint-disable-next-line no-console
                 console.log('RESET LOBBY');
                 resolve();
             });

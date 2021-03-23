@@ -5,7 +5,8 @@ const { connectAndCreateLobby, startGame, connectAndJoin } = require('./Integrat
 describe('GameStartEvents integration tests', () => {
     const port = process.env.PORT || config.local_port;
 
-    let clientSockets = [];
+    const clientSockets = [];
+    let lobbyCode = '';
 
     // Create a new client, and connect it to the server via socket.io
     beforeEach(async (done) => {
@@ -15,8 +16,8 @@ describe('GameStartEvents integration tests', () => {
 
     // Disconnect each socket connected to the server
     afterEach((done) => {
-        const sockets = SocketIOServer.io.sockets.sockets;
-        sockets.forEach(function (socket, key) {
+        const { sockets } = SocketIOServer.io.sockets;
+        sockets.forEach((socket) => {
             socket.disconnect(true);
         });
         done();
@@ -28,9 +29,11 @@ describe('GameStartEvents integration tests', () => {
     });
 
     test('integration test start-game 6 players', async (done) => {
-        for (let i = 1; i < 6; i++) {
+        /* eslint-disable no-await-in-loop */
+        for (let i = 1; i < 6; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
+        /* eslint-enable no-await-in-loop */
         await startGame(clientSockets);
         done();
     });

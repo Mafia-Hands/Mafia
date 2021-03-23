@@ -1,36 +1,27 @@
 {
-    "extends": ["airbnb", "prettier", "plugin:node/recommended", "plugin:jest/recommended"],
+    "extends": ["airbnb", "prettier", "airbnb/hooks", "plugin:jest/recommended"],
     "plugins": ["prettier", "jest"],
+    "parser": "babel-eslint",
+    "env": {
+        "jest/globals": true,
+        "node": true,
+        "commonjs": true,
+        "jasmine": true
+    },
     "rules": {
         "prettier/prettier": "error",
-        "no-unused-vars": "warn",
         "no-console": "warn",
         "func-names": "off",
-        "no-process-exit": "off",
-        "object-shorthand": "off",
-        "class-methods-use-this": "off",
+        "no-shadow": "off",
         "jest/no-done-callback": "off",
-        "import/order": "warn",
-        "no-undef": "warn",
-        "no-plusplus": "warn",
-        "no-param-reassign": "warn",
-        "prefer-const": "warn",
-        "no-array-constructor": "warn",
-        "no-shadow": "warn",
-        "no-restricted-syntax": "warn",
-        "no-prototype-builtins": "warn",
-        "no-use-before-define": "warn",
-        "require-jsdoc": [
-            "warn",
-            {
-                "require": {
-                    "FunctionDeclaration": true,
-                    "MethodDefinition": true,
-                    "ClassDeclaration": false,
-                    "ArrowFunctionExpression": false,
-                    "FunctionExpression": false
-                }
-            }
-        ]
+        "jest/no-jasmine-globals": "off",
+        "jest/expect-expect": "off",
+        "import/order": "off",
+        "no-param-reassign": "off",
+        "prefer-const": "off",
+        "no-await-in-loop": "off",
+        "no-loop-func": "off",
+        "no-restricted-syntax": "off",
+        "no-use-before-define": [2, {"functions": false, "classes": true}]
     }
 }

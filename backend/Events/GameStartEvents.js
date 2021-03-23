@@ -1,4 +1,3 @@
-const MafiaGame = require('../domain/MafiaGame');
 const roles = require('../domain/Enum/Role');
 const GameStartDTO = require('../domain/DTO/response/GameStartDTO');
 const config = require('../config.json');
@@ -69,7 +68,7 @@ function getAvailableRolesToAssign(numOfPlayers) {
 
     // Return an array of roles, with each role occuring once or more depending on the number of players
     // playing the game
-    const rolesToAssign = new Array();
+    const rolesToAssign = [];
     addRoleToArray(rolesToAssign, roles.MAFIA, numOfMafia);
     addRoleToArray(rolesToAssign, roles.MEDIC, numOfMedics);
     addRoleToArray(rolesToAssign, roles.DETECTIVE, numOfDetectives);
@@ -80,7 +79,7 @@ function getAvailableRolesToAssign(numOfPlayers) {
 }
 
 function addRoleToArray(roleArray, role, occuranceCount) {
-    for (i = 0; i < occuranceCount; i++) {
+    for (let i = 0; i < occuranceCount; i += 1) {
         roleArray.push(role);
     }
 }
