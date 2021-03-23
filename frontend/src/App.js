@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import HomePage from './Pages/HomePage';
 import GamePage from './Pages/GamePage';
@@ -15,11 +15,13 @@ export const GeneralContext = React.createContext();
 function App() {
     const [state, dispatch] = useLobbyState();
 
+    const pathname = window.location.pathname.substring(1);
+
     let component;
 
     switch (state.screen) {
         case 'home':
-            component = <HomePage />;
+            component = <HomePage url={pathname} />;
             break;
         case 'lobby':
             component = <NewGameScreen />;
@@ -38,7 +40,9 @@ function App() {
                     <Route exact path="/">
                         <div style={{ width: '70%', margin: 'auto' }}>{component}</div>
                     </Route>
-                    <Route path="/play">{component}</Route>
+                    <Route path="/*">
+                        <Redirect to="/" />
+                    </Route>
                 </Switch>
             </Router>
         </GeneralContext.Provider>
