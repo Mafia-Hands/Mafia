@@ -24,6 +24,7 @@
         "no-empty": "off",
         "prefer-destructuring": "off",
         "no-nested-ternary": "off",
+        "no-alert": "off",
         "react/no-unused-prop-types": "off",
         "no-unused-expressions": ["error", { "allowShortCircuit": true }],
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
