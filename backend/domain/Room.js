@@ -65,7 +65,7 @@ class Room {
     }
 
     incrementRoundNumber() {
-        this.roundNumber++;
+        this.roundNumber += 1;
     }
 
     getWinningRole() {
