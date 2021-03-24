@@ -246,7 +246,7 @@ export default function useGameState() {
             });
 
             if (!isGameOver) {
-                generalState.isHost && setTimeout(() => socket.emit('start-day'), 2000);
+                return generalState.isHost && setTimeout(() => socket.emit('start-day'), 2000);
             }
         }
 

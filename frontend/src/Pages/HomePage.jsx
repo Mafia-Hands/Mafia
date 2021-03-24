@@ -59,7 +59,8 @@ const CustomCreateButton = withStyles({
 export default function HomePage(props) {
     const { dispatch } = useContext(GeneralContext);
     const [nickname, setNickname] = useState('');
-    const [{ code }, setCode] = useState(props);
+    // const [{ code }, setCode] = useState(props);
+    const [code, setCode] = useState(props.code);
     const [joinDisabled, setjoinDisabled] = useState(true);
     const [tickNonempty, setTickNonempty] = useState(false);
     const [tickNoSpaces, setTickNoSpaces] = useState(true);
@@ -87,19 +88,19 @@ export default function HomePage(props) {
     const validateNickname = (nickName) => {
         let validCheck = true;
         setNickname(nickName);
-        if (nickname === '') {
+        if (nickName === '') {
             validCheck = false;
             setTickNonempty(false);
         } else {
             setTickNonempty(true);
         }
-        if (nickname.includes(' ')) {
+        if (nickName.includes(' ')) {
             validCheck = false;
             setTickNoSpaces(false);
         } else {
             setTickNoSpaces(true);
         }
-        if (nickname.length > 10) {
+        if (nickName.length > 10) {
             validCheck = false;
             setTickLessThanTen(false);
         } else {

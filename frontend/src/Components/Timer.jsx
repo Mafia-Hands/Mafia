@@ -24,7 +24,7 @@ const Timer = (props) => {
             setSecond(strSecond);
             setMinute(strMinute);
             interval = setInterval(() => {
-                setCounter((counter) => counter - 1);
+                setCounter((count) => count - 1);
             }, 1000);
 
             return () => clearInterval(interval);
