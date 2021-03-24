@@ -44,7 +44,7 @@ For development purposes, you can run the application locally by following the [
 If you would like to play the game, follow our guide on how to [Get Started](). If you don't know how to play Mafia, you can also read the [Rules of the game](https://github.com/Mafia-Hands/Mafia/wiki/Game-Rules)!
 
 ## Support
-If you have encountered any problems when setting up or developing the project, you can create a Github issue and tag the person who wrote the code related to your issues.
+If you encounter any issues regarding this project, please create a [Github Issue](https://github.com/Mafia-Hands/Mafia/issues) using the relevant template. You can also tag a specific contributor if you feel like they might be able to help you out.
 
 ## Roadmap
 We do have lists for the tasks that need to be done in the Github projects page.
