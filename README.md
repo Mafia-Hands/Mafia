@@ -68,23 +68,21 @@ Outstanding issues and requests can be tracked and visualised on our Github Proj
 
 ## Contributing
 
-For group individual contribuition, visit [Contributions](https://github.com/Mafia-Hands/Mafia/wiki/Contributions)
-
-For contribution guidelines visit the [Contributing-Guidlines](https://github.com/Mafia-Hands/Mafia/wiki/Contributing-Guidelines) in the wiki.
-
-Please make sure to update tests as appropriate.
+If you would like to contribute to this project, please make sure to follow our [Contributing-Guidlines](https://github.com/Mafia-Hands/Mafia/wiki/Contributing-Guidelines)s.
 
 ## Authors and acknowledgement
 
--   This project was coordinated by and for the University of Auckland
--   Thanks the University of Auckland for providing the oppurtunity to work and create this project
--   Thanks Dr Kelly Blincoe - University of Auckland for the assisstance with the development of this project
--   Special thanks each and everyone of Mafia Hand group for their hard work and dedication toward the project
+This project was coordinated by and for the University of Auckland course SOFTENG 701.
+
+-   University of Auckland - for providing the opportunity to work on and create this project
+-   Dr Kelly Blincoe - for assistance with the development of this project
+
+Special thanks to the members of Group 4 (Mafia Hands) for their hard work and dedication towards this project. A detailed list of their contributions can be found [here.](https://github.com/Mafia-Hands/Mafia/wiki/Contributions)
 
 ## Project Status
 
-At this stage, the Mafia Hand group's development for this project has stopped completerly. Whole team now have moved on to the next project.
-For future plan, please refer to [Roadmap](#Roadmap)
+The original developers of this project have now concluded their involvement. Team 3 will be continuing the development process going forward.
+For a list of suggested additions to this app, take a look at the Future Works page on our Wiki.
 
 ## Code of Conduct
 
