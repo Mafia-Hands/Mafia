@@ -134,6 +134,12 @@ describe('night time voting event tests', () => {
     });
 });
 
+/**
+ * Helper function to test detective-vote and suspect-reveal events.
+ * @param {*} suspect The nickname of the player being voted for by the detective
+ * @param {*} shouldBeMafia The expected value of the isMafia field in the SuspectRevealDTO
+ * @param {*} done The done callback from the jest test function
+ */
 function detectiveVoteTest(suspect, shouldBeMafia, done) {
     // Listen for suspect reveal event, check that player is revealed as town
     clientSocket.on('suspect-reveal', (suspectRevealDTO) => {
