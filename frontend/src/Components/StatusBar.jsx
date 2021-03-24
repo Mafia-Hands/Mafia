@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
+import classNames from 'classnames';
 import { GameContext } from '../Context';
 import styles from '../Styles/Statusbar.module.css';
-import classNames from 'classnames';
 
 export default function StatusBar() {
     const { state } = useContext(GameContext);

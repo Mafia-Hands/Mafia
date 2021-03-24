@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import styles from '../Styles/RolesAndRules.module.css';
-import { GameContext } from '../Context';
-import { GeneralContext } from '../Context';
+import { GameContext, GeneralContext } from '../Context';
 
 const useStyles = makeStyles({
     root: {
