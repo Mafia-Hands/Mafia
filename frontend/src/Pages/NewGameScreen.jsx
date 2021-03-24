@@ -10,7 +10,7 @@ import socket from '../Socket';
 
 import RolesAndRules from '../Components/RolesAndRules';
 import SettingDialog from './SettingDialog';
-import ModalMUI from '../Modal/ModalMUI';
+import ModalMUI from '../Components/ModalMUI';
 
 const StyledButton = withStyles({
     root: {

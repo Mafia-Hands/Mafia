@@ -4,7 +4,6 @@ import { animated, useSpring } from 'react-spring';
 import socket from '../Socket';
 import Player from '../Components/Player';
 import { GameContext } from '../Context';
-
 import styles from '../Styles/GameOver.module.css';
 
 const GameOverPage = () => {

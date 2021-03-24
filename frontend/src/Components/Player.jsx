@@ -22,7 +22,7 @@ export default function Player({ playerName, style, childRef }) {
     const isVoted = gameState.votingState.vote === playerName;
     const isPlayer = generalState.nickname === playerName;
 
-    // forces the detctive to only be able to look at one other player per day
+    // forces the detective to only be able to look at one other player per day
     const detectiveHasSuspected = gameState.votingState.vote !== '';
 
     let mafiaString = '';

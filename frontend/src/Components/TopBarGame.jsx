@@ -4,7 +4,7 @@ import HelpIcon from '@material-ui/icons/Help';
 import { withStyles, IconButton } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
 import styles from '../Styles/TopBarGame.module.css';
-import ModalMUI from '../Modal/ModalMUI';
+import ModalMUI from './ModalMUI';
 import SettingDialog from '../Pages/SettingDialog';
 import TopBarSettings from './TopBarSettings';
 import RolesAndRules from './RolesAndRules';

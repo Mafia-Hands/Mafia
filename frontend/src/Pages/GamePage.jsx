@@ -6,7 +6,6 @@ import GameOverPage from './GameOverPage';
 import useGameState from '../Hooks/useGameState';
 
 import { GameContext } from '../Context';
-// export const GameContext = createContext();
 
 export default function GamePage() {
     const [state, dispatch] = useGameState();

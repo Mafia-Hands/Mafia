@@ -7,4 +7,3 @@ export const nightTimeStatus = {
 };
 
 export const constructPlayersOnTrialStatus = (playerOnTrial) => `${playerOnTrial} is on trial`;
-
