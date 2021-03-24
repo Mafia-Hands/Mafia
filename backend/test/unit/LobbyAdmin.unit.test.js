@@ -1,7 +1,6 @@
 const Client = require('socket.io-client');
 const CreateLobbyDTO = require('../../domain/DTO/request/CreateLobbyDTO');
 const JoinLobbyDTO = require('../../domain/DTO/request/JoinLobbyDTO');
-const VoteForDTO = require('../../domain/DTO/request/VoteForDTO');
 const config = require('../../config.json');
 const SocketIOServer = require('../../index');
 
@@ -18,7 +17,7 @@ afterEach((done) => {
     const { sockets } = SocketIOServer.io.sockets;
 
     // Iterate through each connected client and disconnect them.
-    sockets.forEach((socket, key) => {
+    sockets.forEach((socket) => {
         socket.disconnect(true);
     });
 
@@ -58,7 +57,7 @@ describe('create-lobby event test', () => {
 
         const clientSocket2 = new Client(`http://localhost:4001`);
         // Client 2 to subscribe to lobby-code
-        clientSocket2.on('lobby-code', (lobbyCodeDTOString) => {
+        clientSocket2.on('lobby-code', () => {
             fail("Client 2 shouldn't receive a lobby code");
         });
 

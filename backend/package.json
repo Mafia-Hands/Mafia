@@ -19,6 +19,7 @@
         "socket.io-client": "^4.0.0"
     },
     "devDependencies": {
+        "babel-eslint": "^10.1.0",
         "eslint": "^6.0.0",
         "eslint-config-airbnb": "^18.2.1",
         "eslint-config-node": "^4.1.0",
@@ -36,8 +37,10 @@
         "prettier": "^2.2.1",
         "pretty-quick": "^3.1.0"
     },
-    "lint-staged": {
-        "*.js": "eslint --cache --fix"
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run lint"
+        }
     },
     "jest": {
         "moduleNameMapper": {

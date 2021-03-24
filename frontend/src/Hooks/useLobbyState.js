@@ -61,7 +61,7 @@ export default function useLobbyState() {
 
     const onConfirmLobby = ({ success, errMsg }) => {
         if (!success) {
-            alert(errMsg);
+            alert(errMsg); // eslint-disable-line no-alert
         } else {
             dispatch({ type: 'change-screen', screen: 'lobby' });
         }

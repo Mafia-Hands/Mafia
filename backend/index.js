@@ -48,6 +48,7 @@ io.on('connection', (socket) => {
 
 // Start the server on our predetermined port number.
 server.listen(port, () => {
+    // eslint-disable-next-line no-console
     console.log(`Listening on *:${port}`);
 });
 

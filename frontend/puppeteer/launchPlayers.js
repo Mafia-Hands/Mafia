@@ -59,6 +59,7 @@ function busyWait(seconds) {
             defaultViewport: null,
         });
     } catch {
+        // eslint-disable-next-line no-console
         console.log(
             'Chrome cannot be found, please check you have chrome installed or you have enter the correct location for chrome, for more information, please read the README.md'
         );
@@ -87,7 +88,7 @@ function busyWait(seconds) {
         return roomCode.substr(roomCode.lastIndexOf(' ') + 1);
     });
 
-    for (let i = 1; i < 6; i++) {
+    for (let i = 1; i < 6; i += 1) {
         pages.push(await browser.newPage());
         await pages[i].goto(url);
         await enterNickname(pages[i], (i + 1).toString());

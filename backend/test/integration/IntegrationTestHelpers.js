@@ -10,7 +10,7 @@ const JoinLobbyDTO = require('../../domain/DTO/request/JoinLobbyDTO');
  */
 async function connectAndCreateLobby(clientSockets, port) {
     return new Promise((resolve) => {
-        clientSockets[0] = new Client(`http://localhost:` + port);
+        clientSockets[0] = new Client(`http://localhost:${port}`);
         clientSockets[0].on('connect', () => {
             clientSockets[0].emit('create-lobby', new CreateLobbyDTO('Leon'));
             clientSockets[0].on('lobby-code', (createLobbyDTO) => {
@@ -29,9 +29,9 @@ async function connectAndCreateLobby(clientSockets, port) {
  */
 async function connectAndJoin(clientSockets, index, port, lobbyCode) {
     return new Promise((resolve) => {
-        clientSockets[index] = new Client(`http://localhost:` + port);
+        clientSockets[index] = new Client(`http://localhost:${port}`);
         clientSockets[index].on('connect', () => {
-            clientSockets[index].emit('join-lobby', new JoinLobbyDTO('Leon' + index.toString(), lobbyCode));
+            clientSockets[index].emit('join-lobby', new JoinLobbyDTO(`Leon${index.toString()}`, lobbyCode));
             clientSockets[index].once('lobby-join', () => {
                 resolve();
             });
@@ -47,14 +47,13 @@ async function connectAndJoin(clientSockets, index, port, lobbyCode) {
 let hostRole;
 async function startGame(clientSockets) {
     return new Promise((resolve) => {
-        let hostRole;
         // Start the game
         let socketResponseCount = 0;
         clientSockets[0].emit('start-game');
-        for (let i = 0; i < clientSockets.length; i++) {
+        for (let i = 0; i < clientSockets.length; i += 1) {
             clientSockets[i].once('game-start', (gameStartDTO) => {
                 expect(gameStartDTO.role).toBeDefined();
-                socketResponseCount++;
+                socketResponseCount += 1;
                 // return the host role
                 if (i === 0) {
                     hostRole = gameStartDTO.role;
