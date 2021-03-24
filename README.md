@@ -23,20 +23,24 @@ cd Mafia
 
 To run this application locally, the frontend and backend must run together. You can do it like so:
 
-Frontend:
+**Frontend:**
 ```
 cd frontend
 npm install
 npm start
 ```
-Backend:
+**Backend:**
 ```
 cd backend
 npm install
 npm start
 ```
 **Note:** You do not need to run `npm install` everytime. Only when a new package is added.
+
+
 **Note:** Ensure that the `socket.js` file (frontend > src > socket.js) points to your local server by uncommenting the necessary line.
+
+
 
 ## Usage
 For development purposes, you can run the application locally by following the [Installation](https://github.com/Mafia-Hands/Mafia#installation) Instructions.
