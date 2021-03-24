@@ -78,3 +78,8 @@ module.exports.switchPlayer = function (nickname, roomID) {
     const room = mafiaGame.gameRoomsDict[roomID];
     testPlayerSocket.player = room.getPlayerByNickname(nickname);
 };
+
+module.exports.resetRoom = function (roomID) {
+    const room = mafiaGame.gameRoomsDict[roomID];
+    room.resetGame();
+};
