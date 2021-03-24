@@ -57,7 +57,7 @@ module.exports.addMafiaVote = function (voter, votedFor, roomID) {
     const room = mafiaGame.gameRoomsDict[roomID];
     const { mafiaVoteMap } = room.voteHandler;
 
-    mafiaVoteMap[voter] = votedFor;
+    mafiaVoteMap[voter.nickname] = votedFor;
 };
 
 module.exports.addDayVote = function (voter, votedFor, roomID) {
@@ -65,6 +65,12 @@ module.exports.addDayVote = function (voter, votedFor, roomID) {
     const { daytimeVoteMap } = room.voteHandler;
 
     daytimeVoteMap[voter.nickname] = votedFor;
+
+module.exports.addTrialVote = function (voter, votedFor, roomID) {
+    const room = mafiaGame.gameRoomsDict[roomID];
+    const { trialVoteMap } = room.voteHandler;
+
+    trialVoteMap[voter.nickname] = votedFor;
 };
 
 module.exports.addPlayers = function (players, roomID) {
