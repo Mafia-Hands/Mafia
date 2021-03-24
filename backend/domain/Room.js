@@ -5,6 +5,11 @@ const roles = require('./Enum/Role');
 const INITIAL_GAME_STATE = GameStateEnum.WAITINGLOBBY;
 const INITIAL_ROUND_NUMBER = 0;
 
+/**
+ * Represents a Mafia game room.
+ * The room keeps track of all the players that have joined the game.
+ * Is also manages the general state of the game (round number, winning players, votes, etc.)
+ */
 class Room {
     constructor() {
         // Initialize a roomID
