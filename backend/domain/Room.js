@@ -37,7 +37,6 @@ class Room {
         this.players.forEach((player) => {
             if (player.nickname === nickname) {
                 returnedPlayer = player;
-                break;
             }
         });
 
