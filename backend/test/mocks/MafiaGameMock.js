@@ -60,6 +60,13 @@ module.exports.addMafiaVote = function (voter, votedFor, roomID) {
     mafiaVoteMap[voter] = votedFor;
 };
 
+module.exports.addDayVote = function (voter, votedFor, roomID) {
+    const room = mafiaGame.gameRoomsDict[roomID];
+    const { daytimeVoteMap } = room.voteHandler;
+
+    daytimeVoteMap[voter] = votedFor;
+};
+
 module.exports.addPlayers = function (players, roomID) {
     const room = mafiaGame.gameRoomsDict[roomID];
     for (let player of players) {
