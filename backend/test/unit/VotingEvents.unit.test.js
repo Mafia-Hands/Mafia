@@ -4,6 +4,8 @@ const config = require('../../config.json');
 const MafiaGameMock = require('../mocks/MafiaGameMock');
 const Player = require('../../domain/Player');
 const RoleEnum = require('../../domain/Enum/Role');
+const NightTimeVoteDTO = require('../../domain/DTO/request/NightTimeVoteDTO');
+const NightEndDTO = require('../../domain/DTO/response/NightEndDTO');
 
 let clientSocket;
 const port = process.env.PORT || config.local_port;
@@ -70,5 +72,57 @@ describe('voting-events tests', () => {
         // Cast trial vote
         const voteForDTO = new VoteForDTO('P1');
         clientSocket.emit('trial-vote', voteForDTO);
+    });
+});
+
+describe('night time voting event tests', () => {
+    beforeAll(() => {
+        players = [
+            new Player(null, roomElements.roomID, 'notMafia', RoleEnum.MAFIA, false),
+            new Player(null, roomElements.roomID, 'Doctor', RoleEnum.MEDIC, true),
+            new Player(null, roomElements.roomID, 'Sherlock', RoleEnum.DETECTIVE, false),
+            new Player(null, roomElements.roomID, 'Dude', RoleEnum.CIVILIAN, true),
+        ];
+        MafiaGameMock.addPlayers(players, roomElements.roomID);
+    });
+
+    test('mafia votes w/ no medic vote', (done) => {
+        //Listen for night end to check that player has been killed.
+        clientSocket.on('night-end', (nightEndDTO) => {
+            try {
+                expect(nightEndDTO.playerKilled).toEqual('Dude');
+                done();
+            } catch (error) {
+                done.fail(error);
+            }
+        });
+
+        // Switch to mafia player to make vote
+        MafiaGameMock.switchPlayer('notMafia', roomElements.roomID);
+        clientSocket.emit('mafia-vote', new NightTimeVoteDTO('Dude'));
+
+        clientSocket.emit('start-night');
+    });
+
+    test('mafia and medic vote same player', (done) => {
+        //Listen for night end to check that player has been killed.
+        clientSocket.on('night-end', (nightEndDTO) => {
+            try {
+                expect(nightEndDTO.playerKilled).toEqual(null);
+                done();
+            } catch (error) {
+                done.fail(error);
+            }
+        });
+
+        // Switch to mafia player to make vote
+        MafiaGameMock.switchPlayer('notMafia', roomElements.roomID);
+        clientSocket.emit('mafia-vote', new NightTimeVoteDTO('Dude'));
+
+        // Switch to medic to save same player as mafia player
+        MafiaGameMock.switchPlayer('Doctor', roomElements.roomID);
+        clientSocket.emit('medic-vote', new NightTimeVoteDTO('Dude'));
+
+        clientSocket.emit('start-night');
     });
 });
