@@ -1,6 +1,7 @@
-import { constructPlayersOnTrialStatus, nightTimeStatus } from '../GameUtils';
 import { useContext, useReducer, useEffect } from 'react';
-import { GeneralContext } from '../App';
+import { constructPlayersOnTrialStatus, nightTimeStatus } from '../GameUtils';
+
+import { GeneralContext } from '../Context';
 import socket from '../Socket';
 
 const initialState = {

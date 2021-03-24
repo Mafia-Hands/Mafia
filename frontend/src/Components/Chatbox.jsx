@@ -29,32 +29,31 @@ const useStyles = makeStyles({
         padding: '10px',
         paddingLeft: '16px',
     },
-    content:{
+    content: {
         padding: '0px',
         color: '#E3F1F1',
     },
-    action:{
+    action: {
         display: 'grid',
         backgroundColor: 'rgb(152, 193, 217,0.6)',
         gridTemplateColumns: '70% 1fr',
-        padding:'0px',
+        padding: '0px',
     },
-    input:{
-        color: '#E3F1F1', 
-        paddingLeft: '8px', 
-        
-    }
+    input: {
+        color: '#E3F1F1',
+        paddingLeft: '8px',
+    },
 });
 
 const StyledButton = withStyles({
-root:{
-    backgroundColor: 'rgb(152, 193, 217,0.6)',
-    borderRadius:'0px',
-},
-label:{
-    textTransform: 'lowercase',
-    color: '#E3F1F1',
-}
+    root: {
+        backgroundColor: 'rgb(152, 193, 217,0.6)',
+        borderRadius: '0px',
+    },
+    label: {
+        textTransform: 'lowercase',
+        color: '#E3F1F1',
+    },
 })(Button);
 
 /**
@@ -65,7 +64,7 @@ const Chatbox = ({ messageList }) => {
 
     return (
         <Card className={classes.root} variant="outlined">
-            <CardHeader className={classes.title} title="Chat"></CardHeader>
+            <CardHeader className={classes.title} title="Chat" />
             <CardContent className={classes.content}>
                 <List>
                     {messageList.map((messageList, index) => (
@@ -76,7 +75,7 @@ const Chatbox = ({ messageList }) => {
                 </List>
             </CardContent>
             <CardActions className={classes.action}>
-                <Input className={classes.input} type="text" placeholder="message..." disableUnderline= 'true' />
+                <Input className={classes.input} type="text" placeholder="message..." disableUnderline="true" />
                 <StyledButton onClick={() => alert('Chat function not implemented yet')}>Send</StyledButton>
             </CardActions>
         </Card>

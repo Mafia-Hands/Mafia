@@ -1,0 +1,25 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "commonjs": true
+    },
+    "extends": ["plugin:react/recommended", "airbnb", "prettier"],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": ["react", "prettier"],
+    "rules": {
+        "no-unused-vars": "error",
+        "no-console": "warn",
+        "func-names": "off",
+        "no-restricted-syntax": "off",
+        "linebreak-style": ["error", "windows"],
+        "react/prop-types": "off",
+        "no-loop-func": "off"
+    }
+}

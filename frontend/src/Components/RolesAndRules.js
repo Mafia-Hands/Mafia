@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import styles from '../Styles/RolesAndRules.module.css';
-import { GameContext } from '../Pages/GamePage';
-import { GeneralContext } from '../App';
+import { GameContext, GeneralContext } from '../Context';
 
 const useStyles = makeStyles({
     root: {
@@ -13,7 +12,6 @@ const useStyles = makeStyles({
         gridTemplateRows: '2em 1fr 0.5fr',
         alignItems: 'stretch',
         justifySelf: 'end',
-        
     },
     good: { backgroundColor: 'palegreen' },
     bad: { backgroundColor: 'lightcoral' },

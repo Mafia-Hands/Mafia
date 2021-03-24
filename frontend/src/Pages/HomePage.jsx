@@ -1,11 +1,14 @@
 import React, { useContext, useState } from 'react';
-import socket from '../Socket';
-import { GeneralContext } from '../App';
+
 import { withStyles, TextField, Button } from '@material-ui/core';
 import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
-import styles from '../Styles/HomePage.module.css';
+
 import Tooltip from '@material-ui/core/Tooltip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+
+import socket from '../Socket';
+import { GeneralContext } from '../Context';
+import styles from '../Styles/HomePage.module.css';
 
 const CustomTextField = withStyles({
     root: {
@@ -53,10 +56,10 @@ const CustomCreateButton = withStyles({
     },
 })(Button);
 
-export default function HomePage() {
+export default function HomePage(props) {
     const { dispatch } = useContext(GeneralContext);
     const [nickname, setNickname] = useState('');
-    const [code, setCode] = useState('');
+    const [{ code }, setCode] = useState(props);
     const [joinDisabled, setjoinDisabled] = useState(true);
     const [tickNonempty, setTickNonempty] = useState(false);
     const [tickNoSpaces, setTickNoSpaces] = useState(true);
@@ -81,9 +84,9 @@ export default function HomePage() {
         socket.emit('join-lobby', { roomCode: code, nickname });
     };
 
-    const validateNickname = (nickname) => {
+    const validateNickname = (nickName) => {
         let validCheck = true;
-        setNickname(nickname);
+        setNickname(nickName);
         if (nickname === '') {
             validCheck = false;
             setTickNonempty(false);
@@ -125,7 +128,8 @@ export default function HomePage() {
                             disableHoverListener
                             disableTouchListener
                             title={
-                                <React.Fragment>
+                                // <React.Fragment>
+                                <>
                                     <div className={styles.checkers}>
                                         <span className={tickNonempty ? styles.validNickname : styles.invalidNickname}>
                                             {tickNonempty ? (
@@ -162,7 +166,8 @@ export default function HomePage() {
                                             )}
                                         </span>
                                     </div>
-                                </React.Fragment>
+                                </>
+                                //  </React.Fragment>
                             }
                             placement="right"
                             arrow
@@ -177,7 +182,7 @@ export default function HomePage() {
                                 onClick={handleTooltipOpen}
                                 InputLabelProps={{ style: { fontSize: '20px', paddingLeft: '2em' } }}
                                 InputProps={{ disableUnderline: true, style: { fontSize: '30px', paddingLeft: '1em' } }}
-                            ></CustomTextField>
+                            />
                         </Tooltip>
                     </div>
                 </ClickAwayListener>
@@ -191,7 +196,7 @@ export default function HomePage() {
                     onChange={(e) => setCode(e.target.value)}
                     InputLabelProps={{ style: { fontSize: '20px', paddingLeft: '2em' } }}
                     InputProps={{ disableUnderline: true, style: { fontSize: '30px', paddingLeft: '1em' } }}
-                ></CustomTextField>
+                />
                 <CustomJoinButton
                     className={styles.joinButton}
                     variant="outlined"

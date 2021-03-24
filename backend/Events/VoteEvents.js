@@ -1,4 +1,4 @@
-const Player = require('../domain/Player');
+
 const ListVoteDTO = require('../domain/DTO/response/ListVoteDTO');
 const MafiaGame = require('../domain/MafiaGame');
 
