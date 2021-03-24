@@ -5,7 +5,6 @@ const MafiaGameMock = require('../mocks/MafiaGameMock');
 const Player = require('../../domain/Player');
 const RoleEnum = require('../../domain/Enum/Role');
 const NightTimeVoteDTO = require('../../domain/DTO/request/NightTimeVoteDTO');
-const NightEndDTO = require('../../domain/DTO/response/NightEndDTO');
 
 let clientSocket;
 const port = process.env.PORT || config.local_port;
@@ -87,7 +86,7 @@ describe('night time voting event tests', () => {
     });
 
     test('mafia votes w/ no medic vote', (done) => {
-        //Listen for night end to check that player has been killed.
+        // Listen for night end to check that player has been killed.
         clientSocket.on('night-end', (nightEndDTO) => {
             try {
                 expect(nightEndDTO.playerKilled).toEqual('Dude');
@@ -105,7 +104,7 @@ describe('night time voting event tests', () => {
     });
 
     test('mafia and medic vote same player', (done) => {
-        //Listen for night end to check that player has been killed.
+        // Listen for night end to check that nobody has been killed.
         clientSocket.on('night-end', (nightEndDTO) => {
             try {
                 expect(nightEndDTO.playerKilled).toEqual(null);
@@ -125,4 +124,28 @@ describe('night time voting event tests', () => {
 
         clientSocket.emit('start-night');
     });
+
+    test('detective vote for mafia', (done) => {
+        detectiveVoteTest('notMafia', true, done);
+    });
+
+    test('detective vote for town', (done) => {
+        detectiveVoteTest('Doctor', false, done);
+    });
 });
+
+function detectiveVoteTest(suspect, shouldBeMafia, done) {
+    // Listen for suspect reveal event, check that player is revealed as town
+    clientSocket.on('suspect-reveal', (suspectRevealDTO) => {
+        try {
+            expect(suspectRevealDTO.isMafia).toEqual(shouldBeMafia);
+            done();
+        } catch (error) {
+            done.fail(error);
+        }
+    });
+
+    // Switch to detective, submit detective vote
+    MafiaGameMock.switchPlayer('Sherlock', roomElements.roomID);
+    clientSocket.emit('detective-vote', new NightTimeVoteDTO(suspect));
+}
