@@ -43,6 +43,14 @@ If you do not have an existing lobbyID, you would have to create the room for yo
 ## Support
 If you have encountered any problems when setting up or developing the project, you can create a Github issue and tag the person who wrote the code related to your issues.
 
+## Roadmap
+We do have lists for the tasks that need to be done in the Github projects page.
+
+[Backend](https://github.com/Mafia-Hands/Mafia/projects/2)
+[Frontend](https://github.com/Mafia-Hands/Mafia/projects/1)
+[DevOps](https://github.com/Mafia-Hands/Mafia/projects/4)
+[Documentation](https://github.com/Mafia-Hands/Mafia/projects/3)
+
 ## Contributing
 
 For contribution guidelines visit the [Contributing-Guidlines](https://github.com/Mafia-Hands/Mafia/wiki/Contributing-Guidelines) in the wiki. 
