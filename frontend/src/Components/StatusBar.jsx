@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { GameContext } from '../Pages/GamePage';
+import { GameContext } from '../Context';
 import styles from '../Styles/Statusbar.module.css';
 import classNames from 'classnames';
 

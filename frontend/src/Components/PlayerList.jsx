@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { Card, CardContent, CardHeader, Typography } from '@material-ui/core';
-import { GeneralContext } from '../App';
+import { GeneralContext } from '../Context';
 
 const useStyles = makeStyles({
     root: {
@@ -22,10 +22,10 @@ const useStyles = makeStyles({
         padding: '10px',
         paddingLeft: '16px',
     },
-    content:{
+    content: {
         padding: '0px',
         color: '#E3F1F1',
-    }
+    },
 });
 
 const PlayerList = () => {

@@ -1,11 +1,14 @@
 import React, { useContext, useState } from 'react';
-import socket from '../Socket';
-import { GeneralContext } from '../App';
+
 import { withStyles, TextField, Button } from '@material-ui/core';
 import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
-import styles from '../Styles/HomePage.module.css';
+
 import Tooltip from '@material-ui/core/Tooltip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+
+import socket from '../Socket';
+import { GeneralContext } from '../Context';
+import styles from '../Styles/HomePage.module.css';
 
 const CustomTextField = withStyles({
     root: {
@@ -81,9 +84,9 @@ export default function HomePage(props) {
         socket.emit('join-lobby', { roomCode: code, nickname });
     };
 
-    const validateNickname = (nickname) => {
+    const validateNickname = (nickName) => {
         let validCheck = true;
-        setNickname(nickname);
+        setNickname(nickName);
         if (nickname === '') {
             validCheck = false;
             setTickNonempty(false);
@@ -177,7 +180,7 @@ export default function HomePage(props) {
                                 onClick={handleTooltipOpen}
                                 InputLabelProps={{ style: { fontSize: '20px', paddingLeft: '2em' } }}
                                 InputProps={{ disableUnderline: true, style: { fontSize: '30px', paddingLeft: '1em' } }}
-                            ></CustomTextField>
+                            />
                         </Tooltip>
                     </div>
                 </ClickAwayListener>
@@ -191,7 +194,7 @@ export default function HomePage(props) {
                     onChange={(e) => setCode(e.target.value)}
                     InputLabelProps={{ style: { fontSize: '20px', paddingLeft: '2em' } }}
                     InputProps={{ disableUnderline: true, style: { fontSize: '30px', paddingLeft: '1em' } }}
-                ></CustomTextField>
+                />
                 <CustomJoinButton
                     className={styles.joinButton}
                     variant="outlined"

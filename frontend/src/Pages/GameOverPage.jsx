@@ -2,7 +2,7 @@ import { React, useContext } from 'react';
 import socket from '../Socket';
 import { Button } from '@material-ui/core';
 import Player from '../Components/Player';
-import { GameContext } from './GamePage';
+import { GameContext } from '../Context';
 import { Grid } from '@material-ui/core';
 import { animated, useSpring } from 'react-spring';
 import styles from '../Styles/GameOver.module.css';

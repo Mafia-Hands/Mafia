@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState, useContext } from 'react';
 import Player from './Player';
 import styles from '../Styles/Table.module.css';
-import { GeneralContext } from '../App';
-import { GameContext } from '../Pages/GamePage';
+import { GeneralContext } from '../Context';
+import { GameContext } from '../Context';
 import { Button } from '@material-ui/core';
 import socket from '../Socket';
 import classNames from 'classnames';

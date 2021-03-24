@@ -7,7 +7,9 @@ import GamePage from './Pages/GamePage';
 import NewGameScreen from './Pages/NewGameScreen';
 import useLobbyState from './Hooks/useLobbyState';
 
-export const GeneralContext = React.createContext();
+import { GeneralContext } from './Context';
+
+// export const GeneralContext = React.createContext();
 
 /**
  * Main React Component

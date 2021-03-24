@@ -6,11 +6,11 @@ import styles from '../Styles/TopBarGame.module.css';
 import ModalMUI from '../Modal/ModalMUI';
 import SettingDialog from '../Pages/SettingDialog';
 import TopBarSettings from './TopBarSettings';
-import { GeneralContext } from '../App';
+import { GeneralContext } from '../Context';
 import RolesAndRules from './RolesAndRules';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Timer from './Timer';
-import { GameContext } from '../Pages/GamePage';
+import { GameContext } from '../Context';
 
 /**
  * @param userDetails [{userName: <string>, role: <string>}]
