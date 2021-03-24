@@ -55,10 +55,7 @@ Outstanding issues and requests can be tracked and visualised on our Github Proj
 [Documentation](https://github.com/Mafia-Hands/Mafia/projects/3)
 
 ## Contributing
-
-For contribution guidelines visit the [Contributing-Guidlines](https://github.com/Mafia-Hands/Mafia/wiki/Contributing-Guidelines) in the wiki. 
-
-Please make sure to update tests as appropriate.
+If you would like to contribute to this project, please make sure to follow our [Contributing-Guidlines](https://github.com/Mafia-Hands/Mafia/wiki/Contributing-Guidelines)s.
 
 ## Code of Conduct
 Please ensure all [code of conduct](https://github.com/Mafia-Hands/Mafia/wiki/Code-of-Conduct) is followed.
