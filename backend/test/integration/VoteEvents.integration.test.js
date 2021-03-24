@@ -6,7 +6,8 @@ const VoteForDTO = require('../../domain/DTO/request/VoteForDTO');
 describe('day & trial vote integration tests', () => {
     const port = process.env.PORT || config.local_port;
 
-    let clientSockets = [];
+    const clientSockets = [];
+    let lobbyCode = '';
 
     // Create a new client, and connect it to the server via a socket
     beforeEach(async (done) => {
@@ -16,8 +17,8 @@ describe('day & trial vote integration tests', () => {
 
     // Disconnect each socket connected to the server
     afterEach((done) => {
-        const sockets = SocketIOServer.io.sockets.sockets;
-        sockets.forEach(function (socket, key) {
+        const { sockets } = SocketIOServer.io.sockets;
+        sockets.forEach((socket) => {
             socket.disconnect(true);
         });
         done();
@@ -30,15 +31,15 @@ describe('day & trial vote integration tests', () => {
 
     test('day/trial vote test', async (done) => {
         // join to server
-        for (let i = 1; i < 6; i++) {
+        for (let i = 1; i < 6; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
         // start game
         await startGame(clientSockets);
 
         // vote for players and check map is filled out appropriately
-        let voteMap = { Leon: 'Leon1' };
-        for (let i = 1; i < 5; i++) {
+        const voteMap = { Leon: 'Leon1' };
+        for (let i = 1; i < 5; i += 1) {
             voteMap[`Leon${i}`] = await voting(i);
             expect(voteMap[`Leon${i}`]).toBe(`Leon${i + 1}`);
         }
@@ -54,7 +55,6 @@ describe('day & trial vote integration tests', () => {
     async function voting(index) {
         return new Promise((resolve) => {
             clientSockets[0].on('day-vote-update', (listVoteDTO) => {
-                
                 resolve(listVoteDTO.voteMap[`Leon${index}`]);
             });
             // send votes to server
