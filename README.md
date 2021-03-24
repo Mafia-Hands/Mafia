@@ -41,9 +41,7 @@ npm start
 ## Usage
 For development purposes, you can run the application locally by following the [Installation](https://github.com/Mafia-Hands/Mafia#installation) Instructions.
 
-For playing, please read through the [rules of the Mafia game](https://github.com/Mafia-Hands/Mafia/wiki/Game-Rules) first, even though you have played Mafia game before. Now, let's go through how to create, join, start a game quickly. By the default setting, after you start running the front-end application, you would be able to access the game by accessing localhost:3000.
-
-If you do not have an existing lobbyID, you would have to create the room for you and your friend. To create the lobbdyID, you have to click on the button 'Create new game' then share the LobbyID with your friends who would like to join the game. If you already have the LobbyID from the host, then you just input your nickname and the lobbyID, then click join.
+If you would like to play the game, follow our guide on how to [Get Started](). If you don't know how to play Mafia, you can also read the [Rules of the game](https://github.com/Mafia-Hands/Mafia/wiki/Game-Rules)!
 
 ## Support
 If you have encountered any problems when setting up or developing the project, you can create a Github issue and tag the person who wrote the code related to your issues.
