@@ -1,11 +1,11 @@
-import styles from '../Styles/Player.module.css';
 import classNames from 'classnames';
-import { GameContext } from '../Pages/GamePage';
-import { GeneralContext } from '../App';
-import socket from '../Socket';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
+import styles from '../Styles/Player.module.css';
 
-export default function Player({ playerId, playerName, style, childRef }) {
+import { GameContext, GeneralContext } from '../Context';
+import socket from '../Socket';
+
+export default function Player({ playerName, style, childRef }) {
     const { state: generalState } = useContext(GeneralContext);
     const { state: gameState, dispatch } = useContext(GameContext);
 
@@ -22,10 +22,10 @@ export default function Player({ playerId, playerName, style, childRef }) {
     const isVoted = gameState.votingState.vote === playerName;
     const isPlayer = generalState.nickname === playerName;
 
-    // forces the detctive to only be able to look at one other player per day
+    // forces the detective to only be able to look at one other player per day
     const detectiveHasSuspected = gameState.votingState.vote !== '';
 
-    var mafiaString = '';
+    let mafiaString = '';
     for (const suspectedPlayer of gameState.checkedPlayers) {
         if (suspectedPlayer.nickname === playerName) {
             mafiaString = suspectedPlayer.isMafia ? ' (Mafia)' : ' (Not Mafia)';
