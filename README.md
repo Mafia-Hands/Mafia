@@ -39,7 +39,7 @@ npm start
 **Note:** Ensure that the `socket.js` file (frontend > src > socket.js) points to your local server by uncommenting the necessary line.
 
 ## Usage
-For development purpose, please check the [Installation](https://github.com/Mafia-Hands/Mafia#installation) and our [contributing guidelines](https://github.com/Mafia-Hands/Mafia/wiki/Contributing-Guidelines).
+For development purposes, you can run the application locally by following the [Installation](https://github.com/Mafia-Hands/Mafia#installation) Instructions.
 
 For playing, please read through the [rules of the Mafia game](https://github.com/Mafia-Hands/Mafia/wiki/Game-Rules) first, even though you have played Mafia game before. Now, let's go through how to create, join, start a game quickly. By the default setting, after you start running the front-end application, you would be able to access the game by accessing localhost:3000.
 
