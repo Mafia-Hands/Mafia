@@ -11,7 +11,7 @@ However, since this is an OSS project, developers are free to edit rules and add
 Please review the [documentation](https://github.com/Mafia-Hands/Mafia/wiki) for guidelines and information about the software.
 
 ## Installation
-Before you install & get started with the Mafia project, please you have installed [nodejs](https://nodejs.org/en/) and [npm](https://www.npmjs.com/) on your computer.
+Before you install and get started with this project, please ensure that you have installed [nodejs](https://nodejs.org/en/) and [npm](https://www.npmjs.com/) on your computer.
 
 This project uses the package manager [npm](https://www.npmjs.com/get-npm) to install all dependencies.
 
