@@ -15,23 +15,28 @@ Before you install and get started with this project, please ensure that you hav
 
 This project uses the package manager [npm](https://www.npmjs.com/get-npm) to install all dependencies.
 
-### For frontend
-```bash
+First, clone the repository and open the project directory:
+```
 git clone git@github.com:Mafia-Hands/Mafia.git
 cd Mafia
+```
+
+To run this application locally, the frontend and backend must run together. You can do it like so:
+
+Frontend:
+```
 cd frontend
 npm install
 npm start
 ```
-
-### For backend
-```bash
-git clone git@github.com:Mafia-Hands/Mafia.git
-cd Mafia
+Backend:
+```
 cd backend
 npm install
 npm start
 ```
+**Note:** You do not need to run `npm install` everytime. Only when a new package is added.
+**Note:** Ensure that the `socket.js` file (frontend > src > socket.js) points to your local server by uncommenting the necessary line.
 
 ## Usage
 For development purpose, please check the [Installation](https://github.com/Mafia-Hands/Mafia#installation) and our [contributing guidelines](https://github.com/Mafia-Hands/Mafia/wiki/Contributing-Guidelines).
