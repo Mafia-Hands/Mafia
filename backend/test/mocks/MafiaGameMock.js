@@ -88,4 +88,7 @@ module.exports.switchPlayer = function (nickname, roomID) {
 module.exports.resetRoom = function (roomID) {
     const room = mafiaGame.gameRoomsDict[roomID];
     room.resetGame();
+    room.players = [];
+    room.host = null;
+    room.voteHandler.resetVotes();
 };

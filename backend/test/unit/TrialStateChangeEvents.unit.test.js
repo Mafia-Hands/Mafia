@@ -32,7 +32,7 @@ describe('trial-start unit tests', () => {
         roomElements.socketIOServer.close();
     });
 
-    test('trial-start successful call, abstain vote, winning condition is not fulfilled', (done) => {
+    test('trial-start successful call, no votes, winning condition is not fulfilled', (done) => {
         const playerA = new Player(null, null, 'a', roles.MAFIA, true);
         const playerB = new Player(null, null, 'b', roles.JESTER, true);
         const playerC = new Player(null, null, 'c', roles.CIVILIAN, true);
@@ -54,11 +54,13 @@ describe('trial-start unit tests', () => {
         clientSocket.emit('start-trial');
     });
 
-    test('trial-start successful call, abstain vote, winning condition is fulfilled', (done) => {
+    test('trial-start successful call, one abstain vote, winning condition is fulfilled', (done) => {
         const playerA = new Player(null, null, 'a', roles.MAFIA, true);
         playerA.isAlive = false; // Kill off the mafia player
 
         MafiaGameMock.addPlayer(playerA, roomElements.roomID);
+
+        MafiaGameMock.addTrialVote(playerA, 'abstain Vote', roomElements.roomID); // Vote to kill off a civilian
 
         clientSocket.on('trial-start', (trialStartDTO) => {
             expect(trialStartDTO.timeToVote).toBe(config.trial_total_vote_time_in_milliseconds);
@@ -66,6 +68,54 @@ describe('trial-start unit tests', () => {
 
         clientSocket.on('trial-end', (trialEndDTO) => {
             expect(trialEndDTO.playerKilled).toBe('abstain Vote');
+            expect(trialEndDTO.isGameOver).toBe(true);
+            done();
+        });
+
+        clientSocket.emit('start-trial');
+    });
+
+    test('trial-start successful call, someone is killed, winning condition is not fulfilled', (done) => {
+        const playerA = new Player(null, null, 'a', roles.MAFIA, true);
+        const playerB = new Player(null, null, 'b', roles.CIVILIAN, true);
+        const playerC = new Player(null, null, 'c', roles.JESTER, true);
+        const playerD = new Player(null, null, 'd', roles.CIVILIAN, true);
+
+        MafiaGameMock.addPlayer(playerA, roomElements.roomID);
+        MafiaGameMock.addPlayer(playerB, roomElements.roomID);
+        MafiaGameMock.addPlayer(playerC, roomElements.roomID);
+        MafiaGameMock.addPlayer(playerD, roomElements.roomID);
+
+        MafiaGameMock.addTrialVote(playerA, playerD, roomElements.roomID); // Vote to kill off a civilian
+
+        clientSocket.on('trial-start', (trialStartDTO) => {
+            expect(trialStartDTO.timeToVote).toBe(config.trial_total_vote_time_in_milliseconds);
+        });
+
+        clientSocket.on('trial-end', (trialEndDTO) => {
+            expect(trialEndDTO.playerKilled).toBe('d');
+            expect(trialEndDTO.isGameOver).toBe(false);
+            done();
+        });
+
+        clientSocket.emit('start-trial');
+    });
+
+    test('trial-start successful call, someone is killed, winning condition is fulfilled', (done) => {
+        const playerA = new Player(null, null, 'a', roles.MAFIA, true);
+        const playerB = new Player(null, null, 'b', roles.CIVILIAN, true);
+
+        MafiaGameMock.addPlayer(playerA, roomElements.roomID);
+        MafiaGameMock.addPlayer(playerB, roomElements.roomID);
+
+        MafiaGameMock.addTrialVote(playerB, playerA, roomElements.roomID); // Vote to kill the Mafia
+
+        clientSocket.on('trial-start', (trialStartDTO) => {
+            expect(trialStartDTO.timeToVote).toBe(config.trial_total_vote_time_in_milliseconds);
+        });
+
+        clientSocket.on('trial-end', (trialEndDTO) => {
+            expect(trialEndDTO.playerKilled).toBe('a');
             expect(trialEndDTO.isGameOver).toBe(true);
             done();
         });
