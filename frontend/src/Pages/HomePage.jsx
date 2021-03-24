@@ -128,7 +128,6 @@ export default function HomePage(props) {
                             disableHoverListener
                             disableTouchListener
                             title={
-                                // <React.Fragment>
                                 <>
                                     <div className={styles.checkers}>
                                         <span className={tickNonempty ? styles.validNickname : styles.invalidNickname}>
@@ -167,7 +166,6 @@ export default function HomePage(props) {
                                         </span>
                                     </div>
                                 </>
-                                //  </React.Fragment>
                             }
                             placement="right"
                             arrow

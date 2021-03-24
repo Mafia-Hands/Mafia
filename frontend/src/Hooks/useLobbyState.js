@@ -83,7 +83,6 @@ export default function useLobbyState() {
         };
 
         const onlobbyJoin = (res) => {
-            console.log({ type: 'lobby-join', ...res });
             dispatch({ type: 'change-screen', screen: 'lobby' });
             dispatch({ type: 'lobby-join', ...res });
         };

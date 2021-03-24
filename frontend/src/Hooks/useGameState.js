@@ -195,7 +195,7 @@ export default function useGameState() {
         dispatch({
             type: 'init',
             alivePlayers: generalState.players,
-            role: role,
+            role,
             ...extraRoleState,
         });
     }, [generalState]);
@@ -308,7 +308,6 @@ export default function useGameState() {
         }
 
         function onGameOver({ winningRole, winners }) {
-            console.log(winningRole + ' ' + winners);
             dispatch({
                 type: 'game-over',
                 winningRole: winningRole.toLowerCase(),
