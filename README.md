@@ -50,8 +50,11 @@ If you encounter any issues regarding this project, please create a [Github Issu
 Outstanding issues and requests can be tracked and visualised on our Github Projects page.
 
 [Backend](https://github.com/Mafia-Hands/Mafia/projects/2)
+
 [Frontend](https://github.com/Mafia-Hands/Mafia/projects/1)
+
 [DevOps](https://github.com/Mafia-Hands/Mafia/projects/4)
+
 [Documentation](https://github.com/Mafia-Hands/Mafia/projects/3)
 
 ## Contributing
