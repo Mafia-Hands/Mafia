@@ -8,29 +8,9 @@ class Player {
         this.isHost = isHost;
     }
 
-    getRoomID() {
-        return this.roomID;
-    }
-
-    getNickname() {
-        return this.nickname;
-    }
-
-    getRole() {
-        return this.role;
-    }
-
-    getIsAlive() {
-        return this.isAlive;
-    }
-
-    setIsAlive(isAlive) {
-        this.isAlive = isAlive;
-    }
-
     resetPlayer() {
         this.role = null;
-        this.setIsAlive(true);
+        this.isAlive = true;
     }
 }
 

@@ -42,7 +42,7 @@ function endNight(io, socket, mafiaGame) {
     const playerKilled = room.voteHandler.getMafiaVotedPlayer();
 
     if (playerKilled) {
-        room.getPlayerByNickname(playerKilled).setIsAlive(false);
+        room.getPlayerByNickname(playerKilled).isAlive = false;
     }
 
     const winningRole = room.getWinningRole();
