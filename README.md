@@ -47,7 +47,7 @@ If you would like to play the game, follow our guide on how to [Get Started](). 
 If you encounter any issues regarding this project, please create a [Github Issue](https://github.com/Mafia-Hands/Mafia/issues) using the relevant template. You can also tag a specific contributor if you feel like they might be able to help you out.
 
 ## Roadmap
-We do have lists for the tasks that need to be done in the Github projects page.
+Outstanding issues and requests can be tracked and visualised on our Github Projects page.
 
 [Backend](https://github.com/Mafia-Hands/Mafia/projects/2)
 [Frontend](https://github.com/Mafia-Hands/Mafia/projects/1)
