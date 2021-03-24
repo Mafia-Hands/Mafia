@@ -67,9 +67,10 @@ const Chatbox = ({ messageList }) => {
             <CardHeader className={classes.title} title="Chat" />
             <CardContent className={classes.content}>
                 <List>
-                    {messageList.map((messageList, index) => (
+                    {messageList.map((message, index) => (
+                        // react/no-array-index-key, probably need to have a message id etc
                         <ListItem key={index}>
-                            <Typography>{messageList}</Typography>
+                            <Typography>{message}</Typography>
                         </ListItem>
                     ))}
                 </List>

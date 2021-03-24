@@ -1,11 +1,11 @@
 import classNames from 'classnames';
+import React, { useContext } from 'react';
 import styles from '../Styles/Player.module.css';
 
 import { GameContext, GeneralContext } from '../Context';
 import socket from '../Socket';
-import { useContext } from 'react';
 
-export default function Player({ playerId, playerName, style, childRef }) {
+export default function Player({ playerName, style, childRef }) {
     const { state: generalState } = useContext(GeneralContext);
     const { state: gameState, dispatch } = useContext(GameContext);
 
@@ -25,7 +25,7 @@ export default function Player({ playerId, playerName, style, childRef }) {
     // forces the detctive to only be able to look at one other player per day
     const detectiveHasSuspected = gameState.votingState.vote !== '';
 
-    var mafiaString = '';
+    let mafiaString = '';
     for (const suspectedPlayer of gameState.checkedPlayers) {
         if (suspectedPlayer.nickname === playerName) {
             mafiaString = suspectedPlayer.isMafia ? ' (Mafia)' : ' (Not Mafia)';

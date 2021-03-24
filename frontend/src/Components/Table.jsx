@@ -39,16 +39,16 @@ export default function Table() {
 
         const angleBetweenPlayers = 360 / numPlayers;
 
-        return generalState.players.map((player, idx) => {
-            return {
-                playerId: player,
-                name: player,
-                top: 0,
-                left: 0,
-                angle: idx * angleBetweenPlayers,
-                onTrial: false,
-            };
-        });
+        return generalState.players.map((player, idx) => ({
+            // return {
+            playerId: player,
+            name: player,
+            top: 0,
+            left: 0,
+            angle: idx * angleBetweenPlayers,
+            onTrial: false,
+            // };
+        }));
     }
 
     // we need to keep track of px values of all players
