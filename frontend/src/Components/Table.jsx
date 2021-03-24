@@ -1,11 +1,11 @@
 import React, { useRef, useEffect, useState, useContext } from 'react';
+import { Button } from '@material-ui/core';
+import classNames from 'classnames';
 import Player from './Player';
 import styles from '../Styles/Table.module.css';
-import { GeneralContext } from '../App';
-import { GameContext } from '../Pages/GamePage';
-import { Button } from '@material-ui/core';
+import { GeneralContext, GameContext } from '../Context';
+
 import socket from '../Socket';
-import classNames from 'classnames';
 
 /**
  *
@@ -33,6 +33,24 @@ export default function Table() {
     // ref to keep track of if first Render has happend (this was suggested online)
     const firstRender = useRef(true);
 
+    // initially, just put everyone at 0,0
+    function initCoords() {
+        const numPlayers = generalState.players.length;
+
+        const angleBetweenPlayers = 360 / numPlayers;
+
+        return generalState.players.map((player, idx) => ({
+            // return {
+            playerId: player,
+            name: player,
+            top: 0,
+            left: 0,
+            angle: idx * angleBetweenPlayers,
+            onTrial: false,
+            // };
+        }));
+    }
+
     // we need to keep track of px values of all players
     const [playerCoords, setPlayerCoords] = useState(initCoords());
 
@@ -45,24 +63,6 @@ export default function Table() {
             }))
         );
     }, [gameState.votingState]);
-
-    // initially, just put everyone at 0,0
-    function initCoords() {
-        const numPlayers = generalState.players.length;
-
-        const angleBetweenPlayers = 360 / numPlayers;
-
-        return generalState.players.map((player, idx) => {
-            return {
-                playerId: player,
-                name: player,
-                top: 0,
-                left: 0,
-                angle: idx * angleBetweenPlayers,
-                onTrial: false,
-            };
-        });
-    }
 
     function getDimensions(ref) {
         return ref.current.getBoundingClientRect();
@@ -120,9 +120,9 @@ export default function Table() {
     /** This is taken from https://www.pluralsight.com/guides/re-render-react-component-on-window-resize to throttle events */
     function debounce(fn, ms) {
         let timer;
-        return (_) => {
+        return () => {
             clearTimeout(timer);
-            timer = setTimeout((_) => {
+            timer = setTimeout(() => {
                 timer = null;
                 fn.apply(this, arguments);
             }, ms);
@@ -194,7 +194,7 @@ export default function Table() {
                         })}
                 </div>
             </div>
-            <div className={styles.overlay}></div>
+            <div className={styles.overlay} />
         </div>
     );
 }
