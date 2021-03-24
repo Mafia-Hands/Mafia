@@ -21,10 +21,6 @@ class Room {
         this.host = null;
     }
 
-    setGameState(gameState) {
-        this.gameState = gameState;
-    }
-
     getPlayerByNickname(nickname) {
         let returnedPlayer;
 
@@ -95,7 +91,7 @@ class Room {
     }
 
     resetGame() {
-        this.setGameState(INITIAL_GAME_STATE);
+        this.gameState = INITIAL_GAME_STATE;
         this.roundNumber = INITIAL_ROUND_NUMBER;
         for (let i = 0; i < this.players.length; i++) {
             if (this.players[i]) {
