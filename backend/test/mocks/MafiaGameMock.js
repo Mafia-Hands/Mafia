@@ -57,14 +57,14 @@ module.exports.addMafiaVote = function (voter, votedFor, roomID) {
     const room = mafiaGame.gameRoomsDict[roomID];
     const { mafiaVoteMap } = room.voteHandler;
 
-    mafiaVoteMap[voter] = votedFor;
+    mafiaVoteMap[voter.nickname] = votedFor;
 };
 
 module.exports.addTrialVote = function (voter, votedFor, roomID) {
     const room = mafiaGame.gameRoomsDict[roomID];
     const { trialVoteMap } = room.voteHandler;
 
-    trialVoteMap[voter] = votedFor;
+    trialVoteMap[voter.nickname] = votedFor;
 };
 
 module.exports.addPlayers = function (players, roomID) {
@@ -82,4 +82,7 @@ module.exports.switchPlayer = function (nickname, roomID) {
 module.exports.resetRoom = function (roomID) {
     const room = mafiaGame.gameRoomsDict[roomID];
     room.resetGame();
+    room.players = [];
+    room.host = null;
+    room.voteHandler.resetVotes();
 };
