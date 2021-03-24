@@ -29,6 +29,7 @@ const useStyles = makeStyles({
 });
 
 const PlayerList = () => {
+    // get the current lobby state
     const { state } = useContext(GeneralContext);
     const classes = useStyles();
 
@@ -38,6 +39,8 @@ const PlayerList = () => {
             <CardContent className={classes.content}>
                 <List>
                     {state.players.map((playerName, index) => (
+                        // react/no-array-index-key: not safe to use index as the key
+                        // probably need to have an id etc in the future
                         <ListItem key={index}>
                             <Typography>
                                 Player {index + 1}: {playerName}

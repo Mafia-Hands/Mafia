@@ -46,6 +46,8 @@ const StyledButton = withStyles({
     },
 })(Button);
 
+// this component will be used in the NewGameScreen.jsx
+// @param {setOpen, setOpenInfo} used to open the role and rules modal
 const LobbySettings = ({ setOpen, setOpenInfo }) => {
     const classes = useStyles();
 

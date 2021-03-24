@@ -8,6 +8,8 @@ import useGameState from '../Hooks/useGameState';
 import { GameContext } from '../Context';
 
 export default function GamePage() {
+    // get the current game states
+    // pass it to the child components
     const [state, dispatch] = useGameState();
     let component;
 

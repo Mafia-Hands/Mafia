@@ -28,6 +28,8 @@ const initialState = {
 
 const reducer = (state, action) => {
     switch (action.type) {
+        // all players are alive
+        // assign roles to each player
         case 'init': {
             return {
                 ...state,
@@ -39,6 +41,9 @@ const reducer = (state, action) => {
             };
         }
 
+        // change screen
+        // set the timer
+        // change voting state for specific roles [detective, mafia, medic]
         case 'night-start': {
             return {
                 ...state,
@@ -63,6 +68,7 @@ const reducer = (state, action) => {
             };
         }
 
+        // abstain your selection
         case 'abstain': {
             return {
                 ...state,
@@ -203,6 +209,7 @@ export default function useGameState() {
     useEffect(() => {
         function onNightStart({ timeToVote }) {
             const amIDead = !state.alivePlayers.includes(generalState.nickname);
+            // you cannot vote any players now
             if (amIDead) {
                 dispatch({
                     type: 'night-start',
