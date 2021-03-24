@@ -21,22 +21,6 @@ class Room {
         this.host = null;
     }
 
-    getRoomID() {
-        return this.roomID;
-    }
-
-    getGameState() {
-        return this.gameState;
-    }
-
-    setGameState(gameState) {
-        this.gameState = gameState;
-    }
-
-    getPlayers() {
-        return this.players;
-    }
-
     getPlayerByNickname(nickname) {
         let returnedPlayer;
 
@@ -74,18 +58,10 @@ class Room {
         return playersOfTheRole;
     }
 
-    getHost() {
-        return this.Host;
-    }
-
     addPlayer(player) {
         if (player !== null && this.players.length < this.maxPlayerCount) {
             this.players.push(player);
         }
-    }
-
-    getRoundNumber() {
-        return this.roundNumber;
     }
 
     incrementRoundNumber() {
@@ -115,7 +91,7 @@ class Room {
     }
 
     resetGame() {
-        this.setGameState(INITIAL_GAME_STATE);
+        this.gameState = INITIAL_GAME_STATE;
         this.roundNumber = INITIAL_ROUND_NUMBER;
         for (let i = 0; i < this.players.length; i += 1) {
             if (this.players[i]) {
