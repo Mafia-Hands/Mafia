@@ -22,7 +22,7 @@ class MafiaGame {
      * @param {number} roomID
      */
     closeGame(roomID) {
-        delete gameRoomsDict[roomID];
+        delete this.gameRoomsDict[roomID];
     }
 
     /**
@@ -34,7 +34,7 @@ class MafiaGame {
         while (!room) {
             room = new Room();
             // Create a new room if a room that has the same ID already exist
-            if (this.gameRoomsDict[room.getRoomID()] !== undefined) {
+            if (this.gameRoomsDict[room.roomID] !== undefined) {
                 // Room already exists, create the room again using the loop
                 room = null;
             }

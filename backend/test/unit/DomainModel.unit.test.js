@@ -1,6 +1,4 @@
 const Player = require('../../domain/Player');
-const LobbyCodeDTO = require('../../domain/DTO/response/LobbyCodeDTO');
-const MafiaGame = require('../../domain/MafiaGame');
 const Room = require('../../domain/Room');
 
 describe('Domain Model tests', () => {

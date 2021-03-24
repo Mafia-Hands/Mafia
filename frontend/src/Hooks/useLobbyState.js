@@ -61,7 +61,7 @@ export default function useLobbyState() {
 
     const onConfirmLobby = ({ success, errMsg }) => {
         if (!success) {
-            alert(errMsg);
+            alert(errMsg); // eslint-disable-line no-alert
         } else {
             dispatch({ type: 'change-screen', screen: 'lobby' });
         }
@@ -83,7 +83,6 @@ export default function useLobbyState() {
         };
 
         const onlobbyJoin = (res) => {
-            console.log({ type: 'lobby-join', ...res });
             dispatch({ type: 'change-screen', screen: 'lobby' });
             dispatch({ type: 'lobby-join', ...res });
         };

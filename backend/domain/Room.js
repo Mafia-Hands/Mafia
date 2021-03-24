@@ -13,28 +13,12 @@ class Room {
         // Default game settings.
         this.gameState = INITIAL_GAME_STATE;
         this.maxPlayerCount = 6;
-        this.players = new Array();
+        this.players = [];
         this.roundNumber = INITIAL_ROUND_NUMBER;
 
         // Handler used to keep track of votes and calculate tallies
         this.voteHandler = new VoteHandler();
         this.host = null;
-    }
-
-    getRoomID() {
-        return this.roomID;
-    }
-
-    getGameState() {
-        return this.gameState;
-    }
-
-    setGameState(gameState) {
-        this.gameState = gameState;
-    }
-
-    getPlayers() {
-        return this.players;
     }
 
     getPlayerByNickname(nickname) {
@@ -74,22 +58,14 @@ class Room {
         return playersOfTheRole;
     }
 
-    getHost() {
-        return this.Host;
-    }
-
     addPlayer(player) {
         if (player !== null && this.players.length < this.maxPlayerCount) {
             this.players.push(player);
         }
     }
 
-    getRoundNumber() {
-        return this.roundNumber;
-    }
-
     incrementRoundNumber() {
-        this.roundNumber++;
+        this.roundNumber += 1;
     }
 
     getWinningRole() {
@@ -115,9 +91,9 @@ class Room {
     }
 
     resetGame() {
-        this.setGameState(INITIAL_GAME_STATE);
+        this.gameState = INITIAL_GAME_STATE;
         this.roundNumber = INITIAL_ROUND_NUMBER;
-        for (let i = 0; i < this.players.length; i++) {
+        for (let i = 0; i < this.players.length; i += 1) {
             if (this.players[i]) {
                 this.players[i].resetPlayer();
             }
@@ -128,6 +104,7 @@ class Room {
      * Generate a random alphanumeric id
      * @returns {string} a random alphanumeric id
      */
+    // eslint-disable-next-line class-methods-use-this
     getRandomID() {
         return Math.random().toString(36).substring(7);
     }

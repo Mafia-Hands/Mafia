@@ -5,7 +5,7 @@ const RoleEnum = require('../../domain/Enum/Role');
 const { connectAndCreateLobby, connectAndJoin, startGame } = require('./IntegrationTestHelpers');
 
 describe('night time vote event tests', () => {
-    let clientSockets = [];
+    const clientSockets = [];
     let lobbyCode;
     const port = process.env.PORT || config.local_port;
 
@@ -17,7 +17,7 @@ describe('night time vote event tests', () => {
     // Disconnect each socket connected to the server
     afterEach((done) => {
         const { sockets } = SocketIOServer.io.sockets;
-        sockets.forEach((socket, key) => {
+        sockets.forEach((socket) => {
             socket.disconnect(true);
         });
         done();
@@ -34,7 +34,7 @@ describe('night time vote event tests', () => {
     test('Night time Vote events', async (done) => {
         let hostRole;
 
-        for (let i = 1; i < 6; i++) {
+        for (let i = 1; i < 6; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
         hostRole = await startGame(clientSockets);

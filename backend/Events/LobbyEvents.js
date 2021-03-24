@@ -1,8 +1,6 @@
 const Player = require('../domain/Player');
 const LobbyCodeDTO = require('../domain/DTO/response/LobbyCodeDTO');
 const LobbyJoinDTO = require('../domain/DTO/response/LobbyJoinDTO');
-const MafiaGame = require('../domain/MafiaGame');
-const Room = require('../domain/Room');
 /**
  * Event handlers and logic for `create-lobby` and `lobby-code`
  * The goal of these lobby events is to allow a host to create a game and receive a new room id.
@@ -43,6 +41,7 @@ function joinLobby(io, socket, mafiaGame) {
         const room = mafiaGame.gameRoomsDict[joinLobbyDTO.roomCode];
         if (room === undefined) {
             // TODO: Handle non-existent room after MVP is done.
+            // eslint-disable-next-line no-console
             console.log(`Lobby ${joinLobbyDTO.roomCode} doesn't exist`);
             return;
         }
@@ -55,7 +54,6 @@ function joinLobby(io, socket, mafiaGame) {
 
         io.in(socket.player.roomID).emit('lobby-join', new LobbyJoinDTO(room.players.map((player) => player.nickname)));
         if (room.players.length === 6) {
-            
             io.to(room.host.socketID).emit('lobby-ready');
         }
     });

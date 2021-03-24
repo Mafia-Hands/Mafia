@@ -1,6 +1,7 @@
-import { constructPlayersOnTrialStatus, nightTimeStatus } from '../GameUtils';
 import { useContext, useReducer, useEffect } from 'react';
-import { GeneralContext } from '../App';
+import { constructPlayersOnTrialStatus, nightTimeStatus } from '../GameUtils';
+
+import { GeneralContext } from '../Context';
 import socket from '../Socket';
 
 const initialState = {
@@ -194,7 +195,7 @@ export default function useGameState() {
         dispatch({
             type: 'init',
             alivePlayers: generalState.players,
-            role: role,
+            role,
             ...extraRoleState,
         });
     }, [generalState]);
@@ -307,7 +308,6 @@ export default function useGameState() {
         }
 
         function onGameOver({ winningRole, winners }) {
-            console.log(winningRole + ' ' + winners);
             dispatch({
                 type: 'game-over',
                 winningRole: winningRole.toLowerCase(),
