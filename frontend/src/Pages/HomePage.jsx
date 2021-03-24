@@ -59,7 +59,7 @@ const CustomCreateButton = withStyles({
 export default function HomePage(props) {
     const { dispatch } = useContext(GeneralContext);
     const [nickname, setNickname] = useState('');
-    const [code, setCode] = useState(props.url);
+    const [{ code }, setCode] = useState(props);
     const [joinDisabled, setjoinDisabled] = useState(true);
     const [tickNonempty, setTickNonempty] = useState(false);
     const [tickNoSpaces, setTickNoSpaces] = useState(true);
@@ -128,7 +128,8 @@ export default function HomePage(props) {
                             disableHoverListener
                             disableTouchListener
                             title={
-                                <React.Fragment>
+                                // <React.Fragment>
+                                <>
                                     <div className={styles.checkers}>
                                         <span className={tickNonempty ? styles.validNickname : styles.invalidNickname}>
                                             {tickNonempty ? (
@@ -165,7 +166,8 @@ export default function HomePage(props) {
                                             )}
                                         </span>
                                     </div>
-                                </React.Fragment>
+                                </>
+                                //  </React.Fragment>
                             }
                             placement="right"
                             arrow

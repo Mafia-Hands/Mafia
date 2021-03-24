@@ -23,7 +23,7 @@ function App() {
 
     switch (state.screen) {
         case 'home':
-            component = <HomePage url={pathname} />;
+            component = <HomePage code={pathname} />;
             break;
         case 'lobby':
             component = <NewGameScreen />;

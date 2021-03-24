@@ -19,6 +19,7 @@
         "func-names": "off",
         "no-restricted-syntax": "off",
         "linebreak-style": ["error", "windows"],
-        "react/prop-types": "off"
+        "react/prop-types": "off",
+        "no-loop-func": "off"
     }
 }

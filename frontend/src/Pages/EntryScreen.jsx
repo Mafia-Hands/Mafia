@@ -1,8 +1,8 @@
 import { React, useContext } from 'react';
+import { animated, useSpring } from 'react-spring';
 import TopBarSettings from '../Components/TopBarSettings';
 import Player from '../Components/Player';
 import { GeneralContext } from '../Context';
-import { animated, useSpring } from 'react-spring';
 
 const EntryScreen = () => {
     const { state: generalState } = useContext(GeneralContext);

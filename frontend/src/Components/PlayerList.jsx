@@ -34,7 +34,7 @@ const PlayerList = () => {
 
     return (
         <Card className={classes.root} variant="outlined">
-            <CardHeader className={classes.title} title="Player List"></CardHeader>
+            <CardHeader className={classes.title} title="Player List" />
             <CardContent className={classes.content}>
                 <List>
                     {state.players.map((playerName, index) => (
