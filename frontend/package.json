@@ -28,7 +28,8 @@
         "test": "react-scripts test",
         "pretty-quick": "pretty-quick ./",
         "eject": "react-scripts eject",
-        "lint": "./node_modules/.bin/eslint"
+        "lint": "eslint ./",
+        "fix-lint": "eslint ./ --fix"
     },
     "eslintConfig": {
         "extends": [
