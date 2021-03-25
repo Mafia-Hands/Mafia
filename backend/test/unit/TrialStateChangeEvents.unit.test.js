@@ -41,16 +41,17 @@ describe('trial-start unit tests', () => {
         MafiaGameMock.addPlayer(playerB, roomElements.roomID);
         MafiaGameMock.addPlayer(playerC, roomElements.roomID);
 
+        // Register mock event handlers for the events that the backend emits - assertions for the DTOs
         clientSocket.on('trial-start', (trialStartDTO) => {
             expect(trialStartDTO.timeToVote).toBe(config.trial_total_vote_time_in_milliseconds);
         });
-
         clientSocket.on('trial-end', (trialEndDTO) => {
             expect(trialEndDTO.playerKilled).toBe('abstain Vote');
             expect(trialEndDTO.isGameOver).toBe(false);
             done();
         });
 
+        // Imitate the start of the trial
         clientSocket.emit('start-trial');
     });
 
@@ -67,16 +68,17 @@ describe('trial-start unit tests', () => {
 
         MafiaGameMock.addTrialVote(playerA, playerD, roomElements.roomID); // Vote to kill off a civilian
 
+        // Register mock event handlers for the events that the backend emits - assertions for the DTOs
         clientSocket.on('trial-start', (trialStartDTO) => {
             expect(trialStartDTO.timeToVote).toBe(config.trial_total_vote_time_in_milliseconds);
         });
-
         clientSocket.on('trial-end', (trialEndDTO) => {
             expect(trialEndDTO.playerKilled).toBe('d');
             expect(trialEndDTO.isGameOver).toBe(false);
             done();
         });
 
+        // Imitate the start of the trial
         clientSocket.emit('start-trial');
     });
 
@@ -91,16 +93,17 @@ describe('trial-start unit tests', () => {
 
         MafiaGameMock.addTrialVote(playerB, playerC, roomElements.roomID); // Vote to kill a civilian
 
+        // Register mock event handlers for the events that the backend emits - assertions for the DTOs
         clientSocket.on('trial-start', (trialStartDTO) => {
             expect(trialStartDTO.timeToVote).toBe(config.trial_total_vote_time_in_milliseconds);
         });
-
         clientSocket.on('trial-end', (trialEndDTO) => {
             expect(trialEndDTO.playerKilled).toBe('c');
             expect(trialEndDTO.isGameOver).toBe(true);
             done();
         });
 
+        // Imitate the start of the trial
         clientSocket.emit('start-trial');
     });
 });
