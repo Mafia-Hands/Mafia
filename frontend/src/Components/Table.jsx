@@ -34,13 +34,12 @@ export default function Table() {
     const firstRender = useRef(true);
 
     /*
-        Because the players need to be sitting at arbitary points around the table,
+        Because the players need to be sitting at arbitrary points around the table,
         absolute positioning is used relative to the table div. Each player is arranged
         around the table such that they are at an equal angle apart from each other. 
         The positions of each player (x, y) is calculated using the equations of 
         an ellipse (as the table is an ellipse). The playerCoordinates are tracked in 
-        the playerCoords state variable. This variable changes is updated when the 
-        window is resized.
+        the playerCoords state variable. This variable is updated when the window is resized.
     */
     // initially, just put everyone at 0,0
     function initCoords() {
