@@ -11,7 +11,7 @@ Please review the [documentation](https://github.com/Mafia-Hands/Mafia/wiki) for
 
 ## Installation
 
-Note: An in-depth guide is available on our [Wiki's Getting Started page](https://github.com/Mafia-Hands/Mafia/wiki/Getting-Started). A condensed version is as follows:
+-   Note: An in-depth guide is available on our [Wiki's Getting Started page](https://github.com/Mafia-Hands/Mafia/wiki/Getting-Started). A condensed version is as follows:
 
 Before you install and get started with this project, please ensure that you have installed [nodejs](https://nodejs.org/en/) and [npm](https://www.npmjs.com/) on your computer.
 
