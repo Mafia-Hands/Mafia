@@ -18,7 +18,7 @@ describe('start-night unit tests', () => {
     // Disconnect each socket connected to the server
     afterEach((done) => {
         const { sockets } = roomElements.io.sockets;
-        sockets.forEach((socket, key) => {
+        sockets.forEach((socket) => {
             socket.disconnect(true);
         });
 

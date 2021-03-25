@@ -1,15 +1,16 @@
 import { React, useState, useContext } from 'react';
+import { Button, withStyles } from '@material-ui/core';
 import TopBarSettings from '../Components/TopBarSettings';
 import PlayerList from '../Components/PlayerList';
 import LobbySettings from '../Components/LobbySettings';
 import Chatbox from '../Components/Chatbox';
 import styles from '../Styles/NewGameScreen.module.css';
-import { GeneralContext } from '../App';
+import { GeneralContext } from '../Context';
 import socket from '../Socket';
-import { Button, withStyles } from '@material-ui/core';
+
 import RolesAndRules from '../Components/RolesAndRules';
-import SettingDialog from '../Pages/SettingDialog';
-import ModalMUI from '../Modal/ModalMUI';
+import SettingDialog from './SettingDialog';
+import ModalMUI from '../Components/ModalMUI';
 
 const StyledButton = withStyles({
     root: {
@@ -37,7 +38,7 @@ const NewGameScreen = () => {
         <div>
             <TopBarSettings
                 currentScreen={`LOBBY ID: ${state.code}`}
-                showSettings={true}
+                showSettings
                 showUp={setOpen}
                 setOpenInfo={setOpenInfo}
             />
@@ -67,7 +68,7 @@ const NewGameScreen = () => {
                     {openInfo ? (
                         <div>
                             <TopBarSettings
-                                showBack={true}
+                                showBack
                                 showUp={setOpen}
                                 currentScreen="Roles and Rules"
                                 showSettings={false}
@@ -77,12 +78,7 @@ const NewGameScreen = () => {
                         </div>
                     ) : (
                         <div>
-                            <TopBarSettings
-                                showBack={true}
-                                showUp={setOpen}
-                                currentScreen="Settings"
-                                showSettings={false}
-                            />
+                            <TopBarSettings showBack showUp={setOpen} currentScreen="Settings" showSettings={false} />
                             <SettingDialog />
                         </div>
                     )}

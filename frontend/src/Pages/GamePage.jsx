@@ -1,14 +1,16 @@
-import { createContext } from 'react';
+import React from 'react';
 import CoreGamePage from './CoreGamePage';
 import EntryScreen from './EntryScreen';
 import GameOverPage from './GameOverPage';
 
 import useGameState from '../Hooks/useGameState';
 
-export const GameContext = createContext();
+import { GameContext } from '../Context';
 
 export default function GamePage() {
-    const [state, dispatch ] = useGameState();
+    // get the current game states
+    // pass it to the child components
+    const [state, dispatch] = useGameState();
     let component;
 
     switch (state.screen) {
@@ -16,7 +18,7 @@ export default function GamePage() {
             component = <EntryScreen />;
             break;
         case 'core':
-            component = <CoreGamePage/>;
+            component = <CoreGamePage />;
             break;
         case 'end':
             component = <GameOverPage />;

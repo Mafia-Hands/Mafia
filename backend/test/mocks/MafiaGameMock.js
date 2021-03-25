@@ -44,11 +44,11 @@ module.exports.createMafiaGameWithOnePlayerMock = function (port) {
         });
     });
 
-    return { io: io, mafiaGame: mafiaGame, socketIOServer: server, roomID: roomID, hostPlayer: hostPlayer };
+    return { io, mafiaGame, socketIOServer: server, roomID, hostPlayer };
 };
 
 module.exports.addPlayer = function (player, roomID) {
-    room = mafiaGame.gameRoomsDict[roomID];
+    let room = mafiaGame.gameRoomsDict[roomID];
 
     room.addPlayer(player);
 };
@@ -60,9 +60,16 @@ module.exports.addMafiaVote = function (voter, votedFor, roomID) {
     mafiaVoteMap[voter] = votedFor;
 };
 
+module.exports.addDayVote = function (voter, votedFor, roomID) {
+    const room = mafiaGame.gameRoomsDict[roomID];
+    const { daytimeVoteMap } = room.voteHandler;
+
+    daytimeVoteMap[voter.nickname] = votedFor;
+};
+
 module.exports.addPlayers = function (players, roomID) {
     const room = mafiaGame.gameRoomsDict[roomID];
-    for (player of players) {
+    for (let player of players) {
         room.addPlayer(player);
     }
 };

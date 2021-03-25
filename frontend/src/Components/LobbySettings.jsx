@@ -30,55 +30,55 @@ const useStyles = makeStyles({
         padding: '10px',
         paddingLeft: '16px',
     },
-    content:{
+    content: {
         padding: '0px',
-        color:'#E3F1F1',
-    }
+        color: '#E3F1F1',
+    },
 });
 
 const StyledButton = withStyles({
-    root:{
+    root: {
         backgroundColor: 'rgb(152, 193, 217,0.6)',
     },
-    label:{
+    label: {
         textTransform: 'capitalize',
         color: '#E3F1F1',
-    }
-    })(Button);
+    },
+})(Button);
 
+// this component will be used in the NewGameScreen.jsx
+// @param {setOpen, setOpenInfo} used to open the role and rules modal
 const LobbySettings = ({ setOpen, setOpenInfo }) => {
     const classes = useStyles();
 
     return (
-        
-            <Card className={classes.root} variant="Outlined">
-                <CardHeader className={classes.title} title="Game Settings"></CardHeader>
-                <CardContent className={classes.content}>
-                    <List>
-                        <ListItem>
-                            <Typography style={{ marginRight: '20px'}}>Number of Mafia: </Typography>
-                            <Select style={{ color:'#E3F1F1' }} defaultValue={1} label="This is a label">
-                                <MenuItem value={1}>1</MenuItem>
-                                <MenuItem value={2}>2</MenuItem>
-                                <MenuItem value={3}>3</MenuItem>
-                            </Select>
-                        </ListItem>
-                    </List>
-                </CardContent>
-                <CardActions>
-                    <StyledButton
-                        size="large"
-                        variant="contained"
-                        onClick={() => {
-                            setOpen(true);
-                            setOpenInfo(true);
-                        }}
-                    >
-                        Roles
-                    </StyledButton>
-                </CardActions>
-            </Card>
-        
+        <Card className={classes.root} variant="Outlined">
+            <CardHeader className={classes.title} title="Game Settings" />
+            <CardContent className={classes.content}>
+                <List>
+                    <ListItem>
+                        <Typography style={{ marginRight: '20px' }}>Number of Mafia: </Typography>
+                        <Select style={{ color: '#E3F1F1' }} defaultValue={1} label="This is a label">
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                        </Select>
+                    </ListItem>
+                </List>
+            </CardContent>
+            <CardActions>
+                <StyledButton
+                    size="large"
+                    variant="contained"
+                    onClick={() => {
+                        setOpen(true);
+                        setOpenInfo(true);
+                    }}
+                >
+                    Roles
+                </StyledButton>
+            </CardActions>
+        </Card>
     );
 };
 

@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { Card, CardContent, CardHeader, Typography } from '@material-ui/core';
-import { GeneralContext } from '../App';
+import { GeneralContext } from '../Context';
 
 const useStyles = makeStyles({
     root: {
@@ -22,22 +22,25 @@ const useStyles = makeStyles({
         padding: '10px',
         paddingLeft: '16px',
     },
-    content:{
+    content: {
         padding: '0px',
         color: '#E3F1F1',
-    }
+    },
 });
 
 const PlayerList = () => {
+    // get the current lobby state
     const { state } = useContext(GeneralContext);
     const classes = useStyles();
 
     return (
         <Card className={classes.root} variant="outlined">
-            <CardHeader className={classes.title} title="Player List"></CardHeader>
+            <CardHeader className={classes.title} title="Player List" />
             <CardContent className={classes.content}>
                 <List>
                     {state.players.map((playerName, index) => (
+                        // react/no-array-index-key: not safe to use index as the key
+                        // probably need to have an id etc in the future
                         <ListItem key={index}>
                             <Typography>
                                 Player {index + 1}: {playerName}

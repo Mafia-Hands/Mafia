@@ -1,15 +1,16 @@
 import { React, useContext } from 'react';
-import socket from '../Socket';
-import { Button } from '@material-ui/core';
-import Player from '../Components/Player';
-import { GameContext } from './GamePage';
-import { Grid } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
 import { animated, useSpring } from 'react-spring';
+import socket from '../Socket';
+import Player from '../Components/Player';
+import { GameContext } from '../Context';
 import styles from '../Styles/GameOver.module.css';
 
 const GameOverPage = () => {
+    // get the current game state
     const { state } = useContext(GameContext);
 
+    // used for the fade-in animation
     const props = useSpring({
         to: { opacity: 1 },
         from: { opacity: 0.1 },
@@ -25,7 +26,7 @@ const GameOverPage = () => {
         <div>
             <animated.div style={props}>
                 <Grid container direction="row" alignItems="center" justifyItems="center">
-                    <Grid item xs={0} sm={2}></Grid>
+                    <Grid item xs={0} sm={2} />
                     <Grid item xs={10} sm={8}>
                         <h1 style={{ textAlign: 'center' }}>{`${
                             state.winningRole.charAt(0).toUpperCase() + state.winningRole.slice(1)
@@ -34,9 +35,9 @@ const GameOverPage = () => {
                 </Grid>
                 <Grid container direction="column" alignItems="center" justifyItems="center">
                     <div className={styles.playerMap} style={{ textAlign: 'center' }}>
-                        {state.winners.map((name) => {
-                            return <Player playerName={name} />;
-                        })}
+                        {state.winners.map((name) => (
+                            <Player playerName={name} />
+                        ))}
                     </div>
                     <Button
                         className={styles.lobbyBtn}

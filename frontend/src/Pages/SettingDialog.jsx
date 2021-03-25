@@ -12,11 +12,12 @@ const StyledButton = withStyles({
     label: {
         textTransform: 'capitalize',
         letterSpacing: '2px',
-        fontSize:'1.2rem',
-        color: 'white'
+        fontSize: '1.2rem',
+        color: 'white',
     },
 })(Button);
 
+// TODO: implement the slider functions
 const SettingDialog = () => (
     <div className={styles.container}>
         <div>
@@ -28,9 +29,7 @@ const SettingDialog = () => (
             <Slider />
         </div>
         <div>
-            <StyledButton variant="contained">
-                Leave Game
-            </StyledButton>
+            <StyledButton variant="contained">Leave Game</StyledButton>
         </div>
     </div>
 );

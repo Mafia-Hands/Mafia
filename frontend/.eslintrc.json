@@ -1,0 +1,38 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "jest": true,
+        "commonjs": true
+    },
+    "extends": ["plugin:react/recommended", "airbnb", "prettier"],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": ["react", "prettier"],
+    "rules": {
+        "no-unused-vars": "warn",
+        "no-console": "warn",
+        "no-await-in-loop": "off",
+        "react/prop-types": "off",
+        "no-restricted-syntax": "off",
+        "no-empty": "off",
+        "prefer-destructuring": "off",
+        "no-nested-ternary": "off",
+        "no-alert": "off",
+        "react/no-unused-prop-types": "off",
+        "no-unused-expressions": ["error", { "allowShortCircuit": true }],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/destructuring-assignment": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
+        "react/no-array-index-key": "off",
+        "prefer-rest-params": "off",
+        "consistent-return": "off",
+        "no-else-return": "off"
+    }
+}

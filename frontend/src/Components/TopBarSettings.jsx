@@ -1,9 +1,10 @@
 import { React } from 'react';
 import PropTypes from 'prop-types';
 import { IconButton, withStyles } from '@material-ui/core';
-import styles from '../Styles/TopBarSettings.module.css';
 import SettingsIcon from '@material-ui/icons/Settings';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
+import styles from '../Styles/TopBarSettings.module.css';
+
 /**
  * @param currentScreen true/false OPTIONAL prop that will current screen Header text if true
  * @param showSettings true/false OPTIONAL prop that will render settings button if true

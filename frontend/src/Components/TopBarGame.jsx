@@ -2,15 +2,15 @@ import { React, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import HelpIcon from '@material-ui/icons/Help';
 import { withStyles, IconButton } from '@material-ui/core';
+import SettingsIcon from '@material-ui/icons/Settings';
 import styles from '../Styles/TopBarGame.module.css';
-import ModalMUI from '../Modal/ModalMUI';
+import ModalMUI from './ModalMUI';
 import SettingDialog from '../Pages/SettingDialog';
 import TopBarSettings from './TopBarSettings';
-import { GeneralContext } from '../App';
 import RolesAndRules from './RolesAndRules';
-import SettingsIcon from '@material-ui/icons/Settings';
+
 import Timer from './Timer';
-import { GameContext } from '../Pages/GamePage';
+import { GameContext, GeneralContext } from '../Context';
 
 /**
  * @param userDetails [{userName: <string>, role: <string>}]
@@ -30,7 +30,7 @@ const TopBarGame = ({ showTimer, showRole }) => {
     const [open, setOpen] = useState(false);
     const [openInfo, setOpenInfo] = useState(false);
     const userName = state.nickname;
-    const role = state.role;
+    const { role } = state;
     const { state: gameState } = useContext(GameContext);
 
     return (
@@ -70,7 +70,7 @@ const TopBarGame = ({ showTimer, showRole }) => {
                     {openInfo ? (
                         <div>
                             <TopBarSettings
-                                showBack={true}
+                                showBack
                                 showUp={setOpen}
                                 currentScreen="ROLES AND RULES"
                                 showSettings={false}
@@ -80,12 +80,7 @@ const TopBarGame = ({ showTimer, showRole }) => {
                         </div>
                     ) : (
                         <div>
-                            <TopBarSettings
-                                showBack={true}
-                                showUp={setOpen}
-                                currentScreen="SETTINGS"
-                                showSettings={false}
-                            />
+                            <TopBarSettings showBack showUp={setOpen} currentScreen="SETTINGS" showSettings={false} />
                             <SettingDialog />
                         </div>
                     )}

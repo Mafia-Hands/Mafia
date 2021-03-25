@@ -1,7 +1,6 @@
 const config = require('../../config.json');
 const GameStateEnum = require('../../domain/Enum/GameStateEnum');
 
-const MafiaGame = require('../../domain/MafiaGame');
 const NightStartDTO = require('../../domain/DTO/response/NightStartDTO');
 const NightEndDTO = require('../../domain/DTO/response/NightEndDTO');
 const GameOverDTO = require('../../domain/DTO/response/GameOverDTO');
@@ -42,7 +41,7 @@ function endNight(io, socket, mafiaGame) {
     const playerKilled = room.voteHandler.getMafiaVotedPlayer();
 
     if (playerKilled) {
-        room.getPlayerByNickname(playerKilled).setIsAlive(false);
+        room.getPlayerByNickname(playerKilled).isAlive = false;
     }
 
     const winningRole = room.getWinningRole();
