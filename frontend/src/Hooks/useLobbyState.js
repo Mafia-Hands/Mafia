@@ -2,12 +2,12 @@ import { useReducer, useEffect } from 'react';
 import socket from '../Socket';
 
 const initialState = {
-    screen: 'home',
+    screen: 'home', // or lobby or game
     nickname: '',
-    code: '',
-    host: '',
+    code: '', // lobby code
+    host: '', // the player who created the game
     players: [],
-    lobbyReady: false,
+    lobbyReady: false, // lobby is ready when there are 6 players
     isHost: false,
     role: '',
 };
