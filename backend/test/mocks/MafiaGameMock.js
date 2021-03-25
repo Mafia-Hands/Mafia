@@ -25,7 +25,7 @@ module.exports.createMafiaGameWithOnePlayerMock = function (port) {
     mafiaGame = new MafiaGame();
     const roomID = mafiaGame.newGame();
     mafiaGame.gameRoomsDict[roomID] = new Room();
-    const hostPlayer = new Player(null, roomID, 'a', 'mafia', true);
+    const hostPlayer = new Player(null, roomID, 'mafiaPlayer', 'mafia', true);
 
     io.on('connection', (socket) => {
         loadLobbyEvents(io, socket, mafiaGame);
@@ -57,7 +57,7 @@ module.exports.addMafiaVote = function (voter, votedFor, roomID) {
     const room = mafiaGame.gameRoomsDict[roomID];
     const { mafiaVoteMap } = room.voteHandler;
 
-    mafiaVoteMap[voter] = votedFor;
+    mafiaVoteMap[voter.nickname] = votedFor;
 };
 
 module.exports.addDayVote = function (voter, votedFor, roomID) {
@@ -65,6 +65,13 @@ module.exports.addDayVote = function (voter, votedFor, roomID) {
     const { daytimeVoteMap } = room.voteHandler;
 
     daytimeVoteMap[voter.nickname] = votedFor;
+};
+
+module.exports.addTrialVote = function (voter, votedFor, roomID) {
+    const room = mafiaGame.gameRoomsDict[roomID];
+    const { trialVoteMap } = room.voteHandler;
+
+    trialVoteMap[voter.nickname] = votedFor;
 };
 
 module.exports.addPlayers = function (players, roomID) {
@@ -77,4 +84,12 @@ module.exports.addPlayers = function (players, roomID) {
 module.exports.switchPlayer = function (nickname, roomID) {
     const room = mafiaGame.gameRoomsDict[roomID];
     testPlayerSocket.player = room.getPlayerByNickname(nickname);
+};
+
+module.exports.resetRoom = function (roomID) {
+    const room = mafiaGame.gameRoomsDict[roomID];
+    room.resetGame();
+    room.players = [];
+    room.host = null;
+    room.voteHandler.resetVotes();
 };

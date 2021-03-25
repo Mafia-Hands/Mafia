@@ -46,7 +46,7 @@ describe('voting-events tests', () => {
         // Subscribe to day-vote-update, to check that the vote has been registered correctly
         clientSocket.on('day-vote-update', (listVoteDTO) => {
             try {
-                expect(listVoteDTO).toEqual({ voteMap: { a: 'P1' } });
+                expect(listVoteDTO).toEqual({ voteMap: { mafiaPlayer: 'P1' } });
                 done();
             } catch (error) {
                 done.fail(error);
@@ -62,7 +62,7 @@ describe('voting-events tests', () => {
         // Subscribe to trial-vote-update
         clientSocket.on('trial-vote-update', (listVoteDTO) => {
             try {
-                expect(listVoteDTO).toEqual({ voteMap: { a: 'P1' } });
+                expect(listVoteDTO).toEqual({ voteMap: { mafiaPlayer: 'P1' } });
                 done();
             } catch (error) {
                 done.fail(error);
