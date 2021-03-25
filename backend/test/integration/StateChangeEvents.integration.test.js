@@ -15,8 +15,8 @@ beforeEach(async (done) => {
 
 // Disconnect each socket connected to the server
 afterEach((done) => {
-    const sockets = SocketIOServer.io.sockets.sockets;
-    sockets.forEach(function (socket, key) {
+    const { sockets } = SocketIOServer.io.sockets;
+    sockets.forEach((socket) => {
         socket.disconnect(true);
     });
     clientSockets = [];
@@ -38,10 +38,10 @@ describe('NightStateChangeEvents integration tests', () => {
                 // Start the night when response retrieved
                 clientSockets[0].emit('start-night');
                 // Attach handlers to night-start and night-end. In total should be 12 responses
-                for (let i = 0; i < 6; i++) {
+                for (let i = 0; i < 6; i += 1) {
                     clientSockets[i].once('night-start', (nightStartDTO) => {
                         expect(nightStartDTO.timeToVote).toBeDefined();
-                        socketResponseCount++;
+                        socketResponseCount += 1;
                         if (socketResponseCount >= 12) {
                             resolve();
                         }
@@ -49,7 +49,7 @@ describe('NightStateChangeEvents integration tests', () => {
                     clientSockets[i].once('night-end', (nightEndDTO) => {
                         // Player killed should be null, as no one voted
                         expect(nightEndDTO.playerKilled).toBeNull();
-                        socketResponseCount++;
+                        socketResponseCount += 1;
                         if (socketResponseCount >= 12) {
                             resolve();
                         }
@@ -58,7 +58,7 @@ describe('NightStateChangeEvents integration tests', () => {
             });
         }
 
-        for (let i = 1; i < 6; i++) {
+        for (let i = 1; i < 6; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
         await startGame(clientSockets);
@@ -109,10 +109,10 @@ describe('DayStateEvents integration tests', () => {
                 // Start the day when response retrieved
                 clientSockets[0].emit('start-day');
                 // Attach handlers to day-start and discussion-end. In total should be 12 responses
-                for (let i = 0; i < 6; i++) {
+                for (let i = 0; i < 6; i += 1) {
                     clientSockets[i].once('day-start', (dayStartDTO) => {
                         expect(dayStartDTO.timeToVote).toBeDefined();
-                        socketResponseCount++;
+                        socketResponseCount += 1;
                         if (socketResponseCount >= 12) {
                             resolve();
                         }
@@ -120,7 +120,7 @@ describe('DayStateEvents integration tests', () => {
                     clientSockets[i].once('discussion-end', (discussionEndDTO) => {
                         // Player chosen should be null, as no one voted
                         expect(discussionEndDTO.playerOnTrial).toBeNull();
-                        socketResponseCount++;
+                        socketResponseCount += 1;
                         if (socketResponseCount >= 12) {
                             resolve();
                         }
@@ -129,7 +129,7 @@ describe('DayStateEvents integration tests', () => {
             });
         }
 
-        for (let i = 1; i < 6; i++) {
+        for (let i = 1; i < 6; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
         await startGame(clientSockets);
@@ -148,10 +148,10 @@ describe('TrialStateChangeEvents integration tests', () => {
                 // Start the trial when response retrieved
                 clientSockets[0].emit('start-trial');
                 // Attach handlers to trial-start and trial-end. In total should be 12 responses
-                for (let i = 0; i < 6; i++) {
+                for (let i = 0; i < 6; i += 1) {
                     clientSockets[i].once('trial-start', (trialStartDTO) => {
                         expect(trialStartDTO.timeToVote).toBeDefined();
-                        socketResponseCount++;
+                        socketResponseCount += 1;
                         if (socketResponseCount >= 12) {
                             resolve();
                         }
@@ -159,7 +159,7 @@ describe('TrialStateChangeEvents integration tests', () => {
                     clientSockets[i].once('trial-end', (trialEndDTO) => {
                         // Player killed should be null, as no one voted
                         expect(trialEndDTO.playerKilled).toBeDefined();
-                        socketResponseCount++;
+                        socketResponseCount += 1;
                         if (socketResponseCount >= 12) {
                             resolve();
                         }
@@ -168,7 +168,7 @@ describe('TrialStateChangeEvents integration tests', () => {
             });
         }
 
-        for (let i = 1; i < 6; i++) {
+        for (let i = 1; i < 6; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
         await startGame(clientSockets);

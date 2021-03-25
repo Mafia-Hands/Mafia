@@ -20,7 +20,7 @@ afterEach((done) => {
     const { sockets } = roomElements.io.sockets;
 
     // Iterate through each connected client and disconnect them.
-    sockets.forEach((socket, key) => {
+    sockets.forEach((socket) => {
         socket.disconnect(true);
     });
 
@@ -33,6 +33,7 @@ afterAll(() => {
 });
 
 describe('voting-events tests', () => {
+    let players = [];
     beforeAll(() => {
         players = [
             new Player(null, roomElements.roomID, 'P0', RoleEnum.CIVILIAN, false),

@@ -1,5 +1,10 @@
 const Room = require('./Room');
 
+/**
+ * A "manager" class that keeps track of all the active rooms on the server.
+ * Keeps track of all the rooms and identifies them by their unique lobby code.
+ * Rooms can be accessed, reset, added, or deleted via this class.
+ */
 class MafiaGame {
     constructor() {
         // Acts as a mapping for roomID keys to their game room.
@@ -22,7 +27,7 @@ class MafiaGame {
      * @param {number} roomID
      */
     closeGame(roomID) {
-        delete gameRoomsDict[roomID];
+        delete this.gameRoomsDict[roomID];
     }
 
     /**
@@ -34,7 +39,7 @@ class MafiaGame {
         while (!room) {
             room = new Room();
             // Create a new room if a room that has the same ID already exist
-            if (this.gameRoomsDict[room.getRoomID()] !== undefined) {
+            if (this.gameRoomsDict[room.roomID] !== undefined) {
                 // Room already exists, create the room again using the loop
                 room = null;
             }
