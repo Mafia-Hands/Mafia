@@ -3,30 +3,22 @@ const CreateLobbyDTO = require('../../domain/DTO/request/CreateLobbyDTO');
 const JoinLobbyDTO = require('../../domain/DTO/request/JoinLobbyDTO');
 const config = require('../../config.json');
 const SocketIOServer = require('../../index');
+const UnitTestHelpers = require('./UnitTestHelpers');
 
 let clientSocket;
 const port = process.env.PORT || config.local_port;
 
 beforeEach((done) => {
-    clientSocket = new Client(`http://localhost:${port}`);
-    clientSocket.on('connect', done);
+    clientSocket = UnitTestHelpers.setUpClient(port, done);
 });
 
-// Disconnect each socket connected to the server
 afterEach((done) => {
-    const { sockets } = SocketIOServer.io.sockets;
-
-    // Iterate through each connected client and disconnect them.
-    sockets.forEach((socket) => {
-        socket.disconnect(true);
-    });
-
+    UnitTestHelpers.cleanUpTest(SocketIOServer.io);
     done();
 });
 
-// Close the server once all tests are done
 afterAll(() => {
-    SocketIOServer.server.close();
+    UnitTestHelpers.cleanUpAllTests(SocketIOServer.server);
 });
 
 describe('create-lobby event test', () => {

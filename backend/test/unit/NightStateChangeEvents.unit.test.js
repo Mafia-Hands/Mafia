@@ -4,25 +4,25 @@ const Player = require('../../domain/Player');
 const roles = require('../../domain/Enum/Role');
 const UnitTestHelpers = require('./UnitTestHelpers');
 
+const port = process.env.PORT || config.local_port;
+const roomElements = MafiaGameMock.createMafiaGameWithOnePlayerMock(port);
+let clientSocket;
+
+beforeEach((done) => {
+    clientSocket = UnitTestHelpers.setUpClient(port, done);
+});
+
+afterEach((done) => {
+    UnitTestHelpers.cleanUpTestWithMafiaMock(MafiaGameMock, roomElements.io, roomElements.roomID);
+    done();
+});
+
+afterAll((done) => {
+    UnitTestHelpers.cleanUpAllTests(roomElements.socketIOServer);
+    done();
+});
+
 describe('start-night unit tests', () => {
-    const port = process.env.PORT || config.local_port;
-    const roomElements = MafiaGameMock.createMafiaGameWithOnePlayerMock(port);
-    let clientSocket;
-
-    beforeEach((done) => {
-        clientSocket = UnitTestHelpers.setUpClient(port, done);
-    });
-
-    afterEach((done) => {
-        UnitTestHelpers.cleanUpTest(MafiaGameMock, roomElements);
-        done();
-    });
-
-    afterAll((done) => {
-        UnitTestHelpers.cleanUpAllTests(roomElements);
-        done();
-    });
-
     test('start-night successful call, no one is killed', (done) => {
         // Registering mock event handlers for the events that the backend emits when the night starts
         clientSocket.on('night-start', (nightStartDTO) => {

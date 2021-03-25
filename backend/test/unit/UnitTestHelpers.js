@@ -1,3 +1,6 @@
+/**
+ * UnitTestHelpers contains useful set up and tear down functions for setting up a unit test.
+ */
 const Client = require('socket.io-client');
 
 function setUpClient(port, done) {
@@ -8,23 +11,32 @@ function setUpClient(port, done) {
     return clientSocket;
 }
 
-function cleanUpTest(MafiaGameMock, roomElements) {
+function cleanUpTest(io) {
     // Disconnect each socket connected to the server
-    const { sockets } = roomElements.io.sockets;
+    const { sockets } = io.sockets;
+    sockets.forEach((socket) => {
+        socket.disconnect(true);
+    });
+}
+
+function cleanUpTestWithMafiaMock(MafiaGameMock, io, roomID) {
+    // Disconnect each socket connected to the server
+    const { sockets } = io.sockets;
     sockets.forEach((socket) => {
         socket.disconnect(true);
     });
 
-    MafiaGameMock.resetRoom(roomElements.roomID);
+    MafiaGameMock.resetRoom(roomID);
 }
 
-function cleanUpAllTests(roomElements) {
+function cleanUpAllTests(socketIOServer) {
     // Close the server once all tests are done
-    roomElements.socketIOServer.close();
+    socketIOServer.close();
 }
 
 module.exports = {
     setUpClient,
     cleanUpTest,
+    cleanUpTestWithMafiaMock,
     cleanUpAllTests,
 };

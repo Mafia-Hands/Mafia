@@ -1,39 +1,31 @@
-const Client = require('socket.io-client');
 const VoteForDTO = require('../../domain/DTO/request/VoteForDTO');
 const config = require('../../config.json');
 const MafiaGameMock = require('../mocks/MafiaGameMock');
 const Player = require('../../domain/Player');
 const RoleEnum = require('../../domain/Enum/Role');
+const UnitTestHelpers = require('./UnitTestHelpers');
 
-let clientSocket;
 const port = process.env.PORT || config.local_port;
 const roomElements = MafiaGameMock.createMafiaGameWithOnePlayerMock(port);
+let clientSocket;
 
 beforeEach((done) => {
-    clientSocket = new Client(`http://localhost:${port}`);
-    clientSocket.on('connect', done);
+    clientSocket = UnitTestHelpers.setUpClient(port, done);
 });
 
-// Disconnect each socket connected to the server
 afterEach((done) => {
-    const { sockets } = roomElements.io.sockets;
-
-    // Iterate through each connected client and disconnect them.
-    sockets.forEach((socket) => {
-        socket.disconnect(true);
-    });
-
+    UnitTestHelpers.cleanUpTestWithMafiaMock(MafiaGameMock, roomElements.io, roomElements.roomID);
     done();
 });
 
-// Close the server once all tests are done
-afterAll(() => {
-    roomElements.socketIOServer.close();
+afterAll((done) => {
+    UnitTestHelpers.cleanUpAllTests(roomElements.socketIOServer);
+    done();
 });
 
 describe('voting-events tests', () => {
     let players = [];
-    beforeAll(() => {
+    beforeEach(() => {
         players = [
             new Player(null, roomElements.roomID, 'P0', RoleEnum.CIVILIAN, false),
             new Player(null, roomElements.roomID, 'P1', RoleEnum.CIVILIAN, true),

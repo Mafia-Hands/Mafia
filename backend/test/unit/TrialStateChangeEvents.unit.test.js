@@ -4,25 +4,25 @@ const Player = require('../../domain/Player');
 const roles = require('../../domain/Enum/Role');
 const UnitTestHelpers = require('./UnitTestHelpers');
 
+const port = process.env.PORT || config.local_port;
+const roomElements = MafiaGameMock.createMafiaGameWithOnePlayerMock(port);
+let clientSocket;
+
+beforeEach((done) => {
+    clientSocket = UnitTestHelpers.setUpClient(port, done);
+});
+
+afterEach((done) => {
+    UnitTestHelpers.cleanUpTestWithMafiaMock(MafiaGameMock, roomElements.io, roomElements.roomID);
+    done();
+});
+
+afterAll((done) => {
+    UnitTestHelpers.cleanUpAllTests(roomElements.socketIOServer);
+    done();
+});
+
 describe('trial-start unit tests', () => {
-    const port = process.env.PORT || config.local_port;
-    const roomElements = MafiaGameMock.createMafiaGameWithOnePlayerMock(port);
-    let clientSocket;
-
-    beforeEach((done) => {
-        clientSocket = UnitTestHelpers.setUpClient(port, done);
-    });
-
-    afterEach((done) => {
-        UnitTestHelpers.cleanUpTest(MafiaGameMock, roomElements);
-        done();
-    });
-
-    afterAll((done) => {
-        UnitTestHelpers.cleanUpAllTests(roomElements);
-        done();
-    });
-
     test('trial-start successful call, no votes, winning condition is not fulfilled', (done) => {
         const mafiaPlayer = new Player(null, null, 'a', roles.MAFIA, true);
         const jesterPlayer = new Player(null, null, 'b', roles.JESTER, true);
