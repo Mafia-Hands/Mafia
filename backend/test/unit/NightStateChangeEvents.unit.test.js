@@ -1,75 +1,61 @@
-const Client = require('socket.io-client');
 const MafiaGameMock = require('../mocks/MafiaGameMock');
 const config = require('../../config.json');
 const Player = require('../../domain/Player');
 const roles = require('../../domain/Enum/Role');
+const UnitTestHelpers = require('./UnitTestHelpers');
 
 describe('start-night unit tests', () => {
     const port = process.env.PORT || config.local_port;
     const roomElements = MafiaGameMock.createMafiaGameWithOnePlayerMock(port);
-
-    // Create a new client, and connect it to the server via a socket
     let clientSocket;
+
     beforeEach((done) => {
-        clientSocket = new Client(`http://localhost:${port}`);
-        clientSocket.on('connect', done);
+        clientSocket = UnitTestHelpers.setUpClient(port, done);
     });
 
-    // Disconnect each socket connected to the server
     afterEach((done) => {
-        const { sockets } = roomElements.io.sockets;
-        sockets.forEach((socket) => {
-            socket.disconnect(true);
-        });
-
+        UnitTestHelpers.cleanUpTest(MafiaGameMock, roomElements);
         done();
     });
 
-    // Close the server once all tests are done
-    afterAll(() => {
-        roomElements.socketIOServer.close();
+    afterAll((done) => {
+        UnitTestHelpers.cleanUpAllTests(roomElements);
+        done();
     });
 
     test('start-night successful call, no one is killed', (done) => {
-        // jest.useFakeTimers();
-
+        // Registering mock event handlers for the events that the backend emits when the night starts
         clientSocket.on('night-start', (nightStartDTO) => {
-            expect(nightStartDTO.timeToVote).toBeDefined();
-            // jest.runTimersToTime(6000);
-            // jest.runAllTimers();
+            expect(nightStartDTO.timeToVote).toBe(config.night_total_vote_time_in_milliseconds);
         });
-
         clientSocket.on('night-end', (nightEndDTO) => {
             expect(nightEndDTO.playerKilled).toBeNull();
             done();
         });
 
+        // Imitate the start of a night
         clientSocket.emit('start-night');
     });
 
     test('start-night successful call, someone is killed', (done) => {
-        // jest.useFakeTimers();
+        const mafiaPlayer = new Player(null, null, 'a', roles.MAFIA, true);
+        const civilianPlayer = new Player(null, null, 'b', roles.CIVILIAN, true);
 
-        const playerA = new Player(null, null, 'a', roles.MAFIA, true);
-        const playerB = new Player(null, null, 'a', roles.MAFIA, true);
+        MafiaGameMock.addPlayer(mafiaPlayer, roomElements.roomID);
+        MafiaGameMock.addPlayer(civilianPlayer, roomElements.roomID);
 
-        MafiaGameMock.addPlayer(playerA, roomElements.roomID);
-        MafiaGameMock.addPlayer(playerB, roomElements.roomID);
+        MafiaGameMock.addMafiaVote(mafiaPlayer, civilianPlayer, roomElements.roomID); // Mafia kills civilian
 
-        MafiaGameMock.addMafiaVote(playerA, playerB, roomElements.roomID);
-
+        // Registering mock event handlers for the events that the backend emits when the night starts
         clientSocket.on('night-start', (nightStartDTO) => {
-            expect(nightStartDTO.timeToVote).toBeDefined();
-            // jest.runTimersToTime(6000);
-            // jest.runAllTimers();
-            // jest.runOnlyPendingTimers();
+            expect(nightStartDTO.timeToVote).toBe(config.night_total_vote_time_in_milliseconds);
         });
-
         clientSocket.on('night-end', (nightEndDTO) => {
-            expect(nightEndDTO.playerKilled).toBeDefined();
+            expect(nightEndDTO.playerKilled).toBe('b');
             done();
         });
 
+        // Imitate the start of a night
         clientSocket.emit('start-night');
     });
 });
