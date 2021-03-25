@@ -18,7 +18,7 @@ describe('start-day unit tests', () => {
     // Disconnect each socket connected to the server
     afterEach((done) => {
         const { sockets } = roomElements.io.sockets;
-        sockets.forEach((socket, key) => {
+        sockets.forEach((socket) => {
             socket.disconnect(true);
         });
 
@@ -31,36 +31,38 @@ describe('start-day unit tests', () => {
     });
 
     test('start-day successful call, no player on trial', (done) => {
+        // Registering mock event handlers that would respond to emits emitted by the backend
         clientSocket.on('day-start', (dayStartDTO) => {
             expect(dayStartDTO.timeToVote).toBe(config.day_total_vote_time_in_milliseconds);
         });
-
         clientSocket.on('discussion-end', (discussionEndDTO) => {
             expect(discussionEndDTO.playerOnTrial).toBeNull();
             done();
         });
 
+        // Imitate the start of a day discussion
         clientSocket.emit('start-day');
     });
 
     test('start-day successful call, someone is put on trial', (done) => {
-        const playerA = new Player(null, null, 'a', roles.MAFIA, true);
-        const playerB = new Player(null, null, 'b', roles.CIVILIAN, true);
+        const mafiaPlayer = new Player(null, null, 'a', roles.MAFIA, true);
+        const civilianPlayer = new Player(null, null, 'b', roles.CIVILIAN, true);
 
-        MafiaGameMock.addPlayer(playerA, roomElements.roomID);
-        MafiaGameMock.addPlayer(playerB, roomElements.roomID);
+        MafiaGameMock.addPlayer(mafiaPlayer, roomElements.roomID);
+        MafiaGameMock.addPlayer(civilianPlayer, roomElements.roomID);
 
-        MafiaGameMock.addDayVote(playerA, playerB, roomElements.roomID);
+        MafiaGameMock.addDayVote(mafiaPlayer, civilianPlayer, roomElements.roomID); // Mafia votes for civilian
 
+        // Registering mock event handlers that would respond to emits emitted by the backend
         clientSocket.on('day-start', (dayStartDTO) => {
             expect(dayStartDTO.timeToVote).toBe(config.day_total_vote_time_in_milliseconds);
         });
-
         clientSocket.on('discussion-end', (discussionEndDTO) => {
             expect(discussionEndDTO.playerOnTrial).toBe('b');
             done();
         });
 
+        // Imitate the start of a day discussion
         clientSocket.emit('start-day');
     });
 });
