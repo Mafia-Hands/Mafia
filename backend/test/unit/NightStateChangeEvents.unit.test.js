@@ -46,7 +46,6 @@ describe('start-night unit tests', () => {
 
         MafiaGameMock.addMafiaVote(mafiaPlayer, civilianPlayer, roomElements.roomID); // Mafia kills civilian
 
-        // Registering mock event handlers for the events that the backend emits when the night starts
         clientSocket.on('night-start', (nightStartDTO) => {
             expect(nightStartDTO.timeToVote).toBe(config.night_total_vote_time_in_milliseconds);
         });
@@ -55,7 +54,6 @@ describe('start-night unit tests', () => {
             done();
         });
 
-        // Imitate the start of a night
         clientSocket.emit('start-night');
     });
 });
