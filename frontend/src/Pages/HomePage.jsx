@@ -56,6 +56,7 @@ const CustomCreateButton = withStyles({
     },
 })(Button);
 
+// @param {code}  props.code represents the lobby code
 export default function HomePage(props) {
     const { dispatch } = useContext(GeneralContext);
     const [nickname, setNickname] = useState('');

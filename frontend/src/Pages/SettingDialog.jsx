@@ -17,6 +17,7 @@ const StyledButton = withStyles({
     },
 })(Button);
 
+// TODO: implement the slider functions
 const SettingDialog = () => (
     <div className={styles.container}>
         <div>
