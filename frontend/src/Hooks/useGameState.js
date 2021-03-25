@@ -9,13 +9,13 @@ const initialState = {
     dayPeriod: 'Day', // night or day
     dayNumber: 1, // what day it is
     alivePlayers: [],
-    status: '',
+    status: '', // someone is dead, or someone is on trial etc
     winningRole: '',
     winners: [],
-    phase: '',
-    role: '',
-    amIDead: false,
-    checkedPlayers: [],
+    phase: '', // night-start, night-end, day-start, discussion-end etc
+    role: '', // detective or mafia or jester or civilian
+    amIDead: false, // the players themselves are dead or not
+    checkedPlayers: [], // list of players that the detective has checked
     votingState: {
         type: '', // role or discussion or trial or undefined
         votablePlayers: [], // what other players can we vote for
@@ -28,6 +28,8 @@ const initialState = {
 
 const reducer = (state, action) => {
     switch (action.type) {
+        // all players are alive
+        // assign roles to each player
         case 'init': {
             return {
                 ...state,
@@ -39,6 +41,9 @@ const reducer = (state, action) => {
             };
         }
 
+        // change screen
+        // set the timer
+        // change voting state for specific roles [detective, mafia, medic]
         case 'night-start': {
             return {
                 ...state,
@@ -63,6 +68,7 @@ const reducer = (state, action) => {
             };
         }
 
+        // abstain your selection
         case 'abstain': {
             return {
                 ...state,
@@ -202,7 +208,9 @@ export default function useGameState() {
 
     useEffect(() => {
         function onNightStart({ timeToVote }) {
+            // TODO: amIDead should probably be moved to a state variable
             const amIDead = !state.alivePlayers.includes(generalState.nickname);
+            // you cannot vote any players now
             if (amIDead) {
                 dispatch({
                     type: 'night-start',

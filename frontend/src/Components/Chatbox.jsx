@@ -68,7 +68,8 @@ const Chatbox = ({ messageList }) => {
             <CardContent className={classes.content}>
                 <List>
                     {messageList.map((message, index) => (
-                        // react/no-array-index-key, probably need to have a message id etc
+                        // react/no-array-index-key: not safe to use index as the key
+                        // probably need to have a message id etc in the future
                         <ListItem key={index}>
                             <Typography>{message}</Typography>
                         </ListItem>

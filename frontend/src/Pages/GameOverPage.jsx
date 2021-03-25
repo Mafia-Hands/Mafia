@@ -7,8 +7,10 @@ import { GameContext } from '../Context';
 import styles from '../Styles/GameOver.module.css';
 
 const GameOverPage = () => {
+    // get the current game state
     const { state } = useContext(GameContext);
 
+    // used for the fade-in animation
     const props = useSpring({
         to: { opacity: 1 },
         from: { opacity: 0.1 },

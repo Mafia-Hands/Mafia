@@ -5,7 +5,10 @@ import Player from '../Components/Player';
 import { GeneralContext } from '../Context';
 
 const EntryScreen = () => {
+    // get the current lobby state
     const { state: generalState } = useContext(GeneralContext);
+
+    // used for the fade-in animation
     const props = useSpring({
         to: { opacity: 1 },
         from: { opacity: 0.1 },

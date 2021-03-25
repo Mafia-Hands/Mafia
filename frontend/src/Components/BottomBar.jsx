@@ -5,6 +5,7 @@ import { GameContext } from '../Context';
 import styles from '../Styles/BottomBar.module.css';
 
 const BottomBar = () => {
+    // get the current game state
     const { state } = useContext(GameContext);
 
     const isNight = state.dayPeriod === 'Night';

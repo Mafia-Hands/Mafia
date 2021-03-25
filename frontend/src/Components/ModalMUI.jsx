@@ -6,7 +6,7 @@ import Fade from '@material-ui/core/Fade';
 import styles from '../Styles/ModalMUI.module.css';
 
 /**
- * @param props [{open: <bool>, setOpen: <func>}]
+ * @param props [{open: <bool>, setOpen: <func>}] used to open the modal
  */
 export default function ModalMUI(props) {
     const { open, setOpen, children } = props;
