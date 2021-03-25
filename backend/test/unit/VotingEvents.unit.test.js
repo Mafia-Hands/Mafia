@@ -77,7 +77,7 @@ describe('voting-events tests', () => {
 
 describe('night time voting event tests', () => {
     beforeAll(() => {
-        players = [
+        const players = [
             new Player(null, roomElements.roomID, 'notMafia', RoleEnum.MAFIA, false),
             new Player(null, roomElements.roomID, 'Doctor', RoleEnum.MEDIC, true),
             new Player(null, roomElements.roomID, 'Sherlock', RoleEnum.DETECTIVE, false),
