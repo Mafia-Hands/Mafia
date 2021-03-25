@@ -1,5 +1,10 @@
 const Room = require('./Room');
 
+/**
+ * A "manager" class that keeps track of all the active rooms on the server.
+ * Keeps track of all the rooms and identifies them by their unique lobby code.
+ * Rooms can be accessed, reset, added, or deleted via this class.
+ */
 class MafiaGame {
     constructor() {
         // Acts as a mapping for roomID keys to their game room.

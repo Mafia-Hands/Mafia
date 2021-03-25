@@ -15,7 +15,6 @@
     },
     "plugins": ["react", "prettier"],
     "rules": {
-        "prettier/prettier": "error",
         "no-unused-vars": "warn",
         "no-console": "warn",
         "no-await-in-loop": "off",
