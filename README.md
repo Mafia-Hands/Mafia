@@ -68,7 +68,7 @@ Outstanding issues and requests can be tracked and visualised on our Github Proj
 
 ## Contributing
 
-If you would like to contribute to this project, please make sure to follow our [Contributing Guidlines](https://github.com/Mafia-Hands/Mafia/wiki/Contributing-Guidelines).
+If you would like to contribute to this project, please make sure to follow our [Contributing Guidelines](https://github.com/Mafia-Hands/Mafia/wiki/Contributing-Guidelines).
 
 ## Authors and acknowledgement
 
