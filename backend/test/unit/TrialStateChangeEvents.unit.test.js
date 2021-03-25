@@ -55,6 +55,7 @@ describe('trial-start unit tests', () => {
 
         MafiaGameMock.addTrialVote(playerA, 'abstain Vote', roomElements.roomID); // Vote to kill off a civilian
 
+        // Registering mock event handlers for the events that the backend emits when the trial starts
         clientSocket.on('trial-start', (trialStartDTO) => {
             expect(trialStartDTO.timeToVote).toBe(config.trial_total_vote_time_in_milliseconds);
         });
@@ -64,6 +65,7 @@ describe('trial-start unit tests', () => {
             done();
         });
 
+        // Imitate the start of the trial
         clientSocket.emit('start-trial');
     });
 
@@ -80,6 +82,7 @@ describe('trial-start unit tests', () => {
 
         MafiaGameMock.addTrialVote(playerA, playerD, roomElements.roomID); // Vote to kill off a civilian
 
+        // Registering mock event handlers for the events that the backend emits when the trial starts
         clientSocket.on('trial-start', (trialStartDTO) => {
             expect(trialStartDTO.timeToVote).toBe(config.trial_total_vote_time_in_milliseconds);
         });
@@ -90,6 +93,7 @@ describe('trial-start unit tests', () => {
             done();
         });
 
+        // Imitate the start of the trial
         clientSocket.emit('start-trial');
     });
 
@@ -102,6 +106,7 @@ describe('trial-start unit tests', () => {
 
         MafiaGameMock.addTrialVote(playerB, playerA, roomElements.roomID); // Vote to kill the Mafia
 
+        // Registering mock event handlers for the events that the backend emits when the trial starts
         clientSocket.on('trial-start', (trialStartDTO) => {
             expect(trialStartDTO.timeToVote).toBe(config.trial_total_vote_time_in_milliseconds);
         });
@@ -111,6 +116,7 @@ describe('trial-start unit tests', () => {
             done();
         });
 
+        // Imitate the start of the trial
         clientSocket.emit('start-trial');
     });
 });
