@@ -68,16 +68,18 @@ Outstanding issues and requests can be tracked and visualised on our Github Proj
 
 ## Contributing
 
-If you would like to contribute to this project, please make sure to follow our [Contributing-Guidlines](https://github.com/Mafia-Hands/Mafia/wiki/Contributing-Guidelines)s.
+If you would like to contribute to this project, please make sure to follow our [Contributing Guidlines](https://github.com/Mafia-Hands/Mafia/wiki/Contributing-Guidelines).
 
 ## Authors and acknowledgement
 
 This project was coordinated by and for the University of Auckland course SOFTENG 701.
 
+Thanks to:
+
 -   University of Auckland - for providing the opportunity to work on and create this project
 -   Dr Kelly Blincoe - for assistance with the development of this project
 
-Special thanks to the members of Group 4 (Mafia Hands) for their hard work and dedication towards this project. A detailed list of their contributions can be found [here.](https://github.com/Mafia-Hands/Mafia/wiki/Contributions)
+Also, special thanks to the members of Group 4 (Mafia Hands) for their hard work and dedication towards this project. A detailed list of their contributions can be found [here.](https://github.com/Mafia-Hands/Mafia/wiki/Contributions)
 
 ## Project Status
 
