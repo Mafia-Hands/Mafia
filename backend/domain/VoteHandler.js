@@ -45,7 +45,6 @@ class VoteHandler {
 
     // eslint-disable-next-line class-methods-use-this
     getVotedPlayer(voteMap, isTrial) {
-        console.log(voteMap);
         // Generate map of players who have been voted for, and the number of votes they have.
         const voteTally = {};
         voteTally['abstain Vote'] = 0;
