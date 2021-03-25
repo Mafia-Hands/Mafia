@@ -86,7 +86,7 @@ If more than one person works on an issue, ensure this is documented in the issu
 
 ## Tests
 All  additions or modifications to code should include associated tests (an automated test suite should be created).
-Please see [Puppeteer](https://github.com/Mafia-Hands/Mafia/wiki/Frontend-Tech) and [backend testing](https://github.com/Mafia-Hands/Mafia/wiki/Backend-Testing-Infrastructure) for more details on how to create tests within our codebase.
+Please see [Puppeteer](https://github.com/Mafia-Hands/Mafia/wiki/Frontend#semi-automated-testing-with-puppeteer) and [backend testing](https://github.com/Mafia-Hands/Mafia/wiki/Backend-Testing-Infrastructure) for more details on how to create tests within our codebase.
 
 When you submit pull requests, before they can be merged in we require all tests to be passing.
 
