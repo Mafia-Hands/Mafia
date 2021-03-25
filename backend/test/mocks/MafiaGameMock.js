@@ -25,7 +25,7 @@ module.exports.createMafiaGameWithOnePlayerMock = function (port) {
     mafiaGame = new MafiaGame();
     const roomID = mafiaGame.newGame();
     mafiaGame.gameRoomsDict[roomID] = new Room();
-    const hostPlayer = new Player(null, roomID, 'a', 'mafia', true);
+    const hostPlayer = new Player(null, roomID, 'mafiaPlayer', 'mafia', true);
 
     io.on('connection', (socket) => {
         loadLobbyEvents(io, socket, mafiaGame);
