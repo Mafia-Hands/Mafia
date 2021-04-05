@@ -1,3 +1,5 @@
+const PlayerStatus = require('./Enum/PlayerStatus');
+
 /**
  * Represents a player in a game of Mafia.
  * A player is part of a room, and they are tied to a socket that is connected to the server.
@@ -9,7 +11,7 @@ class Player {
         this.roomID = roomID;
         this.nickname = nickname;
         this.role = role;
-        this.isAlive = true;
+        this.status = PlayerStatus.ALIVE;
         this.isHost = isHost;
     }
 
@@ -18,7 +20,7 @@ class Player {
      */
     resetPlayer() {
         this.role = null;
-        this.isAlive = true;
+        this.status = PlayerStatus.ALIVE;
     }
 }
 
