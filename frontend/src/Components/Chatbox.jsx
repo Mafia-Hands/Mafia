@@ -1,4 +1,4 @@
-import { React } from 'react';
+import { React, useEffect, useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
     Button,
@@ -11,6 +11,9 @@ import {
     ListItem,
     Typography,
 } from '@material-ui/core';
+import socketIOClient from 'socket.io-client';
+
+const ENDPOINT = 'http://127.0.0.1:4001';
 
 const useStyles = makeStyles({
     root: {
@@ -62,12 +65,24 @@ const StyledButton = withStyles({
 const Chatbox = ({ messageList }) => {
     const classes = useStyles();
 
+    const [chatMessage, setChatMessage] = useState('');
+    const [chatMessageList, setChatMessageList] = useState([]);
+    const socket = socketIOClient(ENDPOINT);
+
+    useEffect(() => {
+        socket.on('message', (data) => {
+            console.log(chatMessageList)
+            setChatMessageList([...chatMessageList, data])
+            console.log(data);
+        });
+    }, []);
+
     return (
         <Card className={classes.root} variant="outlined">
             <CardHeader className={classes.title} title="Chat" />
             <CardContent className={classes.content}>
                 <List>
-                    {messageList.map((message, index) => (
+                    {chatMessageList.map((message, index) => (
                         // react/no-array-index-key: not safe to use index as the key
                         // probably need to have a message id etc in the future
                         <ListItem key={index}>
@@ -77,8 +92,20 @@ const Chatbox = ({ messageList }) => {
                 </List>
             </CardContent>
             <CardActions className={classes.action}>
-                <Input className={classes.input} type="text" placeholder="message..." disableUnderline="true" />
-                <StyledButton onClick={() => alert('Chat function not implemented yet')}>Send</StyledButton>
+                <Input
+                    className={classes.input}
+                    type="text"
+                    placeholder="message..."
+                    disableUnderline="true"
+                    value={chatMessage}
+                    onChange={(event) => {
+                        setChatMessage(event.target.value);
+                    }}
+                />
+                <StyledButton onClick={() => {
+                    socket.emit('message', chatMessage)
+                    setChatMessage('');
+                }}>Send</StyledButton>
             </CardActions>
         </Card>
     );

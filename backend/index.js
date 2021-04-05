@@ -44,6 +44,11 @@ io.on('connection', (socket) => {
 
     // this function catches events that relate to game state changes
     loadStateChangeEvents(io, socket, mafiaGame);
+
+    socket.on('message', (message) => {
+        console.log(message);
+        io.emit('message', `socket.player.nickname said ${message}`);
+    });
 });
 
 // Start the server on our predetermined port number.
