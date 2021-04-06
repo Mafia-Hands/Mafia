@@ -1,4 +1,5 @@
 const GameStateEnum = require('./Enum/GameStateEnum');
+const PlayerStatus = require('./Enum/PlayerStatus');
 const VoteHandler = require('./VoteHandler');
 const roles = require('./Enum/Role');
 
@@ -17,7 +18,8 @@ class Room {
 
         // Default game settings.
         this.gameState = INITIAL_GAME_STATE;
-        this.maxPlayerCount = 6;
+        this.minPlayerCount = 6;
+        this.maxPlayerCount = 7;
         this.players = [];
         this.roundNumber = INITIAL_ROUND_NUMBER;
 
@@ -39,7 +41,6 @@ class Room {
                 returnedPlayer = player;
             }
         });
-
         return returnedPlayer;
     }
 
@@ -100,21 +101,29 @@ class Room {
      * @returns The winning role, or null if no role has won.
      */
     getWinningRole() {
-        const numOfMafiaAlive = this.getPlayersByRole(roles.MAFIA).filter((player) => player.isAlive).length;
-        const numOfJesterAlive = this.getPlayersByRole(roles.JESTER).filter((player) => player.isAlive).length;
+        const numOfMafiaAlive = this.getPlayersByRole(roles.MAFIA).filter(
+            (player) => player.status === PlayerStatus.ALIVE
+        ).length;
+
         const numOfCiviliansAlive = [
             ...this.getPlayersByRole(roles.CIVILIAN),
             ...this.getPlayersByRole(roles.MEDIC),
             ...this.getPlayersByRole(roles.DETECTIVE),
-        ].filter((player) => player.isAlive).length;
+            ...this.getPlayersByRole(roles.JESTER),
+        ].filter((player) => player.status === PlayerStatus.ALIVE).length;
+
+        // Jesters win if any one of them is killed in a trial
+        const jestersWin = this.getPlayersByRole(roles.JESTER).some(
+            (jester) => jester.status === PlayerStatus.KILLED_BY_TOWN
+        );
 
         if (numOfMafiaAlive === 0) {
             return roles.CIVILIAN;
         }
-        if (numOfMafiaAlive === numOfCiviliansAlive + numOfJesterAlive) {
+        if (numOfMafiaAlive >= numOfCiviliansAlive) {
             return roles.MAFIA;
         }
-        if (numOfJesterAlive === 0) {
+        if (jestersWin) {
             return roles.JESTER;
         }
 
