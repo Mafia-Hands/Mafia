@@ -2,7 +2,7 @@
  * Enums for votes.
  * Can be developed into classes if functionality is required.
  */
-const VoteEnum = {
+ const VoteEnum = {
     NoConfidenceVote: 'noConfidence',
 };
 Object.freeze(VoteEnum);

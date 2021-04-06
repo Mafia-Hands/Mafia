@@ -7,6 +7,8 @@ import { GeneralContext, GameContext } from '../Context';
 
 import socket from '../Socket';
 
+import votes from '../../../common/Enum/Vote';
+
 /**
  *
  * @param playerState [{playerId: <unique id string>, name: <string>, state: <"alive", "dead", "onTrial">}]
@@ -138,7 +140,7 @@ export default function Table() {
     }
 
     function abstainHandler() {
-        socket.emit(`trial-vote`, { votingFor: `abstain Vote` });
+        socket.emit(`trial-vote`, { votingFor: votes.NoConfidenceVote });
         dispatch({ type: 'show-selected', status: `Voted to Abstain` });
     }
 
