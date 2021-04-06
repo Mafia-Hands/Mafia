@@ -67,50 +67,6 @@ async function startGame(clientSockets) {
     });
 }
 
-async function startGameSixPlayer(clientSockets) {
-    return new Promise((resolve) => {
-        // Start the game
-        let socketResponseCount = 0;
-        clientSockets[0].emit('start-game');
-        for (let i = 0; i < clientSockets.length; i += 1) {
-            clientSockets[i].once('game-start', (gameStartDTO) => {
-                expect(gameStartDTO.role).toBeDefined();
-                socketResponseCount += 1;
-                // return the host role
-                if (i === 0) {
-                    hostRole = gameStartDTO.role;
-                }
-                // Only end test if all 6 responses are received
-                if (socketResponseCount >= 6) {
-                    resolve(hostRole);
-                }
-            });
-        }
-    });
-}
-
-async function startGameSevenPlayer(clientSockets) {
-    return new Promise((resolve) => {
-        // Start the game
-        let socketResponseCount = 0;
-        clientSockets[0].emit('start-game');
-        for (let i = 0; i < clientSockets.length; i += 1) {
-            clientSockets[i].once('game-start', (gameStartDTO) => {
-                expect(gameStartDTO.role).toBeDefined();
-                socketResponseCount += 1;
-                // return the host role
-                if (i === 0) {
-                    hostRole = gameStartDTO.role;
-                }
-                // Only end test if all 6 responses are received
-                if (socketResponseCount >= 7) {
-                    resolve(hostRole);
-                }
-            });
-        }
-    });
-}
-
 async function startGameOnePlayer(clientSockets) {
     return new Promise((resolve) => {
         // Start the game
@@ -125,7 +81,5 @@ module.exports = {
     connectAndCreateLobby,
     connectAndJoin,
     startGame,
-    startGameSixPlayer,
-    startGameSevenPlayer,
     startGameOnePlayer,
 };

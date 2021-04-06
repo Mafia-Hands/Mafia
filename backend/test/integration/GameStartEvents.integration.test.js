@@ -1,11 +1,6 @@
 const SocketIOServer = require('../../index');
 const config = require('../../config.json');
-const {
-    connectAndCreateLobby,
-    startGameSixPlayer,
-    startGameSevenPlayer,
-    connectAndJoin,
-} = require('./IntegrationTestHelpers');
+const { connectAndCreateLobby, startGame, connectAndJoin } = require('./IntegrationTestHelpers');
 
 describe('GameStartEvents integration tests', () => {
     const port = process.env.PORT || config.local_port;
@@ -39,7 +34,7 @@ describe('GameStartEvents integration tests', () => {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
         /* eslint-enable no-await-in-loop */
-        await startGameSixPlayer(clientSockets);
+        await startGame(clientSockets);
         done();
     });
 
@@ -49,7 +44,7 @@ describe('GameStartEvents integration tests', () => {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
         /* eslint-enable no-await-in-loop */
-        await startGameSevenPlayer(clientSockets);
+        await startGame(clientSockets);
         done();
     });
 });

@@ -1,12 +1,6 @@
 const SocketIOServer = require('../../index');
 const config = require('../../config.json');
-const {
-    connectAndCreateLobby,
-    startGameSixPlayer,
-    startGameSevenPlayer,
-    connectAndJoin,
-    startGameOnePlayer,
-} = require('./IntegrationTestHelpers');
+const { connectAndCreateLobby, startGame, connectAndJoin, startGameOnePlayer } = require('./IntegrationTestHelpers');
 
 const port = process.env.PORT || config.local_port;
 let clientSockets = [];
@@ -67,7 +61,7 @@ describe('NightStateChangeEvents integration tests', () => {
         for (let i = 1; i < 6; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        await startGameSixPlayer(clientSockets);
+        await startGame(clientSockets);
         await startNight();
 
         done();
@@ -104,7 +98,7 @@ describe('NightStateChangeEvents integration tests', () => {
         for (let i = 1; i < 7; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        await startGameSevenPlayer(clientSockets);
+        await startGame(clientSockets);
         await startNight();
 
         done();
@@ -175,7 +169,7 @@ describe('DayStateEvents integration tests', () => {
         for (let i = 1; i < 6; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        await startGameSixPlayer(clientSockets);
+        await startGame(clientSockets);
         await startDay();
 
         done();
@@ -212,7 +206,7 @@ describe('DayStateEvents integration tests', () => {
         for (let i = 1; i < 7; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        await startGameSevenPlayer(clientSockets);
+        await startGame(clientSockets);
         await startDay();
 
         done();
@@ -251,7 +245,7 @@ describe('TrialStateChangeEvents integration tests', () => {
         for (let i = 1; i < 6; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        await startGameSixPlayer(clientSockets);
+        await startGame(clientSockets);
         await startTrial();
 
         done();
@@ -288,7 +282,7 @@ describe('TrialStateChangeEvents integration tests', () => {
         for (let i = 1; i < 7; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        await startGameSevenPlayer(clientSockets);
+        await startGame(clientSockets);
         await startTrial();
 
         done();
