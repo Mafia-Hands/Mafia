@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react';
+import { React, useEffect, useState, useRef } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
     Box,
@@ -65,14 +65,22 @@ const StyledButton = withStyles({
 const Chatbox = ({ messageList, setMessageList }) => {
     const classes = useStyles();
 
+    // used to scroll to the bottom of the chat
+    const scrollRef = useRef(null);
     const [chatMessage, setChatMessage] = useState('');
-    // const [messageList, setMessageList] = useState([]);
 
     useEffect(() => {
         socket.on('message', (data) => {
             setMessageList(data);
         });
     }, []);
+
+    // always scroll to bottom of text chat when there are new messages
+    useEffect(() => {
+      if (scrollRef.current) {
+        scrollRef.current.scrollIntoView({ behaviour: "smooth" });
+      }
+    }, [messageList]);
 
     return (
         <Card className={classes.root} variant="outlined">
@@ -94,6 +102,7 @@ const Chatbox = ({ messageList, setMessageList }) => {
                             </ListItem>
                         );
                     })}
+                    <ListItem ref={scrollRef} />
                 </List>
             </CardContent>
             <CardActions className={classes.action}>
