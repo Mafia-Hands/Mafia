@@ -4,7 +4,7 @@
 node_modules/
 .pnp/
 .pnp.js
-s
+.vscode/
 
 # testing
 coverage/
