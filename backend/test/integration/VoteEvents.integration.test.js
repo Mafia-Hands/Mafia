@@ -35,7 +35,7 @@ describe('day & trial vote integration tests', () => {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
         // start game
-        await startGame(clientSockets);
+        await startGame(clientSockets, 6);
 
         // vote for players and check map is filled out appropriately
         const voteMap = { Leon: 'Leon1' };
@@ -52,7 +52,7 @@ describe('day & trial vote integration tests', () => {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
         // start game
-        await startGame(clientSockets);
+        await startGame(clientSockets, 7);
 
         // vote for players and check map is filled out appropriately
         const voteMap = { Leon: 'Leon1' };

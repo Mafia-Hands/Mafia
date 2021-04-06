@@ -37,7 +37,7 @@ describe('night time vote event tests', () => {
         for (let i = 1; i < 6; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        hostRole = await startGame(clientSockets);
+        hostRole = await startGame(clientSockets, 6);
         await nightTimeVote(hostRole);
         done();
     });
@@ -48,7 +48,7 @@ describe('night time vote event tests', () => {
         for (let i = 1; i < 7; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        hostRole = await startGame(clientSockets);
+        hostRole = await startGame(clientSockets, 7);
         await nightTimeVote(hostRole);
         done();
     });

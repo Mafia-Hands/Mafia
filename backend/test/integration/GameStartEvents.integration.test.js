@@ -34,7 +34,7 @@ describe('GameStartEvents integration tests', () => {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
         /* eslint-enable no-await-in-loop */
-        await startGame(clientSockets);
+        await startGame(clientSockets, 6);
         done();
     });
 
@@ -44,7 +44,7 @@ describe('GameStartEvents integration tests', () => {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
         /* eslint-enable no-await-in-loop */
-        await startGame(clientSockets);
+        await startGame(clientSockets, 7);
         done();
     });
 });

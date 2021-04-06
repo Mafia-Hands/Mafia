@@ -61,7 +61,7 @@ describe('NightStateChangeEvents integration tests', () => {
         for (let i = 1; i < 6; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        await startGame(clientSockets);
+        await startGame(clientSockets, 6);
         await startNight();
 
         done();
@@ -98,7 +98,7 @@ describe('NightStateChangeEvents integration tests', () => {
         for (let i = 1; i < 7; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        await startGame(clientSockets);
+        await startGame(clientSockets, 7);
         await startNight();
 
         done();
@@ -169,7 +169,7 @@ describe('DayStateEvents integration tests', () => {
         for (let i = 1; i < 6; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        await startGame(clientSockets);
+        await startGame(clientSockets, 6);
         await startDay();
 
         done();
@@ -206,7 +206,7 @@ describe('DayStateEvents integration tests', () => {
         for (let i = 1; i < 7; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        await startGame(clientSockets);
+        await startGame(clientSockets, 7);
         await startDay();
 
         done();
@@ -245,7 +245,7 @@ describe('TrialStateChangeEvents integration tests', () => {
         for (let i = 1; i < 6; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        await startGame(clientSockets);
+        await startGame(clientSockets, 6);
         await startTrial();
 
         done();
@@ -282,7 +282,7 @@ describe('TrialStateChangeEvents integration tests', () => {
         for (let i = 1; i < 7; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        await startGame(clientSockets);
+        await startGame(clientSockets, 7);
         await startTrial();
 
         done();

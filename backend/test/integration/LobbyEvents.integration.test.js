@@ -25,7 +25,7 @@ describe('lobby events tests', () => {
         SocketIOServer.server.close();
     });
     /**
-     * These are a integration tests for all lobby events.
+     * These are the integration tests for all lobby events.
      * They encompass creating a game, Max players joining and reseting the game
      */
     test('Six person lobby events intergration test', async (done) => {
