@@ -1,6 +1,11 @@
 const SocketIOServer = require('../../index');
 const config = require('../../config.json');
-const { connectAndCreateLobby, startGame, connectAndJoin } = require('./IntegrationTestHelpers');
+const {
+    connectAndCreateLobby,
+    startGameSixPlayer,
+    startGameSevenPlayer,
+    connectAndJoin,
+} = require('./IntegrationTestHelpers');
 const VoteForDTO = require('../../domain/DTO/request/VoteForDTO');
 
 describe('day & trial vote integration tests', () => {
@@ -35,7 +40,7 @@ describe('day & trial vote integration tests', () => {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
         // start game
-        await startGame(clientSockets);
+        await startGameSixPlayer(clientSockets);
 
         // vote for players and check map is filled out appropriately
         const voteMap = { Leon: 'Leon1' };
@@ -52,7 +57,7 @@ describe('day & trial vote integration tests', () => {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
         // start game
-        await startGame(clientSockets);
+        await startGameSevenPlayer(clientSockets);
 
         // vote for players and check map is filled out appropriately
         const voteMap = { Leon: 'Leon1' };

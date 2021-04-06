@@ -2,7 +2,12 @@ const config = require('../../config.json');
 const SocketIOServer = require('../../index');
 const NightTimeVoteDTO = require('../../domain/DTO/request/NightTimeVoteDTO');
 const RoleEnum = require('../../domain/Enum/Role');
-const { connectAndCreateLobby, connectAndJoin, startGame } = require('./IntegrationTestHelpers');
+const {
+    connectAndCreateLobby,
+    connectAndJoin,
+    startGameSixPlayer,
+    startGameSevenPlayer,
+} = require('./IntegrationTestHelpers');
 
 describe('night time vote event tests', () => {
     const clientSockets = [];
@@ -37,7 +42,7 @@ describe('night time vote event tests', () => {
         for (let i = 1; i < 6; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        hostRole = await startGame(clientSockets);
+        hostRole = await startGameSixPlayer(clientSockets);
         await nightTimeVote(hostRole);
         done();
     });
@@ -48,7 +53,7 @@ describe('night time vote event tests', () => {
         for (let i = 1; i < 7; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
         }
-        hostRole = await startGame(clientSockets);
+        hostRole = await startGameSevenPlayer(clientSockets);
         await nightTimeVote(hostRole);
         done();
     });
