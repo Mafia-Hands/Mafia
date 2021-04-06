@@ -113,8 +113,9 @@ class Room {
         ].filter((player) => player.status === PlayerStatus.ALIVE).length;
 
         // Jesters win if any one of them is killed in a trial
-        const jesters = this.getPlayersByRole(roles.JESTER);
-        const jestersWin = jesters.some((jester) => jester.status === PlayerStatus.KILLED_BY_TOWN);
+        const jestersWin = this.getPlayersByRole(roles.JESTER).some(
+            (jester) => jester.status === PlayerStatus.KILLED_BY_TOWN
+        );
 
         if (numOfMafiaAlive === 0) {
             return roles.CIVILIAN;
