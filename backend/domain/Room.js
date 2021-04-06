@@ -39,7 +39,6 @@ class Room {
                 returnedPlayer = player;
             }
         });
-
         return returnedPlayer;
     }
 
