@@ -1,5 +1,6 @@
 const config = require('../../config.json');
 const GameStateEnum = require('../../domain/Enum/GameStateEnum');
+const PlayerStatus = require('../../domain/Enum/PlayerStatus');
 
 const TrialStartDTO = require('../../domain/DTO/response/DayStartDTO');
 const TrialEndDTO = require('../../domain/DTO/response/TrialEndDTO');
@@ -41,7 +42,7 @@ function endTrial(io, socket, mafiaGame) {
     const playerChosen = room.voteHandler.getTrialVotedPlayer();
 
     if (playerChosen && playerChosen !== 'abstain Vote') {
-        room.getPlayerByNickname(playerChosen).isAlive = false;
+        room.getPlayerByNickname(playerChosen).status = PlayerStatus.KILLED_BY_TOWN;
     }
 
     const winningRole = room.getWinningRole();
