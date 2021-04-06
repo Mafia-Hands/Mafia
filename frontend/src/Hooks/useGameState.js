@@ -3,7 +3,6 @@ import { constructPlayersOnTrialStatus, nightTimeStatus } from '../GameUtils';
 
 import { GeneralContext } from '../Context';
 import socket from '../Socket';
-import votes from '../../../common/Enum/Vote';
 
 const initialState = {
     screen: 'entry',
@@ -306,7 +305,7 @@ export default function useGameState() {
             dispatch({
                 type: 'trial-end',
                 status:
-                    playerKilled === votes.NoConfidenceVote || !playerKilled
+                    playerKilled === 'abstain Vote' || !playerKilled
                         ? `Nobody was killed in the Trial!`
                         : `The town voted to kill ${playerKilled}!`,
                 playerKilled,
