@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
+    Box,
     Button,
     Card,
     CardActions,
@@ -11,9 +12,7 @@ import {
     ListItem,
     Typography,
 } from '@material-ui/core';
-import socketIOClient from 'socket.io-client';
-
-const ENDPOINT = 'http://127.0.0.1:4001';
+import socket from '../Socket';
 
 const useStyles = makeStyles({
     root: {
@@ -35,6 +34,7 @@ const useStyles = makeStyles({
     content: {
         padding: '0px',
         color: '#E3F1F1',
+        overflow: 'auto',
     },
     action: {
         display: 'grid',
@@ -62,18 +62,15 @@ const StyledButton = withStyles({
 /**
  * @param messageList MANDATORY prop: a list of strings (previous chat messages)
  */
-const Chatbox = ({ messageList }) => {
+const Chatbox = ({ messageList, setMessageList }) => {
     const classes = useStyles();
 
     const [chatMessage, setChatMessage] = useState('');
-    const [chatMessageList, setChatMessageList] = useState([]);
-    const socket = socketIOClient(ENDPOINT);
+    // const [messageList, setMessageList] = useState([]);
 
     useEffect(() => {
         socket.on('message', (data) => {
-            console.log(chatMessageList)
-            setChatMessageList([...chatMessageList, data])
-            console.log(data);
+            setMessageList(data);
         });
     }, []);
 
@@ -82,13 +79,19 @@ const Chatbox = ({ messageList }) => {
             <CardHeader className={classes.title} title="Chat" />
             <CardContent className={classes.content}>
                 <List>
-                    {chatMessageList.map((message, index) => (
-                        // react/no-array-index-key: not safe to use index as the key
-                        // probably need to have a message id etc in the future
-                        <ListItem key={index}>
-                            <Typography>{message}</Typography>
-                        </ListItem>
-                    ))}
+                    {messageList.map((message, index) => {
+                        // const formattedMessage = message.split(': ', 1);
+                        // console.log(message)
+                        const i = message.indexOf(': ');
+                        const splits = [message.slice(0, i), message.slice(i+1)]
+                        return (
+                            // react/no-array-index-key: not safe to use index as the key
+                            // probably need to have a message id etc in the future
+                            <ListItem key={index}>
+                                <Typography><Box fontWeight="fontWeightBold">{splits[0]}</Box> {splits[1]}</Typography>
+                            </ListItem>
+                        );
+                    })}
                 </List>
             </CardContent>
             <CardActions className={classes.action}>
@@ -102,10 +105,14 @@ const Chatbox = ({ messageList }) => {
                         setChatMessage(event.target.value);
                     }}
                 />
-                <StyledButton onClick={() => {
-                    socket.emit('message', chatMessage)
-                    setChatMessage('');
-                }}>Send</StyledButton>
+                <StyledButton
+                    onClick={() => {
+                        socket.emit('message', chatMessage);
+                        setChatMessage('');
+                    }}
+                >
+                    Send
+                </StyledButton>
             </CardActions>
         </Card>
     );

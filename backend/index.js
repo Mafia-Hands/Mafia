@@ -46,8 +46,7 @@ io.on('connection', (socket) => {
     loadStateChangeEvents(io, socket, mafiaGame);
 
     socket.on('message', (message) => {
-        console.log(message);
-        io.emit('message', `socket.player.nickname said ${message}`);
+        io.emit('message', `${socket.player.nickname}: ${message}`);
     });
 });
 

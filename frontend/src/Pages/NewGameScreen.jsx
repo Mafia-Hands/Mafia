@@ -31,6 +31,7 @@ const NewGameScreen = () => {
     const { state } = useContext(GeneralContext);
     const [open, setOpen] = useState(false);
     const [openInfo, setOpenInfo] = useState(false);
+    const [messageList, setMessageList] = useState([]);
     const startGame = () => {
         socket.emit('start-game');
     };
@@ -48,7 +49,13 @@ const NewGameScreen = () => {
                     <LobbySettings className={styles.lobbySettings} setOpen={setOpen} setOpenInfo={setOpenInfo} />
                 </div>
                 <div className={styles.rightContainer}>
-                    <Chatbox className={styles.chatbox} messageList={['hi', 'sup', 'Hi SOFTENG 701 :)']} />
+                    <Chatbox
+                        className={styles.chatbox}
+                        messageList={messageList}
+                        setMessageList={(message) => {
+                            setMessageList((prevList) => [...prevList, message]);
+                        }}
+                    />
 
                     <StyledButton
                         className={styles.startButton}
