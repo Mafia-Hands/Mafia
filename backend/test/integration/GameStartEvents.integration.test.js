@@ -28,23 +28,16 @@ describe('GameStartEvents integration tests', () => {
         SocketIOServer.server.close();
     });
 
-    test('integration test start-game 6 players', async (done) => {
-        /* eslint-disable no-await-in-loop */
-        for (let i = 1; i < 6; i += 1) {
-            await connectAndJoin(clientSockets, i, port, lobbyCode);
-        }
-        /* eslint-enable no-await-in-loop */
-        await startGame(clientSockets, 6);
-        done();
-    });
-
-    test('integration test start-game 7 players', async (done) => {
-        /* eslint-disable no-await-in-loop */
-        for (let i = 1; i < 7; i += 1) {
-            await connectAndJoin(clientSockets, i, port, lobbyCode);
-        }
-        /* eslint-enable no-await-in-loop */
-        await startGame(clientSockets, 7);
-        done();
-    });
+    // Run integration tests for all possible lobby sizes.
+    for (let playerCount = 6; playerCount <= 7; playerCount += 1) {
+        test('integration test start-game X players', async (done) => {
+            /* eslint-disable no-await-in-loop */
+            for (let i = 1; i < playerCount; i += 1) {
+                await connectAndJoin(clientSockets, i, port, lobbyCode);
+            }
+            /* eslint-enable no-await-in-loop */
+            await startGame(clientSockets, playerCount);
+            done();
+        });
+    }
 });
