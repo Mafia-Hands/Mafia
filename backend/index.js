@@ -8,6 +8,7 @@ const loadVoteEvents = require('./Events/VoteEvents');
 const loadGameStartEvents = require('./Events/GameStartEvents');
 const { loadNightTimeEvents } = require('./Events/NightTimeVoteEvents');
 const loadStateChangeEvents = require('./Events/GameStateEvents/StateChangeEvents');
+const broadcastMessage = require('./Events/MessageEvents');
 
 const io = require('socket.io')(server, {
     // Set up of CORS settings for socket.io server
@@ -45,9 +46,7 @@ io.on('connection', (socket) => {
     // this function catches events that relate to game state changes
     loadStateChangeEvents(io, socket, mafiaGame);
 
-    socket.on('message', (message) => {
-        io.emit('message', `${socket.player.nickname}: ${message}`);
-    });
+    broadcastMessage(io, socket);
 });
 
 // Start the server on our predetermined port number.
