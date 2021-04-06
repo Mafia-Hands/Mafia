@@ -83,12 +83,14 @@ const Chatbox = ({ messageList, setMessageList }) => {
                         // const formattedMessage = message.split(': ', 1);
                         // console.log(message)
                         const i = message.indexOf(': ');
-                        const splits = [message.slice(0, i), message.slice(i+1)]
+                        const splits = [message.slice(0, i), message.slice(i + 1)];
                         return (
                             // react/no-array-index-key: not safe to use index as the key
                             // probably need to have a message id etc in the future
                             <ListItem key={index}>
-                                <Typography><Box fontWeight="fontWeightBold">{splits[0]}</Box> {splits[1]}</Typography>
+                                <Typography>
+                                    <Box fontWeight="fontWeightBold">{splits[0]}</Box> {splits[1]}
+                                </Typography>
                             </ListItem>
                         );
                     })}
@@ -103,6 +105,12 @@ const Chatbox = ({ messageList, setMessageList }) => {
                     value={chatMessage}
                     onChange={(event) => {
                         setChatMessage(event.target.value);
+                    }}
+                    onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                            socket.emit('message', chatMessage);
+                            setChatMessage('');
+                        }
                     }}
                 />
                 <StyledButton
