@@ -107,7 +107,7 @@ const Chatbox = ({ messageList, setMessageList }) => {
                         setChatMessage(event.target.value);
                     }}
                     onKeyPress={(e) => {
-                        if (e.key === 'Enter') {
+                        if (e.key === 'Enter' && chatMessage) {
                             socket.emit('message', chatMessage);
                             setChatMessage('');
                         }
@@ -115,8 +115,10 @@ const Chatbox = ({ messageList, setMessageList }) => {
                 />
                 <StyledButton
                     onClick={() => {
-                        socket.emit('message', chatMessage);
-                        setChatMessage('');
+                        if (chatMessage) {
+                            socket.emit('message', chatMessage);
+                            setChatMessage('');
+                        }
                     }}
                 >
                     Send
