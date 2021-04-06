@@ -29,7 +29,7 @@ describe('day & trial vote integration tests', () => {
         SocketIOServer.server.close();
     });
 
-    test('day/trial vote test', async (done) => {
+    test('6 player day/trial vote test', async (done) => {
         // join to server
         for (let i = 1; i < 6; i += 1) {
             await connectAndJoin(clientSockets, i, port, lobbyCode);
@@ -40,6 +40,23 @@ describe('day & trial vote integration tests', () => {
         // vote for players and check map is filled out appropriately
         const voteMap = { Leon: 'Leon1' };
         for (let i = 1; i < 5; i += 1) {
+            voteMap[`Leon${i}`] = await voting(i);
+            expect(voteMap[`Leon${i}`]).toBe(`Leon${i + 1}`);
+        }
+        done();
+    });
+
+    test('7 player day/trial vote test', async (done) => {
+        // join to server
+        for (let i = 1; i < 7; i += 1) {
+            await connectAndJoin(clientSockets, i, port, lobbyCode);
+        }
+        // start game
+        await startGame(clientSockets);
+
+        // vote for players and check map is filled out appropriately
+        const voteMap = { Leon: 'Leon1' };
+        for (let i = 1; i < 6; i += 1) {
             voteMap[`Leon${i}`] = await voting(i);
             expect(voteMap[`Leon${i}`]).toBe(`Leon${i + 1}`);
         }

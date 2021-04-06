@@ -37,4 +37,14 @@ describe('GameStartEvents integration tests', () => {
         await startGame(clientSockets);
         done();
     });
+
+    test('integration test start-game 7 players', async (done) => {
+        /* eslint-disable no-await-in-loop */
+        for (let i = 1; i < 7; i += 1) {
+            await connectAndJoin(clientSockets, i, port, lobbyCode);
+        }
+        /* eslint-enable no-await-in-loop */
+        await startGame(clientSockets);
+        done();
+    });
 });
