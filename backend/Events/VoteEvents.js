@@ -1,5 +1,5 @@
 const ListVoteDTO = require('../domain/DTO/response/ListVoteDTO');
-const votes = require('../../common/Enum/Vote');
+const voteType = require('../../common/Enum/Vote');
 
 /**
  * Event handler and logic for `day-vote`
@@ -33,7 +33,7 @@ function voteTrial(io, socket, mafiaGame) {
         const voter = socket.player;
         const votee = voteForDTO.votingFor;
         room.voteHandler.trialVoteMap[voter.nickname] =
-            votee === votes.NoConfidenceVote ? votes.NoConfidenceVote : room.getPlayerByNickname(votee);
+            votee === voteType.NoConfidenceVote ? voteType.NoConfidenceVote : room.getPlayerByNickname(votee);
         io.in(socket.player.roomID).emit('trial-vote-update', new ListVoteDTO(room.voteHandler.trialVoteMap));
     });
 }

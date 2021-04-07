@@ -4,7 +4,7 @@ const GameStateEnum = require('../../domain/Enum/GameStateEnum');
 const TrialStartDTO = require('../../domain/DTO/response/DayStartDTO');
 const TrialEndDTO = require('../../domain/DTO/response/TrialEndDTO');
 const GameOverDTO = require('../../domain/DTO/response/GameOverDTO');
-const votes = require('../../../common/Enum/Vote');
+const voteType = require('../../../common/Enum/Vote');
 
 /**
  * Event handlers and logic for `start-trial`
@@ -41,7 +41,7 @@ function endTrial(io, socket, mafiaGame) {
 
     const playerChosen = room.voteHandler.getTrialVotedPlayer();
 
-    if (playerChosen && playerChosen !== votes.NoConfidenceVote) {
+    if (playerChosen && playerChosen !== voteType.NoConfidenceVote) {
         room.getPlayerByNickname(playerChosen).isAlive = false;
     }
 
