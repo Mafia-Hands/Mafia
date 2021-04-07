@@ -1,7 +1,7 @@
 const Player = require('../../domain/Player');
 const Room = require('../../domain/Room');
-const PlayerStatus = require('../../domain/Enum/PlayerStatus');
-const Role = require('../../domain/Enum/Role');
+const PlayerStatus = require('../../domain/enum/PlayerStatus');
+const Role = require('../../domain/enum/Role');
 
 describe('Domain Model tests', () => {
     test('room domain six model object', (done) => {

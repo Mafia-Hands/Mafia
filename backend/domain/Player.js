@@ -1,4 +1,4 @@
-const PlayerStatus = require('./Enum/PlayerStatus');
+const PlayerStatus = require('./enum/PlayerStatus');
 
 /**
  * Represents a player in a game of Mafia.
