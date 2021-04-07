@@ -27,20 +27,21 @@ describe('night time vote event tests', () => {
         SocketIOServer.server.close();
     });
     /**
-     * This is a integration test for night time voting events.
+     * These are integration tests for night time voting events for a 6 and 7 person game.
      * It goes through stariting a game to checking mafia vote
      *
      */
-    test('Night time Vote events', async (done) => {
-        let hostRole;
-
-        for (let i = 1; i < 6; i += 1) {
-            await connectAndJoin(clientSockets, i, port, lobbyCode);
-        }
-        hostRole = await startGame(clientSockets);
-        await nightTimeVote(hostRole);
-        done();
-    });
+    for (let playerCount = 6; playerCount <= 7; playerCount += 1) {
+        test('Night time X Player Vote events', async (done) => {
+            let hostRole;
+            for (let i = 1; i < playerCount; i += 1) {
+                await connectAndJoin(clientSockets, i, port, lobbyCode);
+            }
+            hostRole = await startGame(clientSockets, playerCount);
+            await nightTimeVote(hostRole);
+            done();
+        });
+    }
 
     /**
      * This function votes for a player and checks if they are mafia
