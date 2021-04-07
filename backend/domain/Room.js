@@ -1,6 +1,6 @@
-const GameStateEnum = require('./Enum/GameStateEnum');
+const GameStateEnum = require('./enum/GameStateEnum');
 const VoteHandler = require('./VoteHandler');
-const roles = require('./Enum/Role');
+const roles = require('./enum/Role');
 
 const INITIAL_GAME_STATE = GameStateEnum.WAITINGLOBBY;
 const INITIAL_ROUND_NUMBER = 0;

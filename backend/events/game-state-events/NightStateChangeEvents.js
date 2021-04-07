@@ -1,5 +1,5 @@
 const config = require('../../config.json');
-const GameStateEnum = require('../../domain/Enum/GameStateEnum');
+const GameStateEnum = require('../../domain/enum/GameStateEnum');
 
 const NightStartDTO = require('../../domain/dto/response/NightStartDTO');
 const NightEndDTO = require('../../domain/dto/response/NightEndDTO');

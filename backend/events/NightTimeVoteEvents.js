@@ -1,4 +1,4 @@
-const RoleEnum = require('../domain/Enum/Role');
+const RoleEnum = require('../domain/enum/Role');
 const SuspectRevealDTO = require('../domain/dto/response/SuspectRevealDTO');
 
 /**
