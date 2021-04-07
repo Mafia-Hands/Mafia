@@ -2,6 +2,7 @@ const GameStateEnum = require('./Enum/GameStateEnum');
 const PlayerStatus = require('./Enum/PlayerStatus');
 const VoteHandler = require('./VoteHandler');
 const roles = require('./Enum/Role');
+const { v4: uuidv4 } = require('uuid');
 
 const INITIAL_GAME_STATE = GameStateEnum.WAITINGLOBBY;
 const INITIAL_ROUND_NUMBER = 0;
@@ -144,12 +145,12 @@ class Room {
     }
 
     /**
-     * Generate a random alphanumeric id
-     * @returns {string} a random alphanumeric id
+     * Generate a univerally unique identifier
+     * @returns {string} a univerally unique identifier
      */
-    // eslint-disable-next-line class-methods-use-this
+    /* eslint class-methods-use-this: ["error", { "exceptMethods": ["getRandomID"] }] */
     getRandomID() {
-        return Math.random().toString(36).substring(7);
+        return uuidv4();
     }
 }
 

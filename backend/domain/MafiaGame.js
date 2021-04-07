@@ -34,17 +34,9 @@ class MafiaGame {
      * Create a new room with a unique ID
      * @returns A newly created room
      */
+    /* eslint class-methods-use-this: ["error", { "exceptMethods": ["createNewRoom"] }] */
     createNewRoom() {
-        let room;
-        while (!room) {
-            room = new Room();
-            // Create a new room if a room that has the same ID already exist
-            if (this.gameRoomsDict[room.roomID] !== undefined) {
-                // Room already exists, create the room again using the loop
-                room = null;
-            }
-        }
-        return room;
+        return new Room();
     }
 
     resetGame(roomID) {
