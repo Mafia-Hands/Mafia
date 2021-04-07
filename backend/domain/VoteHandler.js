@@ -47,10 +47,10 @@ class VoteHandler {
     getVotedPlayer(voteMap, isTrial) {
         // Generate map of players who have been voted for, and the number of votes they have.
         const voteTally = {};
-        voteTally['noConfidence'] = 0;
+        voteTally['no Confidence'] = 0;
         for (const [, chosenPlayer] of Object.entries(voteMap)) {
-            if (chosenPlayer === 'noConfidence') {
-                voteTally['noConfidence'] += 1;
+            if (chosenPlayer === 'no Confidence') {
+                voteTally['no Confidence'] += 1;
             } else if (Object.prototype.hasOwnProperty.call(voteTally, chosenPlayer.nickname)) {
                 voteTally[chosenPlayer.nickname] += 1;
             } else {
@@ -62,7 +62,7 @@ class VoteHandler {
         let maxVotes = 0;
         let votedPlayer = null;
         for (const [player, numVotes] of Object.entries(voteTally)) {
-            if (numVotes > maxVotes || (isTrial && player === 'noConfidence' && numVotes === maxVotes)) {
+            if (numVotes > maxVotes || (isTrial && player === 'no Confidence' && numVotes === maxVotes)) {
                 maxVotes = numVotes;
                 votedPlayer = player;
             }

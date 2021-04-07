@@ -9,7 +9,6 @@
         "jasmine": true
     },
     "rules": {
-        "dot-notation": "off",
         "prettier/prettier": "error",
         "no-console": "warn",
         "func-names": "off",
