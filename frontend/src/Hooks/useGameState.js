@@ -305,7 +305,7 @@ export default function useGameState() {
             dispatch({
                 type: 'trial-end',
                 status:
-                    playerKilled === 'abstain Vote' || !playerKilled
+                    playerKilled === 'noConfidence' || !playerKilled
                         ? `Nobody was killed in the Trial!`
                         : `The town voted to kill ${playerKilled}!`,
                 playerKilled,

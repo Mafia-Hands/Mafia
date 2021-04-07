@@ -41,7 +41,7 @@ function endTrial(io, socket, mafiaGame) {
 
     const playerChosen = room.voteHandler.getTrialVotedPlayer();
 
-    if (playerChosen && playerChosen !== 'abstain Vote') {
+    if (playerChosen && playerChosen !== 'noConfidence') {
         room.getPlayerByNickname(playerChosen).status = PlayerStatus.KILLED_BY_TOWN;
     }
 

@@ -49,7 +49,7 @@ describe('trial-start unit tests', () => {
             expect(trialStartDTO.timeToVote).toBe(config.trial_total_vote_time_in_milliseconds);
         });
         clientSocket.on('trial-end', (trialEndDTO) => {
-            expect(trialEndDTO.playerKilled).toBe('abstain Vote');
+            expect(trialEndDTO.playerKilled).toBe('noConfidence');
             expect(trialEndDTO.isGameOver).toBe(false);
             done();
         });

@@ -138,7 +138,7 @@ export default function Table() {
     }
 
     function abstainHandler() {
-        socket.emit(`trial-vote`, { votingFor: `abstain Vote` });
+        socket.emit(`trial-vote`, { votingFor: `noConfidence` });
         dispatch({ type: 'show-selected', status: `Voted to Abstain` });
     }
 
