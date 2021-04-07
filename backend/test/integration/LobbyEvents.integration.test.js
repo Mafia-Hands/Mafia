@@ -25,17 +25,20 @@ describe('lobby events tests', () => {
         SocketIOServer.server.close();
     });
     /**
-     * This is a integration test for all lobby events.
-     * It encompases creating a game, Max players joining and reseting the game
+     * These are the integration tests for all lobby events.
+     * They encompass creating a game, Max players joining and reseting the game
      */
-    test('full lobby events intergration test', async (done) => {
-        // connect players to lobby
-        for (let i; i < 6; i += 1) {
-            await connectAndJoin(clientSockets, i, port, lobbyCode);
-        }
-        await resetLobby();
-        done();
-    });
+
+    for (let playerCount = 6; playerCount <= 7; playerCount += 1) {
+        test('X person lobby events intergration test', async (done) => {
+            // connect players to lobby
+            for (let i; i < playerCount; i += 1) {
+                await connectAndJoin(clientSockets, i, port, lobbyCode);
+            }
+            await resetLobby();
+            done();
+        });
+    }
 
     /**
      * This function tests the reset lobby function

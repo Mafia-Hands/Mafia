@@ -29,23 +29,24 @@ describe('day & trial vote integration tests', () => {
         SocketIOServer.server.close();
     });
 
-    test('day/trial vote test', async (done) => {
-        // join to server
-        for (let i = 1; i < 6; i += 1) {
-            await connectAndJoin(clientSockets, i, port, lobbyCode);
-        }
-        // start game
-        await startGame(clientSockets);
+    for (let playerCount = 6; playerCount <= 7; playerCount += 1) {
+        test('7 player day/trial vote test', async (done) => {
+            // join to server
+            for (let i = 1; i < playerCount; i += 1) {
+                await connectAndJoin(clientSockets, i, port, lobbyCode);
+            }
+            // start game
+            await startGame(clientSockets, playerCount);
 
-        // vote for players and check map is filled out appropriately
-        const voteMap = { Leon: 'Leon1' };
-        for (let i = 1; i < 5; i += 1) {
-            voteMap[`Leon${i}`] = await voting(i);
-            expect(voteMap[`Leon${i}`]).toBe(`Leon${i + 1}`);
-        }
-        done();
-    });
-
+            // vote for players and check map is filled out appropriately
+            const voteMap = { Leon: 'Leon1' };
+            for (let i = 1; i < playerCount - 1; i += 1) {
+                voteMap[`Leon${i}`] = await voting(i);
+                expect(voteMap[`Leon${i}`]).toBe(`Leon${i + 1}`);
+            }
+            done();
+        });
+    }
     /**
      * This function is used to create votes for people and return the vote map
      * @param {*} clientSockets The client sockets

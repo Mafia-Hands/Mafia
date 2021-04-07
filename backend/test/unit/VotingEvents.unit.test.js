@@ -81,7 +81,6 @@ describe('night time voting event tests', () => {
             new Player(null, roomElements.roomID, 'notMafia', RoleEnum.MAFIA, false),
             new Player(null, roomElements.roomID, 'Doctor', RoleEnum.MEDIC, true),
             new Player(null, roomElements.roomID, 'Sherlock', RoleEnum.DETECTIVE, false),
-            new Player(null, roomElements.roomID, 'Dude', RoleEnum.CIVILIAN, true),
         ];
         MafiaGameMock.addPlayers(players, roomElements.roomID);
     });
@@ -90,7 +89,7 @@ describe('night time voting event tests', () => {
         // Listen for night end to check that player has been killed.
         clientSocket.on('night-end', (nightEndDTO) => {
             try {
-                expect(nightEndDTO.playerKilled).toEqual('Dude');
+                expect(nightEndDTO.playerKilled).toEqual('P0');
                 done();
             } catch (error) {
                 done.fail(error);
@@ -99,7 +98,9 @@ describe('night time voting event tests', () => {
 
         // Switch to mafia player to make vote
         MafiaGameMock.switchPlayer('notMafia', roomElements.roomID);
-        clientSocket.emit('mafia-vote', new NightTimeVoteDTO('Dude'));
+        clientSocket.emit('mafia-vote', new NightTimeVoteDTO('P0'));
+        MafiaGameMock.switchPlayer('mafiaPlayer', roomElements.roomID);
+        clientSocket.emit('mafia-vote', new NightTimeVoteDTO('P0'));
 
         clientSocket.emit('start-night');
     });
@@ -117,11 +118,13 @@ describe('night time voting event tests', () => {
 
         // Switch to mafia player to make vote
         MafiaGameMock.switchPlayer('notMafia', roomElements.roomID);
-        clientSocket.emit('mafia-vote', new NightTimeVoteDTO('Dude'));
+        clientSocket.emit('mafia-vote', new NightTimeVoteDTO('P0'));
+        MafiaGameMock.switchPlayer('mafiaPlayer', roomElements.roomID);
+        clientSocket.emit('mafia-vote', new NightTimeVoteDTO('P0'));
 
         // Switch to medic to save same player as mafia player
         MafiaGameMock.switchPlayer('Doctor', roomElements.roomID);
-        clientSocket.emit('medic-vote', new NightTimeVoteDTO('Dude'));
+        clientSocket.emit('medic-vote', new NightTimeVoteDTO('P0'));
 
         clientSocket.emit('start-night');
     });

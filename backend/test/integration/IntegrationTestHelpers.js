@@ -45,7 +45,7 @@ async function connectAndJoin(clientSockets, index, port, lobbyCode) {
  * @returns Promise with resolve returning role of host player
  */
 let hostRole;
-async function startGame(clientSockets) {
+async function startGame(clientSockets, lobbySize) {
     return new Promise((resolve) => {
         // Start the game
         let socketResponseCount = 0;
@@ -59,7 +59,7 @@ async function startGame(clientSockets) {
                     hostRole = gameStartDTO.role;
                 }
                 // Only end test if all 6 responses are received
-                if (socketResponseCount >= 6) {
+                if (socketResponseCount >= lobbySize) {
                     resolve(hostRole);
                 }
             });

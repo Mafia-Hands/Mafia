@@ -53,7 +53,7 @@ function joinLobby(io, socket, mafiaGame) {
         socket.join(player.roomID);
 
         io.in(socket.player.roomID).emit('lobby-join', new LobbyJoinDTO(room.players.map((player) => player.nickname)));
-        if (room.players.length === 6) {
+        if (room.players.length >= room.minPlayerCount) {
             io.to(room.host.socketID).emit('lobby-ready');
         }
     });

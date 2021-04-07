@@ -30,6 +30,7 @@ function createMafiaGameWithOnePlayerMock(port) {
     const roomID = mafiaGame.newGame();
     mafiaGame.gameRoomsDict[roomID] = new Room();
     const hostPlayer = new Player(null, roomID, 'mafiaPlayer', 'mafia', true);
+    addPlayer(hostPlayer, roomID);
 
     io.on('connection', (socket) => {
         loadLobbyEvents(io, socket, mafiaGame);
@@ -62,6 +63,11 @@ function addPlayers(players, roomID) {
     for (let player of players) {
         room.addPlayer(player);
     }
+}
+
+function getHostPlayer(roomID) {
+    const room = mafiaGame.gameRoomsDict[roomID];
+    return room.players[0];
 }
 
 function addMafiaVote(voter, votedFor, roomID) {
@@ -101,12 +107,16 @@ function resetRoom(roomID) {
     room.players = [];
     room.host = null;
     room.voteHandler.resetVotes();
+
+    const hostPlayer = new Player(null, roomID, 'mafiaPlayer', 'mafia', true);
+    addPlayer(hostPlayer, roomID);
 }
 
 module.exports = {
     createMafiaGameWithOnePlayerMock,
     addPlayer,
     addPlayers,
+    getHostPlayer,
     addMafiaVote,
     addDayVote,
     addTrialVote,

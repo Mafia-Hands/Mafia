@@ -47,11 +47,13 @@ describe('start-night unit tests', () => {
     test('start-night successful call, someone is killed', (done) => {
         const playerA = new Player(null, null, 'a', roles.MAFIA, true);
         const playerB = new Player(null, null, 'a', roles.MAFIA, true);
+        const hostPlayer = MafiaGameMock.getHostPlayer(roomElements.roomID); // host is mafia
 
         MafiaGameMock.addPlayer(playerA, roomElements.roomID);
         MafiaGameMock.addPlayer(playerB, roomElements.roomID);
 
         MafiaGameMock.addMafiaVote(playerA, playerB, roomElements.roomID);
+        MafiaGameMock.addMafiaVote(hostPlayer, playerB, roomElements.roomID);
 
         // Register mock event handlers for the events that the backend emits - assertions for the DTOs
         clientSocket.on('night-start', (nightStartDTO) => {
