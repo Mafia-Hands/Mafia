@@ -2,7 +2,7 @@
 name: Redesign
 about: Discuss a redesign of the frontend
 title: Redesign of INSERT ASPECT OF FRONTEND
-labels: ''
+labels: 'design'
 assignees: ''
 ---
 
