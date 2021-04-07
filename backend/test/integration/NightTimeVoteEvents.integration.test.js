@@ -50,7 +50,7 @@ describe('night time vote event tests', () => {
         return new Promise((resolve) => {
             let isMafia = false;
             // check if host is mafia
-            if (hostRole === RoleEnum.JESTER || hostRole === RoleEnum.MAFIA) {
+            if (hostRole === RoleEnum.MAFIA) {
                 isMafia = true;
             }
             // check if receiving suspect reveal
