@@ -1,6 +1,6 @@
 const Client = require('socket.io-client');
-const CreateLobbyDTO = require('../../domain/DTO/request/CreateLobbyDTO');
-const JoinLobbyDTO = require('../../domain/DTO/request/JoinLobbyDTO');
+const CreateLobbyDTO = require('../../domain/dto/request/CreateLobbyDTO');
+const JoinLobbyDTO = require('../../domain/dto/request/JoinLobbyDTO');
 
 /**
  * Host connects and creates lobby

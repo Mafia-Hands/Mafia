@@ -1,4 +1,4 @@
-const ListVoteDTO = require('../domain/DTO/response/ListVoteDTO');
+const ListVoteDTO = require('../domain/dto/response/ListVoteDTO');
 
 /**
  * Event handler and logic for `day-vote`

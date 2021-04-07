@@ -1,5 +1,5 @@
 const RoleEnum = require('../domain/Enum/Role');
-const SuspectRevealDTO = require('../domain/DTO/response/SuspectRevealDTO');
+const SuspectRevealDTO = require('../domain/dto/response/SuspectRevealDTO');
 
 /**
  * Event handlers and logic for `mafia-vote`, 'medic-vote' and `detective-vote`

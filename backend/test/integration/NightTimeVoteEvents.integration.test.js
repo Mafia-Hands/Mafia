@@ -1,6 +1,6 @@
 const config = require('../../config.json');
 const SocketIOServer = require('../../index');
-const NightTimeVoteDTO = require('../../domain/DTO/request/NightTimeVoteDTO');
+const NightTimeVoteDTO = require('../../domain/dto/request/NightTimeVoteDTO');
 const RoleEnum = require('../../domain/Enum/Role');
 const { connectAndCreateLobby, connectAndJoin, startGame } = require('./IntegrationTestHelpers');
 

@@ -1,9 +1,9 @@
 const config = require('../../config.json');
 const GameStateEnum = require('../../domain/Enum/GameStateEnum');
 
-const TrialStartDTO = require('../../domain/DTO/response/DayStartDTO');
-const TrialEndDTO = require('../../domain/DTO/response/TrialEndDTO');
-const GameOverDTO = require('../../domain/DTO/response/GameOverDTO');
+const TrialStartDTO = require('../../domain/dto/response/DayStartDTO');
+const TrialEndDTO = require('../../domain/dto/response/TrialEndDTO');
+const GameOverDTO = require('../../domain/dto/response/GameOverDTO');
 
 /**
  * Event handlers and logic for `start-trial`
