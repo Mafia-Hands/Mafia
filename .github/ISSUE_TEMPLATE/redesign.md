@@ -14,7 +14,7 @@ assignees: ''
 
 If yes:
 
-  - Please add the label `ready-to-implement`
+  - Please add the label `ready to implement`
   - Please addd hi-fi prototypes, screenshots and any assets here
 
 If no:
