@@ -47,11 +47,13 @@ describe('start-day unit tests', () => {
     test('start-day successful call, someone is put on trial', (done) => {
         const mafiaPlayer = new Player(null, null, 'a', roles.MAFIA, true);
         const civilianPlayer = new Player(null, null, 'b', roles.CIVILIAN, true);
+        const hostPlayer = MafiaGameMock.getHostPlayer(roomElements.roomID); // host is mafia
 
         MafiaGameMock.addPlayer(mafiaPlayer, roomElements.roomID);
         MafiaGameMock.addPlayer(civilianPlayer, roomElements.roomID);
 
         MafiaGameMock.addDayVote(mafiaPlayer, civilianPlayer, roomElements.roomID); // Mafia votes for civilian
+        MafiaGameMock.addDayVote(hostPlayer, civilianPlayer, roomElements.roomID); // host votes for civilian
 
         // Registering mock event handlers that would respond to emits emitted by the backend
         clientSocket.on('day-start', (dayStartDTO) => {
