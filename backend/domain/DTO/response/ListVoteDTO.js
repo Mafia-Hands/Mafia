@@ -1,11 +1,11 @@
-const voteType = require('../../../../common/Enum/Vote');
+const VoteType = require('../../../../common/Enum/Vote');
 
 class ListVoteDTO {
     constructor(votes) {
         const nicknameVoteMap = {};
         for (const [voter, chosenPlayer] of Object.entries(votes)) {
             nicknameVoteMap[voter] =
-                chosenPlayer === voteType.NoConfidenceVote ? voteType.NoConfidenceVote : chosenPlayer.nickname;
+                chosenPlayer === VoteType.NoConfidenceVote ? VoteType.NoConfidenceVote : chosenPlayer.nickname;
         }
         this.voteMap = nicknameVoteMap;
     }

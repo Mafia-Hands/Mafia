@@ -3,7 +3,7 @@
  * This includes tallying votes, and figuring out who the most voted player is.
  * The vote handler keeps track of vote maps. These are JSON objects where each key is a player nickname, and each value is the Player object that was voted for.
  */
-const voteType = require('../../common/Enum/Vote');
+const VoteType = require('../../common/Enum/Vote');
 
 class VoteHandler {
     /**
@@ -49,10 +49,10 @@ class VoteHandler {
     getVotedPlayer(voteMap, isTrial) {
         // Generate map of players who have been voted for, and the number of votes they have.
         const voteTally = {};
-        voteTally[voteType.NoConfidenceVote] = 0;
+        voteTally[VoteType.NoConfidenceVote] = 0;
         for (const [, chosenPlayer] of Object.entries(voteMap)) {
-            if (chosenPlayer === voteType.NoConfidenceVote) {
-                voteTally[voteType.NoConfidenceVote] += 1;
+            if (chosenPlayer === VoteType.NoConfidenceVote) {
+                voteTally[VoteType.NoConfidenceVote] += 1;
             } else if (Object.prototype.hasOwnProperty.call(voteTally, chosenPlayer.nickname)) {
                 voteTally[chosenPlayer.nickname] += 1;
             } else {
@@ -64,7 +64,7 @@ class VoteHandler {
         let maxVotes = 0;
         let votedPlayer = null;
         for (const [player, numVotes] of Object.entries(voteTally)) {
-            if (numVotes > maxVotes || (isTrial && player === voteType.NoConfidenceVote && numVotes === maxVotes)) {
+            if (numVotes > maxVotes || (isTrial && player === VoteType.NoConfidenceVote && numVotes === maxVotes)) {
                 maxVotes = numVotes;
                 votedPlayer = player;
             }
