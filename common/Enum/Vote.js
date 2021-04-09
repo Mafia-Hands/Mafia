@@ -3,7 +3,7 @@
  * Can be developed into classes if functionality is required.
  */
  const VoteEnum = {
-    NoConfidenceVote: 'noConfidence',
+    NoConfidenceVote: 'no Confidence',
 };
 Object.freeze(VoteEnum);
 
