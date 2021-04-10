@@ -81,6 +81,7 @@ export default function Player({ playerName, style, childRef }) {
                         status: `Selected ${playerName} for ability`,
                         votedPlayer: playerName,
                     });
+                    socket.emit('night-vote');
                     break;
                 }
                 break;

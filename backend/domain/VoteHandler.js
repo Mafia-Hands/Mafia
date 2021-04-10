@@ -14,6 +14,7 @@ class VoteHandler {
         this.mafiaVoteMap = {};
         this.trialVoteMap = {};
         this.medicChosenPlayer = null;
+        this.detectiveChosenPlayer = null;
     }
 
     /**
@@ -82,6 +83,7 @@ class VoteHandler {
         this.mafiaVoteMap = {};
         this.trialVoteMap = {};
         this.medicChosenPlayer = null;
+        this.detectiveChosenPlayer = null;
     }
 }
 

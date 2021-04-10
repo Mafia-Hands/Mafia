@@ -1,6 +1,7 @@
 const config = require('../../config.json');
 const GameStateEnum = require('../../domain/enum/GameStateEnum');
 const PlayerStatus = require('../../domain/enum/PlayerStatus');
+const PlayerRole = require('../../domain/enum/Role');
 
 const NightStartDTO = require('../../domain/dto/response/NightStartDTO');
 const NightEndDTO = require('../../domain/dto/response/NightEndDTO');
@@ -24,7 +25,28 @@ function startNight(io, socket, mafiaGame) {
 
         io.in(roomID).emit('night-start', new NightStartDTO(TIME_TO_VOTE));
 
-        setTimeout(() => endNight(io, socket, mafiaGame), TIME_TO_VOTE);
+        let timer = setTimeout(() => {
+            console.log('night timeout triggered');
+            endNight(io, socket, mafiaGame);
+        }, TIME_TO_VOTE);
+
+        room.currentTimer = timer;
+        console.log(room.currentTimer);
+    });
+
+    socket.on('night-vote', () => {
+        const { roomID } = socket.player;
+        const room = mafiaGame.gameRoomsDict[roomID];
+        const numMafiaRoles = room.players.filter((player) => player.role === PlayerRole.MAFIA).length;
+        const numMafiaVotes = Object.keys(room.voteHandler.mafiaVoteMap).length;
+        console.log(numMafiaRoles);
+        console.log(numMafiaVotes);
+        if (numMafiaRoles  === numMafiaVotes && room.voteHandler.medicChosenPlayer && room.voteHandler.detectiveChosenPlayer) {
+            console.log(room.currentTimer);
+            clearTimeout(room.currentTimer);
+            console.log('cleared');
+            endNight(io, socket, mafiaGame);
+        }
     });
 }
 
