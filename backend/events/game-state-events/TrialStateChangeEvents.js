@@ -26,12 +26,10 @@ function startTrial(io, socket, mafiaGame) {
         io.in(roomID).emit('trial-start', new TrialStartDTO(TIME_TO_VOTE));
 
         let timer = setTimeout(() => {
-            console.log('trial timeout triggered');
             endTrial(io, socket, mafiaGame);
         }, TIME_TO_VOTE);
 
         room.currentTimer = timer;
-        console.log(room.currentTimer);
     });
 
     socket.on('trial-vote', () => {
@@ -39,12 +37,8 @@ function startTrial(io, socket, mafiaGame) {
         const room = mafiaGame.gameRoomsDict[roomID];
         const numAlive = room.players.filter((player) => player.status === PlayerStatus.ALIVE).length;
         const numVotes = Object.keys(room.voteHandler.trialVoteMap).length;
-        console.log(numAlive);
-        console.log(numVotes);
         if (numAlive - 1 === numVotes) {
-            console.log(room.currentTimer);
             clearTimeout(room.currentTimer);
-            console.log('cleared');
             endTrial(io, socket, mafiaGame);
         }
     });

@@ -24,12 +24,10 @@ function startDay(io, socket, mafiaGame) {
         io.in(roomID).emit('day-start', new DayStartDTO(TIME_TO_VOTE));
 
         let timer = setTimeout(() => {
-            console.log("timeout triggered");
             endDiscussion(io, socket, mafiaGame);
         }, TIME_TO_VOTE);
 
         room.currentTimer = timer;
-        console.log(room.currentTimer);
     });
 
     socket.on('day-vote', () => {
@@ -39,12 +37,8 @@ function startDay(io, socket, mafiaGame) {
             (player) => player.status === PlayerStatus.ALIVE
         ).length;
         const numVotes = Object.keys(room.voteHandler.daytimeVoteMap).length
-        console.log(numAlive);
-        console.log(numVotes);
         if (numAlive === numVotes) {
-            console.log(room.currentTimer);
             clearTimeout(room.currentTimer);
-            console.log("cleared");
             endDiscussion(io, socket, mafiaGame);
         }
     });
