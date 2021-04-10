@@ -36,17 +36,20 @@ describe('trial-start unit tests', () => {
         const playerA = new Player(null, null, 'a', roles.MAFIA, true);
         const playerB = new Player(null, null, 'b', roles.JESTER, true);
         const playerC = new Player(null, null, 'c', roles.CIVILIAN, true);
+        const playerD = new Player(null, null, 'd', roles.CIVILIAN, true);
 
+        // total 5 players: mock initialised with host player which is mafia
         MafiaGameMock.addPlayer(playerA, roomElements.roomID);
         MafiaGameMock.addPlayer(playerB, roomElements.roomID);
         MafiaGameMock.addPlayer(playerC, roomElements.roomID);
+        MafiaGameMock.addPlayer(playerD, roomElements.roomID);
 
         // Register mock event handlers for the events that the backend emits - assertions for the DTOs
         clientSocket.on('trial-start', (trialStartDTO) => {
             expect(trialStartDTO.timeToVote).toBe(config.trial_total_vote_time_in_milliseconds);
         });
         clientSocket.on('trial-end', (trialEndDTO) => {
-            expect(trialEndDTO.playerKilled).toBe('abstain Vote');
+            expect(trialEndDTO.playerKilled).toBe('no Confidence');
             expect(trialEndDTO.isGameOver).toBe(false);
             done();
         });
@@ -60,13 +63,16 @@ describe('trial-start unit tests', () => {
         const playerB = new Player(null, null, 'b', roles.CIVILIAN, true);
         const playerC = new Player(null, null, 'c', roles.JESTER, true);
         const playerD = new Player(null, null, 'd', roles.CIVILIAN, true);
+        const playerE = new Player(null, null, 'e', roles.CIVILIAN, true);
+        const hostPlayer = MafiaGameMock.getHostPlayer(roomElements.roomID); // host is mafia
 
         MafiaGameMock.addPlayer(playerA, roomElements.roomID);
         MafiaGameMock.addPlayer(playerB, roomElements.roomID);
         MafiaGameMock.addPlayer(playerC, roomElements.roomID);
         MafiaGameMock.addPlayer(playerD, roomElements.roomID);
+        MafiaGameMock.addPlayer(playerE, roomElements.roomID);
 
-        MafiaGameMock.addTrialVote(playerA, playerD, roomElements.roomID); // Vote to kill off a civilian
+        MafiaGameMock.addTrialVote(hostPlayer, playerD, roomElements.roomID); // Vote to kill off a civilian
 
         // Register mock event handlers for the events that the backend emits - assertions for the DTOs
         clientSocket.on('trial-start', (trialStartDTO) => {
@@ -86,12 +92,15 @@ describe('trial-start unit tests', () => {
         const playerA = new Player(null, null, 'a', roles.MAFIA, true);
         const playerB = new Player(null, null, 'b', roles.CIVILIAN, true);
         const playerC = new Player(null, null, 'c', roles.CIVILIAN, true);
+        const playerD = new Player(null, null, 'd', roles.CIVILIAN, true);
+        const hostPlayer = MafiaGameMock.getHostPlayer(roomElements.roomID); // host is mafia
 
         MafiaGameMock.addPlayer(playerA, roomElements.roomID);
         MafiaGameMock.addPlayer(playerB, roomElements.roomID);
         MafiaGameMock.addPlayer(playerC, roomElements.roomID);
+        MafiaGameMock.addPlayer(playerD, roomElements.roomID);
 
-        MafiaGameMock.addTrialVote(playerB, playerC, roomElements.roomID); // Vote to kill a civilian
+        MafiaGameMock.addTrialVote(hostPlayer, playerC, roomElements.roomID); // Vote to kill a civilian
 
         // Register mock event handlers for the events that the backend emits - assertions for the DTOs
         clientSocket.on('trial-start', (trialStartDTO) => {
