@@ -1,5 +1,5 @@
-const ListVoteDTO = require('../domain/DTO/response/ListVoteDTO');
-const VoteType = require('../../common/Enum/Vote');
+const ListVoteDTO = require('../domain/dto/response/ListVoteDTO');
+const VoteType = require('../../common/enum/Vote');
 
 /**
  * Event handler and logic for `day-vote`

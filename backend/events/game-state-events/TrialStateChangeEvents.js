@@ -1,11 +1,11 @@
 const config = require('../../config.json');
-const GameStateEnum = require('../../domain/Enum/GameStateEnum');
-const PlayerStatus = require('../../domain/Enum/PlayerStatus');
+const GameStateEnum = require('../../domain/enum/GameStateEnum');
+const PlayerStatus = require('../../domain/enum/PlayerStatus');
 
-const TrialStartDTO = require('../../domain/DTO/response/DayStartDTO');
-const TrialEndDTO = require('../../domain/DTO/response/TrialEndDTO');
-const GameOverDTO = require('../../domain/DTO/response/GameOverDTO');
-const VoteType = require('../../../common/Enum/Vote');
+const TrialStartDTO = require('../../domain/dto/response/DayStartDTO');
+const TrialEndDTO = require('../../domain/dto/response/TrialEndDTO');
+const GameOverDTO = require('../../domain/dto/response/GameOverDTO');
+const VoteType = require('../../../common/enum/Vote');
 
 /**
  * Event handlers and logic for `start-trial`

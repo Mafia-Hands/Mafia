@@ -1,10 +1,10 @@
 const config = require('../../config.json');
-const GameStateEnum = require('../../domain/Enum/GameStateEnum');
-const PlayerStatus = require('../../domain/Enum/PlayerStatus');
+const GameStateEnum = require('../../domain/enum/GameStateEnum');
+const PlayerStatus = require('../../domain/enum/PlayerStatus');
 
-const NightStartDTO = require('../../domain/DTO/response/NightStartDTO');
-const NightEndDTO = require('../../domain/DTO/response/NightEndDTO');
-const GameOverDTO = require('../../domain/DTO/response/GameOverDTO');
+const NightStartDTO = require('../../domain/dto/response/NightStartDTO');
+const NightEndDTO = require('../../domain/dto/response/NightEndDTO');
+const GameOverDTO = require('../../domain/dto/response/GameOverDTO');
 
 /**
  * Event handlers and logic for `start-night`
