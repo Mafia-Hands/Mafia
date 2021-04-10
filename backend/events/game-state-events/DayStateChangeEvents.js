@@ -25,26 +25,26 @@ function startDay(io, socket, mafiaGame) {
         io.in(roomID).emit('day-start', new DayStartDTO(TIME_TO_VOTE));
 
         timer = setTimeout(() => {
-          console.log("timeout triggered");
-          endDiscussion(io, socket, mafiaGame);
+            console.log("timeout triggered");
+            endDiscussion(io, socket, mafiaGame);
         }, TIME_TO_VOTE);
     });
 
     socket.on('day-vote', () => {
-      const { roomID } = socket.player;
-      const room = mafiaGame.gameRoomsDict[roomID];
-      const numAlive = room.players.filter(
-          (player) => player.status === PlayerStatus.ALIVE
-      ).length;
-      const numVotes = Object.keys(room.voteHandler.daytimeVoteMap).length
-      console.log(numAlive);
-      console.log(numVotes);
-      if (numAlive === numVotes) {
-        clearTimeout(timer);
-        timer = 0;
-        console.log("cleared");
-        endDiscussion(io, socket, mafiaGame);
-      }
+        const { roomID } = socket.player;
+        const room = mafiaGame.gameRoomsDict[roomID];
+        const numAlive = room.players.filter(
+            (player) => player.status === PlayerStatus.ALIVE
+        ).length;
+        const numVotes = Object.keys(room.voteHandler.daytimeVoteMap).length
+        console.log(numAlive);
+        console.log(numVotes);
+        if (numAlive === numVotes) {
+            clearTimeout(timer);
+            timer = 0;
+            console.log("cleared");
+            endDiscussion(io, socket, mafiaGame);
+        }
     });
 }
 
