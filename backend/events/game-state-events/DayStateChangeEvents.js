@@ -30,6 +30,7 @@ function startDay(io, socket, mafiaGame) {
         room.currentTimer = timer;
     });
 
+    // Is called whenever a vote occurs during the day, and terminates the timer if all possible votes have been cast
     socket.on('day-vote', () => {
         const { roomID } = socket.player;
         const room = mafiaGame.gameRoomsDict[roomID];

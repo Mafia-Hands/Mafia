@@ -32,6 +32,7 @@ function startTrial(io, socket, mafiaGame) {
         room.currentTimer = timer;
     });
 
+    // Is called whenever a vote occurs during a trial, and terminates the timer if all possible votes have been cast
     socket.on('trial-vote', () => {
         const { roomID } = socket.player;
         const room = mafiaGame.gameRoomsDict[roomID];

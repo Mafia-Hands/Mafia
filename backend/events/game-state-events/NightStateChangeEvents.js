@@ -32,6 +32,7 @@ function startNight(io, socket, mafiaGame) {
         room.currentTimer = timer;
     });
 
+    // Is called whenever a vote occurs at night, and terminates the timer if all possible votes have been cast
     socket.on('night-vote', () => {
         const { roomID } = socket.player;
         const room = mafiaGame.gameRoomsDict[roomID];
