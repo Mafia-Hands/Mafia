@@ -1,5 +1,6 @@
 const config = require('../../config.json');
 const GameStateEnum = require('../../domain/enum/GameStateEnum');
+const PlayerStatus = require('../../domain/enum/PlayerStatus');
 
 const TrialStartDTO = require('../../domain/dto/response/DayStartDTO');
 const TrialEndDTO = require('../../domain/dto/response/TrialEndDTO');
