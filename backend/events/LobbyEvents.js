@@ -1,6 +1,6 @@
 const Player = require('../domain/Player');
-const LobbyCodeDTO = require('../domain/DTO/response/LobbyCodeDTO');
-const LobbyJoinDTO = require('../domain/DTO/response/LobbyJoinDTO');
+const LobbyCodeDTO = require('../domain/dto/response/LobbyCodeDTO');
+const LobbyJoinDTO = require('../domain/dto/response/LobbyJoinDTO');
 /**
  * Event handlers and logic for `create-lobby` and `lobby-code`
  * The goal of these lobby events is to allow a host to create a game and receive a new room id.

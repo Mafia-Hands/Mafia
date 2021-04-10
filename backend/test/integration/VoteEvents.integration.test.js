@@ -1,7 +1,7 @@
 const SocketIOServer = require('../../index');
 const config = require('../../config.json');
 const { connectAndCreateLobby, startGame, connectAndJoin } = require('./IntegrationTestHelpers');
-const VoteForDTO = require('../../domain/DTO/request/VoteForDTO');
+const VoteForDTO = require('../../domain/dto/request/VoteForDTO');
 
 describe('day & trial vote integration tests', () => {
     const port = process.env.PORT || config.local_port;

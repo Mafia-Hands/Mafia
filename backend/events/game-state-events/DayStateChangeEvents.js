@@ -1,8 +1,8 @@
 const config = require('../../config.json');
-const GameStateEnum = require('../../domain/Enum/GameStateEnum');
+const GameStateEnum = require('../../domain/enum/GameStateEnum');
 
-const DayStartDTO = require('../../domain/DTO/response/DayStartDTO');
-const DiscussionEndDTO = require('../../domain/DTO/response/DiscussionEndDTO');
+const DayStartDTO = require('../../domain/dto/response/DayStartDTO');
+const DiscussionEndDTO = require('../../domain/dto/response/DiscussionEndDTO');
 
 /**
  * Event handlers and logic for `start-day`

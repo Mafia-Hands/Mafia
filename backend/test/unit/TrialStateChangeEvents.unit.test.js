@@ -2,8 +2,8 @@ const Client = require('socket.io-client');
 const MafiaGameMock = require('../mocks/MafiaGameMock');
 const config = require('../../config.json');
 const Player = require('../../domain/Player');
-const roles = require('../../domain/Enum/Role');
-const VoteType = require('../../../common/Enum/Vote');
+const roles = require('../../domain/enum/Role');
+const VoteType = require('../../../common/enum/Vote');
 
 describe('trial-start unit tests', () => {
     const port = process.env.PORT || config.local_port;

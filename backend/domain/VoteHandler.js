@@ -3,7 +3,7 @@
  * This includes tallying votes, and figuring out who the most voted player is.
  * The vote handler keeps track of vote maps. These are JSON objects where each key is a player nickname, and each value is the Player object that was voted for.
  */
-const VoteType = require('../../common/Enum/Vote');
+const VoteType = require('../../common/enum/Vote');
 
 class VoteHandler {
     /**
