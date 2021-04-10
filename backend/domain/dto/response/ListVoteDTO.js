@@ -1,4 +1,4 @@
-const VoteType = require('../../../../common/Enum/Vote');
+const VoteType = require('../../../../common/enum/Vote');
 
 class ListVoteDTO {
     constructor(votes) {

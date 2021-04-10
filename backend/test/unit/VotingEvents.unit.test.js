@@ -1,10 +1,10 @@
 const Client = require('socket.io-client');
-const VoteForDTO = require('../../domain/DTO/request/VoteForDTO');
+const VoteForDTO = require('../../domain/dto/request/VoteForDTO');
 const config = require('../../config.json');
 const MafiaGameMock = require('../mocks/MafiaGameMock');
 const Player = require('../../domain/Player');
-const RoleEnum = require('../../domain/Enum/Role');
-const NightTimeVoteDTO = require('../../domain/DTO/request/NightTimeVoteDTO');
+const RoleEnum = require('../../domain/enum/Role');
+const NightTimeVoteDTO = require('../../domain/dto/request/NightTimeVoteDTO');
 
 let clientSocket;
 const port = process.env.PORT || config.local_port;
