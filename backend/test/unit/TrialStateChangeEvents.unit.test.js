@@ -3,6 +3,7 @@ const MafiaGameMock = require('../mocks/MafiaGameMock');
 const config = require('../../config.json');
 const Player = require('../../domain/Player');
 const roles = require('../../domain/Enum/Role');
+const VoteType = require('../../../common/Enum/Vote');
 
 describe('trial-start unit tests', () => {
     const port = process.env.PORT || config.local_port;
@@ -49,7 +50,7 @@ describe('trial-start unit tests', () => {
             expect(trialStartDTO.timeToVote).toBe(config.trial_total_vote_time_in_milliseconds);
         });
         clientSocket.on('trial-end', (trialEndDTO) => {
-            expect(trialEndDTO.playerKilled).toBe('no Confidence');
+            expect(trialEndDTO.playerKilled).toBe(VoteType.NoConfidenceVote);
             expect(trialEndDTO.isGameOver).toBe(false);
             done();
         });
