@@ -36,11 +36,23 @@ function startNight(io, socket, mafiaGame) {
     socket.on('night-vote', () => {
         const { roomID } = socket.player;
         const room = mafiaGame.gameRoomsDict[roomID];
-        const numMafiaRoles = room.players.filter((player) => player.role === PlayerRole.MAFIA).length;
+        const numLiveMafia = room.players.filter((player) => player.role === PlayerRole.MAFIA)
+            .filter((player) => player.status === PlayerStatus.ALIVE)
+            .length;
         const numMafiaVotes = Object.keys(room.voteHandler.mafiaVoteMap).length;
-        if (numMafiaRoles  === numMafiaVotes && room.voteHandler.medicChosenPlayer && room.voteHandler.detectiveChosenPlayer) {
-            clearTimeout(room.currentTimer);
-            endNight(io, socket, mafiaGame);
+        const numLiveMedic = room.players.filter((player) => player.role === PlayerRole.MEDIC)
+            .filter((player) => player.status === PlayerStatus.ALIVE)
+            .length;
+        const numLiveDetective = room.players.filter((player) => player.role === PlayerRole.DETECTIVE)
+            .filter((player) => player.status === PlayerStatus.ALIVE)
+            .length;
+        if (numLiveMafia  === numMafiaVotes) {
+            if (room.voteHandler.medicChosenPlayer || numLiveMedic === 0) {
+                if (room.voteHandler.detectiveChosenPlayer || numLiveDetective === 0) {
+                    clearTimeout(room.currentTimer);
+                    endNight(io, socket, mafiaGame);
+                }
+            }
         }
     });
 }
