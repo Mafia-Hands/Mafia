@@ -36,54 +36,55 @@ const NewGameScreen = () => {
     };
     return (
         <div className={styles.newGameScreen}>
-            <TopBarSettings
-                currentScreen={`LOBBY ID: ${state.code}`}
-                showSettings
-                showUp={setOpen}
-                setOpenInfo={setOpenInfo}
-            />
             <div className={styles.container}>
-                <div className={styles.leftContainer}>
-                    <PlayerList className={styles.playerNames} />
-                    <LobbySettings className={styles.lobbySettings} setOpen={setOpen} setOpenInfo={setOpenInfo} />
-                </div>
-                <div className={styles.rightContainer}>
-                    <Chatbox className={styles.chatbox} messageList={['hi', 'sup', 'Hi SOFTENG 701 :)']} />
+                <TopBarSettings
+                    currentScreen={`LOBBY ID: ${state.code}`}
+                    showSettings
+                    showUp={setOpen}
+                    setOpenInfo={setOpenInfo}
+                />
+                <div className={styles.bodyContainer}>
+                    <div className={styles.leftContainer}>
+                        <PlayerList className={styles.playerNames} />
+                        <LobbySettings className={styles.lobbySettings} setOpen={setOpen} setOpenInfo={setOpenInfo} />
+                    </div>
+                    <div className={styles.rightContainer}>
+                        <Chatbox className={styles.chatbox} messageList={['hi', 'sup', 'Hi SOFTENG 701 :)']} />
 
-                    <StyledButton
-                        className={styles.startButton}
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        id="start-game"
-                        disabled={!state.lobbyReady}
-                        onClick={startGame}
-                    >
-                        Start Game
-                    </StyledButton>
+                        <StyledButton
+                            className={styles.startButton}
+                            variant="contained"
+                            color="primary"
+                            size="large"
+                            id="start-game"
+                            disabled={!state.lobbyReady}
+                            onClick={startGame}
+                        >
+                            Start Game
+                        </StyledButton>
+                    </div>
                 </div>
             </div>
-            <div style={{ display: 'none' }}>
-                <ModalMUI open={open} setOpen={setOpen}>
-                    {openInfo ? (
-                        <div>
-                            <TopBarSettings
-                                showBack
-                                showUp={setOpen}
-                                currentScreen="Roles and Rules"
-                                showSettings={false}
-                                setOpenInfo={setOpenInfo}
-                            />
-                            <RolesAndRules inLobby />
-                        </div>
-                    ) : (
-                        <div>
-                            <TopBarSettings showBack showUp={setOpen} currentScreen="Settings" showSettings={false} />
-                            <SettingDialog />
-                        </div>
-                    )}
-                </ModalMUI>
-            </div>
+
+            <ModalMUI open={open} setOpen={setOpen}>
+                {openInfo ? (
+                    <div>
+                        <TopBarSettings
+                            showBack
+                            showUp={setOpen}
+                            currentScreen="Roles and Rules"
+                            showSettings={false}
+                            setOpenInfo={setOpenInfo}
+                        />
+                        <RolesAndRules inLobby />
+                    </div>
+                ) : (
+                    <div>
+                        <TopBarSettings showBack showUp={setOpen} currentScreen="Settings" showSettings={false} />
+                        <SettingDialog />
+                    </div>
+                )}
+            </ModalMUI>
         </div>
     );
 };

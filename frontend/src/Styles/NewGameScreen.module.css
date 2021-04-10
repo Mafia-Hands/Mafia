@@ -6,8 +6,11 @@
 }
 
 .container {
-    margin: auto;
     width: 70%;
+    margin: auto;
+}
+
+.bodyContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 2em;
@@ -41,29 +44,6 @@
 .lobbySettings {
     grid-row-start: 2;
     grid-row-end: 3;
-}
-
-.root {
-    display: 'grid';
-    grid-gap: '0px';
-    background-color: '#7795a6';
-    grid-template-rows: '0.5fr 5fr';
-    border: 'none';
-    border-radius: '10px';
-}
-
-.title {
-    font-size: '10px';
-    font-family: 'Helvetica, sans-serif';
-    background-color: '#c8d3d5';
-    color: '#2b282a';
-    padding: '10px';
-    padding-left: '16px';
-}
-
-.content {
-    padding: '0px';
-    color: '#2b282a';
 }
 
 .Modal {
