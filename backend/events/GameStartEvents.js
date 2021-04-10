@@ -1,5 +1,5 @@
-const roles = require('../domain/Enum/Role');
-const GameStartDTO = require('../domain/DTO/response/GameStartDTO');
+const roles = require('../domain/enum/Role');
+const GameStartDTO = require('../domain/dto/response/GameStartDTO');
 const config = require('../config.json');
 
 /**

@@ -3,6 +3,8 @@
  * This includes tallying votes, and figuring out who the most voted player is.
  * The vote handler keeps track of vote maps. These are JSON objects where each key is a player nickname, and each value is the Player object that was voted for.
  */
+const VoteType = require('../../common/enum/Vote');
+
 class VoteHandler {
     /**
      * Constructor: mainly just initialises the vote maps as empty JSON objects.
@@ -47,10 +49,10 @@ class VoteHandler {
     getVotedPlayer(voteMap, isTrial) {
         // Generate map of players who have been voted for, and the number of votes they have.
         const voteTally = {};
-        voteTally['no Confidence'] = 0;
+        voteTally[VoteType.NoConfidenceVote] = 0;
         for (const [, chosenPlayer] of Object.entries(voteMap)) {
-            if (chosenPlayer === 'no Confidence') {
-                voteTally['no Confidence'] += 1;
+            if (chosenPlayer === VoteType.NoConfidenceVote) {
+                voteTally[VoteType.NoConfidenceVote] += 1;
             } else if (Object.prototype.hasOwnProperty.call(voteTally, chosenPlayer.nickname)) {
                 voteTally[chosenPlayer.nickname] += 1;
             } else {
@@ -62,7 +64,7 @@ class VoteHandler {
         let maxVotes = 0;
         let votedPlayer = null;
         for (const [player, numVotes] of Object.entries(voteTally)) {
-            if (numVotes > maxVotes || (isTrial && player === 'no Confidence' && numVotes === maxVotes)) {
+            if (numVotes > maxVotes || (isTrial && player === VoteType.NoConfidenceVote && numVotes === maxVotes)) {
                 maxVotes = numVotes;
                 votedPlayer = player;
             }
