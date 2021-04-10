@@ -14,7 +14,6 @@ const DiscussionEndDTO = require('../../domain/dto/response/DiscussionEndDTO');
  * @param {MafiaGame} mafiaGame
  */
 function startDay(io, socket, mafiaGame) {
-    let timer = 0;
     socket.on('start-day', () => {
         const { roomID } = socket.player;
         const room = mafiaGame.gameRoomsDict[roomID];
@@ -24,10 +23,13 @@ function startDay(io, socket, mafiaGame) {
 
         io.in(roomID).emit('day-start', new DayStartDTO(TIME_TO_VOTE));
 
-        timer = setTimeout(() => {
+        let timer = setTimeout(() => {
             console.log("timeout triggered");
             endDiscussion(io, socket, mafiaGame);
         }, TIME_TO_VOTE);
+
+        room.currentTimer = timer;
+        console.log(room.currentTimer);
     });
 
     socket.on('day-vote', () => {
@@ -40,8 +42,8 @@ function startDay(io, socket, mafiaGame) {
         console.log(numAlive);
         console.log(numVotes);
         if (numAlive === numVotes) {
-            clearTimeout(timer);
-            timer = 0;
+            console.log(room.currentTimer);
+            clearTimeout(room.currentTimer);
             console.log("cleared");
             endDiscussion(io, socket, mafiaGame);
         }
