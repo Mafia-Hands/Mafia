@@ -13,7 +13,7 @@ import styles from '../Styles/TopBarSettings.module.css';
 const StyledIconButton = withStyles({
     root: {
         padding: '5px',
-        color: '#293241',
+        color: '#c8d3d5',
     },
 })(IconButton);
 

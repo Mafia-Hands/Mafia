@@ -17,7 +17,7 @@ const StyledButton = withStyles({
         alignSelf: 'start',
         height: '100%',
         borderRadius: '10px',
-        backgroundColor: '#EE6644',
+        backgroundColor: '#f76c6c',
     },
     label: {
         fontWeight: 'bolder',
@@ -35,7 +35,7 @@ const NewGameScreen = () => {
         socket.emit('start-game');
     };
     return (
-        <div>
+        <div className={styles.newGameScreen}>
             <TopBarSettings
                 currentScreen={`LOBBY ID: ${state.code}`}
                 showSettings
