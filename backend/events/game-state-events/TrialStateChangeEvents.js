@@ -40,8 +40,8 @@ function endTrial(io, socket, mafiaGame) {
 
     const playerChosen = room.voteHandler.getTrialVotedPlayer();
 
-    if (playerChosen && playerChosen !== 'abstain Vote') {
-        room.getPlayerByNickname(playerChosen).isAlive = false;
+    if (playerChosen && playerChosen !== 'no Confidence') {
+        room.getPlayerByNickname(playerChosen).status = PlayerStatus.KILLED_BY_TOWN;
     }
 
     const winningRole = room.getWinningRole();

@@ -20,11 +20,11 @@ export default function Player({ playerName, style, childRef }) {
 
     // check if each player component being rendered by the table is dead
     // if the player is dead, other players cannot hover the dead player circle
-    const isDead = !gameState.alivePlayers.includes(playerName);
+    const isHoveredPlayerDead = !gameState.alivePlayers.includes(playerName);
 
     // check if players themselves are dead
     // if players themselves are dead, they cannot hover any player circles
-    const amIDead = !gameState.alivePlayers.includes(generalState.nickname);
+    const isCurrentPlayerDead = !gameState.alivePlayers.includes(generalState.nickname);
 
     // the hoverable variable depends on the following conditions:
     // the game state [role or discussion or trial or undefined]
@@ -34,8 +34,8 @@ export default function Player({ playerName, style, childRef }) {
     const isHoverable =
         !!gameState.votingState.type &&
         gameState.votingState.votablePlayers.includes(playerName) &&
-        !isDead &&
-        !amIDead;
+        !isHoveredPlayerDead &&
+        !isCurrentPlayerDead;
     const hasVoted = gameState.votingState.playersWhoVoted.includes(playerName);
     const isVoted = gameState.votingState.vote === playerName;
     const isPlayer = generalState.nickname === playerName;
@@ -57,13 +57,13 @@ export default function Player({ playerName, style, childRef }) {
         [styles.isHoverable]: isHoverable,
         [styles.hasVoted]: hasVoted,
         [styles.isClicked]: isVoted,
-        [styles.isDead]: isDead,
+        [styles.isDead]: isHoveredPlayerDead,
     });
 
     // this only allows clicks if a player is actually hoverable.
     function validateOnClick(fn) {
         return (...args) => {
-            if (!isDead && isHoverable && !isVoted) {
+            if (!isHoveredPlayerDead && isHoverable && !isVoted) {
                 fn(...args);
             }
         };
@@ -100,7 +100,7 @@ export default function Player({ playerName, style, childRef }) {
     return (
         <div className={playerStyle} style={style} ref={childRef} onClick={validateOnClick(onClick)}>
             <div className={styles.playerText}>
-                <p>{playerName.concat(isDead ? ' (DEAD)' : '')}</p>
+                <p>{playerName.concat(isHoveredPlayerDead ? ' (DEAD)' : '')}</p>
                 <p>{mafiaString}</p>
             </div>
         </div>
