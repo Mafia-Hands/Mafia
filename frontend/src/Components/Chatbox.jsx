@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     root: {
         display: 'grid',
         gridGap: '0px',
-        backgroundColor: '#3E5B7F',
+        backgroundColor: '#7795a6',
         gridTemplateRows: '0.5fr 5fr',
         border: 'none',
         borderRadius: '10px',
@@ -26,36 +26,36 @@ const useStyles = makeStyles({
     title: {
         fontSize: '10px',
         fontFamily: 'Helvetica, sans-serif',
-        backgroundColor: 'rgb(152, 193, 217,0.6)',
-        color: '#E3F1F1',
+        backgroundColor: '#c8d3d5',
+        color: '#2b282a',
         padding: '10px',
         paddingLeft: '16px',
     },
     content: {
         padding: '0px',
-        color: '#E3F1F1',
+        color: '#2b282a',
         overflow: 'auto',
     },
     action: {
         display: 'grid',
-        backgroundColor: 'rgb(152, 193, 217,0.6)',
+        backgroundColor: '#c6ccd6',
         gridTemplateColumns: '70% 1fr',
         padding: '0px',
     },
     input: {
-        color: '#E3F1F1',
+        color: '#2b282a',
         paddingLeft: '8px',
     },
 });
 
 const StyledButton = withStyles({
     root: {
-        backgroundColor: 'rgb(152, 193, 217,0.6)',
+        backgroundColor: '#a4b8c4',
         borderRadius: '0px',
     },
     label: {
         textTransform: 'lowercase',
-        color: '#E3F1F1',
+        color: '#2b282a',
     },
 })(Button);
 

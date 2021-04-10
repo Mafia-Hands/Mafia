@@ -40,7 +40,7 @@ function App() {
             <Router>
                 <Switch>
                     <Route exact path="/">
-                        <div style={{ width: '70%', margin: 'auto' }}>{component}</div>
+                        <div style={{ height: '100vh' }}>{component}</div>
                     </Route>
                     <Route path="/*">
                         <Redirect to="/" />

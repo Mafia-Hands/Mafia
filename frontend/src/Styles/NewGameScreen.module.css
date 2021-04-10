@@ -1,16 +1,19 @@
 @import './colourScheme.css';
 
-.container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 2em;
-    height: 80vh;
-    padding-bottom: 30px;
+.newGameScreen {
+    background-color: var(--gunmetal);
+    height: 100%;
 }
 
 .container {
+    width: 70%;
+    margin: auto;
+}
+
+.bodyContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-column-gap: 2em;
     column-gap: 2em;
 }
 
