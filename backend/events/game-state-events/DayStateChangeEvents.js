@@ -1,5 +1,6 @@
 const config = require('../../config.json');
 const GameStateEnum = require('../../domain/enum/GameStateEnum');
+const PlayerStatus = require('../../domain/enum/PlayerStatus');
 
 const DayStartDTO = require('../../domain/dto/response/DayStartDTO');
 const DiscussionEndDTO = require('../../domain/dto/response/DiscussionEndDTO');
@@ -22,7 +23,25 @@ function startDay(io, socket, mafiaGame) {
 
         io.in(roomID).emit('day-start', new DayStartDTO(TIME_TO_VOTE));
 
-        setTimeout(() => endDiscussion(io, socket, mafiaGame), TIME_TO_VOTE);
+        let timer = setTimeout(() => {
+            endDiscussion(io, socket, mafiaGame);
+        }, TIME_TO_VOTE);
+
+        room.currentTimer = timer;
+    });
+
+    // Is called whenever a vote occurs during the day, and terminates the timer if all possible votes have been cast
+    socket.on('day-vote', () => {
+        const { roomID } = socket.player;
+        const room = mafiaGame.gameRoomsDict[roomID];
+        const numAlive = room.players.filter(
+            (player) => player.status === PlayerStatus.ALIVE
+        ).length;
+        const numVotes = Object.keys(room.voteHandler.daytimeVoteMap).length
+        if (numAlive === numVotes) {
+            clearTimeout(room.currentTimer);
+            endDiscussion(io, socket, mafiaGame);
+        }
     });
 }
 

@@ -1,6 +1,7 @@
 const config = require('../../config.json');
 const GameStateEnum = require('../../domain/enum/GameStateEnum');
 const PlayerStatus = require('../../domain/enum/PlayerStatus');
+const PlayerRole = require('../../domain/enum/Role');
 
 const NightStartDTO = require('../../domain/dto/response/NightStartDTO');
 const NightEndDTO = require('../../domain/dto/response/NightEndDTO');
@@ -24,7 +25,35 @@ function startNight(io, socket, mafiaGame) {
 
         io.in(roomID).emit('night-start', new NightStartDTO(TIME_TO_VOTE));
 
-        setTimeout(() => endNight(io, socket, mafiaGame), TIME_TO_VOTE);
+        let timer = setTimeout(() => {
+            endNight(io, socket, mafiaGame);
+        }, TIME_TO_VOTE);
+
+        room.currentTimer = timer;
+    });
+
+    // Is called whenever a vote occurs at night, and terminates the timer if all possible votes have been cast
+    socket.on('night-vote', () => {
+        const { roomID } = socket.player;
+        const room = mafiaGame.gameRoomsDict[roomID];
+        const numLiveMafia = room.players.filter((player) => player.role === PlayerRole.MAFIA)
+            .filter((player) => player.status === PlayerStatus.ALIVE)
+            .length;
+        const numMafiaVotes = Object.keys(room.voteHandler.mafiaVoteMap).length;
+        const numLiveMedic = room.players.filter((player) => player.role === PlayerRole.MEDIC)
+            .filter((player) => player.status === PlayerStatus.ALIVE)
+            .length;
+        const numLiveDetective = room.players.filter((player) => player.role === PlayerRole.DETECTIVE)
+            .filter((player) => player.status === PlayerStatus.ALIVE)
+            .length;
+        if (numLiveMafia  === numMafiaVotes) {
+            if (room.voteHandler.medicChosenPlayer || numLiveMedic === 0) {
+                if (room.voteHandler.detectiveChosenPlayer || numLiveDetective === 0) {
+                    clearTimeout(room.currentTimer);
+                    endNight(io, socket, mafiaGame);
+                }
+            }
+        }
     });
 }
 

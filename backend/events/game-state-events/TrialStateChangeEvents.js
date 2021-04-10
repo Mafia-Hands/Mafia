@@ -25,7 +25,23 @@ function startTrial(io, socket, mafiaGame) {
 
         io.in(roomID).emit('trial-start', new TrialStartDTO(TIME_TO_VOTE));
 
-        setTimeout(() => endTrial(io, socket, mafiaGame), TIME_TO_VOTE);
+        let timer = setTimeout(() => {
+            endTrial(io, socket, mafiaGame);
+        }, TIME_TO_VOTE);
+
+        room.currentTimer = timer;
+    });
+
+    // Is called whenever a vote occurs during a trial, and terminates the timer if all possible votes have been cast
+    socket.on('trial-vote', () => {
+        const { roomID } = socket.player;
+        const room = mafiaGame.gameRoomsDict[roomID];
+        const numAlive = room.players.filter((player) => player.status === PlayerStatus.ALIVE).length;
+        const numVotes = Object.keys(room.voteHandler.trialVoteMap).length;
+        if (numAlive - 1 === numVotes) {
+            clearTimeout(room.currentTimer);
+            endTrial(io, socket, mafiaGame);
+        }
     });
 }
 
