@@ -1,35 +1,82 @@
 @import './colourScheme.css';
+@import url('https://fonts.googleapis.com/css?family=Audiowide');
+
+.pageContainer {
+    align-items: center;
+    background-color: #A4B8C4!important;
+}
 
 .roleContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto;
-    align-items: stretch;
-    justify-items: stretch;
-    text-align: center;
-    width: 100%;
-    column-gap: 3em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-.roleContainer h3 {
+.charaImg {
+    float: left;
+    padding-top: 7%;
+}
+
+.roleContainer h1 {
     margin-top: 0;
     text-transform: uppercase;
+    font-family: 'Audiowide';
 }
 
-.ruleContainer {
+.spanTitle {
+    font-weight: bold;
+    font-size: 15px;
+}
+.spanContent {
+    font-size: 15px;
+}
+
+.detail {
+    width: 60%;
+    float: right;
+}
+
+.dayRuleContainer {
     margin: 3em auto 2em auto;
+    background-color: var(--lightGrey)!important;
+    padding: 0.5em;
     width: 80%;
     text-align: justify;
     white-space: pre-line;
+    overflow: auto;
+}
+.nightRuleContainer {
+    margin: 0 auto 2em auto;
+    background-color: var(--gunmetal)!important;
+    color: white!important;
+    padding: 0.5em;
+    width: 80%;
+    text-align: justify;
+    white-space: pre-line;
+    overflow: auto;
+}
+
+.ruleImg {
+    float: left;
+}
+
+.ruleDetail {
+    float:right;
+    width: 90%;
 }
 
 .roleInfo {
-    display: grid;
+    display: flex;
     grid-template-rows: 2em 1fr;
+    margin: 20px;
+    width: 380px;
+    height: 200px;
+
 }
 
 .roleHighlight {
-    background-color: var(--darkOrange);
+    background-color: black;
     color: black;
     margin: 0;
     padding: 0.5em;
