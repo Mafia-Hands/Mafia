@@ -21,6 +21,8 @@ function App() {
 
     let component;
 
+    let gameComponent;
+
     switch (state.screen) {
         case 'home':
             component = <HomePage code={pathname} />;
@@ -35,12 +37,18 @@ function App() {
             throw new Error('Invalid App screen state');
     }
 
+    if (state.screen === 'game') {
+        gameComponent = <div style={{ height: '100vh' }}>{component}</div>;
+    } else {
+        gameComponent = <div style={{ height: '100vh' }}>{component}</div>
+    }
+
     return (
         <GeneralContext.Provider value={{ state, dispatch }}>
             <Router>
                 <Switch>
                     <Route exact path="/">
-                        <div style={{ height: '100vh' }}>{component}</div>
+                        {gameComponent}
                     </Route>
                     <Route path="/*">
                         <Redirect to="/" />

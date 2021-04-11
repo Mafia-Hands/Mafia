@@ -22,6 +22,9 @@ const useStyles = makeStyles({
         gridTemplateRows: '0.5fr 5fr',
         border: 'none',
         borderRadius: '10px',
+        height: '100%',
+        overflow: 'auto',
+        maxHeight: '100vh'
     },
     title: {
         fontSize: '10px',
