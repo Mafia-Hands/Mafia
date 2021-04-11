@@ -29,7 +29,7 @@ describe('lobby events tests', () => {
      * They encompass creating a game, Max players joining and reseting the game
      */
 
-    for (let playerCount = 6; playerCount <= 7; playerCount += 1) {
+    for (let playerCount = 6; playerCount <= 15; playerCount += 1) {
         test('X person lobby events intergration test', async (done) => {
             // connect players to lobby
             for (let i; i < playerCount; i += 1) {
