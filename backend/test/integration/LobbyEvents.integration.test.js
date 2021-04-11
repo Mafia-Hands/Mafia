@@ -1,6 +1,6 @@
 const config = require('../../config.json');
 const SocketIOServer = require('../../index');
-const { connectAndCreateLobby, connectAndJoin } = require('./IntegrationTestHelpers');
+const { connectAndCreateLobby, connectAndJoin, getRoles, checkRoles } = require('./IntegrationTestHelpers');
 
 describe('lobby events tests', () => {
     const clientSockets = [];
@@ -32,13 +32,121 @@ describe('lobby events tests', () => {
     for (let playerCount = 6; playerCount <= 15; playerCount += 1) {
         test('X person lobby events intergration test', async (done) => {
             // connect players to lobby
-            for (let i; i < playerCount; i += 1) {
+            for (let i = 1; i <= playerCount - 1; i += 1) {
                 await connectAndJoin(clientSockets, i, port, lobbyCode);
             }
             await resetLobby();
             done();
         });
     }
+
+    test('Min person lobby start game roles', async (done) => {
+        const roles = await getRoles(6, clientSockets, port, lobbyCode);
+
+        expect(roles.total).toBe(6);
+
+        checkRoles({
+            roles,
+            expectedMafiaCount: 1,
+            expectedDetectivesCount: 1,
+            expectedMedicsCount: 1,
+            expectedJesterCount: 1,
+            expectedCiviliansCount: 2,
+        });
+
+        await resetLobby();
+        done();
+    });
+
+    test('7 person lobby start game roles', async (done) => {
+        const roles = await getRoles(7, clientSockets, port, lobbyCode);
+
+        expect(roles.total).toBe(7);
+
+        checkRoles({
+            roles,
+            expectedMafiaCount: 2,
+            expectedDetectivesCount: 1,
+            expectedMedicsCount: 1,
+            expectedJesterCount: 1,
+            expectedCiviliansCount: 2,
+        });
+
+        await resetLobby();
+        done();
+    });
+
+    test('10 person lobby start game roles', async (done) => {
+        const roles = await getRoles(10, clientSockets, port, lobbyCode);
+
+        expect(roles.total).toBe(10);
+
+        checkRoles({
+            roles,
+            expectedMafiaCount: 2,
+            expectedDetectivesCount: 1,
+            expectedMedicsCount: 1,
+            expectedJesterCount: 1,
+            expectedCiviliansCount: 5,
+        });
+
+        await resetLobby();
+        done();
+    });
+
+    test('11 person lobby start game roles', async (done) => {
+        const roles = await getRoles(11, clientSockets, port, lobbyCode);
+
+        expect(roles.total).toBe(11);
+
+        checkRoles({
+            roles,
+            expectedMafiaCount: 2,
+            expectedDetectivesCount: 2,
+            expectedMedicsCount: 2,
+            expectedJesterCount: 1,
+            expectedCiviliansCount: 4,
+        });
+
+        await resetLobby();
+        done();
+    });
+
+    test('14 person lobby start game roles', async (done) => {
+        const roles = await getRoles(14, clientSockets, port, lobbyCode);
+
+        expect(roles.total).toBe(14);
+
+        checkRoles({
+            roles,
+            expectedMafiaCount: 2,
+            expectedDetectivesCount: 2,
+            expectedMedicsCount: 2,
+            expectedJesterCount: 1,
+            expectedCiviliansCount: 7,
+        });
+
+        await resetLobby();
+        done();
+    });
+
+    test('Max person lobby start game roles', async (done) => {
+        const roles = await getRoles(15, clientSockets, port, lobbyCode);
+
+        expect(roles.total).toBe(15);
+
+        checkRoles({
+            roles,
+            expectedMafiaCount: 2,
+            expectedDetectivesCount: 2,
+            expectedMedicsCount: 2,
+            expectedJesterCount: 2,
+            expectedCiviliansCount: 7,
+        });
+
+        await resetLobby();
+        done();
+    });
 
     /**
      * This function tests the reset lobby function
