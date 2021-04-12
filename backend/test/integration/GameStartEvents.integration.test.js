@@ -29,7 +29,7 @@ describe('GameStartEvents integration tests', () => {
     });
 
     // Run integration tests for all possible lobby sizes.
-    for (let playerCount = 6; playerCount <= 7; playerCount += 1) {
+    for (let playerCount = 6; playerCount <= 15; playerCount += 1) {
         test('integration test start-game X players', async (done) => {
             /* eslint-disable no-await-in-loop */
             for (let i = 1; i < playerCount; i += 1) {

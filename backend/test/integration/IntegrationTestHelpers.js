@@ -1,6 +1,7 @@
 const Client = require('socket.io-client');
 const CreateLobbyDTO = require('../../domain/dto/request/CreateLobbyDTO');
 const JoinLobbyDTO = require('../../domain/dto/request/JoinLobbyDTO');
+const Role = require('../../domain/enum/Role');
 
 /**
  * Host connects and creates lobby
@@ -46,6 +47,7 @@ async function connectAndJoin(clientSockets, index, port, lobbyCode) {
  */
 let hostRole;
 async function startGame(clientSockets, lobbySize) {
+    let roles = [];
     return new Promise((resolve) => {
         // Start the game
         let socketResponseCount = 0;
@@ -58,9 +60,11 @@ async function startGame(clientSockets, lobbySize) {
                 if (i === 0) {
                     hostRole = gameStartDTO.role;
                 }
+                roles.push(gameStartDTO.role);
+
                 // Only end test if all 6 responses are received
                 if (socketResponseCount >= lobbySize) {
-                    resolve(hostRole);
+                    resolve({ hostRole, roles });
                 }
             });
         }
@@ -77,9 +81,51 @@ async function startGameOnePlayer(clientSockets) {
     });
 }
 
+async function getRoles(playerCount, clientSockets, port, lobbyCode) {
+    // connect players to lobby
+    for (let i = 1; i <= playerCount - 1; i += 1) {
+        await connectAndJoin(clientSockets, i, port, lobbyCode);
+    }
+
+    const { roles } = await startGame(clientSockets, playerCount);
+    expect(roles.length).toBe(playerCount);
+
+    let roleCounts = {
+        total: 0,
+    };
+    roles.forEach((role) => {
+        roleCounts.total += 1;
+
+        if (roleCounts[role]) {
+            roleCounts[role] += 1;
+        } else {
+            roleCounts[role] = 1;
+        }
+    });
+
+    return roleCounts;
+}
+
+function checkRoles({
+    roles,
+    expectedMafiaCount,
+    expectedDetectivesCount,
+    expectedMedicsCount,
+    expectedJesterCount,
+    expectedCiviliansCount,
+}) {
+    expect(roles[Role.MAFIA]).toBe(expectedMafiaCount);
+    expect(roles[Role.DETECTIVE]).toBe(expectedDetectivesCount);
+    expect(roles[Role.MEDIC]).toBe(expectedMedicsCount);
+    expect(roles[Role.JESTER]).toBe(expectedJesterCount);
+    expect(roles[Role.CIVILIAN]).toBe(expectedCiviliansCount);
+}
+
 module.exports = {
     connectAndCreateLobby,
     connectAndJoin,
     startGame,
     startGameOnePlayer,
+    getRoles,
+    checkRoles,
 };
