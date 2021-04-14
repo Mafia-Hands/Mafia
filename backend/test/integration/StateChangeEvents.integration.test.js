@@ -30,7 +30,7 @@ afterAll(() => {
 
 /** -----------------TESTS------------------*/
 describe('NightStateChangeEvents integration tests', () => {
-    for (let playerCount = 6; playerCount <= 7; playerCount += 1) {
+    for (let playerCount = 6; playerCount <= 15; playerCount += 1) {
         test('integration test start-night X players', async (done) => {
             // Start the night
             async function startNight() {
@@ -103,7 +103,7 @@ describe('NightStateChangeEvents integration tests', () => {
 });
 
 describe('DayStateEvents integration tests', () => {
-    for (let playerCount = 6; playerCount <= 7; playerCount += 1) {
+    for (let playerCount = 6; playerCount <= 15; playerCount += 1) {
         test('integration test start-day X players', async (done) => {
             // Start the day
             async function startDay() {
@@ -144,7 +144,7 @@ describe('DayStateEvents integration tests', () => {
 });
 
 describe('TrialStateChangeEvents integration tests', () => {
-    for (let playerCount = 6; playerCount <= 7; playerCount += 1) {
+    for (let playerCount = 6; playerCount <= 15; playerCount += 1) {
         test('integration test start-trial X players', async (done) => {
             // Start the trial
             async function startTrial() {

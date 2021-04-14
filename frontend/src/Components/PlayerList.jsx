@@ -25,6 +25,8 @@ const useStyles = makeStyles({
     content: {
         padding: '0px',
         color: '#2b282a',
+        maxHeight: '100%',
+        overflow: 'auto',
     },
 });
 

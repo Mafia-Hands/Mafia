@@ -31,13 +31,12 @@ describe('night time vote event tests', () => {
      * It goes through stariting a game to checking mafia vote
      *
      */
-    for (let playerCount = 6; playerCount <= 7; playerCount += 1) {
+    for (let playerCount = 6; playerCount <= 15; playerCount += 1) {
         test('Night time X Player Vote events', async (done) => {
-            let hostRole;
             for (let i = 1; i < playerCount; i += 1) {
                 await connectAndJoin(clientSockets, i, port, lobbyCode);
             }
-            hostRole = await startGame(clientSockets, playerCount);
+            let { hostRole } = await startGame(clientSockets, playerCount);
             await nightTimeVote(hostRole);
             done();
         });

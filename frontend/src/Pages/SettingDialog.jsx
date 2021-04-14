@@ -41,13 +41,14 @@ export default function SettingDialog(){
         'https://demo.twilio.com/docs/classic.mp3'
     ];
 
-    const currentBrightness = parseInt(document.getElementById("brightness").style.background.substring(4,7), 10) - 155;
+    const currentBrightness = parseInt(document.getElementById("GLBbrightness").style.background.substring(4,7), 10) - 155;
 
     const [value, setValue] = useState(currentBrightness);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
-        document.getElementById("brightness").style.background = RGBToHex(newValue+155,newValue+155,newValue+155);
+        document.getElementById("GLBbrightness").style.background = RGBToHex(newValue+155,newValue+155,newValue+155);
+        if (document.getElementById("NGSbrightness")) {document.getElementById("NGSbrightness").style.background = RGBToHex(newValue+155,newValue+155,newValue+155);}
     };
 
     return(
