@@ -15,14 +15,10 @@ import yourRole from '../images/Your Role.svg'
 const useStyles = makeStyles({
     root: {
         padding: '1em',
-        // margin: '2em',
         display: 'inline-table',
-        // gridTemplateRows: '2em 1fr 0.5fr',
-        // alignItems: 'stretch',
         height: '160px!important',
         width: '349px!important',
         overflow: 'hidden!important',
-        // justifySelf: 'end',
     },
     good: { backgroundColor: 'palegreen' },
     bad: { backgroundColor: 'lightcoral' },
