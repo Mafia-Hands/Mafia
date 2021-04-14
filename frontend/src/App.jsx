@@ -38,9 +38,9 @@ function App() {
     }
 
     if (state.screen === 'game') {
-        gameComponent = <div id="GLBbrightness" style={{ height: '100vh', background : '#9B9B9B' }}>{component}</div>;
+        gameComponent = <div id="brightness" style={{ height: '100vh', background : '#9B9B9B' }}>{component}</div>;
     } else {
-        gameComponent = <div id="GLBbrightness" style={{ height: '100vh', background : '#9B9B9B' }}>{component}</div>
+        gameComponent = <div id="brightness" style={{ height: '100vh', background : '#9B9B9B' }}>{component}</div>
     }
 
     return (

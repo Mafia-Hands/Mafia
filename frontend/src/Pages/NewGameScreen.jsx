@@ -36,7 +36,7 @@ const NewGameScreen = () => {
         socket.emit('start-game');
     };
     return (
-        <div id="NGSbrightness" className={styles.newGameScreen}>
+        <div className={styles.newGameScreen}>
             <div className={styles.container}>
                 <TopBarSettings
                     currentScreen={`LOBBY ID: ${state.code}`}
