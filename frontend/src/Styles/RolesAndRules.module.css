@@ -15,10 +15,10 @@
 
 .charaImg {
     float: left;
-    padding-top: 7%;
+    padding-top: 2%;
 }
 
-.roleContainer h1 {
+.roleContainer h2 {
     margin-top: 0;
     text-transform: uppercase;
     font-family: 'Audiowide';
@@ -26,10 +26,10 @@
 
 .spanTitle {
     font-weight: bold;
-    font-size: 15px;
+    font-size: 12px;
 }
 .spanContent {
-    font-size: 15px;
+    font-size: 12px;
 }
 
 .detail {
@@ -38,7 +38,7 @@
 }
 
 .dayRuleContainer {
-    margin: 3em auto 2em auto;
+    margin: 0.5em auto 0.5em auto;
     background-color: var(--lightGrey)!important;
     padding: 0.5em;
     width: 80%;
@@ -47,7 +47,7 @@
     overflow: auto;
 }
 .nightRuleContainer {
-    margin: 0 auto 2em auto;
+    margin: 0 auto 1em auto;
     background-color: var(--gunmetal)!important;
     color: white!important;
     padding: 0.5em;
@@ -59,6 +59,8 @@
 
 .ruleImg {
     float: left;
+    width: 8%;
+    left: 1%;
 }
 
 .ruleDetail {
@@ -68,10 +70,10 @@
 
 .roleInfo {
     display: flex;
-    grid-template-rows: 2em 1fr;
-    margin: 20px;
-    width: 380px;
-    height: 200px;
+    /* grid-template-rows: 1em 1fr; */
+    margin: 5px;
+    width: 360px;
+    height: 180px;
 
 }
 

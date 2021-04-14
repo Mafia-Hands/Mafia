@@ -14,7 +14,7 @@ import yourRole from '../images/Your Role.svg'
 
 const useStyles = makeStyles({
     root: {
-        padding: '1em',
+        padding: '0.2em',
         display: 'inline-table',
         height: '160px!important',
         width: '349px!important',
@@ -122,7 +122,7 @@ const RolesAndRules = ({ inLobby }) => {
                         >
                             <img src={role.image} alt="" className={styles.charaImg} />
                             <div className={styles.detail}>
-                                <h1>{role.name}</h1>
+                                <h2>{role.name}</h2>
                                 <span className={styles.spanTitle}>Alignment: </span><span className={styles.spanContent}>{role.description.alignment}</span>
                                 <br />
                                 <span className={styles.spanTitle}>Powers: </span><span className={styles.spanContent}>{role.description.powers}</span>
@@ -133,7 +133,7 @@ const RolesAndRules = ({ inLobby }) => {
                     </div>
                 ))}
             </div>
-            <div style={{marginTop:'2em'}}>
+            <div style={{marginTop:'0.5em'}}>
                 <Paper
                     elevation={4}
                     className={styles.dayRuleContainer}
