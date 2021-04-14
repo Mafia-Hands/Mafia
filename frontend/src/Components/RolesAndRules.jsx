@@ -1,5 +1,5 @@
 import { React, useContext } from 'react';
-import { colors, Paper } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import styles from '../Styles/RolesAndRules.module.css';
 import { GameContext, GeneralContext } from '../Context';
