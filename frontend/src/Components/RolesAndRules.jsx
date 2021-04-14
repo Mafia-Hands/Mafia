@@ -10,6 +10,7 @@ import jesterImage from '../images/Jester.svg';
 import detectiveImage from '../images/Detective.svg';
 import sun from '../images/Sun.svg';
 import moon from '../images/Moon.svg';
+import yourRole from '../images/Your Role.svg'
 
 const useStyles = makeStyles({
     root: {
@@ -114,7 +115,7 @@ const RolesAndRules = ({ inLobby }) => {
                     <div className={styles.roleInfo} key={role.name}>
                         <div>
                             {role.name.toLowerCase() === userRole.toLowerCase() && (
-                                <p className={styles.roleHighlight}>This is your role!</p>
+                                <img src={yourRole} alt='' className={styles.roleTag} />
                             )}
                         </div>
                         <Paper
