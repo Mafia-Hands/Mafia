@@ -5,6 +5,11 @@ import { GameContext, GeneralContext } from '../Context';
 import socket from '../Socket';
 import avatarImage from '../images/AvatarAlive.png'
 import avatarImageDead from '../images/AvatarDead.png'
+import civilianImage from '../images/Citizen.svg';
+import detectiveImage from '../images/Detective.svg';
+import jesterImage from '../images/Jester.svg';
+import mafiaImage from '../images/Mafia.svg';
+import medicImage from '../images/Medic.svg';
 
 /**
  * The player component represents a specific player on the table.
@@ -60,6 +65,15 @@ export default function Player({ playerName, style, childRef }) {
         [styles.isDead]: isHoveredPlayerDead,
     });
 
+    // apply player avatar depending on what role the player has
+    const playerAvatar = classNames({
+        [civilianImage]: (isPlayer && gameState.role === 'civilian'),
+        [detectiveImage]: (isPlayer && gameState.role === 'detective'),
+        [jesterImage]: (isPlayer && gameState.role === 'jester'),
+        [mafiaImage]: (isPlayer && gameState.role === 'mafia' || mafiaString === ' (Mafia)'),
+        [medicImage]: (isPlayer && gameState.role === 'medic'),
+    })
+
     // this only allows clicks if a player is actually hoverable.
     function validateOnClick(fn) {
         return (...args) => {
@@ -106,6 +120,7 @@ export default function Player({ playerName, style, childRef }) {
                 <p>{isPlayer ? ' (YOU)' : ''}</p>
                 <p>{mafiaString}</p>
             </div>
+            <img src={playerAvatar} alt=""/>
         </div>
     );
 }

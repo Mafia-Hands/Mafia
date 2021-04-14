@@ -36,17 +36,17 @@ function startNight(io, socket, mafiaGame) {
     socket.on('night-vote', () => {
         const { roomID } = socket.player;
         const room = mafiaGame.gameRoomsDict[roomID];
-        const numLiveMafia = room.players.filter((player) => player.role === PlayerRole.MAFIA)
-            .filter((player) => player.status === PlayerStatus.ALIVE)
-            .length;
+        const numLiveMafia = room.players
+            .filter((player) => player.role === PlayerRole.MAFIA)
+            .filter((player) => player.status === PlayerStatus.ALIVE).length;
         const numMafiaVotes = Object.keys(room.voteHandler.mafiaVoteMap).length;
-        const numLiveMedic = room.players.filter((player) => player.role === PlayerRole.MEDIC)
-            .filter((player) => player.status === PlayerStatus.ALIVE)
-            .length;
-        const numLiveDetective = room.players.filter((player) => player.role === PlayerRole.DETECTIVE)
-            .filter((player) => player.status === PlayerStatus.ALIVE)
-            .length;
-        if (numLiveMafia  === numMafiaVotes) {
+        const numLiveMedic = room.players
+            .filter((player) => player.role === PlayerRole.MEDIC)
+            .filter((player) => player.status === PlayerStatus.ALIVE).length;
+        const numLiveDetective = room.players
+            .filter((player) => player.role === PlayerRole.DETECTIVE)
+            .filter((player) => player.status === PlayerStatus.ALIVE).length;
+        if (numLiveMafia === numMafiaVotes) {
             if (room.voteHandler.medicChosenPlayer || numLiveMedic === 0) {
                 if (room.voteHandler.detectiveChosenPlayer || numLiveDetective === 0) {
                     clearTimeout(room.currentTimer);
