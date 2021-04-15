@@ -4,6 +4,7 @@ import styles from '../Styles/Player.module.css';
 import { GameContext, GeneralContext } from '../Context';
 import socket from '../Socket';
 import avatarImage from '../images/AvatarAlive.png'
+import avatarImageDead from '../images/AvatarDead.png'
 
 /**
  * The player component represents a specific player on the table.
@@ -101,7 +102,8 @@ export default function Player({ playerName, style, childRef }) {
 
     return (
         <div className={playerStyle} style={style} ref={childRef} onClick={validateOnClick(onClick)}>
-            <img src={avatarImage} alt="player avatar"/>
+            {/* {playerName.concat(isHoveredPlayerDead ? {<img src={avatarImage} alt="player avatar" className={styles.playerImg}/> : <img src={avatarImageDead} alt="player avatar" className={styles.playerImg}/>) */}
+            <img src={avatarImage} alt="player avatar" className={styles.playerImg}/>
             <div className={styles.playerText}>
                 <p>{playerName.concat(isHoveredPlayerDead ? ' (DEAD)' : '')}</p>
                 <p>{mafiaString}</p>
