@@ -69,6 +69,15 @@ export default function Player({ playerName, style, childRef }) {
         };
     }
 
+    function revealVote() {
+        if (gameState.prevVotingState.trialVoteMap[playerName] === "no Confidence"){
+            return "No confidence"
+        } else if (gameState.prevVotingState.playersWhoVoted.includes(playerName)){
+            return "KILL!"
+        } 
+        return ""
+    }
+
     function onClick() {
         switch (gameState.votingState.type) {
             case 'role':
@@ -103,6 +112,7 @@ export default function Player({ playerName, style, childRef }) {
             <div className={styles.playerText}>
                 <p>{playerName.concat(isHoveredPlayerDead ? ' (DEAD)' : '')}</p>
                 <p>{mafiaString}</p>
+                <p>{gameState.phase === 'trial-end' ? revealVote() : ''}</p>
             </div>
         </div>
     );
