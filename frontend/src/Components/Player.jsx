@@ -54,8 +54,6 @@ export default function Player({ playerName, style, childRef }) {
 
     // apply styles based on whether certain props is true -> 1st was true before
     const playerStyle = classNames({
-        [styles.playerWrapper]: false,
-        [styles.player]: isPlayer,
         [styles.isHoverable]: isHoverable,
         [styles.hasVoted]: hasVoted,
         [styles.isClicked]: isVoted,
@@ -102,10 +100,10 @@ export default function Player({ playerName, style, childRef }) {
 
     return (
         <div className={playerStyle} style={style} ref={childRef} onClick={validateOnClick(onClick)}>
-            {/* {playerName.concat(isHoveredPlayerDead ? {<img src={avatarImage} alt="player avatar" className={styles.playerImg}/> : <img src={avatarImageDead} alt="player avatar" className={styles.playerImg}/>) */}
-            <img src={avatarImage} alt="player avatar" className={styles.playerImg}/>
+            {isHoveredPlayerDead ? <img src={avatarImageDead} alt="dead player avatar" className={styles.playerImg}/> : <img src={avatarImage} alt="player avatar" className={styles.playerImg}/>}
             <div className={styles.playerText}>
                 <p>{playerName.concat(isHoveredPlayerDead ? ' (DEAD)' : '')}</p>
+                <p>{isPlayer ? ' (YOU)' : ''}</p>
                 <p>{mafiaString}</p>
             </div>
         </div>

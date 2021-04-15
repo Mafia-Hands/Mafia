@@ -1,27 +1,5 @@
 @import './colourScheme.css';
 
-/* .playerWrapper {
-    height: 7vw;
-    width: 7vw;
-    border-radius: 50%;
-    background-color: var(--mediumBlue);
-    color: var(--deepBlue);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
-    font-size: 1.5rem;
-} */
-
-/* .playerWrapper {
-    height: 7vw;
-    width: 7vw;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
-    font-size: 1.5rem;
-} */
 
 .playerImg {
     height: 7vw;
@@ -31,17 +9,9 @@
 }
 
 
-.player {
-    background-color: var(--deepBlue);
-    color: var(--lightBlue);
-}
 
 .isHoverable:hover {
-    /* background-color: var(--mediumBlue); */
     cursor: pointer;
-    /* border: 5px solid var(--deepBlue); */
-    /* transition: 0.2s ease background-color box-shadow;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.479); */
     transform: scale(1.1);
 }
 
@@ -66,8 +36,7 @@
 }
 
 .isDead {
-    background-color: var(--darkBlue);
-    color: var(--lightOrange);
+    color: var(--darkOrange);
 }
 
 .playerText {
