@@ -4,6 +4,8 @@
 .pageContainer {
     align-items: center;
     background-color: #A4B8C4!important;
+    max-height: 700px;
+    overflow: auto!important;
 }
 
 .roleContainer {
@@ -15,7 +17,8 @@
 
 .charaImg {
     float: left;
-    padding-top: 2%;
+    width: 30%;
+    padding-top: 12%;
 }
 
 .roleContainer h2 {
@@ -38,6 +41,7 @@
 }
 
 .dayRuleContainer {
+    vertical-align: middle;
     margin: 0.5em auto 0.5em auto;
     background-color: var(--lightGrey)!important;
     padding: 0.5em;
@@ -47,6 +51,7 @@
     overflow: auto;
 }
 .nightRuleContainer {
+    vertical-align: middle;
     margin: 0 auto 1em auto;
     background-color: var(--gunmetal)!important;
     color: white!important;
@@ -58,6 +63,7 @@
 }
 
 .ruleImg {
+    transform: translate(0%, 17%);
     float: left;
     width: 8%;
     left: 1%;
@@ -66,13 +72,14 @@
 .ruleDetail {
     float:right;
     width: 90%;
+    font-size: 14px;
 }
 
 .roleInfo {
     display: flex;
     /* grid-template-rows: 1em 1fr; */
     margin: 5px;
-    width: 360px;
+    width: 280px;
     height: 180px;
 
 }

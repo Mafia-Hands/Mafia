@@ -16,8 +16,8 @@ const useStyles = makeStyles({
     root: {
         padding: '0.2em',
         display: 'inline-table',
-        height: '160px!important',
-        width: '349px!important',
+        height: '177px!important',
+        width: '320px!important',
         overflow: 'hidden!important',
     },
     good: { backgroundColor: 'palegreen' },
