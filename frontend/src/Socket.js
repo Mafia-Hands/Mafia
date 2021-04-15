@@ -7,4 +7,7 @@ import socketIOClient from 'socket.io-client';
 // Uncomment if you would like to use a local server to test server changes
 const socket = new socketIOClient('localhost:4001');
 
+// Uncomment if you would like to use a currently online server
+const socket = new socketIOClient('yswysc.iask.in:4001');
+
 export default socket;

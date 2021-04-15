@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     root: {
         display: 'grid',
         gridGap: '0px',
-        backgroundColor: '#7795a6',
+        backgroundColor: '#3E5B7F',
         gridTemplateRows: '0.5fr 5fr',
         border: 'none',
         borderRadius: '10px',
@@ -25,24 +25,24 @@ const useStyles = makeStyles({
     title: {
         fontSize: '10px',
         fontFamily: 'Helvetica, sans-serif',
-        backgroundColor: '#c8d3d5',
-        color: '#2b282a',
+        backgroundColor: 'rgb(152, 193, 217,0.6)',
+        color: '#E3F1F1',
         padding: '10px',
         paddingLeft: '16px',
     },
     content: {
         padding: '0px',
-        color: '#2b282a',
+        color: '#E3F1F1',
     },
 });
 
 const StyledButton = withStyles({
     root: {
-        backgroundColor: '#a4b8c4',
+        backgroundColor: 'rgb(152, 193, 217,0.6)',
     },
     label: {
         textTransform: 'capitalize',
-        color: '#2b282a',
+        color: '#E3F1F1',
     },
 })(Button);
 
@@ -57,8 +57,24 @@ const LobbySettings = ({ setOpen, setOpenInfo }) => {
             <CardContent className={classes.content}>
                 <List>
                     <ListItem>
-                        <Typography style={{ marginRight: '20px' }}>Number of Mafia: </Typography>
-                        <Select style={{ color: '#2b282a' }} defaultValue={1} label="This is a label">
+                        <Typography style={{ marginRight: '20px' }}>Number of Mafias: </Typography>
+                        <Select style={{ color: '#E3F1F1' }} defaultValue={1} label="This is a label">
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                        </Select>
+                    </ListItem>
+                    <ListItem>
+                        <Typography style={{ marginRight: '20px' }}>Number of Medics: </Typography>
+                        <Select style={{ color: '#E3F1F1' }} defaultValue={1} label="This is a label">
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                        </Select>
+                    </ListItem>
+                    <ListItem>
+                        <Typography style={{ marginRight: '20px' }}>Number of Jesters: </Typography>
+                        <Select style={{ color: '#E3F1F1' }} defaultValue={1} label="This is a label">
                             <MenuItem value={1}>1</MenuItem>
                             <MenuItem value={2}>2</MenuItem>
                             <MenuItem value={3}>3</MenuItem>
