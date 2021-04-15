@@ -3,9 +3,9 @@
 
 .pageContainer {
     align-items: center;
-    background-color: #A4B8C4!important;
+    background-color: #a4b8c4 !important;
     max-height: 700px;
-    overflow: auto!important;
+    overflow: auto !important;
 }
 
 .roleContainer {
@@ -43,7 +43,7 @@
 .dayRuleContainer {
     vertical-align: middle;
     margin: 0.5em auto 0.5em auto;
-    background-color: var(--lightGrey)!important;
+    background-color: var(--lightGrey) !important;
     padding: 0.5em;
     width: 80%;
     text-align: justify;
@@ -53,8 +53,8 @@
 .nightRuleContainer {
     vertical-align: middle;
     margin: 0 auto 1em auto;
-    background-color: var(--gunmetal)!important;
-    color: white!important;
+    background-color: var(--gunmetal) !important;
+    color: white !important;
     padding: 0.5em;
     width: 80%;
     text-align: justify;
@@ -63,14 +63,13 @@
 }
 
 .ruleImg {
-    transform: translate(0%, 17%);
     float: left;
     width: 8%;
     left: 1%;
 }
 
 .ruleDetail {
-    float:right;
+    float: right;
     width: 90%;
     font-size: 14px;
 }
@@ -78,10 +77,12 @@
 .roleInfo {
     display: flex;
     /* grid-template-rows: 1em 1fr; */
-    margin: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 12.5px;
+    margin-right: 12.5px;
     width: 280px;
     height: 180px;
-
 }
 
 .roleHighlight {
