@@ -1,3 +1,5 @@
+@import './colourScheme.css';
+
 .backButton {
     grid-area: BackButton;
     justify-self: start;
@@ -10,6 +12,7 @@
 .header {
     grid-area: Header;
     justify-self: center;
+    color: black;
 }
 
 .settingsButton {

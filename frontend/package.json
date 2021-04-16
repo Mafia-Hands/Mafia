@@ -12,7 +12,9 @@
         "eslint-config-airbnb": "^18.2.1",
         "eslint-config-prettier": "^8.1.0",
         "eslint-plugin-prettier": "^3.3.1",
+        "husky": "^4.3.8",
         "lint": "^0.7.0",
+        "material-ui-audio-player": "^1.6.2",
         "prop-types": "^15.7.2",
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
@@ -22,8 +24,7 @@
         "react-slider": "^1.1.4",
         "react-spring": "^8.0.27",
         "socket.io-client": "^4.0.0",
-        "web-vitals": "^1.0.1",
-        "husky": "^4.3.8"
+        "web-vitals": "^1.0.1"
     },
     "scripts": {
         "start": "react-scripts start",

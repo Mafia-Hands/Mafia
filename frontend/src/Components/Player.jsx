@@ -1,8 +1,12 @@
 import classNames from 'classnames';
 import React, { useContext } from 'react';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import styles from '../Styles/Player.module.css';
 import { GameContext, GeneralContext } from '../Context';
 import socket from '../Socket';
+import avatarImage from '../images/AvatarAlive.png'
+import avatarImageDead from '../images/AvatarDead.png'
 
 /**
  * The player component represents a specific player on the table.
@@ -50,10 +54,8 @@ export default function Player({ playerName, style, childRef }) {
         }
     }
 
-    // apply styles based on whether certain props is true
+    // apply styles based on whether certain props is true -> 1st was true before
     const playerStyle = classNames({
-        [styles.playerWrapper]: true,
-        [styles.player]: isPlayer,
         [styles.isHoverable]: isHoverable,
         [styles.hasVoted]: hasVoted,
         [styles.isClicked]: isVoted,
@@ -69,6 +71,20 @@ export default function Player({ playerName, style, childRef }) {
         };
     }
 
+    // Reveal an icon at trial end to show how a given player voted.
+    function revealVote() {
+        // Check the previous vote map and see if the player associated with this name voted 'no confidence'
+        if (gameState.prevVotingState.trialVoteMap[playerName] === "no Confidence"){
+            return <ThumbDownIcon fontSize="large"/>
+        // If the player is part of the 'playersWhoVoted' array, but didn't vote 'no confidence', they must have
+        // voted to kill the player on trial
+        } else if (gameState.prevVotingState.playersWhoVoted.includes(playerName)){
+            return <ThumbUpIcon fontSize="large"/>
+        } 
+        // This case is where a given player did not vote, or was on trial. Currently shouldn't display anything
+        return null
+    }
+
     function onClick() {
         switch (gameState.votingState.type) {
             case 'role':
@@ -81,6 +97,7 @@ export default function Player({ playerName, style, childRef }) {
                         status: `Selected ${playerName} for ability`,
                         votedPlayer: playerName,
                     });
+                    socket.emit('night-vote');
                     break;
                 }
                 break;
@@ -99,9 +116,12 @@ export default function Player({ playerName, style, childRef }) {
 
     return (
         <div className={playerStyle} style={style} ref={childRef} onClick={validateOnClick(onClick)}>
+            {isHoveredPlayerDead ? <img src={avatarImageDead} alt="dead player avatar" className={styles.playerImg}/> : <img src={avatarImage} alt="player avatar" className={styles.playerImg}/>}
             <div className={styles.playerText}>
                 <p>{playerName.concat(isHoveredPlayerDead ? ' (DEAD)' : '')}</p>
+                <p>{isPlayer ? ' (YOU)' : ''}</p>
                 <p>{mafiaString}</p>
+                <div>{gameState.phase === 'trial-end' ? revealVote() : ''}</div>
             </div>
         </div>
     );

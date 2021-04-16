@@ -1,7 +1,7 @@
 const SocketIOServer = require('../../index');
 const config = require('../../config.json');
 const { connectAndCreateLobby, startGame, connectAndJoin } = require('./IntegrationTestHelpers');
-const VoteForDTO = require('../../domain/DTO/request/VoteForDTO');
+const VoteForDTO = require('../../domain/dto/request/VoteForDTO');
 
 describe('day & trial vote integration tests', () => {
     const port = process.env.PORT || config.local_port;
@@ -29,8 +29,8 @@ describe('day & trial vote integration tests', () => {
         SocketIOServer.server.close();
     });
 
-    for (let playerCount = 6; playerCount <= 7; playerCount += 1) {
-        test('7 player day/trial vote test', async (done) => {
+    for (let playerCount = 6; playerCount <= 15; playerCount += 1) {
+        test('X player day/trial vote test', async (done) => {
             // join to server
             for (let i = 1; i < playerCount; i += 1) {
                 await connectAndJoin(clientSockets, i, port, lobbyCode);

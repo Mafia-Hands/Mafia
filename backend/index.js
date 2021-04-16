@@ -3,11 +3,12 @@ const server = require('http').createServer(app);
 const config = require('./config.json');
 const MafiaGame = require('./domain/MafiaGame');
 
-const loadLobbyEvents = require('./Events/LobbyEvents');
-const loadVoteEvents = require('./Events/VoteEvents');
-const loadGameStartEvents = require('./Events/GameStartEvents');
-const { loadNightTimeEvents } = require('./Events/NightTimeVoteEvents');
-const loadStateChangeEvents = require('./Events/GameStateEvents/StateChangeEvents');
+const loadLobbyEvents = require('./events/LobbyEvents');
+const loadVoteEvents = require('./events/VoteEvents');
+const loadGameStartEvents = require('./events/GameStartEvents');
+const { loadNightTimeEvents } = require('./events/NightTimeVoteEvents');
+const loadStateChangeEvents = require('./events/game-state-events/StateChangeEvents');
+const broadcastMessage = require('./events/MessageEvents');
 
 const io = require('socket.io')(server, {
     // Set up of CORS settings for socket.io server
@@ -44,6 +45,8 @@ io.on('connection', (socket) => {
 
     // this function catches events that relate to game state changes
     loadStateChangeEvents(io, socket, mafiaGame);
+
+    broadcastMessage(io, socket);
 });
 
 // Start the server on our predetermined port number.

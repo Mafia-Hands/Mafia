@@ -57,7 +57,23 @@ const LobbySettings = ({ setOpen, setOpenInfo }) => {
             <CardContent className={classes.content}>
                 <List>
                     <ListItem>
-                        <Typography style={{ marginRight: '20px' }}>Number of Mafia: </Typography>
+                        <Typography style={{ marginRight: '20px' }}>Number of Mafias: </Typography>
+                        <Select style={{ color: '#E3F1F1' }} defaultValue={1} label="This is a label">
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                        </Select>
+                    </ListItem>
+                    <ListItem>
+                        <Typography style={{ marginRight: '20px' }}>Number of Medics: </Typography>
+                        <Select style={{ color: '#E3F1F1' }} defaultValue={1} label="This is a label">
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                        </Select>
+                    </ListItem>
+                    <ListItem>
+                        <Typography style={{ marginRight: '20px' }}>Number of Jesters: </Typography>
                         <Select style={{ color: '#E3F1F1' }} defaultValue={1} label="This is a label">
                             <MenuItem value={1}>1</MenuItem>
                             <MenuItem value={2}>2</MenuItem>

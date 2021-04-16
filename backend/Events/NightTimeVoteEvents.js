@@ -1,5 +1,5 @@
-const RoleEnum = require('../domain/Enum/Role');
-const SuspectRevealDTO = require('../domain/DTO/response/SuspectRevealDTO');
+const RoleEnum = require('../domain/enum/Role');
+const SuspectRevealDTO = require('../domain/dto/response/SuspectRevealDTO');
 
 /**
  * Event handlers and logic for `mafia-vote`, 'medic-vote' and `detective-vote`
@@ -36,6 +36,7 @@ exports.loadNightTimeEvents = (io, socket, mafiaGame) => {
     socket.on('detective-vote', (detectiveVoteObj) => {
         const room = mafiaGame.gameRoomsDict[socket.player.roomID];
         const suspect = room.getPlayerByNickname(detectiveVoteObj.votingFor);
+        room.voteHandler.detectiveChosenPlayer = suspect;
         socket.emit('suspect-reveal', new SuspectRevealDTO(suspect.nickname, suspect.role === RoleEnum.MAFIA));
     });
 };
