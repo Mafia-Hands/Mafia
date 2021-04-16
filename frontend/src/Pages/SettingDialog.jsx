@@ -1,6 +1,5 @@
 import { React, useState  } from 'react';
 import { Slider, Button, withStyles } from '@material-ui/core';
-import AudioPlayer from 'material-ui-audio-player';
 import styles from '../Styles/SettingDialog.module.css';
 
 /* eslint-disable */
@@ -19,7 +18,6 @@ function RGBToHex(r,g,b) {
 }
 /* eslint-enable */
 
-// TODO: implement the slider functions
 export default function SettingDialog(){
     const StyledButton = withStyles({
         root: {
@@ -35,47 +33,41 @@ export default function SettingDialog(){
             color: 'white',
         },
     })(Button);
-    
-    const musicSrcSet = [
-        'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-        'https://demo.twilio.com/docs/classic.mp3'
-    ];
 
+    // Brightness cotrol logic
     const currentBrightness = parseInt(document.getElementById("brightness").style.background.substring(4,7), 10) - 155;
 
-    const [value, setValue] = useState(currentBrightness);
+    const [brightnessValue, setBrightnessValue] = useState(currentBrightness);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
+    const handleBrightnessChange = (event, newValue) => {
+        setBrightnessValue(newValue);
         document.getElementById("brightness").style.background = RGBToHex(newValue+155,newValue+155,newValue+155);
+    };
+
+    // Volume control logic
+    const [bgmVolume, setBgmVolume] = useState(document.getElementById("bgm").volume*100);
+
+    const handleBgmVolumeChange = (event, newValue) => {
+        setBgmVolume(newValue);
+        document.getElementById("bgm").volume = newValue / 100.0;
     };
 
     return(
         <div className={styles.container}>
         <div>
-            <div><b> Sound </b><br /><br /></div>
-            <div>
-                <AudioPlayer
-                    elevation={0}
-                    height="50px"
-                    variation="primary"
-                    spacing={1}
-                    autoplay="autoplay"
-                    debug={false}
-                    loop="true"
-                    src={musicSrcSet}
-                    onFinished={() => {
-                        //
-                    }}
-                />
-            </div>
+            <b> Sounds </b>
+            <Slider 
+                defaultValue={100}
+                value={bgmVolume}
+                onChange={handleBgmVolumeChange}
+            />
         </div>
         <div>
             <b> Brightness </b>
             <Slider 
                 defaultValue={currentBrightness}
-                value={value}
-                onChange={handleChange}
+                value={brightnessValue}
+                onChange={handleBrightnessChange}
             />
         </div>
         <div>
