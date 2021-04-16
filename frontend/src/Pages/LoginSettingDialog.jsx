@@ -1,5 +1,5 @@
 import { React, useState  } from 'react';
-import { Slider, Button, withStyles } from '@material-ui/core';
+import { Slider } from '@material-ui/core';
 import styles from '../Styles/SettingDialog.module.css';
 
 /* eslint-disable */
@@ -19,21 +19,6 @@ function RGBToHex(r,g,b) {
 /* eslint-enable */
 
 export default function SettingDialog(){
-    const StyledButton = withStyles({
-        root: {
-            alignSelf: 'start',
-            height: '100%',
-            borderRadius: '10px',
-            backgroundColor: '#EE6644',
-        },
-        label: {
-            textTransform: 'capitalize',
-            letterSpacing: '2px',
-            fontSize: '1.2rem',
-            color: 'white',
-        },
-    })(Button);
-
     // Brightness cotrol logic
     const currentBrightness = parseInt(document.getElementById("brightness").style.background.substring(4,7), 10) - 155;
 
@@ -69,16 +54,6 @@ export default function SettingDialog(){
                 value={brightnessValue}
                 onChange={handleBrightnessChange}
             />
-        </div>
-        <div>
-            <StyledButton
-                variant="contained"
-                onClick={() => {
-                    window.location.reload();
-                }}
-            >
-                Leave Game
-            </StyledButton>
         </div>
     </div>
     );

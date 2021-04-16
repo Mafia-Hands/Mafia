@@ -37,18 +37,16 @@ function App() {
             throw new Error('Invalid App screen state');
     }
 
-    if (state.screen === 'game') {
-        gameComponent = <div id="brightness" style={{ height: '100vh', background : '#9B9B9B' }}>{component}</div>;
-    } else {
-        gameComponent = <div id="brightness" style={{ height: '100vh', background : '#9B9B9B' }}>{component}</div>
-    }
-
     return (
         <GeneralContext.Provider value={{ state, dispatch }}>
             <Router>
                 <Switch>
                     <Route exact path="/">
-                        {gameComponent}
+                        <audio id ="bgm" autoPlay="autoPlay" preload="auto" loop="loop">
+                            <source  src="https://demo.twilio.com/docs/classic.mp3" type="audio/mpeg" />
+                            <track src="" kind="captions" srcLang="" label="" />
+                        </audio>
+                        <div id="brightness" style={{ height: '100vh', background : '#9B9B9B' }}>{component}</div>;
                     </Route>
                     <Route path="/*">
                         <Redirect to="/" />
