@@ -1,11 +1,23 @@
 import React, { useContext, useState } from 'react';
 
-import { withStyles, TextField, Button } from '@material-ui/core';
+import { withStyles, TextField, Dialog, DialogContent, DialogTitle, Button, IconButton, Slider } from '@material-ui/core';
+
+import SettingsIcon from '@material-ui/icons/Settings';
 
 import socket from '../Socket';
 import { GeneralContext } from '../Context';
 import styles from '../Styles/HomePage.module.css';
 import logo from '../images/MafiaLogo.png'
+
+const StyledIconButton = withStyles({
+    root: {
+        padding: '5px',
+        color: '#c8d3d5',
+        position: 'fixed',
+        top: '15px',
+        left: '15px',
+    },
+})(IconButton);
 
 const CustomTextField = withStyles({
     root: {
@@ -66,6 +78,16 @@ export default function HomePage(props) {
     const [tickLessThanTen, setTickLessThanTen] = useState(true);
     const [switchForm, setForm] = useState(false);
 
+    const [openSetting, setOpenSetting] = useState(false);
+
+    // Volume control logic
+    const [bgmVolume, setBgmVolume] = useState(100);
+
+    const handleBgmVolumeChange = (event, newValue) => {
+        setBgmVolume(newValue);
+        document.getElementById("bgm").volume = newValue / 100.0;
+    };
+
     const createLobby = () => {
         dispatch({ type: 'create-lobby', nickname });
         socket.emit('create-lobby', { nickname });
@@ -119,6 +141,12 @@ export default function HomePage(props) {
 
     return (
         <div className={styles.container}>
+            <StyledIconButton
+                variant="contained"
+                onClick={() => setOpenSetting(true)}
+            >
+                <SettingsIcon />
+            </StyledIconButton>
             <img src={logo} alt="" />
             <div className={styles.contents}>
                 <div className={`${switchForm === true ? styles.hidden : styles.primary}`}>
@@ -211,6 +239,23 @@ export default function HomePage(props) {
                     </div>
                 </div>
             </div>
+            <Dialog
+                open={openSetting}
+                onClose={() => {
+                    setOpenSetting(false);
+                }}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">Sound</DialogTitle>
+                <DialogContent>
+                    <Slider 
+                        defaultValue={100}
+                        value={bgmVolume}
+                        onChange={handleBgmVolumeChange}
+                    />
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }

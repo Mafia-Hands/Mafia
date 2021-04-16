@@ -21,8 +21,6 @@ function App() {
 
     let component;
 
-    let gameComponent;
-
     switch (state.screen) {
         case 'home':
             component = <HomePage code={pathname} />;
