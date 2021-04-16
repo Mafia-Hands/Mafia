@@ -1,5 +1,7 @@
 import classNames from 'classnames';
 import React, { useContext } from 'react';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import styles from '../Styles/Player.module.css';
 import { GameContext, GeneralContext } from '../Context';
 import socket from '../Socket';
@@ -69,13 +71,18 @@ export default function Player({ playerName, style, childRef }) {
         };
     }
 
+    // Reveal an icon at trial end to show how a given player voted.
     function revealVote() {
+        // Check the previous vote map and see if the player associated with this name voted 'no confidence'
         if (gameState.prevVotingState.trialVoteMap[playerName] === "no Confidence"){
-            return "No confidence"
+            return <ThumbDownIcon fontSize="large"/>
+        // If the player is part of the 'playersWhoVoted' array, but didn't vote 'no confidence', they must have
+        // voted to kill the player on trial
         } else if (gameState.prevVotingState.playersWhoVoted.includes(playerName)){
-            return "KILL!"
+            return <ThumbUpIcon fontSize="large"/>
         } 
-        return ""
+        // This case is where a given player did not vote, or was on trial. Currently shouldn't display anything
+        return null
     }
 
     function onClick() {
@@ -112,7 +119,7 @@ export default function Player({ playerName, style, childRef }) {
             <div className={styles.playerText}>
                 <p>{playerName.concat(isHoveredPlayerDead ? ' (DEAD)' : '')}</p>
                 <p>{mafiaString}</p>
-                <p>{gameState.phase === 'trial-end' ? revealVote() : ''}</p>
+                <div>{gameState.phase === 'trial-end' ? revealVote() : ''}</div>
             </div>
         </div>
     );
