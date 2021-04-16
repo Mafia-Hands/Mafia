@@ -3,6 +3,8 @@ import React, { useContext } from 'react';
 import styles from '../Styles/Player.module.css';
 import { GameContext, GeneralContext } from '../Context';
 import socket from '../Socket';
+import avatarImage from '../images/AvatarAlive.png'
+import avatarImageDead from '../images/AvatarDead.png'
 
 /**
  * The player component represents a specific player on the table.
@@ -50,10 +52,8 @@ export default function Player({ playerName, style, childRef }) {
         }
     }
 
-    // apply styles based on whether certain props is true
+    // apply styles based on whether certain props is true -> 1st was true before
     const playerStyle = classNames({
-        [styles.playerWrapper]: true,
-        [styles.player]: isPlayer,
         [styles.isHoverable]: isHoverable,
         [styles.hasVoted]: hasVoted,
         [styles.isClicked]: isVoted,
@@ -100,8 +100,10 @@ export default function Player({ playerName, style, childRef }) {
 
     return (
         <div className={playerStyle} style={style} ref={childRef} onClick={validateOnClick(onClick)}>
+            {isHoveredPlayerDead ? <img src={avatarImageDead} alt="dead player avatar" className={styles.playerImg}/> : <img src={avatarImage} alt="player avatar" className={styles.playerImg}/>}
             <div className={styles.playerText}>
                 <p>{playerName.concat(isHoveredPlayerDead ? ' (DEAD)' : '')}</p>
+                <p>{isPlayer ? ' (YOU)' : ''}</p>
                 <p>{mafiaString}</p>
             </div>
         </div>
