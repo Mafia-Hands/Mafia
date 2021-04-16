@@ -1,14 +1,11 @@
 import React, { useContext, useState } from 'react';
 
 import { withStyles, TextField, Button } from '@material-ui/core';
-import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
-
-import Tooltip from '@material-ui/core/Tooltip';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 import socket from '../Socket';
 import { GeneralContext } from '../Context';
 import styles from '../Styles/HomePage.module.css';
+import logo from '../images/MafiaLogo.png';
 
 const CustomTextField = withStyles({
     root: {
@@ -33,7 +30,8 @@ const CustomJoinButton = withStyles({
     label: {
         fontFamily: 'Helvetica, sans-serif',
         fontWeight: 'bold',
-        color: 'rgba((62,91,127))',
+        color: 'white',
+        fontSize: '14px',
     },
 })(Button);
 
@@ -60,21 +58,13 @@ const CustomCreateButton = withStyles({
 export default function HomePage(props) {
     const { dispatch } = useContext(GeneralContext);
     const [nickname, setNickname] = useState('');
-    // const [{ code }, setCode] = useState(props);
     const [code, setCode] = useState(props.code);
     const [joinDisabled, setjoinDisabled] = useState(true);
+    const [joinLobbyDisabled, setjoinLobbyDisabled] = useState(true);
     const [tickNonempty, setTickNonempty] = useState(false);
     const [tickNoSpaces, setTickNoSpaces] = useState(true);
     const [tickLessThanTen, setTickLessThanTen] = useState(true);
-    const [open, setOpen] = useState(false);
-
-    const handleTooltipClose = () => {
-        setOpen(false);
-    };
-
-    const handleTooltipOpen = () => {
-        setOpen(true);
-    };
+    const [switchForm, setForm] = useState(false);
 
     const createLobby = () => {
         dispatch({ type: 'create-lobby', nickname });
@@ -114,107 +104,112 @@ export default function HomePage(props) {
         }
     };
 
+    const validateCode = (lobbyCode) => {
+        let validCheck = true;
+        setCode(lobbyCode);
+        if (lobbyCode === '') {
+            validCheck = false;
+        }
+        if (validCheck && joinDisabled === false) {
+            setjoinLobbyDisabled(false);
+        } else {
+            setjoinLobbyDisabled(true);
+        }
+    };
+
     return (
         <div className={styles.container}>
+            <img src={logo} alt="" />
             <div className={styles.contents}>
-                <div className={styles.header}> Mafia </div>
-                <ClickAwayListener onClickAway={handleTooltipClose} style={{ display: 'grid' }}>
-                    <div style={{ display: 'grid' }}>
-                        <Tooltip
-                            PopperProps={{
-                                disablePortal: true,
-                            }}
-                            onClose={handleTooltipClose}
-                            open={open}
-                            disableFocusListener
-                            disableHoverListener
-                            disableTouchListener
-                            title={
-                                <>
-                                    <div className={styles.checkers}>
-                                        <span className={tickNonempty ? styles.validNickname : styles.invalidNickname}>
-                                            {tickNonempty ? (
-                                                <span>
-                                                    <CheckRoundedIcon fontSize="small" />
-                                                    <span className={styles.checkitems}> Non-empty nickname</span>{' '}
-                                                </span>
-                                            ) : (
-                                                <span className={styles.checkitems}> Non-empty nickname</span>
-                                            )}
-                                        </span>
-                                        <span className={tickNoSpaces ? styles.validNickname : styles.invalidNickname}>
-                                            {tickNoSpaces ? (
-                                                <span>
-                                                    <CheckRoundedIcon fontSize="small" />
-                                                    <span className={styles.checkitems}> No spaces</span>{' '}
-                                                </span>
-                                            ) : (
-                                                <span className={styles.checkitems}>No spaces</span>
-                                            )}
-                                        </span>
-                                        <span
-                                            className={tickLessThanTen ? styles.validNickname : styles.invalidNickname}
-                                        >
-                                            {tickLessThanTen ? (
-                                                <span>
-                                                    <CheckRoundedIcon fontSize="small" />
-                                                    <span className={styles.checkitems}>
-                                                        Less than 10 characters
-                                                    </span>{' '}
-                                                </span>
-                                            ) : (
-                                                <span className={styles.checkitems}>Less than 10 characters</span>
-                                            )}
-                                        </span>
-                                    </div>
-                                </>
-                            }
-                            placement="right"
-                            arrow
+                <div className={`${switchForm === true ? styles.hidden : styles.primary}`}>
+                    <CustomTextField
+                        className={styles.nameInputs}
+                        id="nickname"
+                        label="Enter Nickname"
+                        autoComplete="off"
+                        value={nickname}
+                        onChange={(e) => validateNickname(e.target.value)}
+                        InputLabelProps={{ style: { fontSize: '18px', paddingLeft: '2em' } }}
+                        InputProps={{ disableUnderline: true, style: { fontSize: '26px', paddingLeft: '1em' } }}
+                    />
+                    <div className={styles.checkers}>
+                        <span className={tickNonempty ? styles.validNickname : styles.invalidNickname}>
+                            {tickNonempty ? (
+                                <span className={styles.checkitems}>&#10004; Non-empty nickname</span>
+                            ) : (
+                                <span className={styles.checkitems}>&#10005; Non-empty nickname</span>
+                            )}
+                        </span><br />
+                        <span className={tickNoSpaces ? styles.validNickname : styles.invalidNickname}>
+                            {tickNoSpaces ? (
+                                <span className={styles.checkitems}>&#10004; No spaces</span>
+                            ) : (
+                                <span className={styles.checkitems}>&#10005; No spaces</span>
+                            )}
+                        </span><br />
+                        <span
+                            className={tickLessThanTen ? styles.validNickname : styles.invalidNickname}
                         >
-                            <CustomTextField
-                                className={styles.nameInputs}
-                                id="nickname"
-                                label="Enter Nickname"
-                                autoComplete="off"
-                                value={nickname}
-                                onChange={(e) => validateNickname(e.target.value)}
-                                onClick={handleTooltipOpen}
-                                InputLabelProps={{ style: { fontSize: '20px', paddingLeft: '2em' } }}
-                                InputProps={{ disableUnderline: true, style: { fontSize: '30px', paddingLeft: '1em' } }}
-                            />
-                        </Tooltip>
+                            {tickLessThanTen ? (
+                                <span>
+                                    <span className={styles.checkitems}>&#10004; Less than 10 characters</span>
+                                </span>
+                            ) : (
+                                <span className={styles.checkitems}>&#10005; Less than 10 characters</span>
+                            )}
+                        </span>
                     </div>
-                </ClickAwayListener>
-                <CustomTextField
-                    className={styles.codeInputs}
-                    id="room-code"
-                    value={code}
-                    label="Enter LobbyID"
-                    autoComplete="off"
-                    type="text"
-                    onChange={(e) => setCode(e.target.value)}
-                    InputLabelProps={{ style: { fontSize: '20px', paddingLeft: '2em' } }}
-                    InputProps={{ disableUnderline: true, style: { fontSize: '30px', paddingLeft: '1em' } }}
-                />
-                <CustomJoinButton
-                    className={styles.joinButton}
-                    variant="outlined"
-                    onClick={joinLobby}
-                    id="join-lobby"
-                    disabled={joinDisabled}
-                >
-                    Join
-                </CustomJoinButton>
-                <CustomCreateButton
-                    className={styles.createButton}
-                    variant="outlined"
-                    onClick={createLobby}
-                    id="create-lobby"
-                    disabled={joinDisabled}
-                >
-                    Create new game
-                </CustomCreateButton>
+                    <CustomCreateButton
+                        className={styles.createButton}
+                        variant="outlined"
+                        onClick={createLobby}
+                        id="create-lobby"
+                        disabled={joinDisabled}
+                    >
+                        Create new game
+                    </CustomCreateButton>
+                    <CustomCreateButton
+                        className={styles.joinButton}
+                        variant="outlined"
+                        onClick={() => setForm(true)}
+                        id="switch-form"
+                        disabled={joinDisabled}
+                    >
+                        Join Game
+                    </CustomCreateButton>
+                </div>
+                <div className={`${switchForm === false ? styles.hidden : styles.secondary}`}>
+                    <div className={styles.header}>Enter an ID to start playing!</div>
+                    <button 
+                        className={styles.goBackButton}
+                        onClick={() => setForm(false)}
+                        type="button"
+                    >
+                        Go Back
+                    </button>
+                    <div className={styles.joinForm}>
+                        <CustomTextField
+                            className={styles.codeInputs}
+                            id="room-code"
+                            value={code}
+                            label="Enter LobbyID"
+                            autoComplete="off"
+                            type="text"
+                            onChange={(e) => validateCode(e.target.value)}
+                            InputLabelProps={{ style: { fontSize: '18px', paddingLeft: '2em' } }}
+                            InputProps={{ disableUnderline: true, style: { fontSize: '26px', paddingLeft: '1em' } }}
+                        />
+                        <CustomJoinButton
+                            className={styles.joinLobbyButton}
+                            variant="outlined"
+                            onClick={joinLobby}
+                            id="join-lobby"
+                            disabled={joinLobbyDisabled}
+                        >
+                            Join
+                        </CustomJoinButton>
+                    </div>
+                </div>
             </div>
         </div>
     );
