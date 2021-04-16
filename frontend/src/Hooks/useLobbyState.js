@@ -73,7 +73,7 @@ export default function useLobbyState() {
             dispatch({ type: 'set-role', role: role.toLowerCase() });
 
             dispatch({ type: 'change-screen', screen: 'game' });
-            state.isHost && setTimeout(() => socket.emit('start-night'), 2000);
+            state.isHost && setTimeout(() => socket.emit('start-night'), 7000);
         };
 
         const onLobbyCode = ({ code }) => {
