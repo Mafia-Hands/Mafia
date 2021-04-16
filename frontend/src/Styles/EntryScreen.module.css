@@ -1,0 +1,35 @@
+@import './colourScheme.css';
+
+.screenBackground {
+    background-color: var(--lightGrey); 
+    height: '100%';
+}
+
+.roleInfo {
+    display: flex;
+    margin: 5px;
+    width: auto;
+    height: auto;
+}
+
+.charaImg {
+    float: left;
+    width: 30%;
+    padding-top: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+}
+
+.detail {
+    width: 60%;
+    float: right;
+}
+
+.spanTitle {
+    font-weight: bold;
+    font-size: 12px;
+}
+.spanContent {
+    font-size: 12px;
+}

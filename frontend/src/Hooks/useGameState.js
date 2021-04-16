@@ -134,9 +134,12 @@ const reducer = (state, action) => {
         case 'trial-end': {
             return {
                 ...state,
-                phase: 'trial-start',
+                phase: 'trial-end',
                 status: action.status,
                 alivePlayers: state.alivePlayers.filter((p) => p !== action.playerKilled),
+                prevVotingState: {
+                    ...state.votingState,
+                },
                 votingState: {
                     ...initialState.votingState,
                 },
@@ -160,6 +163,7 @@ const reducer = (state, action) => {
                 votingState: {
                     ...state.votingState,
                     playersWhoVoted: action.playersWhoVoted,
+                    trialVoteMap: action.trialVoteMap,
                 },
             };
         }
@@ -327,6 +331,7 @@ export default function useGameState() {
             dispatch({
                 type: 'vote-update',
                 playersWhoVoted: Object.keys(voteMap),
+                trialVoteMap: voteMap,
             });
         }
 

@@ -142,6 +142,11 @@ export default function Table() {
         dispatch({ type: 'show-selected', status: `Voted to Abstain` });
     }
 
+    function killHandler(playerName) {
+        socket.emit(`trial-vote`, { votingFor: playerName });
+        dispatch({ type: 'show-selected', status: `Voted to kill ${playerName}`, votedPlayer: playerName });
+    }
+
     useEffect(() => {
         // we want the positions to be computed after the first render
         if (firstRender.current) {
@@ -184,20 +189,35 @@ export default function Table() {
                             const { playerId, name } = p;
 
                             return (
-                                <>
-                                    <Player key={playerId} playerId={playerId} playerName={name} childRef={playerRef} />{' '}
-                                    <Button
-                                        onClick={() => {
-                                            abstainHandler();
-                                        }}
-                                        style={{
-                                            visibility: (gameState.phase !== 'trial-start' || amIDead) && 'hidden',
-                                        }}
-                                        variant="contained"
-                                    >
-                                        Abstain
-                                    </Button>
-                                </>
+                                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                                    <div>
+                                        <Player key={playerId} playerId={playerId} playerName={name} childRef={playerRef} />{' '}
+                                    </div>
+                                    <div>
+                                        <Button
+                                            onClick={() => {
+                                                killHandler(name);
+                                            }}
+                                            style={{
+                                                visibility: (gameState.phase !== 'trial-start' || amIDead) && 'hidden',
+                                                margin: '10px',
+                                            }}
+                                            variant="contained">
+                                                Kill
+                                        </Button>
+                                        <Button
+                                            onClick={() => {
+                                                abstainHandler();
+                                            }}
+                                            style={{
+                                                visibility: (gameState.phase !== 'trial-start' || amIDead) && 'hidden',
+                                            }}
+                                            variant="contained"
+                                        >
+                                            Save
+                                        </Button>
+                                    </div>
+                                </div>
                             );
                         })}
                 </div>
