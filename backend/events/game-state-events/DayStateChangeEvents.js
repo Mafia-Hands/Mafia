@@ -34,10 +34,8 @@ function startDay(io, socket, mafiaGame) {
     socket.on('day-vote', () => {
         const { roomID } = socket.player;
         const room = mafiaGame.gameRoomsDict[roomID];
-        const numAlive = room.players.filter(
-            (player) => player.status === PlayerStatus.ALIVE
-        ).length;
-        const numVotes = Object.keys(room.voteHandler.daytimeVoteMap).length
+        const numAlive = room.players.filter((player) => player.status === PlayerStatus.ALIVE).length;
+        const numVotes = Object.keys(room.voteHandler.daytimeVoteMap).length;
         if (numAlive === numVotes) {
             clearTimeout(room.currentTimer);
             endDiscussion(io, socket, mafiaGame);
