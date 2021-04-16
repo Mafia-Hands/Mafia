@@ -8,7 +8,14 @@
     font-size: 1.5rem;
 }
 
-
+.hatImg {
+    height: 4vw;
+    width: 4vw;
+    /* position: relative; */
+    margin: -150% 25% 150% 25%;
+    /* padding-bottom: 0vw; */
+    font-size: 1.5rem;
+}
 
 .isHoverable:hover {
     cursor: pointer;

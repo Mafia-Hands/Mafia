@@ -5,11 +5,11 @@ import { GameContext, GeneralContext } from '../Context';
 import socket from '../Socket';
 import avatarImage from '../images/AvatarAlive.png'
 import avatarImageDead from '../images/AvatarDead.png'
-import civilianImage from '../images/Citizen.svg';
-import detectiveImage from '../images/Detective.svg';
-import jesterImage from '../images/Jester.svg';
-import mafiaImage from '../images/Mafia.svg';
-import medicImage from '../images/Medic.svg';
+import citizenImage from '../images/CitizenHat.svg';
+import detectiveImage from '../images/DetectiveHat.svg';
+import jesterImage from '../images/JesterHat.svg';
+import mafiaImage from '../images/MafiaHat.svg';
+import medicImage from '../images/MedicHat.svg';
 
 /**
  * The player component represents a specific player on the table.
@@ -65,13 +65,13 @@ export default function Player({ playerName, style, childRef }) {
         [styles.isDead]: isHoveredPlayerDead,
     });
 
-    // apply player avatar depending on what role the player has
-    const playerAvatar = classNames({
-        [civilianImage]: (isPlayer && gameState.role === 'civilian'),
-        [detectiveImage]: (isPlayer && gameState.role === 'detective'),
-        [jesterImage]: (isPlayer && gameState.role === 'jester'),
-        [mafiaImage]: (isPlayer && gameState.role === 'mafia' || mafiaString === ' (Mafia)'),
-        [medicImage]: (isPlayer && gameState.role === 'medic'),
+    // apply player avatar hat depending on what role the player has
+    const playerHat = classNames({
+        [citizenImage]: (gameState.role === 'civilian'),
+        [detectiveImage]: (gameState.role === 'detective'),
+        [jesterImage]: (gameState.role === 'jester'),
+        [mafiaImage]: (gameState.role === 'mafia'),
+        [medicImage]: (gameState.role === 'medic'),
     })
 
     // this only allows clicks if a player is actually hoverable.
@@ -120,7 +120,8 @@ export default function Player({ playerName, style, childRef }) {
                 <p>{isPlayer ? ' (YOU)' : ''}</p>
                 <p>{mafiaString}</p>
             </div>
-            <img src={playerAvatar} alt=""/>
+            {isPlayer ? <img src={playerHat} alt="" className={styles.hatImg}/> : null}
+            {(mafiaString === ' (Mafia)') ? <img src={mafiaImage} alt="" className={styles.hatImg}/> : null}
         </div>
     );
 }
