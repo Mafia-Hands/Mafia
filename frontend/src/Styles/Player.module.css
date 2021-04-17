@@ -1,41 +1,37 @@
 @import './colourScheme.css';
 
-.playerWrapper {
+
+.playerImg {
     height: 7vw;
     width: 7vw;
-    border-radius: 50%;
-    background-color: var(--mediumBlue);
-    color: var(--deepBlue);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
+    margin: 10px 10px 0px 10px;
     font-size: 1.5rem;
 }
 
-.player {
-    background-color: var(--deepBlue);
-    color: var(--lightBlue);
-}
+
 
 .isHoverable:hover {
-    background-color: var(--mediumBlue);
     cursor: pointer;
-    border: 5px solid var(--deepBlue);
-    transition: 0.2s ease background-color box-shadow;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.479);
     transform: scale(1.1);
 }
 
 .hasVoted:after {
-    content: '';
-    width: 30px;
-    height: 30px;
+    content: 'I VOTED!';
+    font-weight: bold;
+    font-size: medium;
+    text-align: center;
+    vertical-align: 50%;
+    margin-left: 10px;
+    color: black;
+    border-radius: 4px;
+    width: 90px;
+    height: 25px;
     position: absolute;
-    border-radius: 50%;
-    bottom: 0;
-    right: 10%;
-    background-color: var(--lightOrange);
+    top: -15px;
+    background-color: var(--lightGreen);    
+    border-color: rgb(146, 168, 136);
+    border-style: solid;  
+    border-width: 1px;
 }
 
 .isClicked {
@@ -48,10 +44,12 @@
 }
 
 .isDead {
-    background-color: var(--darkBlue);
-    color: var(--lightOrange);
+    color: var(--darkOrange);
 }
 
 .playerText {
     text-align: center;
+}
+.playerText p {
+    margin: 2px;
 }
