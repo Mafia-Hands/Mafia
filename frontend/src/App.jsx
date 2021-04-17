@@ -9,15 +9,7 @@ import useLobbyState from './Hooks/useLobbyState';
 
 import { GeneralContext } from './Context';
 
-/* eslint-disable */
-function bgmLang() {
-    var brsLang =(navigator.language || navigator.browserLanguage).toLowerCase().substr(0, 2);
-    if (brsLang === 'zh')
-        return "http://yswysc.iask.in/public/.701A2_3L/2tigers.mp3";
-    else
-        return "https://demo.twilio.com/docs/classic.mp3";
-}
-/* eslint-enable */
+// export const GeneralContext = React.createContext();
 
 /**
  * Main React Component
@@ -49,7 +41,7 @@ function App() {
                 <Switch>
                     <Route exact path="/">
                         <audio id ="bgm" autoPlay="autoPlay" preload="auto" loop="loop">
-                            <source  src={bgmLang()} />
+                            <source  src="https://demo.twilio.com/docs/classic.mp3" type="audio/mpeg" />
                             <track src="" kind="captions" srcLang="" label="" />
                         </audio>
                         <div id="brightness" style={{ height: '100vh', background : '#9B9B9B' }}>{component}</div>;
