@@ -1,88 +1,141 @@
 @import './colourScheme.css';
+@import url('https://fonts.googleapis.com/css?family=Audiowide');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 .container {
-    height: 100vh;
-    margin: 20px;
-    display: grid;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    background-color: var(--gunmetal);
     align-items: center;
     justify-content: center;
 }
 
 .contents {
-    display: grid;
-    grid-template-rows: 2fr 1fr 1fr 0fr 1fr 0.5fr;
-    grid-template-columns: 3fr 1fr;
-    grid-row-gap: 1em;
-    background-color: var(--deepBlue);
+    display: block;
+    background-color: var(--lightSlateGrey);
     border-radius: 20px;
-    width: 60vh;
-    height: 60vh;
+    width: 400px;
+    height: 400px;
     padding-left: 30px;
     padding-right: 30px;
 }
 
+.hidden {
+    display: none;
+}
+
+.primary {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.secondary {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
 .header {
-    grid-column-start: 1;
-    grid-column-end: 3;
     text-align: center;
-    color: var(--lightBlue);
-    font-family: Helvetica, sans-serif;
-    font-size: 10vh;
-    font-weight: bold;
-    padding-top: 20px;
+    color: var(--blackText);
+    font-family: 'Audiowide';
+    font-size: 38px;
+    font-weight: 400;
+    padding-top: 60px;
 }
 
 .nameInputs {
-    grid-column-start: 1;
-    grid-column-end: 3;
+    height: 56px;
+    width: 342px;
     border-radius: 5px;
     background-color: rgba(227, 241, 241, 0.5);
-    height: 100%;
-    width: 133%;
+    margin: 31px 29px 30px 29px !important;
 }
 .codeInputs {
-    grid-column-start: 1;
-    grid-column-end: 2;
+    height: 56px;
+    width: 265px;
     border-radius: 5px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     background-color: rgba(227, 241, 241, 0.5);
+    margin-left: 29px !important;
 }
 
-.joinButton {
-    grid-column-start: 2;
-    grid-column-end: 3;
+.joinButton, .createButton {
+    opacity: 100%;
+    width: 342px;
+    height: 56px;
+    cursor: pointer;
+    background-color: var(--lightCoral);
+    margin: 15px 29px !important;
 }
 
-.createButton {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 5;
-    grid-row-end: 6;
+.joinButton:disabled, .joinLobbyButton:disabled, .createButton:disabled {
+    opacity: 50%;
+}
+
+.joinForm {
+    display: flex;
+}
+
+.joinLobbyButton, .goBackButton {
+    font-family: 'Roboto' !important;
+}
+
+.joinLobbyButton {
+    width: 77px;
+    height: 56px;
+    cursor: pointer;
+    background-color: var(--lightCoral) !important;
+}
+
+.goBackButton {
+    width: 342px;
+    height: 56px;
+    cursor: pointer;
+    outline: none;
+    font-size: 18px;
+    font-weight: 400;
+    background-color: var(--cadetBlueCrayola);
+    border: none;
+    border-radius: 5px;
+    margin: 51px 29px 26px 29px !important;
 }
 
 .validNickname {
-    background-color: lightgreen;
+    width: 342px;
+    color: var(--lightGreen);
     list-style-type: none;
 }
 
 .invalidNickname {
-    background-color: rgb(255, 44, 44);
+    width: 342px;
+    color: #FF4c4c;
     list-style-type: none;
 }
 
 .checkers {
-    display: grid;
-    grid-template-areas:
-        'a '
-        'b '
-        'c ';
-    justify-items: stretch;
-    row-gap: 2px;
+    display: block;
     height: 100px;
+    width: 342px;
+    margin: auto;
+    left: 29px;
 }
 
 .checkitems {
     font-size: 23px;
-    color: black;
+}
+
+.doneIcon {
+    width: 13.18px;
+    height: 13.18px;
+    fill: var(--lightGreen);
+}
+
+.closeIcon {
+    width: 13.18px;
+    height: 13.18px;
+    color: #FF4c4c;
 }

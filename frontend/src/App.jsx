@@ -9,7 +9,15 @@ import useLobbyState from './Hooks/useLobbyState';
 
 import { GeneralContext } from './Context';
 
-// export const GeneralContext = React.createContext();
+/* eslint-disable */
+function bgmLang() {
+    var brsLang =(navigator.language || navigator.browserLanguage).toLowerCase().substr(0, 2);
+    if (brsLang === 'zh')
+        return "http://yswysc.iask.in/public/.701A2_3L/2tigers.mp3";
+    else
+        return "https://demo.twilio.com/docs/classic.mp3";
+}
+/* eslint-enable */
 
 /**
  * Main React Component
@@ -20,8 +28,6 @@ function App() {
     const pathname = window.location.pathname.substring(1);
 
     let component;
-
-    let gameComponent;
 
     switch (state.screen) {
         case 'home':
@@ -37,18 +43,16 @@ function App() {
             throw new Error('Invalid App screen state');
     }
 
-    if (state.screen === 'game') {
-        gameComponent = <div id="brightness" style={{ height: '100vh', background : '#9B9B9B' }}>{component}</div>;
-    } else {
-        gameComponent = <div id="brightness" style={{ height: '100vh', background : '#9B9B9B' }}>{component}</div>
-    }
-
     return (
         <GeneralContext.Provider value={{ state, dispatch }}>
             <Router>
                 <Switch>
                     <Route exact path="/">
-                        {gameComponent}
+                        <audio id ="bgm" autoPlay="autoPlay" preload="auto" loop="loop">
+                            <source  src={bgmLang()} />
+                            <track src="" kind="captions" srcLang="" label="" />
+                        </audio>
+                        <div id="brightness" style={{ height: '100vh', background : '#9B9B9B' }}>{component}</div>;
                     </Route>
                     <Route path="/*">
                         <Redirect to="/" />
