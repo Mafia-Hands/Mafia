@@ -17,7 +17,11 @@ const StyledButton = withStyles({
         alignSelf: 'start',
         height: '100%',
         borderRadius: '10px',
+        color: 'white',
         backgroundColor: '#f76c6c',
+        '&:hover': {
+            backgroundColor: '#f75252',
+        },
     },
     label: {
         fontWeight: 'bolder',
@@ -60,7 +64,6 @@ const NewGameScreen = () => {
                         <StyledButton
                             className={styles.startButton}
                             variant="contained"
-                            color="primary"
                             size="large"
                             id="start-game"
                             disabled={!state.lobbyReady}

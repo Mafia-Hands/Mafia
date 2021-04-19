@@ -33,6 +33,7 @@
 }
 .spanContent {
     font-size: 12px;
+    width: 80%;
 }
 
 .detail {
@@ -79,8 +80,8 @@
 }
 
 .roleInfo {
-  margin: 10px;
-  position: relative;
+    margin: 10px;
+    position: relative;
 }
 
 .roleHighlight {
