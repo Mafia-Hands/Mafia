@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     root: {
         display: 'grid',
         gridGap: '0px',
-        backgroundColor: '#3E5B7F',
+        backgroundColor: '#7796A6',
         gridTemplateRows: '0.5fr 5fr',
         border: 'none',
         borderRadius: '10px',
@@ -25,8 +25,8 @@ const useStyles = makeStyles({
     title: {
         fontSize: '10px',
         fontFamily: 'Helvetica, sans-serif',
-        backgroundColor: 'rgb(152, 193, 217,0.6)',
-        color: '#E3F1F1',
+        backgroundColor: '#C8D3D5',
+        color: 'black',
         padding: '10px',
         paddingLeft: '16px',
     },
@@ -38,11 +38,11 @@ const useStyles = makeStyles({
 
 const StyledButton = withStyles({
     root: {
-        backgroundColor: 'rgb(152, 193, 217,0.6)',
+        backgroundColor: '#C2CCD6',
     },
     label: {
         textTransform: 'capitalize',
-        color: '#E3F1F1',
+        color: 'black',
     },
 })(Button);
 
@@ -57,24 +57,24 @@ const LobbySettings = ({ setOpen, setOpenInfo }) => {
             <CardContent className={classes.content}>
                 <List>
                     <ListItem>
-                        <Typography style={{ marginRight: '20px' }}>Number of Mafias: </Typography>
-                        <Select style={{ color: '#E3F1F1' }} defaultValue={1} label="This is a label">
+                        <Typography style={{ marginRight: '20px', color: 'black' }}>Number of Mafias: </Typography>
+                        <Select defaultValue={1} label="This is a label">
                             <MenuItem value={1}>1</MenuItem>
                             <MenuItem value={2}>2</MenuItem>
                             <MenuItem value={3}>3</MenuItem>
                         </Select>
                     </ListItem>
                     <ListItem>
-                        <Typography style={{ marginRight: '20px' }}>Number of Medics: </Typography>
-                        <Select style={{ color: '#E3F1F1' }} defaultValue={1} label="This is a label">
+                        <Typography style={{ marginRight: '20px', color: 'black'  }}>Number of Medics: </Typography>
+                        <Select defaultValue={1} label="This is a label">
                             <MenuItem value={1}>1</MenuItem>
                             <MenuItem value={2}>2</MenuItem>
                             <MenuItem value={3}>3</MenuItem>
                         </Select>
                     </ListItem>
                     <ListItem>
-                        <Typography style={{ marginRight: '20px' }}>Number of Jesters: </Typography>
-                        <Select style={{ color: '#E3F1F1' }} defaultValue={1} label="This is a label">
+                        <Typography style={{ marginRight: '20px', color: 'black'  }}>Number of Jesters: </Typography>
+                        <Select defaultValue={1} label="This is a label">
                             <MenuItem value={1}>1</MenuItem>
                             <MenuItem value={2}>2</MenuItem>
                             <MenuItem value={3}>3</MenuItem>

@@ -12,7 +12,7 @@
 .header {
     grid-area: Header;
     justify-self: center;
-    color: black;
+    color: white;
 }
 
 .settingsButton {
