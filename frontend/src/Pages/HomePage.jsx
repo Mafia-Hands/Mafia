@@ -75,6 +75,12 @@ const CustomCreateButton = withStyles({
     },
 })(Button);
 
+const CustomStyledIconButton = withStyles({
+    root: {
+        paddingLeft: '95%',
+    },
+})(StyledIconButton);
+
 // @param {code}  props.code represents the lobby code
 export default function HomePage(props) {
     const { dispatch } = useContext(GeneralContext);
@@ -150,9 +156,9 @@ export default function HomePage(props) {
 
     return (
         <div className={styles.container}>
-            <StyledIconButton variant="contained" onClick={() => setOpenSetting(true)}>
+            <CustomStyledIconButton variant="contained" onClick={() => setOpenSetting(true)}>
                 <SettingsIcon />
-            </StyledIconButton>
+            </CustomStyledIconButton>
             <img src={logo} alt="" />
             <div className={styles.contents}>
                 <div className={`${switchForm === true ? styles.hidden : styles.primary}`}>
