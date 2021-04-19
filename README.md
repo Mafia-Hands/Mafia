@@ -4,7 +4,7 @@ This is an online multiplayer take on the classic party game Mafia. The game spl
 However, since this is an OSS project, developers are free to edit rules and add new functionality as they please.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Mafia-Hands/Mafia/main/frontend/public/logo192.png" height=200; width=200>
+  <img src="frontend/src/images/MafiaLogo.png" height=200; width=200>
 </p>
 
 Please review the [documentation](https://github.com/Mafia-Hands/Mafia/wiki) for guidelines and information about the software.
