@@ -7,6 +7,11 @@ import { GameContext, GeneralContext } from '../Context';
 import socket from '../Socket';
 import avatarImage from '../images/AvatarAlive.png'
 import avatarImageDead from '../images/AvatarDead.png'
+import citizenImage from '../images/CitizenHat.svg';
+import detectiveImage from '../images/DetectiveHat.svg';
+import jesterImage from '../images/JesterHat.svg';
+import mafiaImage from '../images/MafiaHat.svg';
+import medicImage from '../images/MedicHat.svg';
 
 /**
  * The player component represents a specific player on the table.
@@ -61,6 +66,15 @@ export default function Player({ playerName, style, childRef }) {
         [styles.isClicked]: isVoted,
         [styles.isDead]: isHoveredPlayerDead,
     });
+
+    // apply player avatar hat depending on what role the player has
+    const playerHat = classNames({
+        [citizenImage]: (gameState.role === 'civilian'),
+        [detectiveImage]: (gameState.role === 'detective'),
+        [jesterImage]: (gameState.role === 'jester'),
+        [mafiaImage]: (gameState.role === 'mafia'),
+        [medicImage]: (gameState.role === 'medic'),
+    })
 
     // this only allows clicks if a player is actually hoverable.
     function validateOnClick(fn) {
@@ -123,6 +137,8 @@ export default function Player({ playerName, style, childRef }) {
                 <p>{mafiaString}</p>
                 <div>{gameState.phase === 'trial-end' ? revealVote() : ''}</div>
             </div>
+            {isPlayer ? <img src={playerHat} alt="" className={styles.hatImg}/> : null}
+            {(mafiaString === ' (Mafia)') ? <img src={mafiaImage} alt="" className={styles.hatImg}/> : null}
         </div>
     );
 }
