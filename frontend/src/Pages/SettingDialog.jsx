@@ -22,6 +22,9 @@ export default function SettingDialog() {
             height: '100%',
             borderRadius: '10px',
             backgroundColor: '#F76C6C',
+            '&:hover': {
+                backgroundColor: '#f75252',
+            },
         },
         label: {
             textTransform: 'capitalize',
@@ -31,7 +34,7 @@ export default function SettingDialog() {
         },
     })(Button);
 
-    // Brightness cotrol logic
+    // Brightness control logic
     const currentBrightness =
         parseInt(document.getElementById('brightness').style.background.substring(4, 7), 10) - 155;
 

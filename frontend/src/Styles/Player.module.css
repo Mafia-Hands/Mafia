@@ -33,16 +33,17 @@
 }
 
 .isClicked {
-    background-color: var(--darkOrange);
+    background-color: var(--lightCoral);
     color: var(--lightBlue);
+    border-radius: 10px 10px 10px 10px;
 }
 
 .isClicked:hover {
-    background-color: #99361e;
+    background-color: #f75252;
 }
 
 .isDead {
-    color: var(--darkOrange);
+    color: #f75252;
 }
 
 .playerText {

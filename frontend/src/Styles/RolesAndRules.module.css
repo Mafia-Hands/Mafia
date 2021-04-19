@@ -33,6 +33,7 @@
 }
 .spanContent {
     font-size: 12px;
+    width: 80%;
 }
 
 .detail {
@@ -76,7 +77,7 @@
 
 .roleInfo {
     display: flex;
-    /* grid-template-rows: 1em 1fr; */
+    grid-template-rows: 1em 1fr;
     margin-top: 5px;
     margin-bottom: 5px;
     margin-left: 12.5px;
