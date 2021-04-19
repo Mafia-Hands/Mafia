@@ -1,13 +1,22 @@
 import React, { useContext, useState } from 'react';
 
-import { withStyles, TextField, Dialog, DialogContent, DialogTitle, Button, IconButton, Slider } from '@material-ui/core';
+import {
+    withStyles,
+    TextField,
+    Dialog,
+    DialogContent,
+    DialogTitle,
+    Button,
+    IconButton,
+    Slider,
+} from '@material-ui/core';
 
 import SettingsIcon from '@material-ui/icons/Settings';
 
 import socket from '../Socket';
 import { GeneralContext } from '../Context';
 import styles from '../Styles/HomePage.module.css';
-import logo from '../images/MafiaLogo.png'
+import logo from '../images/MafiaLogo.png';
 
 const StyledIconButton = withStyles({
     root: {
@@ -29,14 +38,14 @@ const CustomTextField = withStyles({
 
 const CustomJoinButton = withStyles({
     root: {
-        backgroundColor: 'rgba(227, 241, 241)',
+        backgroundColor: '#f76c6c',
         borderTopLeftRadius: '0',
         borderBottomLeftRadius: '0',
         borderTopRightRadius: '5px',
         borderBottomRightRadius: '5px',
         border: 'none',
         '&:hover': {
-            backgroundColor: 'rgba(152, 193, 217)',
+            backgroundColor: '#f75252',
         },
     },
     label: {
@@ -49,11 +58,11 @@ const CustomJoinButton = withStyles({
 
 const CustomCreateButton = withStyles({
     root: {
-        backgroundColor: 'rgba(238, 102, 68)',
+        backgroundColor: '#f76c6c',
         borderRadius: '5px',
         border: 'none',
         '&:hover': {
-            backgroundColor: 'rgb(180, 63, 34)',
+            backgroundColor: '#f75252',
         },
     },
     label: {
@@ -85,7 +94,7 @@ export default function HomePage(props) {
 
     const handleBgmVolumeChange = (event, newValue) => {
         setBgmVolume(newValue);
-        document.getElementById("bgm").volume = newValue / 100.0;
+        document.getElementById('bgm').volume = newValue / 100.0;
     };
 
     const createLobby = () => {
@@ -141,10 +150,7 @@ export default function HomePage(props) {
 
     return (
         <div className={styles.container}>
-            <StyledIconButton
-                variant="contained"
-                onClick={() => setOpenSetting(true)}
-            >
+            <StyledIconButton variant="contained" onClick={() => setOpenSetting(true)}>
                 <SettingsIcon />
             </StyledIconButton>
             <img src={logo} alt="" />
@@ -167,17 +173,17 @@ export default function HomePage(props) {
                             ) : (
                                 <span className={styles.checkitems}>&#10005; Non-empty nickname</span>
                             )}
-                        </span><br />
+                        </span>
+                        <br />
                         <span className={tickNoSpaces ? styles.validNickname : styles.invalidNickname}>
                             {tickNoSpaces ? (
                                 <span className={styles.checkitems}>&#10004; No spaces</span>
                             ) : (
                                 <span className={styles.checkitems}>&#10005; No spaces</span>
                             )}
-                        </span><br />
-                        <span
-                            className={tickLessThanTen ? styles.validNickname : styles.invalidNickname}
-                        >
+                        </span>
+                        <br />
+                        <span className={tickLessThanTen ? styles.validNickname : styles.invalidNickname}>
                             {tickLessThanTen ? (
                                 <span>
                                     <span className={styles.checkitems}>&#10004; Less than 10 characters</span>
@@ -208,11 +214,7 @@ export default function HomePage(props) {
                 </div>
                 <div className={`${switchForm === false ? styles.hidden : styles.secondary}`}>
                     <div className={styles.header}>Enter an ID to start playing!</div>
-                    <button 
-                        className={styles.goBackButton}
-                        onClick={() => setForm(false)}
-                        type="button"
-                    >
+                    <button className={styles.goBackButton} onClick={() => setForm(false)} type="button">
                         Go Back
                     </button>
                     <div className={styles.joinForm}>
@@ -249,11 +251,7 @@ export default function HomePage(props) {
             >
                 <DialogTitle id="alert-dialog-title">Sound</DialogTitle>
                 <DialogContent>
-                    <Slider 
-                        defaultValue={100}
-                        value={bgmVolume}
-                        onChange={handleBgmVolumeChange}
-                    />
+                    <Slider defaultValue={100} value={bgmVolume} onChange={handleBgmVolumeChange} />
                 </DialogContent>
             </Dialog>
         </div>

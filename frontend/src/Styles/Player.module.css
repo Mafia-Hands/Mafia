@@ -8,8 +8,6 @@
     font-size: 1.5rem;
 }
 
-
-
 .isHoverable:hover {
     cursor: pointer;
     transform: scale(1.1);
