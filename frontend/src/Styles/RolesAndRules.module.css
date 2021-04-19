@@ -80,6 +80,7 @@
 
 .roleInfo {
   margin: 10px;
+  position: relative;
 }
 
 .roleHighlight {
@@ -92,7 +93,7 @@
 }
 
 .roleTag {
-    position: fixed;
+    position: absolute;
     margin-left: -40px;
     margin-top: -40px;
 }
