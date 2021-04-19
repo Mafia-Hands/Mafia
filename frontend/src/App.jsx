@@ -9,13 +9,15 @@ import useLobbyState from './Hooks/useLobbyState';
 
 import { GeneralContext } from './Context';
 
+// bgm selector
+// The music is retrieved from freepd.com, and they are public domain copyright-free resources
 /* eslint-disable */
 function bgmLang() {
     var brsLang =(navigator.language || navigator.browserLanguage).toLowerCase().substr(0, 2);
     if (brsLang === 'zh')
-        return "http://yswysc.iask.in/public/.701A2_3L/2tigers.mp3";
+        return "https://freepd.com/music/Arpent.mp3";
     else
-        return "https://demo.twilio.com/docs/classic.mp3";
+        return "https://freepd.com/music/Goodnightmare.mp3";
 }
 /* eslint-enable */
 
