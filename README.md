@@ -81,12 +81,15 @@ Thanks to:
 -   University of Auckland - for providing the opportunity to work on and create this project
 -   Dr Kelly Blincoe - for assistance with the development of this project
 
-Also, special thanks to the members of Group 4 (Mafia Hands) for their hard work and dedication towards this project. A detailed list of their contributions can be found [here.](https://github.com/Mafia-Hands/Mafia/wiki/Contributions)
+Also, special thanks to the members of Team 4 (Mafia Hands) for their hard work and dedication towards this project. A detailed list of their contributions can be found [here.](https://github.com/Mafia-Hands/Mafia/wiki/Contributions)
+
+Thanks to Team 3 (3Lancers) too, for all the extra work they've done.
 
 ## Project Status
 
-The original developers of this project have now concluded their involvement. Team 3 will be continuing the development process going forward.
-For a list of suggested additions to this app, take a look at the Future Works page on our Wiki.
+-   The original developers of this project have now concluded their involvement.
+-   Similarly Team 3 has overhauled the design and added extra features and have also concluded their involvement.
+-   We welcome any and all contributions! For a list of suggested additions to this app, take a look at the Future Works page on our Wiki.
 
 ## Code of Conduct
 
